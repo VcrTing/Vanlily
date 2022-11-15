@@ -1,0 +1,96 @@
+
+$pg_br: #D9D9D9
+
+.ul-def
+    padding: 0px
+    margin: 0px $ds_s-r
+    li
+        padding: $ds
+        text-align: center
+        a
+            border: none
+            padding: $ds 0
+            cursor: pointer
+            position: relative
+            &::after
+                position: absolute
+                content: ''
+                bottom: -3px
+                left: 0
+                height: 3px
+                width: 100%
+                background: none
+
+.ul-tab
+    li
+        color: $sus
+        min-width: 5em
+        padding: $ds 1.5em
+    li.active
+        a   
+            color: $tit
+            &::after
+                background: $primary_Light
+
+$pgW: 2.6em
+
+.ul-pagenation
+    padding: 0px $ds_s
+    @extend .fx-c
+    li
+        padding: $ds
+        cursor: pointer
+        margin: 0px $ds_s
+        background: #FFF
+    li
+        @extend .fx-c
+        width: $pgW
+        height: $pgW
+        &:hover
+            background: #FFFFFF30
+    li:last-child,
+    li:first-child
+        opacity: 0.8
+    .active
+        color: #FFFFFFEF
+        background: $primary_Deep
+        border-color: $primary_Deep
+        &:hover
+            background: $primary
+
+.ul-pagenation li,
+.pagenation input,
+.pagenation select
+    height: $pgW
+    min-height: $pgW
+    border-radius: $br_s
+    border: 1px solid $cold_Br
+
+.pagenation
+    input,
+    select
+        height: $pgW
+        min-width: 3em
+        text-align: center
+        padding: $ds_s $ds_n
+    input
+        width: 2em
+        margin: 0px $ds_s
+
+.pagenation-inn
+    li
+        width: 2em
+        height: 2em
+        color: $sus
+        border: none
+        &:hover
+            color: $primary
+    li:last-child,
+    li:first-child
+        color: $sub
+        opacity: 0.6
+    .active
+        color: $primary
+        background: none
+        &:hover
+            background: none

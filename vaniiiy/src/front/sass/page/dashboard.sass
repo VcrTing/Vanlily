@@ -1,0 +1,74 @@
+
+
+// DASHBOARD
+
+// 
+
+.panel-dash-top,
+.panel-dash-top2,
+.panel-dash-right,
+.panel-dash-salehot,
+.panel-dash-paymode
+    @extend .bxs
+    background: #FFF
+
+.panel-dash-top2
+    min-height: 18em
+
+.panel-dash-right
+    width: 100%
+    overflow: hidden
+    min-height: 40em
+
+.panel-dash-salehot,
+.panel-dash-paymode
+    min-height: 24em
+
+//  
+.dash-top-card
+    padding-left: $ds_x2
+    padding-right: $ds_x
+    & > nav
+        padding: 0.8em 0 0.5em
+
+.dash-top
+    // height: 12em
+    flex-wrap: wrap
+    & > div
+        margin-bottom: $ds_x2
+    & > div,
+    & > div > div
+        // flex: 1
+        height: 100%
+        flex-wrap: wrap
+        padding-top: 1.5em
+        padding-bottom: 1em
+    & > div:last-child,
+    & > div:first-child
+        .dash-top-card
+            padding-left: $ds_x4
+            padding-right: $ds_x
+
+.card-dash
+    padding: $ds_x $ds_x4 $ds
+
+
+.pan el-dash-right
+    position: fixed
+    right: $ds_x2
+    top: 30vh
+    height: 70vh
+    background: none
+    & > button
+        width: 2em
+        
+        padding: $ds $ds_s
+        text-align: center
+    & > div
+        height: 70vh
+        min-width: 37em
+        overflow-y: scroll
+    & > div,
+    & > button
+        @extend .bxs
+        background: #FFF

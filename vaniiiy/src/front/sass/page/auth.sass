@@ -1,0 +1,67 @@
+$auth: #F0F2F5
+.backimg
+    background-size: cover
+    background-repeat: no-repeat
+    background-position: right -10vh
+
+.auth-wrapper
+    width: 100vw
+    height: 100vh
+    background: $auth
+    position: relative
+
+    .auth-img
+        z-index: 99
+        width: 100%
+        height: 100%
+        @extend .backimg
+        position: absolute
+        background-size: cover
+        background-position: right -8vh
+    
+    .auth-cont
+        width: 100%
+        height: 100%
+        z-index: 300
+        left: 50%
+        margin: 0 auto
+        background: none !important
+        position: absolute
+        transform: translateX(-50%)
+        max-width: calc( 120px + 72vw )
+// 大于 1444
+@media screen and ( min-width: 1400px )
+    .auth-cont
+        left: 44.8% !important
+    .auth-img
+        right: 0
+        width: 70% !important
+
+.auth-panel
+    width: 100%
+    height: auto
+    max-width: 28em
+    min-height: 240px
+    padding: 0 $ds_x2
+    transform: translateY(0vh)
+    background: none !important
+    & > nav
+        width: 100%
+        border-radius: $br
+        // background: #FFF
+
+    .auth-logo
+        max-width: 13.2em !important
+
+.input-auth
+    i
+        left: $ds
+        color: #000
+        opacity: 0.8
+    .input
+        padding: 0.87em
+        padding-left: 3.4em !important
+        padding-right: $ds !important
+        border-radius: $br
+        background: none // #FFFFFFCC
+        

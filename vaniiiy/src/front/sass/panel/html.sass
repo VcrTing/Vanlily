@@ -1,0 +1,166 @@
+
+$topH: 42px
+
+$menuW: calc(120px + 8vw )
+$menuW_r: calc(-120px - 8vw )
+$menuC: #1F2C2E
+$menuTxt: rgba(255, 255, 255, 0.65)
+// 主界面
+.html
+    width: 100vw
+    height: 100vh
+    overflow: hidden
+    position: relative
+
+.menu
+    overflow-y: scroll
+    background: $menuC
+    min-width: $menuW
+    min-height: 100%
+    width: $menuW
+    z-index: 600
+    bottom: 0
+    *
+        color: $menuTxt
+
+.content
+    padding: 0
+    position: relative
+    .center
+        padding-top: $topH
+        & > div,
+        & > nav 
+            padding-top: calc( 20px + 1vh )
+
+.top
+    width: 100%
+    z-index: 500
+    background: #FFF
+
+.top,
+.menu
+    top: 0
+    left: 0
+    position: fixed
+
+.top,
+.content
+    padding: 0
+    padding-left: $menuW
+
+.content,
+.center
+    height: 100%
+    max-height: 100%
+
+.top
+    @extend .bxs_n
+    padding-top: $ds_s
+    padding-bottom: $ds_s
+
+.top > div,
+.center
+    padding-left: $ds_x2
+    padding-right: $ds_x2
+
+.center
+    overflow-y: scroll
+
+// MENU 动画
+.collapse-menu-item
+    & > button
+        &:hover
+            background: $primary_Light
+.menu-many-wrapper > button:hover .collapse-i
+    transform: rotate(90deg) translateX(2px)
+.menu-one-wrapper:hover > .collapse-i::before
+    transition: all .212s
+    transform: translateX($ds_t) !important
+
+// 背景
+.menu-bg
+    position: fixed
+    left: 0
+    top: 0
+    z-index: 499
+    width: 100vw
+    height: 100vh
+    background: rgba(0, 0, 0, 0.4)
+    
+.pl_menu
+    padding-left: calc( 38px + 1.2vw ) !important
+    
+@media screen and (min-width: 1444px)
+    .menu-one-wrapper,
+    .menu-many-wrapper > button
+        padding-left: $ds_x3 !important
+        padding-right: $ds_x3 !important
+    .pl_menu
+        .pl_n
+            padding-left: $ds_x
+
+
+@media screen and ( min-width: 1082px )
+    .html
+        .menu-bg
+            display: none
+@media screen and ( max-width: 1082px )
+
+    .html
+        .top
+            width: 100%
+            min-width: 100vw
+        .top,
+        .content
+            padding-left: 0px
+        .content
+            overflow-x: scroll
+            .center
+                min-width: 911px
+        .menu
+            min-width: 216px
+
+    .html-active
+        .menu
+            animation: menu-shower .362s ease-in-out
+        .menu-bg
+            animation: menu-bg-shower .122s ease-in-out
+    .html-hide
+        .menu
+            margin-left: -216px // $menuW_r
+            animation: menu-hide .362s ease-in-out
+        .menu-bg
+            display: none 
+            animation: menu-bg-hide .122s ease-in-out
+
+
+@keyframes menu-hide
+    0%
+        opacity: 0.4
+        transform: translateX(0px)
+    100%
+        opacity: 1
+        transform: translateX(-90px)
+        margin-left: $menuW_r
+@keyframes menu-bg-hide
+    0%
+        opacity: 1
+    100%
+        opacity: 0
+        display: none 
+
+
+// SHOWER
+@keyframes menu-shower
+    0%
+        opacity: 0.4
+        transform: translateX($menuW_r)
+    100%
+        opacity: 1
+        transform: translateX(0px)
+@keyframes menu-bg-shower
+    0%
+        opacity: 0
+    100%
+        opacity: 1
+        display: block

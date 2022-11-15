@@ -1,0 +1,266 @@
+textarea
+    width: 100%
+// 
+.input-sus
+    i
+        color: $sus !important
+    input[placeholder],
+    [placeholder]
+        color: $sus
+    &:-moz-placeholder,
+    &:-ms-input-placeholder,
+    &::-webkit-input-placeholder
+        color: $sus !important
+    
+$ip-br: #e1e1e1
+$ip-br_Hover: #d3d3d3
+
+$ip-br_x2: #c2c2c2
+
+._input
+    @extend .mh
+    @extend .input-sus
+    padding: $ds_t $ds
+    border: 1px solid transparent
+    outline: 2px solid transparent
+    transition: all .182s ease-out
+
+.input-def
+    @extend ._input
+    border-radius: $br
+    border-color: $ip-br
+    &:focus,
+    &:active,
+    &:focus-visible
+        border-color: $ip-br
+    &:hover
+        border-color: $ip-br_Hover
+//
+
+.area, .input, .select
+    @extend .input-def
+    margin: 0px
+    padding: $ds $ds_x3
+
+.input-td
+    min-height: 36px
+    padding: $ds_s $ds_x2
+.input-td-s
+    //
+    padding: $ds_s $ds_s
+@media screen and ( max-width: 1444px )
+    .area, .input, .select
+        padding: $ds $ds_x2
+@media screen and ( max-width: 1281px )
+    .area, .input, .select
+        padding: $ds
+        padding-right: 2px
+
+.input-td .vuejs3-datepicker__value
+    min-height: 20px
+    padding: 0px
+.input-td .mdi-calendar-blank
+    right: 2px
+    z-index: 400
+
+.ip-br
+    border-radius: $br
+    border: 1px solid $ip-br
+
+    
+.select
+    min-height: 2em
+    min-width: 2em
+    width: auto
+    border-radius: $br
+    display: inline-block
+    padding: 0.1em 0.5em !important
+
+.input-tip
+    transition: all .242s ease-out
+    padding: 0px $ds_x
+    padding-top: $ds_t
+    height: 0px 
+    overflow: hidden
+
+.ip-tip-active
+    height: 1.5em
+    animation: shower .62s ease-out
+
+@keyframes shower
+    0%
+        height: 0px
+    100%
+        height: 1.5em
+        
+
+.input-pri
+    &:hover,
+    &:focus,
+    &:active,
+    &:focus-visible
+        border-color: $primary
+        transition: all .242s ease-out
+        box-shadow: 0px 0px 4px -0.5px $primary_Shadow
+
+.input-air
+    background: none
+    &:hover
+        border-color: $ip-br_Hover
+        background: rgba(255, 255, 255, 0.86)
+
+.inline-search
+    input
+        width: 412px
+    button
+        width: 10em
+        margin-left: $ds
+        min-height: $h !important
+
+
+.input-attach
+    position: relative
+    .icon
+        top: 48%
+        right: 1em
+        font-size: 1.4em
+        position: absolute
+        color: rgb(186, 186, 186)
+        transform: translateY(-50%)
+
+    input
+        padding-right: 2.6em
+
+.input-inset
+    position: relative
+
+    .input-inset-wrapper
+        z-index: 333
+        padding-left: 7.2em
+    
+    .input-inset-in
+        width: 6em
+        top: 0px
+        left: 0
+        z-index: 444
+        padding: 0px $ds
+        position: absolute
+        border: none !important
+        border-top-right-radius: 0px
+        border-bottom-right-radius: 0px
+
+
+// 
+$checkbox: #c2c2c2
+.checkbox
+    @extend .hand
+    border: 1px solid $checkbox !important
+
+
+// 选择框 
+.iii
+    user-select: none
+
+// 搜索框
+.input-icon,
+.input-icon-l,
+.input-icon-r
+    position: relative
+    i
+        position: absolute
+        top: 50%
+        transform: translateY(-50%)
+        
+.input-icon-l
+    input,
+    select
+        padding-left: 3.2em !important
+        padding-right: $ds_x !important
+    i
+        left: $ds
+
+.input-icon-r
+    input,
+    select
+        padding-right: 3.2em !important
+        padding-left: $ds_x !important
+    i
+        right: $ds
+
+
+// 输入框
+
+.label-inline
+    min-width: 5.4em
+
+
+.input-inline
+    margin-bottom: $ds_x2
+
+.input-inline-fill
+    & > div,
+    input,
+    select,
+    textarea
+        width: 100%
+    & > div
+        // padding-right: $ds_x2
+
+
+// 过滤
+.input-filter
+    @extend .br_s
+    @extend .input
+    @extend .bxs_n
+    @extend .input-sus
+select.input-filter
+    padding-left: $ds_s !important
+    padding-right: $ds_s !important
+    min-width: 5em
+
+select.input-short
+    width: auto
+    padding-left: $ds_x2
+
+
+// RADIO
+$radio: 1.4em
+    
+.radio
+    @extend .hand
+    &,
+    &::after
+        padding: 0
+        margin: 0
+        border-radius: 100%
+        transition: all .242s ease-in-out
+    color: transparent
+    position: relative
+    border: 1px solid $sus
+    width: $radio !important
+    height: $radio  !important
+    min-width: $radio !important
+    min-height: $radio !important
+    &:hover
+        color: $sus
+    &::after
+        @extend .abs-cc
+        width: 70%
+        height: 70%
+        border-radius: 100%
+        background: currentColor
+
+.radio-active
+    color: $primary
+    border-color: $primary
+    &:hover
+        color: $primary_Hover
+        border-color: $primary_Hover
+
+input[type=radio]
+    min-width: 1em
+input[type=checkbox]
+    min-width: 1em
+    margin-right: $ds_s
+
+@import ./input_other

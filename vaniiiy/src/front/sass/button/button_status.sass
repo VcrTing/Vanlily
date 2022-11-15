@@ -1,0 +1,33 @@
+$succ: #6ae81d // 6BE81F
+$err: #f45d5b // F55C5C
+    
+.succ
+    color: $succ
+.btn-err,
+.btn-succ
+    @extend .br
+    color: #FFF
+    cursor: pointer
+    background: $succ
+.btn-err
+    background: $err
+
+.err
+    color: $err
+.err_son,
+.err_son *
+    color: $err 
+
+.sts-err
+    position: relative
+    padding-left: 0.82em
+    color: $err
+    &::before  
+        @extend .abs-c
+        border-radius: 100%
+        background: $err
+        height: 5px
+        width: 5px
+
+
+
