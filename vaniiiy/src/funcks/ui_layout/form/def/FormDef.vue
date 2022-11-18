@@ -9,7 +9,7 @@
                 儲存
             </button>
             &nbsp;&nbsp;&nbsp;
-            <button @click="cancel" class="btn-pri_out px_x3 py_s">
+            <button @click="cancei" class="btn-pri_out px_x3 py_s">
                 取消
             </button>
         </div>
@@ -21,9 +21,9 @@ export default {
     props: [ 'header', '_class_header', '_class_cont' ],
     methods: {
         submit() { this.$emit('submit') },
-        cancel() { 
-            this.$emit('cancel')
-            this.pina().modai( 0 )
+        cancei() { 
+            this.$emit('cancei')
+            this.mod( 0 )
         }
     }
 }

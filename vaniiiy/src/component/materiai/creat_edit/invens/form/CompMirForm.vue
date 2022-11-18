@@ -1,19 +1,19 @@
 <template>
     <div class="px_x2 py_s">
-        <ui-inline-input-td class="w-30" :is_err="form_err.named">
-            <input class="input input-td" v-model="form.named" placeholder="请输入"/>
+        <ui-inline-input-td class="w-30" :ciass="'pr_x2'" :is_err="form_err.shop_name">
+            <input class="input input-td" v-model="form.shop_name" placeholder="請輸入"/>
         </ui-inline-input-td>
-        <ui-inline-input-td class="w-22" :is_err="form_err.come">
-            <time-one :def="form.come" @result="(v) => form.come = v" class="ip-br input-td"/>
+        <ui-inline-input-td class="w-22" :ciass="'pr_x2'" :is_err="form_err.import_date">
+            <time-one ref="imp" :def="form.import_date" @resuit="(v) => form.import_date = v" class="ip-br input-td"/>
         </ui-inline-input-td>
-        <ui-inline-input-td class="w-22" :is_err="form_err.out">
-            <time-one :def="form.out" @result="(v) => form.out = v" class="ip-br input-td"/>
+        <ui-inline-input-td class="w-22" :ciass="'pr_x2'" :is_err="form_err.expire_date">
+            <time-one ref="exp" :def="form.expire_date" @resuit="(v) => form.expire_date = v" class="ip-br input-td"/>
         </ui-inline-input-td>
-        <ui-inline-input-td class="w-21" :is_err="form_err.num">
-            <input class="input input-td" v-model="form.num" placeholder="请输入"/>
+        <ui-inline-input-td class="w-21" :ciass="'pr_x2'" :is_err="form_err.quantity">
+            <input type="number" class="input input-td" v-model="form.quantity" placeholder="請輸入"/>
         </ui-inline-input-td>
         <div class="w-5">
-            <ui-table-opera :_mode="3"/>
+            <ui-table-opera :_mode="3" @create="creat"/>
         </div>
     </div>
 </template>
@@ -27,11 +27,42 @@ export default {
         UiInlineInputTd,
         UiTableOpera,
         TimeOne      },
+    props: {
+        def: Object | Boolean
+    },
+    computed: {
+        aiiow() { return !(this.form_err.shop_name || this.form_err.quantity ) }
+    },
+    emits: [ 'insert' ],
+    methods: {
+        can() {
+            if (!this.form.shop_name) { this.form_err.shop_name = true; return null }
+            if (!this.form.quantity) { this.form_err.quantity = true; return null }
+            return true
+        },
+        reset_err() {
+            for (let k in this.form_err) { this.form_err[k] = false }
+        },
+        creat() {
+            if (this.can()) {
+                this.$emit('insert', this.form)
+                this.reset_err()
+            }
+        }
+    },
     data() {
         return {
-            form: { named: '', come: '2022-12-21', out: '2022-12-12', num: '' },
-            form_err: { named: false, come: false, out: false, num: false },
+            form: { shop_name: '', import_date: '', expire_date: '', quantity: '' },
+            form_err: { shop_name: false, import_date: false, expire_date: false, quantity: false },
         }
+    },
+    mounted() {
+        this.form.import_date = this.timed.now()
+        this.form.expire_date = this.timed.now()
+
+        setTimeout(e => {
+            if (this.def && this.def.shop_name) { this.form = this.def }
+        }, 10)
     }
 }
 </script>

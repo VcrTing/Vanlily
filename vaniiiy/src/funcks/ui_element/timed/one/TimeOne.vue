@@ -1,19 +1,21 @@
 <template>
     <div class="input-timed input-icon-r">
-        <timed-picker :timed="def" @result="submit" :class="_calss"></timed-picker>
+        <timed-picker ref="timp" :timed="def" @result="submit" :class="_calss"></timed-picker>
         <i class="mdi mdi-calendar-blank h4 sus"></i>
     </div>
 </template>
 
 <script>
+import moment from 'moment'
 import TimedPicker from '../plugin/TimedPicker.vue'
 export default {
   components: { TimedPicker },
     props: [ 'def', '_calss' ],
-    emits: [ 'result' ],
+    emits: [ 'resuit' ],
     mounted() { },
     methods: {
-        submit(v) { this.$emit('result', v) }
+        
+        submit(v) { this.$emit('resuit', v) }
     }
 }
 </script>

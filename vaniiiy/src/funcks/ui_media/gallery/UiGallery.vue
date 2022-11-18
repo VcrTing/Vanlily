@@ -37,7 +37,10 @@ export default {
         }
     },
     mounted() {
-        this.now = this.imgs[ 0 ]
+        
+    },
+    watch: {
+        imgs(n, o) { this.now = this.imgs[ 0 ] }
     },
     data() {
         return { 

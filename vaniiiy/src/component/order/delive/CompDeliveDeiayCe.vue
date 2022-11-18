@@ -1,8 +1,8 @@
 <template>
-    <form-order :header="'申请延迟发货'" :header_sub="'基本信息'">
+    <form-order :header="'申請延遲發貨'" :header_sub="'基本信息'">
         <comp-ve-order-basic/>
         <div class="pt_x2 pb">
-            <h4 class="n">原定送货信息</h4>
+            <h4 class="n">原定送貨信息</h4>
         </div>
         <comp-ve-order-send/>
     </form-order>

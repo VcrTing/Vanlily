@@ -22,10 +22,10 @@ export default {
             now: 0, cover: ''
         }
     },
-    mounted() {
-        if (this.imgs) { this.cover = this.imgs[0] }
-    },
     watch: {
+        imgs(n, o) {
+            this.cover = this.imgs[0]
+        },
         now(n, o) {
             if (this.imgs) {
                 this.cover = this.imgs[n]

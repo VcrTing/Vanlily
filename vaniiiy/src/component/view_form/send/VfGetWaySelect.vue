@@ -9,17 +9,17 @@ export default {
     props: [ 'def' ],
     data() {
         return {
-            now: 1,
+            now: 'gogovan',
             ops: [
-                { txt: 'GOGOVAN', v: 1 },
-                { txt: '自取', v: 2 }
+                { txt: 'GOGOVAN', v: 'gogovan' },
+                { txt: '自取', v: 'fee' }
             ]
         }
     },
-    mounted() { this.now = this.def ? this.def : 1 },
+    mounted() { this.now = this.def ? this.def : 'gogovan' },
     watch: {
         now(n, o) {
-            console.log('選入')
+            this.$emit('resuit', n)
         }
     }
 }

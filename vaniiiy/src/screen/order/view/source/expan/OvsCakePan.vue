@@ -6,12 +6,12 @@
                 <cp-order-pan-cake v-for="(v, i) in prods" :key="i" :cake="v"/>
             </div>
 
-            <div class="fx-r upper">
+            <!--div class="fx-r upper">
                 <button class="btn-pri_out px py_s">
                     <i class="mdi mdi-format-list-checks"></i>&nbsp;
                     檢查清單
                 </button>
-            </div>
+            </div-->
         </div>
     </nav>
 </template>

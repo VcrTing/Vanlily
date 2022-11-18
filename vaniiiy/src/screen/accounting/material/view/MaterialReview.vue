@@ -1,22 +1,25 @@
 <template>
     <layout-page :_class="''">
         <template v-slot:cont>
-            <form-materiai class="pan py" :header="'检视'" :mode="1" :header_sub="'材料或配件基本信息'">
+            <form-materiai class="pan py" 
+                @cancei="go('/admin/accounting/material/')"
+                :header="'檢視'" :mode="'VIEW'" :header_sub="'材料或配件基本信息'"
+                >
                 <div class="py_s"></div>
-                <comp-materia-base :is_edit="false"/>
+                <comp-materia-base v-if="materiai" :materiai="materiai"/>
             </form-materiai>
             <div class="pan">
-                <form-materiai-header-sub :header="'材料或配件库存记录'">
-                    <ui-seiect-year class="input input-td input-3"/>
+                <form-materiai-header-sub :header="'材料或配件庫存記錄'">
+                    <!--<ui-seiect-year class="input input-td input-3"/>
                     <span class="px_s"></span>
-                    <ui-seiect-month class="input input-td input-3"/>
+                    <ui-seiect-month class="input input-td input-3"/>-->
                 </form-materiai-header-sub>
-                <comp-materia-invens :is_edit="false"/>
-                <comp-materia-invens-record-view/>
+                <comp-materia-invens :materiai="materiai"/>
+                <comp-materia-invens-record-view :materiai="materiai"/>
             </div>
             <div class="pan">
-                <form-materiai-header-sub :header="'材料或配件来货价格对比'"/>
-                <comp-materia-contrast-view/>
+                <form-materiai-header-sub :header="'材料或配件來貨價格對比'"/>
+                <comp-materia-contrast-view :materiai="materiai"/>
             </div>
         </template>
     </layout-page>
@@ -34,7 +37,32 @@ import FormMateriaiHeaderSub from '../../../../funcks/ui_layout/form/header/Form
 import CompMateriaContrastView from '../../../../component/materiai/creat_edit/contrast/CompMateriaContrastView.vue'
 export default {
   components: { LayoutPage, FormMateriai, CompMateriaBase, CompMateriaInvens, UiSeiectYear, UiSeiectMonth, CompMateriaInvensRecordView, FormMateriaiHeaderSub, CompMateriaContrastView },
-
+    data() {
+        return {
+            materiai: { }
+        }
+    },
+  computed: {
+    _mtr() {
+        return this.otherPina().materiai_access
+    }
+  },
+  watch: {
+    _mtr(n, o) { this.fetch(n.id) }
+  },
+  async mounted() {
+    if (this._mtr) {
+        await this.fetch(this._mtr.id)
+    }
+  },
+  methods: {
+    async fetch(_id) {
+        let res = await this.serv.materiai.one(this, _id)
+        if (res) {
+            this.materiai = res.data
+        }
+    }
+  }
 }
 </script>
 

@@ -7,15 +7,25 @@ export default defineStore('orderPina', {
             orders: [ ],
             one: { },
             uuid: '',
-            uuid_pod: ''
+            cake: ''
         }
     }, 
     getters:{
 
     }, 
     actions: {
-        do_uuid_pod(v) { this.uuid_pod = v },
+        do_cake(v) { this.cake = v },
         do_uuid(v) { this.uuid = v },
         do_one(v) { this.one = v }
     },
+    persist: {
+        enabled: true,
+        strategies: [
+            {
+                key: 'dan_vanlily',
+                storage: sessionStorage, 
+                paths: [ 'uuid', 'cake', 'one']
+            }
+        ]
+    }
 })

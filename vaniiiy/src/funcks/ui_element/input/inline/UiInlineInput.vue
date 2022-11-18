@@ -1,9 +1,9 @@
 <template>
-    <nav class="fx-l input-inline input-inline-fill">
+    <nav class="fx-l pb_x2 " :class="{ 'mb-0': _kiii_mb, 'inline-input-txt-mode': _txt_mode }">
         <label :class="_class" v-if="header">
             <span v-html="header"></span>&nbsp;
         </label>
-        <div class="fx-1" :class="{ 'input-err': is_err }">
+        <div class="fx-1 ip-w-100" :class="{ 'input-err': is_err }">
             <slot></slot>
         </div>
     </nav>
@@ -15,10 +15,14 @@ export default {
         is_err: { type: Boolean, default: true },
         header: { type: String },
         _class: { type: String, default: "label-inline" },
+        _kiii_mb: Boolean,
+        _txt_mode: Boolean
     },
 }
 </script>
 
 <style lang="sass">
-
+.input-inline
+    input
+        width: 100%
 </style>

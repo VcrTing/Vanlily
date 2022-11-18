@@ -4,13 +4,19 @@
             <h2 v-html="header"></h2>
 
             <div class="fx-r py_s">
-                <button @click="cancel" class="btn-err px_x3 py_s">
-                    删除
+                <button v-if="is_view" @click="trash" class="btn-err px_x3 py_s">
+                    刪除
                 </button>
-                &nbsp;&nbsp;&nbsp;
-                <button @click="which" class="btn-pri px_x3 py_s">
-                    <span v-if="mode == 1">返回</span>
-                    <span v-else>儲存</span>
+                <button v-else @click="$emit('cancei')" class="btn-pri_out px_x3 py_s">
+                    返回
+                </button>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                    
+                <button v-if="!is_view" @click="$emit('submit')" class="btn-pri px_x3 py_s">
+                    儲存
+                </button>
+                <button v-else @click="$emit('cancei')" class="btn-pri px_x3 py_s">
+                    返回
                 </button>
             </div>
         </div>
@@ -25,14 +31,17 @@
 import FormMateriaiHeaderSub from '../header/FormMateriaiHeaderSub.vue'
 export default {
   components: { FormMateriaiHeaderSub },
-    emits: [ 'back', 'submit', 'cancel' ],
+    emits: [ 'cancei', 'submit' ],
     props: [ 'header', 'header_sub', '_class_cont', 'mode' ],
     methods: {
-        which() { this.$emit(this.mode == 1 ? 'back' : 'submit') },
-        cancel() { 
-            this.$emit('cancel')
-            this.pina().modai( 0 )
+        trash() { 
+            this.$emit('trash')
+            this.mod( 0 )
         }
+    },
+    computed: {
+        is_view() { return this.mode == 'VIEW' }, 
+        is_edit() { return this.mode == 'EDIT' }, is_creat() { return this.mode == 'CREAT' },
     }
 }
 </script>

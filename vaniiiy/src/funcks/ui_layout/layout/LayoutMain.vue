@@ -16,12 +16,14 @@
         </div>
 
         <fk-auth-tooi-kit/>
+        <fk-cakes-tookit/>
     </div>
 </template>
 <script>
 import FkAuthTooiKit from '../../tooikit/FkAuthTooiKit.vue'
+import FkCakesTookit from '../../tooikit/FkCakesTookit.vue'
 export default {
-  components: { FkAuthTooiKit },
+  components: { FkAuthTooiKit, FkCakesTookit },
     data() {
         return {
             menu: true

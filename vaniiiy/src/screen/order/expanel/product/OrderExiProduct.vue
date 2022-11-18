@@ -7,7 +7,7 @@
                     <fk-order-img-msg class="fx-1" :imgs="_imgs(v)"/>
                     <div class="w-25 t-r row-item">
                         <button @click="checkIist(v)" class="btn-pri_out px py_s">檢查清單</button>
-                        <button v-if="!_kiii_btn" class="btn-pri_out px_x2 py_s">編輯</button>
+                        <button v-if="!_kiii_btn" @click="edit(v)" class="btn-pri_out px_x2 py_s">編輯</button>
                     </div>
                 </div>
                 <div class="py_x"><hr/></div>
@@ -57,8 +57,16 @@ export default {
         },
         // .  
         checkIist(cake) {
-            sessionStorage.setItem('vaniiiy_pro_uuid', cake.product_uuid)
+            // sessionStorage.setItem('vaniiiy_pro_uuid', cake.product_uuid)
+            this.orderPina().do_cake(cake)
             this.mod(22); 
+        },
+
+        //  編輯 
+        edit(cake) {
+            // sessionStorage.setItem('vaniiiy_pro_uuid', cake.product_uuid)
+            this.orderPina().do_cake(cake)
+            console.log('CAKE =', cake); this.mod(22)
         }
     },
     mounted() { }
@@ -74,8 +82,8 @@ export default {
                     { src: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fstatic.wdmcake.cn%2Fimages%2F202111%2Fgoods_img%2F2248_G_1637621899254.jpg&refer=http%3A%2F%2Fstatic.wdmcake.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1670848149&t=f9032f33752944942e4871e4bd13db9d' },
                 ],
                 img: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fstatic.wdmcake.cn%2Fimages%2F202111%2Fgoods_img%2F2248_G_1637621899254.jpg&refer=http%3A%2F%2Fstatic.wdmcake.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1670848149&t=f9032f33752944942e4871e4bd13db9d', 
-                typed: '糖皮水果蛋糕', wd: '芒果', color: '金黄', weight: '2 KG',
-                marks: { main: '生日快乐' }, chis: 80, num: 1, 
+                typed: '糖皮水果蛋糕', wd: '芒果', color: '金黃', weight: '2 KG',
+                marks: { main: '生日快樂' }, chis: 80, num: 1, 
                 price_result: 999, price: 888, price_origin: 1299
             }
         ]

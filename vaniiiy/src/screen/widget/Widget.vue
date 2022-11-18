@@ -25,7 +25,6 @@
             <!-- 库存 -->
 
             <!-- 蛋糕 -->
-            <comp-order-cake-creat-edit v-else-if="page == 21"></comp-order-cake-creat-edit>
 
             <!-- 员工 -->
             <comp-staff-create-edit v-else-if="page == 111"></comp-staff-create-edit>
@@ -51,7 +50,6 @@ import IconOrder from '../../funcks/ui_static/icon/IconOrder.vue'
 import Charts from './chart/Charts.vue'
 import CompStaffCreateEdit from '../../component/staff/creat_edit/staff/CompStaffCreateEdit.vue'
 import CompConsumeCreatEdit from '../../component/company/creat_edit/consume/CompConsumeCreatEdit.vue'
-import CompOrderCakeCreatEdit from '../../component/order/creat_edit/cake/CompOrderCakeCreatEdit.vue'
 
 export default {
     components: { 
@@ -67,7 +65,6 @@ export default {
         IconLight,
         CompStaffCreateEdit,
         CompConsumeCreatEdit,
-        CompOrderCakeCreatEdit,
         },
     data() {
         return {

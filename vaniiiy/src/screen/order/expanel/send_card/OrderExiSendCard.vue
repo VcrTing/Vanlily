@@ -1,7 +1,7 @@
 <template>
     <div>
         <panel-inner class="panel-inner-pure" :header="'送貨地區'" :_header_ciass="'sub pb'">
-            <template v-if="__edit" v-slot:cont>
+            <template v-if="edit" v-slot:cont>
                 <comp-ve-order-addr-area/>
             </template>
             <template v-else v-slot:cont>
@@ -9,8 +9,8 @@
             </template>
         </panel-inner>
         <div class="py_s"></div>
-        <panel-inner class="panel-inner-pure" :header="__edit ? '送貨類別' : '送貨備註'" :_header_ciass="'pb'">
-            <template v-if="__edit" v-slot:cont>
+        <panel-inner class="panel-inner-pure" :header="edit ? '送貨類別' : '送貨備註'" :_header_ciass="'pb'">
+            <template v-if="edit" v-slot:cont>
                 <comp-ve-order-addr-mark/>
             </template>
             <template v-else v-slot:cont>
@@ -27,7 +27,7 @@ import CompVeOrderAddrMark from '../../../../component/order/view_edit/addr/Comp
 import PanelInner from '../../../../funcks/ui/panel/PanelInner.vue'
 export default {
     props: {
-        __edit: Boolean,
+        edit: Boolean,
         order: Object
     },
     computed: {

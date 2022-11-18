@@ -2,13 +2,13 @@ import order from "../../../screen/order/order.vue"
 import OrderView from "../../../screen/order/view/OrderView.vue"
 import OrderViewSource from "../../../screen/order/view/source/OrderViewSource.vue"
 
-import OrderCrestEdit from '../../../screen/order/creat_edit/OrderCreatEdit.vue'
+import OrderCreat from '../../../screen/order/creat_edit/OrderCreat.vue'
 
 export default (head) => {
     return [
         {
             path: head + '/add_order',
-            component: OrderCrestEdit,
+            component: OrderCreat,
             children: [ ]
         },
         {

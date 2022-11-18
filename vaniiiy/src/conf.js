@@ -1,4 +1,4 @@
-const TEST = false
+const TEST = true
 
 const URI = 'https://strapi04.svr.up5d.com'
 

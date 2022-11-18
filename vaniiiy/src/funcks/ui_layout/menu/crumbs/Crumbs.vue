@@ -21,7 +21,7 @@ export default {
             ],
             txts: {
                 'edit': '編輯',
-                'review': '检视',
+                'review': '檢視',
                 'accounting': '會計',
                 'consume': '公司支出',
                 'contrast': '產品對比',
@@ -36,10 +36,10 @@ export default {
                 'customer_iist': '客戶列表',
                 'add_order': '新增訂單',
 
-                'member': '用户管理',
-                'member_iist': '用户管理',
-                'member_edit': '编辑用户',
-                'member_creat': '新增用户',
+                'member': '用戶管理',
+                'member_iist': '用戶管理',
+                'member_edit': '編輯用戶',
+                'member_creat': '新增用戶',
 
                 'material_create': '新增材料及配件'
             }

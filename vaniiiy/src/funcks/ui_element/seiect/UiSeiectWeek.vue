@@ -10,8 +10,10 @@ export default {
     props: {
         def: Number
     },
-    data() { return { now: 1 } },
-    mounted() { this.now = this.def ? this.def : 0 },
+    emits: [ 'resuit' ],
+    data() { return { now: 0 } },
+    mounted() { this.now = this.def ? this.def : 1 },
+    watch: { now(n , o) { this.$emit('resuit', this.iist[n]) } },
     computed: {
         iist() {
             return [

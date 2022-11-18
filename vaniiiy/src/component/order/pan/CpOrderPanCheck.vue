@@ -8,9 +8,9 @@
         </nav>
         <div>
             <div v-if="iist && iist.length > 0">
-                <nav class="fx-l" v-for="(v, i) in iist" :key="i">
+                <nav class="fx-l check-iist" v-for="(v, i) in iist" :key="i">
                     <div class="w-2"></div>
-                    <div class="min-6em fx-c py_s">
+                    <div class="min-6em fx-c">
                         <ui-checkbox-for-one :def="v.isDoneChecking" @change="(n) => updCheck(n, v.attribute_type_uuid, 'isDoneChecking')"/>
                     </div>
                     <div class="min-6em fx-c">
@@ -23,7 +23,7 @@
                     <div class="w-2"></div>
                     <div class="min-6em"></div>
                     <div class="min-6em"></div>
-                    <div class="pl_x2 ">无内容</div>
+                    <div class="pl_x2 ">無內容</div>
             </nav>
             <!-- -->
             <nav class="fx-l fx-t">
@@ -105,4 +105,8 @@ export default {
 .copc-tr
     padding-top: 0px
     margin-top: -6px !important
+
+.check-iist
+    .min-6em
+        min-height: 2.5em
 </style>

@@ -1,7 +1,7 @@
 <template>
     <layout-cont :_class="'w-unf-r_1388 pt_x2'">
         <template v-slot:filter>
-            <material-top-fiiter/>
+            <material-top-fiiter @search="(n) => q = n"/>
         </template>
 
         <template v-slot:opera>
@@ -14,9 +14,9 @@
             <div>
                 <nav class="table">
                     <material-tr/>
-                    <ui-page-empty :srcs="metars">
+                    <ui-page-empty :srcs="items">
                         <collapse>
-                            <collapse-td-item v-for="(v, i) in metars" :key="i">
+                            <collapse-td-item v-for="(v, i) in items" :key="i">
 
                                 <template v-slot:tit>
                                     <material-td :one="v"/>
@@ -30,7 +30,7 @@
                     </ui-page-empty>
                 </nav>
 
-                <pagenation class="py_x2"></pagenation>
+                <pagenation @page="pageni" :count="(items && items.length > 0) ? items.length : 10" class="py_x2" :_limit="200"></pagenation>
             </div>
         </template>
     </layout-cont>
@@ -51,36 +51,27 @@ export default {
   components: { LayoutCont, UiPageEmpty, Collapse, CollapseTdItem, Pagenation, MaterialTr, MaterialTd, MaterialExpanel, MaterialTopFiiter },
     data() {
         return {
+            q: '', page: {  }, funni: { },
+            items: [ ],
             metars: [
                 {
-                    id: 1, number: '0001', typed: '生日牌', named: '彩色气球Happy Birthday 生日蛋糕插牌装饰',
-                    brand: 'Noble Shop', stas: '小包', remark: 'HKTVMALL 现在没货'
-                },
-                {
-                    id: 2, number: '0002', typed: '生日牌', named: '彩色气球Happy Birthday 生日蛋糕插牌装饰',
-                    brand: 'Noble Shop', stas: '小包', remark: 'HKTVMALL 现在没货'
-                },
-                {
-                    id: 3, number: '0003', typed: '生日牌', named: '彩色气球Happy Birthday 生日蛋糕插牌装饰',
-                    brand: 'Noble Shop 2', stas: '大包', remark: 'HKTVMALL 有货'
-                },
-                {
-                    id: 4, number: '0004', typed: '生日牌', named: '彩色气球Happy Birthday 生日蛋糕插牌装饰',
-                    brand: 'Noble Shop 3', stas: '大包', remark: 'HKTVMALL 有货'
-                },
-                {
-                    id: 5, number: '0005', typed: '生日牌', named: '彩色气球Happy Birthday 生日蛋糕插牌装饰',
-                    brand: 'Noble Shop', stas: '大包', remark: 'HKTVMALL 有货'
-                },
-                {
-                    id: 6, number: '0006', typed: '生日牌', named: '彩色气球Happy Birthday 生日蛋糕插牌装饰',
-                    brand: 'Noble Shop', stas: '小包', remark: 'HKTVMALL 现在没货'
-                },
+                    id: 1, number: '', type: '', name: '',
+                    brand: '', specification: '', remarks: ''
+                }
             ]
         }
     },
     methods: {
-        
+        async pageni(star, end, imit) {
+            this.funni = { star, end, imit }
+            const res = await this._fetch();
+            if (res) {
+                this.items = res.data; this.page = res.page;
+            }
+        },
+        async _fetch(q = '') {
+            return await this.serv.materiai.many(this, q, this.funni.star, this.funni.imit)
+        },
     }
 }
 </script>

@@ -2,7 +2,7 @@
     <panel-inner :header="'新增付款記錄'">
         <template v-slot:cont>
           <comp-pay-record-line v-if="item.payment_date" :pay="item"/>
-          <div v-else class="py fx-c">暂无记录</div>
+          <div v-else class="py fx-c">暫無記錄</div>
         </template>
     </panel-inner>
 </template>

@@ -1,7 +1,7 @@
 <template>
     <nav>
-        <div v-for="(v, i) in ways" :key="i" class="px_s">
-            <button class="px_x py_t"
+        <div v-for="(v, i) in ways" :key="i" class="px_s d-ib">
+            <button class="px_x py_s"
                 @click="change(v)"
                 :class="{ 'item-pri_out': now == v.id, 'xxxx': now != v.id }"
             >
@@ -19,23 +19,25 @@ export default {
     },
     data() {
         return {
-            now: 2,
+            now: 1,
             ways: [
-                { txt: '自取', id: 1 },
-                { txt: '送港鐵站', id: 2 },
-                { txt: '樓下交收', id: 3 },
-                { txt: '送貨上門', id: 4 }
+                { txt: '公公送货', id: 1 },
+                { txt: '先生送货', id: 2 },
+                { txt: 'Gogovan', id: 3 },
+                { txt: 'Runrun 送货', id: 4 },
+                { txt: '606 自取', id: 5 },
+                { txt: '屯门站', id: 6 },
+                { txt: '步兵送货', id: 7 }
             ]
         }
     },
     watch: {
-        now(n, o) { this.$emit('change', n) }
+        now(n, o) { this.$emit('resuit', n) }
     },
-    mounted() { this.now = this.def ? this.def : 2 },
+    mounted() { this.now = this.def ? this.def : 1 },
     methods: {
         change(v) {
-            this.now = v.id
-            if (this.mode != 0) { }
+            this.now = v.id; if (this.mode != 0) { }
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
-    <nav class="fx-l input-inline input-inline-fill mb-0">
-        <div class="fx-1" :class="{ 'input-err': is_err, 'pr_x2': is_pr, 'pr_s': !is_pr }">
+    <nav class="fx-l input-inline input-inline-fill mb-0" :class="{ 'input-err': is_err }">
+        <div class="fx-1" :class="ciass">
             <slot></slot>
         </div>
     </nav>
@@ -11,7 +11,7 @@ export default {
     props: {
         is_err: { type: Boolean, default: true },
         header: { type: String },
-        is_pr: { type: Boolean, default: true }
+        ciass: { type: String, default: '' }
     },
 }
 </script>

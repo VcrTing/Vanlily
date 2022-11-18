@@ -51,10 +51,16 @@ $ip-br_x2: #c2c2c2
 @media screen and ( max-width: 1444px )
     .area, .input, .select
         padding: $ds $ds_x2
+    .input-td
+        padding-top: $ds_s
+        padding-bottom: $ds_s
 @media screen and ( max-width: 1281px )
     .area, .input, .select
         padding: $ds
         padding-right: 2px
+    .input-td
+        padding-top: $ds_s
+        padding-bottom: $ds_s
 
 .input-td .vuejs3-datepicker__value
     min-height: 20px
@@ -193,19 +199,11 @@ $checkbox: #c2c2c2
 .label-inline
     min-width: 5.4em
 
-
-.input-inline
-    margin-bottom: $ds_x2
-
-.input-inline-fill
-    & > div,
-    input,
-    select,
-    textarea
-        width: 100%
+.inline-input-txt-mode
+    padding-bottom: $ds
     & > div
-        // padding-right: $ds_x2
-
+        @extend .mh
+        padding: $ds 0px
 
 // 过滤
 .input-filter
@@ -256,6 +254,9 @@ $radio: 1.4em
     &:hover
         color: $primary_Hover
         border-color: $primary_Hover
+.radio-pri
+    .radio
+        border-color: $primary
 
 input[type=radio]
     min-width: 1em

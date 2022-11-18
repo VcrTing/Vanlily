@@ -125,7 +125,8 @@ export default {
         reset() { this.now = 1 },
         // 發送 頁碼變動信號
         sign() {
-            const n = this.now < 1 ? this.now : 1
+            let n = this.now
+            n = n < 1 ? 1 : n
             this.$emit('page', n, n * this.limit, this.limit)
         },
 
@@ -134,6 +135,5 @@ export default {
             
         }
     },
-    emits: [ 'page' ]
 }
 </script>

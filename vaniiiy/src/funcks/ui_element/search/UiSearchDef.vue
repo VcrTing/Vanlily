@@ -16,7 +16,7 @@ export default {
     },
     methods: {
         submit() {
-            console.log('搜索 Q =', this.q)
+            this.$emit('resuit', this.q)
         }
     }
 }

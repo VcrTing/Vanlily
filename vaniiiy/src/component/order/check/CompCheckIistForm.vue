@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form-def :header="'检查清单'">
+        <form-def :header="'檢查清單'">
             <cp-order-pan-check/>
             <div class="py"></div>
         </form-def>

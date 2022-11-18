@@ -18,8 +18,14 @@ const status = async function(vue, status, uuid) {
     }); return res
 }
 
+// 
+const order_patch = async function(vue, uuid, data) {
+
+}
+
 export default {
     one,
     many,
-    status
+    status,
+    order_patch
 }

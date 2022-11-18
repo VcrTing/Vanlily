@@ -1,7 +1,7 @@
 <template>
     <div class="f_row">
         <div class="w-27">
-            <ui-gallery v-if="prod" :mode="'VERTICAL'" :imgs="prod.images_url"></ui-gallery>
+            <ui-gallery v-if="prod && prod.images_url" :mode="'VERTICAL'" :imgs="prod.images_url"></ui-gallery>
         </div>
         <div class="fx-1 f_row pt">
                 <div class="w-8 f-area"></div>
@@ -17,7 +17,7 @@
                 <div class="w-29 f-area pl_x2">
                     <fk-cake-price-group :cake="cake"/>
                 </div>
-                <div class="w-100 f_row">
+                <!--div class="w-100 f_row">
                     <div class="w-8"></div>
                     <div class="fx-1 f_row">
                         <div class="w-5em">生日字粒：</div>
@@ -26,7 +26,7 @@
                             <div class="pt_n"><span>底盤字粒：</span><span>happy birthday</span></div>
                         </div>
                     </div>
-                </div>
+                </!--div-->
         </div>
     </div>
 </template>

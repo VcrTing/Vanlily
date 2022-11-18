@@ -1,20 +1,13 @@
 <template>
     <nav class="fx-c pri_son">
-        <button @click="view">储存</button>
+        <button @click="$emit('save')">儲存</button>
         <span>&nbsp;&nbsp;</span>
-        <button @click="edit">取消</button>
+        <button @click="$emit('cancei')">取消</button>
     </nav>
 </template>
 <script>
 export default {
     props: [ '_item' ],
-    methods: {
-        view() {
-            this.$emit('save')
-        },
-        edit() {
-            this.$emit('cancel')
-        }
-    }
+    emits: [ 'save', 'cancei' ],
 }
 </script>

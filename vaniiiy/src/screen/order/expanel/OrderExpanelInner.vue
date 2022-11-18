@@ -2,40 +2,38 @@
     <div class="">
         <ui-header class="py_x">
             <template v-slot:tit>
-                <h3 class="n">單號：<span v-if="_one">{{ _one.uuid }}</span></h3>
-            </template>
-            <template v-slot:cont>
-                <button v-if="edt" class="btn-pri py_s px fx-s" @click="go('/admin/order/view/query')">
-                    <i class="mdi mdi-chevron-double-left h5"></i>返回</button>
+                <h3 class="n">
+                    <span v-if="!is_creat">單號：<span v-if="_one">{{ _one.uuid }}</span></span>
+                    <span v-else>新增訂單</span>
+                </h3>
             </template>
         </ui-header>
 
         <h5 class="n py_n">基本信息</h5>
-        <comp-ve-order-basic class="pb_x2" :order="order" :edit="edt"></comp-ve-order-basic>
+        <comp-ve-order-basic class="pb_x2" :order="order" :edit="!is_view" ></comp-ve-order-basic>
 
         <div class="pb_x3">
             <nav class="fx-l">
                 <h5 class="n py_n">蛋糕信息</h5>&nbsp;&nbsp;
-                <button v-if="!kiii_btn" @click="mod(21)" class="btn-pri py_t px_s s">添加訂制蛋糕</button>
             </nav>
 
             <panel-inner :header="'定製蛋糕內容'" v-if="order">
                 <template v-slot:cont>
-                    <order-exi-product :order="order" :_kiii_btn="kiii_btn"></order-exi-product>
+                    <order-exi-product :order="order" :_kiii_btn="kiii_btn"  :edit="!is_view"></order-exi-product>
                 </template>
             </panel-inner>
         </div>
 
         <div class="pb_x3">
             <h5 class="n py_n">送貨信息</h5>
-            <comp-ve-order-send class="pb_x2" :order="order" :edit="edt"></comp-ve-order-send>
-            <comp-ve-order-send-people class="py" :order="order" :edit="edt"></comp-ve-order-send-people>
-            <order-exi-send-card :order="order" :edit="edt"></order-exi-send-card>
+            <comp-ve-order-send class="pb_x2" :order="order"  :edit="!is_view" ></comp-ve-order-send>
+            <comp-ve-order-send-people class="py" :order="order"  :edit="!is_view" ></comp-ve-order-send-people>
+            <order-exi-send-card :order="order"  ></order-exi-send-card>
         </div>
 
         <div v-if="order">
             <h5 class="n py">備註</h5>
-            <order-exi-remark :order="order" :edit="edt" class="pb_x2"></order-exi-remark>
+            <order-exi-remark :order="order"  :edit="!is_view" class="pb_x2"></order-exi-remark>
         </div>
         
         <div class="pb_x2" v-if="_pay">
@@ -69,20 +67,12 @@ export default {
         CompVeOrderSendPeople,
         OrderExiRemark
     },
-    props: [ '_one', 'mode', '_pay', 'kiii_btn' ],
-    mounted() { },
-    data() {
-        return {
-            
-        }
-    },
+    props: [ '_one', '_pay', 'mode' ],
     computed: {
         order() { let res = this.orderPina().one; return res && res.id ? res: null },
-        edt() { return (this.mode == 'EDIT')},
+        is_view() { return this.mode == 'VIEW' }, 
+        is_edit() { return this.mode == 'EDIT' }, is_creat() { return this.mode == 'CREAT' },
     },
-    methods: {
-        create_or_edit() { console.log("OederExpanelInner create or edit") },
-    }
 }
 </script>
 

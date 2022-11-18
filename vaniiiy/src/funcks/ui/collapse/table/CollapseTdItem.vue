@@ -37,5 +37,5 @@ export default {
 <style lang="sass" scoped>
 .collapse-active
     & > div
-        max-height: 160em
+        max-height: 180em
 </style>

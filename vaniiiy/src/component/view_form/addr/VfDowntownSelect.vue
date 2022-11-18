@@ -18,7 +18,7 @@ export default {
     },
     mounted() { this.now = this.def ? this.def : 1 },
     watch: {
-        now(n, o) { }
+        now(n, o) { this.$emit('resuit', n) }
     }
 }
 </script>

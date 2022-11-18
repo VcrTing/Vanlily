@@ -5,6 +5,7 @@
           <collapse-td-item v-for="(m, i) in items" :key="i">
             <template v-slot:tit>
               <ovs-td @openPan="expan" :one="m" :i="i"></ovs-td>
+              <span>{{iog('TAB =', i + '/' + td)}}</span>
             </template>
               
             <template v-slot:cont>
@@ -15,11 +16,14 @@
                 <ovs-check-pan :one="m" v-else-if="pan == 4"></ovs-check-pan>
 
                 <nav class="px_x2 bg-FFF" v-else-if="pan == 100">
-                  <order-expanel-inner class="px_x4 py" :mode="'VIEW'" :_one="m" :_pay="true" :kiii_btn="true">
+                  <order-expanel-inner class="px_x4 py"  :_one="m" :_pay="true">
                     <template v-slot:opera>
                       <order-exi-opera />
                     </template>
                   </order-expanel-inner>
+                </nav>
+                <nav class="px_x2 bg-FFF" v-else-if="pan == 101">
+                  <order-edit/>
                 </nav>
               </div>
             </template>
@@ -44,10 +48,12 @@ import OvsBasePan from './expan/OvsBasePan.vue'
 import OvsCakePan from './expan/OvsCakePan.vue'
 import OvsSendPan from './expan/OvsSendPan.vue'
 import OvsCheckPan from './expan/OvsCheckPan.vue'
+import OrderEdit from '../../creat_edit/OrderEdit.vue'
 
 export default {
   components: { OvsTr, OvsTd, Pagenation, Collapse, CollapseTdItem, OrderExpanelInner, OrderExiOpera, 
-      OvsBasePan, OvsCakePan, OvsSendPan, OvsCheckPan
+      OvsBasePan, OvsCakePan, OvsSendPan, OvsCheckPan,
+    OrderEdit
     },
     data() {
         return {
@@ -89,6 +95,8 @@ export default {
           this.pan = 4
         } else if (k == 'CHECK_AII') {
           this.pan = 100
+        } else if (k == 'EDIT') {
+          this.pan = 101
         }
         this.insert_order_detaii(uuid)
       },

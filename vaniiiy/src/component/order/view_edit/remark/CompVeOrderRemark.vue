@@ -4,9 +4,8 @@
             <span>{{ _header }}</span>
             <div>&nbsp;{{ cont }}</div>
         </div>
-        <ui-input v-else :header="_header" :is_err="remark_err">
-            
-            <textarea class="input" v-model="remark" placeholder="請輸入內容"></textarea>
+        <ui-input v-else :header="_header" :is_err="is_err">
+            <slot></slot>
         </ui-input>
     </div>
 </template>
@@ -18,13 +17,8 @@ export default {
     props: {
         _header: { type: String },
         __edit: {  type: Boolean, default: false },
-        cont: { type: String, default: '' }
-    },
-    data() {
-        return {
-            remark: '',
-            remark_err: false
-        }
+        cont: { type: String, default: '' },
+        is_err: Boolean
     }
 }
 </script>

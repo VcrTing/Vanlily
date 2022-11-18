@@ -26,5 +26,6 @@ export default {
         if (src) {
             return src.format('yyyy年MM月DD日')
         }
-    }
+    },
+    now() { return moment(new Date()).format('yyyy-MM-DD') }
 }

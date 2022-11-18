@@ -3,7 +3,7 @@
       <template v-slot:cont>
         <order-expanel-inner 
           :_pay="false"
-          :mode="'EDIT'">
+          :mode="'CREAT'">
             <template v-slot:opera>
               <div class="fx-c upper">
                   <button class="btn-pri px_x3 py_s">

@@ -9,16 +9,22 @@ export default {
     props: [ 'def' ],
     data() {
         return {
-            now: 1,
+            now: 'web',
             ops: [
-                { txt: 'Website', v: 1 },
-                { txt: 'Whatsapp', v: 2 }
+                { txt: 'Website', v: 'website' },
+                { txt: 'Whatsapp', v: 'whatsapp' },
+                { txt: 'Fackbook', v: 'fackbook' },
+                { txt: 'Email', v: 'email' },
+                { txt: 'Referral', v: 'referral' },
             ]
         }
     },
-    mounted() { this.now = this.def ? this.def : 1 },
+    mounted() { this.now = this.def ? this.def : 'web' },
     watch: {
         now(n, o) { this.$emit('change', n) }
+    },
+    methods: {
+
     }
 }
 </script>
