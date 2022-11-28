@@ -17,7 +17,8 @@ export default defineStore('userPina', {
     }, 
     getters:{
         avatar() { return this.user ? this.user.avatar : DEF.avatar },
-        named() { return this.user ? this.user.email : '未登录' }
+        named() { return this.user ? this.user.email : '未登录' },
+        username() { return this.user ? this.user.username : '' }
     }, 
     actions: {
         iogin(jwt, user) { this.jwt = jwt; this.user = Object.assign(DEF, user) }

@@ -1,7 +1,7 @@
 <template>
     <div class="d-ib">
-        <span>{{ send_date }}</span>
-        <span class="w-0-s">&nbsp;{{ send_time }}</span>
+        <span>{{ send_date }}&nbsp;</span><br/>
+        <span class="w-0-s">{{ send_time }}</span>
     </div>
 </template>
 <script>

@@ -5,8 +5,8 @@
                     送貨日期：<span>{{ deiive ? deiive.delivery_date : '' }}</span>
                 </div>
                 <div class="w-54">
-                    送貨時段：<span>{{ deiive ? deiive.delivery_time : '' }}</span>&nbsp;&nbsp;
-                    <button class="btn-succ">已更新</button>
+                    送貨時段：<span>{{ timed }}</span>&nbsp;&nbsp;
+                    <button v-if="timed" class="btn-succ righter">已更新</button>
                 </div>
             </div>
             <div class="w-50 fx-l">
@@ -28,6 +28,11 @@ export default {
     components: {
 
         VarOrderDeiiveAddr
+    },
+    computed: {
+        timed() {
+            return this.deiive ? this.deiive.delivery_time : ''
+        }
     }
 }
 </script>

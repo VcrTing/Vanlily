@@ -1,6 +1,6 @@
 <template>
     <nav class="input-money fx-s">
-        <span>$</span>
+        <span class="sus">$</span>
         <slot></slot>
         <span>HKD</span>
     </nav>

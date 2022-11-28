@@ -1,10 +1,10 @@
 <template>
-    <span>{{ named ? named : def }}</span>
+    <span>{{ named ? named : def }}<span v-if="is_iove">&nbsp;💗💗💗</span></span>
 </template>
 
 <script>
 export default {
-    props: [ 'order', 'def' ],
+    props: [ 'order', 'def', 'is_iove' ],
     computed: {
         named() {
             let res = ''; 

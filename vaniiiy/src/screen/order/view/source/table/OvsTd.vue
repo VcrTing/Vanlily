@@ -1,33 +1,33 @@
 <template>
     <div class="item td" >
         <div class="w-6  w-7-s">
-            <span class="tag tag-pri_light" v-if="one.is_new">New</span>
+            <view-order-isnew ref="is_new" :order="one" @tap="kiiiNew"/>
         </div>
         <div class="w-6  w-6-s hand" @click="tap('NUM')">{{ one.uuid }}</div>
         <div class="w-8  w-9-s" @click="tap('NUM')">{{ timed.view(one.ordered_date) }}</div>
-        <div class="w-8  w-10-s">
+        <div class="w-12  w-10-s">
             <var-order-user-name :order="one" :def="'未命名'"/>    
         </div>
-        <div class="w-13 w-18-s hand pr t-elip_x2" @click="tap('CAKE')">
+        <div class="w-22 w-18-s hand pr t-elip_x2" @click="tap('CAKE')">
             <var-order-cake-name :order="one"/>    
         </div>
-        <div class="w-15 w-12-s pr">
+        <div class="w-14 w-12-s pr">
             <view-order-time-send v-if="deiive" :date="deiive.delivery_date" :time="deiive.delivery_time"></view-order-time-send>
         </div>
-        <div class="w-6  w-0-s">{{ over_time }}</div>
         <div class="w-7 w-9-s" @click="tap('SEND')">
             <view-order-send-type class="hand" :_typed="deiive_way"></view-order-send-type>
         </div>
-        <div class="w-13 w-0-s hand pr t-elip_x2" @click="tap('SEND')">
+        <div class="w-7  w-0-s">{{ over_time }}</div>
+        <!--<div class="w-13 w-0-s hand pr t-elip_x2" @click="tap('SEND')">
             <view-order-send-addr :order="one" :def="''"/>  
-        </div>
+        </div>-->
         <div class="w-6">
             <view-order-pay-status :_is_pay="one.is_paid"></view-order-pay-status>
         </div>
         <div class="w-7 w-8-s">
             <opera-status :_item="one.is_open" @change="changeStatus"></opera-status>
         </div>
-        <div class="w-6 w-7-s t-c hand"  @click="tap('CHECK')">
+        <div class="w-6 w-7-s t-c hand" > <!-- @click="tap('CHECK')" -->
             <view-order-check-bulb :is_check="one.is_check_all"></view-order-check-bulb>
         </div>
         <div class="w-9">
@@ -45,9 +45,11 @@ import VarOrderUserName from '../../../../../front/variab/order/VarOrderUserName
 import VarOrderCakeName from '../../../../../front/variab/order/VarOrderCakeName.vue'
 import UiTableOpera from '../../../../../funcks/ui_element/table/opera/UiTableOpera.vue'
 import ViewOrderSendAddr from '../../../../../component/view/order/addr/ViewOrderSendAddr.vue'
+import ViewOrderIsnew from '../../../../../component/view/order/ViewOrderIsnew.vue'
 export default {
 components: { UiTableOpera, VarOrderCakeName, ViewOrderTimeSend, ViewOrderCheckBulb, ViewOrderSendType, ViewOrderPayStatus, OperaStatus, VarOrderUserName,
-    ViewOrderSendAddr   },
+    ViewOrderSendAddr,
+ViewOrderIsnew,   },
 props: [ 'one', 'i' ],
 data() {
     return {
@@ -74,8 +76,8 @@ computed: {
     },
     deiive_way() {
         let src = this.deiive
-        src = src ? src.delivery_type : undefined
-        return src ? src.method : ''
+        src = src ? src.delivery_method : undefined
+        return src ? src : ''
     },
 },
 mounted() {
@@ -100,6 +102,12 @@ methods: {
     // 訂單狀態
     async changeStatus(v) {
         await this.serv.order.status(this, v, this.one.uuid)
+    },
+    // 订单 NEW
+    async kiiiNew() {
+        // const un = this.userPina().username
+        this.$refs.is_new.kiii()
+        await this.serv.order.change_new(this, this.one.uuid)
     }
 }
 }

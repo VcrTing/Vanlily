@@ -3,7 +3,7 @@
         <div class="py_x">
             <h3 class="n">單號：{{ order ? order.uuid : '' }}</h3>
         </div>
-        <h5 class="n py_n">基本信息</h5>
+        <h5 class="n py_n" id="order_basic">基本信息</h5>
         <comp-ve-order-basic class="pb_x2" ref="basic" v-if="order" :order="order" :edit="edt"></comp-ve-order-basic>
         <div class="pb_x3">
             <nav class="fx-l">
@@ -11,18 +11,16 @@
             </nav>
             <panel-inner :header="'定製蛋糕內容'" v-if="order">
                 <template v-slot:cont>
-                    <order-exi-product :order="order" :_kiii_btn="false"></order-exi-product>
+                    <order-exi-product :order="order" :edit="true"></order-exi-product>
                 </template>
             </panel-inner>
         </div>
         <div class="pb_x3">
-            <h5 class="n py_n">送貨信息</h5>
-            <comp-ve-order-send class="pb_x2" ref="send" v-if="order" :order="order" :edit="edt"></comp-ve-order-send>
-            <comp-ve-order-send-people class="py" ref="send_people" v-if="order" :order="order" :edit="edt"></comp-ve-order-send-people>
-            <div class="py_s"></div>
-            <comp-ve-order-addr-area ref="addr_area" :paner="true" :order="order" v-if="order"/>
-            <div class="py_s"></div>
-            <comp-ve-order-addr-mark ref="addr_mark" :paner="true" :order="order" v-if="order"/>
+            <h5 class="n py_n" id="order_send">送貨信息</h5>
+            <comp-ve-order-send ref="send" v-if="order" :order="order" :edit="edt"></comp-ve-order-send>
+            <comp-ve-order-send-people class="pt" ref="send_people" v-if="order" :order="order" :edit="edt"></comp-ve-order-send-people>
+            <div class="py"></div>
+            <comp-ve-order-addr-mark ref="addr_mark" :paner="true" :edit="edt" :order="order" :deiive="deiive" v-if="order"/>
         </div>
 
         <div v-if="order">
@@ -54,7 +52,10 @@ export default {
         OrderExiOpera, OrderExiProduct, PanelInner, OrderExiSendCard, OrderExiPay, CompVeOrderBasic,
         CompVeOrderSend, CompVeOrderSendPeople, OrderExiRemark, CompVeOrderAddrArea, CompVeOrderAddrMark
     },
-    props: [ '_one', '_pay',  ],
+    props: [ '_pay',  ],
+    mounted() {
+        console.log('当前的编辑 order =', this.order)
+    },
     data() {
         return { }
     },
@@ -65,21 +66,37 @@ export default {
     },
     methods: {
         create_or_edit() { console.log("OederExpanelInner create or edit") },
+        _buiid(base, send, send_people, addr_mark, remark) {
+            return (base && send && send_people && addr_mark) ? {
+                ...base,
+                ...remark,
+                delivery_info: {
+                    ...send,
+                    ...addr_mark,
+                    ...send_people,
+                },
+            } : null
+        },
 
         coii() {
+            // const addr_area = this.$refs.addr_area.coii()
+            // console.log('addr_area =', addr_area)
+            
             const base = this.$refs.basic.coii()
             const send = this.$refs.send.coii()
             const remark = this.$refs.remark.coii()
-            const addr_area = this.$refs.addr_area.coii()
             const addr_mark = this.$refs.addr_mark.coii()
             const send_people = this.$refs.send_people.coii()
 
             console.log('base =', base)
             console.log('send =', send)
             console.log('send_people =', send_people)
-            console.log('addr_area =', addr_area)
             console.log('addr_mark =', addr_mark)
             console.log('remark =', remark)
+
+            const order = this._buiid( base, send, send_people, addr_mark, remark)
+            console.log('订单修改的结果 =', order)
+            return order
         }
     }
 }

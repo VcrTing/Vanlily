@@ -1,5 +1,9 @@
 <template>
     <div>
+        <!--div class="py_x2">
+            <ovs-test/>
+        </!--div-->
+
         <ui-header :header="'訂單'">
             <template v-slot:cont>
                 <button @click="go('/admin/order/add_order')" class="btn btn-pri py_n px_x3">新增訂單</button>
@@ -19,8 +23,9 @@
 import UiHeader from '../../../funcks/ui_element/header/UiHeader.vue'
 import UiSearch from '../../../funcks/ui_element/search/UiSearch.vue'
 import OrderExiTab from '../expanel_tab/OrderExiTab.vue'
+import OvsTest from './source/OvsTest.vue'
 export default {
-  components: { UiHeader, UiSearch, OrderExiTab },
+  components: { UiHeader, UiSearch, OrderExiTab, OvsTest },
     methods: {
         openMod() {
             // this.$refs.modREF.change()

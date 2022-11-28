@@ -1,5 +1,5 @@
 <template>
-    <nav class="fx-l input-inline input-inline-fill">
+    <nav class="fx-l input-inline ip-ini-icon">
         <label :class="_class" v-if="header">
             <span v-html="header"></span>&nbsp;
         </label>
@@ -33,6 +33,4 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.input-inline
-    margin-bottom: 0px
 </style>

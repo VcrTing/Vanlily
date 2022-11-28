@@ -14,7 +14,7 @@ import UiImg from '../../ui_static/UiImg.vue';
 export default {
   components: { UiImg },
     props: {
-        cake: Object
+        cake: Object,
     },
     methods: {
         _named(src) {
@@ -25,6 +25,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="sass">
+.fk-cake-an-cover
+    img
+        border-radius: 1px
 </style>

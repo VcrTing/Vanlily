@@ -1,7 +1,7 @@
 <template>
-    <div class="fx-l cus-def" v-show="txt">
-        <span class="pr_t">{{ txt }}</span>
-        <i class="mdi mdi-truck-cargo-container h5 pri"></i>
+    <div class="fx-l cus-def" v-if="item">
+        <span class="pr_t">{{ item.txt }}</span>
+        <i :class="item.icon" class="h5 pri"></i>
     </div>
 </template>
 <script>
@@ -10,14 +10,20 @@ export default {
     data() {
         return {
             ix_txt: '送货_送貨',
-
+            
+            items: [
+                { txt: '送貨', char: '送', icon: 'mdi mdi-truck-cargo-container' },
+                { txt: '自取', char: '取', icon: 'mdi mdi-briefcase-clock-outline' },
+                { txt: 'MTR', char: 'MTR', icon: 'mdi mdi-subway' },
+            ]
         }
     },
     computed: {
-        txt() {
-            if (!this._typed) { return '' }
-            if (this.ix_txt.indexOf(this._typed)) { return '送貨' }
-            return '自取'
+        item() {
+            let res = { }; if (!this._typed) { return null }
+            this.items.map(e => {
+                if (this._typed.indexOf(e.char) >= 0) { res = e }
+            }); return res
         }
     }
 }

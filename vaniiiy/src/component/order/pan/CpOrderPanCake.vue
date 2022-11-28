@@ -1,14 +1,16 @@
 <template>
     <div class="f_row">
-        <div class="w-27">
+        <div class="w-19">
             <ui-gallery v-if="prod && prod.images_url" :mode="'VERTICAL'" :imgs="prod.images_url"></ui-gallery>
         </div>
-        <div class="fx-1 f_row pt">
+        <div class="fx-1 pt">
+            <div class="fx-l">
+                <div class="w-8 f-area"></div>
+                <h3 class="n"><var-cake-name v-if="prod" :prod="prod"/></h3>
+            </div>
+            <div class="fx-s fx-t pt_x2 upper">
                 <div class="w-8 f-area"></div>
                 <div class="w-33 f-area pr">
-                    <div>
-                        款式：<span><var-cake-name v-if="prod" :prod="prod"/></span>
-                    </div>
                     <fk-cake-attrs :cake="cake"/>
                 </div>
                 <div class="w-30 f-area">
@@ -17,16 +19,7 @@
                 <div class="w-29 f-area pl_x2">
                     <fk-cake-price-group :cake="cake"/>
                 </div>
-                <!--div class="w-100 f_row">
-                    <div class="w-8"></div>
-                    <div class="fx-1 f_row">
-                        <div class="w-5em">生日字粒：</div>
-                        <div class="pl">
-                            <div><span>名字字粒：</span><span>KC Li</span></div>
-                            <div class="pt_n"><span>底盤字粒：</span><span>happy birthday</span></div>
-                        </div>
-                    </div>
-                </!--div-->
+            </div>
         </div>
     </div>
 </template>
@@ -52,6 +45,22 @@ export default {
 
     }
 }
+/*
+        <!--<div>
+            款式：<span><var-cake-name v-if="prod" :prod="prod"/></span>
+        </div>-->
+
+<!--div class="w-100 f_row">
+    <div class="w-8"></div>
+    <div class="fx-1 f_row">
+        <div class="w-5em">生日字粒：</div>
+        <div class="pl">
+            <div><span>名字字粒：</span><span>KC Li</span></div>
+            <div class="pt_n"><span>底盤字粒：</span><span>happy birthday</span></div>
+        </div>
+    </div>
+</!--div-->
+*/
 </script>
 
 <style>

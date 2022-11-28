@@ -2,92 +2,94 @@
     <div :class="{ 'panel-inner px_x2 py': paner }">
         <div class="pt_s">送貨類別</div>
 
-            <div class="pt_s">
-                <vf-send-type-choise :def="1" @resuit="(n) => {}" class="pt cold row"></vf-send-type-choise>
-                <div class="w-50 pl_x2 pt">
-                    <vf-receive-type-choise class="fx-s pt" :def="1" @resuit="(n) => {}"/>
-                </div>
+        <div class="pt_s">
+            <!-- 送上门 -->
+            <vf-send-type-choise ref="stc" @resuit="(n) => typed = n" class="pt cold row"></vf-send-type-choise>
+            <div class="pt"></div>
+            <div class="fx-l pl_x2 py br pr" :class="{ 'choise-die': !need_comp }">
+                <vf-send-company-choise ref="scc" class="fx-s" @resuit="(n) => company = n"/>
             </div>
+        </div>
 
-            <div class="pl_x2 pt_x2 pb">
-                <!-- 自取 -->
-                <div v-show="tab == 1" class="fx-s upper cold">
-                    <div class="w-15"></div>
-                    <div class="w-70">
-                        <vf-self-get-radio></vf-self-get-radio>
-                    </div>
-                    <div class="w-15"></div>
-                </div>
+        <div class="pl_x2 pt_x2 pb">
+                <!-- 送货 -->
+                <cp-ve-order-addr-area-pan @resuit="(n) => addr = n" class="upper" v-if="need_comp"/>
                 <!-- 送達地鐵站 -->
-                <div v-show="tab == 2" class="fx-s upper">
-                    <div class="w-28">
-                        <p>地域</p>
-                        <input class="input w-100" placeholder="請輸入內容" />
-                    </div>
-                    <div class="w-33">
-                        <p>地区</p>
-                        <input class="input w-100" placeholder="請輸入內容" />
-                    </div>
-                    <div class="w-33">
-                        <p>详细地址</p>
-                        <input class="input w-100" placeholder="請輸入內容" />
-                    </div>
-                </div>
+                <cp-ve-order-addr-subway @resuit="(n) => addr = n" class="upper" v-else-if="typed.code == 'subway_aii'"/>
                 <!-- 樓下交收 -->
-                <div v-show="tab >= 3" class="upper">
-                    <ui-input :header="'地址備註'" :is_err="false">
-                        <textarea class="input" placeholder="請輸入地址"></textarea>
-                    </ui-input>
-                </div>
-            </div>
-            <div class="fx-s fx-t pt_x2 cold">
-                <div class="w-32">
-                    <p class="">運費對比</p>
-                    <p class="">&nbsp;</p>
-                </div>
-                <div class="w-28">
-                    <p>客付運費價格</p>
-                    <p class="pb">
-                        <span>$</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="h5">120</span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span>HKD</span>
-                    </p>
-                </div>
-                <div class="w-45 pri_son">
-                    <p>Vanlily Cake 付運費價格</p>
-                    <p class="pb pl_x2">
-                        <span>$</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="h5">120</span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span>HKD</span>
-                    </p>
-                </div>
-            </div>
+                <!--cp-ve-order-addr-fioor v-else class="upper"/ -->
+                <!-- 屯门站 -->
+                <cp-ve-order-tunmen-subway @resuit="(n) => addr = n" class="upper" v-else-if="typed.code == 'subway_tunmen'"/>
+                <!-- 606 自取 -->
+                <cp-ve-order-self-get @resuit="(n) => addr = n" class="upper" v-else/>
+        </div>
+
+        <cp-ov-order-price class="pt_x2" :is_edit="edit"/>
     </div>
 </template>
 
 <script>
 import UiInput from '../../../../funcks/ui_element/input/normal/UiInput.vue'
 import VfSelfGetRadio from '../../../view_form/addr/VfSelfGetRadio.vue'
-import VfReceiveTypeChoise from '../../../view_form/send/VfReceiveTypeChoise.vue'
+import VfSendCompanyChoise from '../../../view_form/send/VfSendCompanyChoise.vue'
 import VfSendTypeChoise from '../../../view_form/send/VfSendTypeChoise.vue'
+import CpVeOrderAddrAreaPan from './input/CpVeOrderAddrAreaPan.vue'
+import CpVeOrderAddrFioor from './input/CpVeOrderAddrFioor.vue'
+import CpVeOrderAddrSubway from './input/CpVeOrderAddrSubway.vue'
+import CpVeOrderSelfGet from './input_2/CpVeOrderSelfGet.vue'
+import CpVeOrderTunmenSubway from './input_2/CpVeOrderTunmenSubway.vue'
+import CpOvOrderPrice from './snipp/CpOvOrderPrice.vue'
 export default {
-  components: { VfSendTypeChoise, VfSelfGetRadio, UiInput, VfReceiveTypeChoise },
+  components: { VfSendTypeChoise, VfSelfGetRadio, UiInput, VfSendCompanyChoise, CpOvOrderPrice,
+        CpVeOrderAddrAreaPan,
+        CpVeOrderAddrSubway,
+        CpVeOrderAddrFioor,
+        CpVeOrderTunmenSubway,
+    CpVeOrderSelfGet       
+    },
     props: {
-        paner: Boolean,
-        order: Object
+        paner: Boolean, order: Object, edit: Boolean, deiive: Object
     },
     data() {
-        return { tab: 2 }
+        return { addr: { }, typed: { txt: '送上門' , code: 'addr' }, company: { txt: '公公送貨' } }
     },
+    computed: {
+        need_comp() {
+            let src = this.typed.code
+            return (src == 'addr' || src == 'fioor') }
+        // deiive() { let res = this.order; res = res ? res.delivery_info : null; return res }
+    },
+    watch: {
+        typed(n, o) { this.typed = n },
+        company(n, o) {
+            this.company = n
+            if (this.need_comp) { console.log('收集 COMAPNY =', n) }
+        }
+    },
+    mounted() { this.ioc() },
     methods: { 
-        tabType(v) { this.tab = v },
         coii() {
-            
+            let res = {
+                delivery_method: this.typed.v,
+                delivery_company: this.need_comp ? this.company.v : null,
+                ...this.addr
+            }
+            return res
+        },
+        ioc() {
+            if (this.edit ) {
+                const txt = this.deiive ? this.deiive.delivery_method : ''
+                this.$refs.stc.ioc( txt )
+                const company = this.deiive ? this.deiive.delivery_company : ''
+                if (company) { this.$refs.scc.ioc(company) }
+                console.log('定位 =', txt, company)
+            }
         }
     }
 }
 </script>
 
-<style>
-
+<style lang="sass">
+.choise-die
+    background: #f5f5f5
 </style>

@@ -9,6 +9,7 @@ export default {
     order_cake: '/orders/check_product',
     order_check: '/orders/checklist',
     order_status: '/orders/order_status',
+    order_is_new: '/orders/is_new_to',
 
     materiai_access: '/materials-accessories'
 }

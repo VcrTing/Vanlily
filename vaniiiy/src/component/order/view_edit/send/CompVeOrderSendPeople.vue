@@ -3,23 +3,28 @@
         <div class="fx-s">
             <p class="w-31 fx-l">
                 <span class="min-6em">送貨人員：</span>
-                <span v-if="!edit">{{ one.sender_name }}</span>
-                <ui-inline-input-icon :is_err="form_err.named" :icon="'mdi-truck-cargo-container'">
+                <span v-if="!edit">
+                    <span v-if="one.sender_name">
+                        {{ one.sender_name }}
+                    </span>
+                    <span v-else>(無)</span>
+                </span>
+                <ui-inline-input-icon v-else :is_err="form_err.named" :icon="'mdi-truck-cargo-container'">
                     <input class="input" placeholder="請輸入" v-model="form.named">
                 </ui-inline-input-icon>
             </p>
             <p class="w-31 fx-l">
-                <span class="min-4em">電話：</span>
+                <span class="min-6em">電話：</span>
                 <span v-if="!edit">{{ one.sender_phone }}</span>
-                <ui-inline-input-icon :is_err="form_err.phoned" :icon="'mdi-phone-outline'">
+                <ui-inline-input-icon v-else :is_err="form_err.phoned" :icon="'mdi-phone-outline'">
                     <input class="input" placeholder="請輸入" v-model="form.phoned">
                 </ui-inline-input-icon>
             </p>
             <p class="w-31 fx-l">
-                <span class="min-6em">取貨時間：</span>
+                <span class="min-7em">取貨時間：</span>
                 <span v-if="!edit">{{ one.pick_up_time }}</span>
                 <ui-input v-else class="fx-1" :is_err="form_err.pick_up_time">
-                    <input class="input ip-minut" placeholder="00:00 / 00-00" v-model="form.pick_up_time"/>
+                    <input class="input ip-minut w-100" placeholder="00:00" v-model="form.pick_up_time"/>
                 </ui-input>
             </p>
         </div>
@@ -71,15 +76,23 @@ export default {
             }
         },
         can() {
-            if (!this.form.named) { this.form_err.named = true; return null }
-            if (!this.form.phoned) { this.form_err.phoned = true; return null }
-            if (!this.form.pick_up_time) { this.form_err.pick_up_time = true; return null }
+            // if (!this.form.named) { this.form_err.named = true; return null }
+            // if (!this.form.phoned) { this.form_err.phoned = true; return null }
+            // if (!this.form.pick_up_time) { this.form_err.pick_up_time = true; return null }
             return true
+        },
+        ser_timed( v ) {
+            if (v) { return v.replace('：', ':') } return ''
         },
         coii() {
             if (this.can()) {
-                return this.aiiow ? this.form : null
-            }
+                this.form.pick_up_time = this.ser_timed( this.form.pick_up_time )
+                return this.aiiow ? {
+                    delivery_man_name: this.form.named,
+                    delivery_man_phone_no: this.form.phoned,
+                    delivery_man_pickup_time: this.form.pick_up_time
+                } : null
+            } return null
         }
     }
 }

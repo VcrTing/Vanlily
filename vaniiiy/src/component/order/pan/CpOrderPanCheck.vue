@@ -25,38 +25,6 @@
                     <div class="min-6em"></div>
                     <div class="pl_x2 ">無內容</div>
             </nav>
-            <!-- -->
-            <nav class="fx-l fx-t">
-                <div class="w-2"></div>
-                <div class="min-6em fx-c pt_s">
-                    <ui-checkbox-for-one :def="true" @change="(n) => updCheck(n, null)"/>
-                </div>
-                <div class="min-6em fx-c pt_s">
-                    <ui-checkbox-for-one :def="true" @change="(n) => updCheck(n, null)"/>
-                </div>
-                <div class="pl_x2 pt_s">
-                    <zi-li-layout>
-                        <div class="pb_n">字牌 1：<span></span></div>
-                        <div class="pb_n">字牌 2：<span></span></div>
-                    </zi-li-layout>
-                </div>
-            </nav>
-            <!--nav class="fx-l">
-                <div class="min-6em fx-c">
-                    <ui-checkbox-for-one :def="true" @change="(n) => updCheck(n, '0')"/>
-                </div>
-                <div class="min-6em fx-c">
-                    <ui-checkbox-for-one :def="true" @change="(n) => updCheck(n, '0')"/>
-                </div>
-                <div class="pl">
-                    <zi-li-layout :header="'特別要求：'" :_top="false">
-                        <div>
-                            名字字粒：<span>KC Li</span>&nbsp;&nbsp;
-                            <button class="btn-succ">已更新</button>
-                        </div>
-                    </zi-li-layout>
-                </div>
-            </!--nav-->
         </div>
     </nav>
 </template>
@@ -97,6 +65,40 @@ export default {
         }
     }
 }
+/*
+            <!-- 
+            <nav class="fx-l fx-t">
+                <div class="w-2"></div>
+                <div class="min-6em fx-c pt_s">
+                    <ui-checkbox-for-one :def="true" @change="(n) => updCheck(n, null)"/>
+                </div>
+                <div class="min-6em fx-c pt_s">
+                    <ui-checkbox-for-one :def="true" @change="(n) => updCheck(n, null)"/>
+                </div>
+                <div class="pl_x2 pt_s">
+                    <zi-li-layout>
+                        <div class="pb_n">字牌 1：<span></span></div>
+                        <div class="pb_n">字牌 2：<span></span></div>
+                    </zi-li-layout>
+                </div>
+            </nav>-->
+            <!--nav class="fx-l">
+                <div class="min-6em fx-c">
+                    <ui-checkbox-for-one :def="true" @change="(n) => updCheck(n, '0')"/>
+                </div>
+                <div class="min-6em fx-c">
+                    <ui-checkbox-for-one :def="true" @change="(n) => updCheck(n, '0')"/>
+                </div>
+                <div class="pl">
+                    <zi-li-layout :header="'特別要求：'" :_top="false">
+                        <div>
+                            名字字粒：<span>KC Li</span>&nbsp;&nbsp;
+                            <button class="btn-succ">已更新</button>
+                        </div>
+                    </zi-li-layout>
+                </div>
+            </!--nav-->
+*/
 </script>
 
 <style lang="sass" scoped>

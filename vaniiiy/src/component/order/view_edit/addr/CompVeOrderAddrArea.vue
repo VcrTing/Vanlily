@@ -2,22 +2,7 @@
     <div class="" :class="{ 'panel-inner px_x2 pt': paner }">
         <div class="pt_s">送貨地區</div>
         <div class="pl_x2 py">
-            <div class="fx-s pl_x2">
-                <div class="w-28">
-                    <p>國家/地區：</p>
-                    <p class="pl_x2">香港</p>
-                </div>
-                <div class="w-33">
-                    <p>地區</p>
-                    <vf-downtown-select :def="null" @resuit="(n) => form.diqu = n" class="input w-100"></vf-downtown-select>
-                </div>
-                <div class="w-33">
-                    <p>市政/區域</p>
-                    <ui-inline-input :is_err="form_err.shi" :_kiii_mb="true">
-                        <input class="input" placeholder="請輸入內容" v-model="form.shi"/>
-                    </ui-inline-input>
-                </div>
-            </div>
+            <cp-ve-order-addr-area-pan class="pl_x2 fx-t"/>
         </div>
         <div class="pl_x2 pt">
             <div class="fx-s fx-t pl_x2">
@@ -41,10 +26,11 @@
 
 <script>
 import UiInlineInput from '../../../../funcks/ui_element/input/inline/UiInlineInput.vue'
-import VfDowntownSelect from "../../../view_form/addr/VfDowntownSelect.vue"
+import VfAddrAreaSelect from "../../../view_form/addr/VfAddrAreaSelect.vue"
+import CpVeOrderAddrAreaPan from './input/CpVeOrderAddrAreaPan.vue'
 
 export default {
-    components: { VfDowntownSelect, UiInlineInput },
+    components: { VfAddrAreaSelect, UiInlineInput, CpVeOrderAddrAreaPan },
     props: {
         paner: Boolean,
         order: Object

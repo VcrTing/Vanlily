@@ -1,6 +1,6 @@
 <template>
     <div class="d-ib">
-        <span v-if="_is_pay">
+        <span v-if="_is_pay" class="sts-succ">
             已付
         </span>
         <span v-else class="sts-err">

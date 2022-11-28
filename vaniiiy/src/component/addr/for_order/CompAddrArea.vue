@@ -1,15 +1,16 @@
 <template>
-    <div>
+    <div class="panel-inner pt pb_s">
+        <div class="sub pb_x px_x2">送貨地區</div>
         <div class="pl_x2">
             <div class="fx-s pl_x2">
                 <cp-oaa-block :header="'國家 / 地區'" class="w-33">
-                    {{ vai('delivery_address_1') }}
+                    {{ vai('delivery_address_1') }}&nbsp;
                 </cp-oaa-block>
                 <cp-oaa-block :header="'地區'" class="w-33">
-                    {{ vai('delivery_address_2') }}
+                    {{ vai('delivery_address_2') }}&nbsp;
                 </cp-oaa-block>
                 <cp-oaa-block :header="'市政 / 區域'" class="w-33">
-                    {{ vai('delivery_address_3') }}
+                    {{ vai('delivery_address_3') }}&nbsp;
                 </cp-oaa-block>
             </div>
         </div>
@@ -20,10 +21,10 @@
                     
                 </cp-oaa-block>
                 <cp-oaa-block :header="'公寓、套房、單位等'" class="w-33">
-                    {{ vai('delivery_address_4') }}
+                    {{ vai('delivery_address_4') }}&nbsp;
                 </cp-oaa-block>
                 <cp-oaa-block :header="'門牌號碼和街道名稱'" class="w-33">
-                    {{ vai('delivery_address_5') }}
+                    {{ vai('delivery_address_5') }}&nbsp;
                 </cp-oaa-block>
             </div>
         </div>

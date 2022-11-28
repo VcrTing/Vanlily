@@ -22,6 +22,9 @@ export default {
             now: 0, cover: ''
         }
     },
+    mounted() {
+        this.cover = this.imgs[0]
+    },
     watch: {
         imgs(n, o) {
             this.cover = this.imgs[0]

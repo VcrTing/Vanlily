@@ -18,7 +18,8 @@ $err: #f45d5b // F55C5C
 .err_son *
     color: $err 
 
-.sts-err
+.sts-err,
+.sts-succ
     position: relative
     padding-left: 0.82em
     color: $err
@@ -29,5 +30,10 @@ $err: #f45d5b // F55C5C
         height: 5px
         width: 5px
 
+.sts-succ
+    color: $succ
+    &::before
+        background: $succ
+        
 
 

@@ -12,10 +12,15 @@ const one = async function(vue, uuid) {
     return res && res.data ? vue.strapi.ser(res): ''
 }
 
-const status = async function(vue, status, uuid) {
+const status = async function(vue, is_open, uuid) {
     let res = await vue.net.patch('order_status', vue.token(), uuid, {
-        is_open: status
+        is_open
     }); return res
+}
+
+const change_new = async function(vue, uuid) {
+    let res = await vue.net.patch('order_is_new', vue.token(), uuid, { })
+    return res && res.status < 399
 }
 
 // 
@@ -23,9 +28,12 @@ const order_patch = async function(vue, uuid, data) {
 
 }
 
+
+
 export default {
     one,
     many,
     status,
+    change_new,
     order_patch
 }

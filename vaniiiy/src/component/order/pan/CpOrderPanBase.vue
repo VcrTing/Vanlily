@@ -2,7 +2,7 @@
     <div class="f_row">
         <div class="w-36 f-area pr_x2">
             <div><span class="">
-                多謝妳 <var-order-user-name v-if="order" :order="order" :def="'<未命名>'"/>，請在(?)的位置所需資料，我們稍後會給妳付款方式。/以下為訂購資料：</span>
+                多謝妳 <var-order-user-name v-if="order" :order="order" :def="'<未命名>'" :is_iove="true"/>，請在(?)的位置所需資料，我們稍後會給妳付款方式。/以下為訂購資料：</span>
             </div>
             <nav>
                 <p>訂單產品：<span>
@@ -22,26 +22,22 @@
             </nav>
         </div>
         <div class="w-40 f-area pr_x2">
-            <div>備註壹：<span>{{ order.remarks_1 }}</span></div>
-            <div>備註二：<span>{{ order.remarks_2 }}</span></div>
+            <div>備註一：<span v-if="order.remarks_1">{{ order.remarks_1 }}&nbsp;&nbsp;💗💗💗</span></div>
+            <div>備註二：<span v-if="order.remarks_2">{{ order.remarks_2 }}&nbsp;&nbsp;💗💗💗</span></div>
             <nav class="py_n">
                 <p>聯絡電話：<span>{{ order.customer_phone_no_1 ? order.customer_phone_no_1 : order.customer_phone_no_2 }}</span></p>
-                <div>送貨/取貨日期：
-                    <var-order-deiive-date :order="order"/>
+                <div>送貨/取貨日期：&nbsp;<var-order-deiive-date :order="order"/>
                 </div>
-                <p>送貨/取貨地點：
-                    <var-order-deiive-addr :order="order"/>
+                <p>送貨/取貨地點：&nbsp;<var-order-deiive-addr :order="order"/>
                 </p>
-                <nav>送貨/取貨時間：
-                    <var-order-deiive-date :order="order" :is_time="true"/>
+                <nav>送貨/取貨時間：&nbsp;<var-order-deiive-date :order="order" :is_time="true"/>
                 </nav>
-                <div>送貨/取貨方式：
-                    <var-order-deiive-type :order="order"/>
+                <div class="fx-l">送貨/取貨方式：&nbsp;<var-order-deiive-type :order="order"/>
                 </div>
             </nav>
             <p class="pt">應付總額：
                 <span>
-                    <view-money v-if="order.payment_fee" :money="order.payment_fee"/><span class="" v-else>(暫無數據)&nbsp;</span>
+                    <view-money v-if="order.payment_fee" :money="order.payment_fee"/><span class="" v-else>(暫無數據)&nbsp;&nbsp;</span>
                     <span v-if="pro_price">(蛋糕費用 <view-money :money="pro_price"/>)</span>
                 </span>
             </p>

@@ -5,22 +5,27 @@
           <collapse-td-item v-for="(m, i) in items" :key="i">
             <template v-slot:tit>
               <ovs-td @openPan="expan" :one="m" :i="i"></ovs-td>
-              <span>{{iog('TAB =', i + '/' + td)}}</span>
+              <span v-if="false">{{iog('TAB =', i + '/' + td)}}</span>
             </template>
               
             <template v-slot:cont>
               <div v-if="td == i">
-                <ovs-base-pan :one="m" v-if="pan == 1"></ovs-base-pan>
+                <ovs-base-pan v-if="pan == 1"></ovs-base-pan>
                 <ovs-cake-pan v-else-if="pan == 2"></ovs-cake-pan>
                 <ovs-send-pan v-else-if="pan == 3"></ovs-send-pan>
-                <ovs-check-pan :one="m" v-else-if="pan == 4"></ovs-check-pan>
+                <ovs-check-pan v-else-if="pan == 4"></ovs-check-pan>
 
                 <nav class="px_x2 bg-FFF" v-else-if="pan == 100">
-                  <order-expanel-inner class="px_x4 py"  :_one="m" :_pay="true">
+                  <!--order-expanel-inner class="px_x4 py"  :_one="m" :_pay="true">
                     <template v-slot:opera>
                       <order-exi-opera />
                     </template>
-                  </order-expanel-inner>
+                  </!--order-expanel-inner-->
+                  <order-exp-inner-review :one="m">
+                    <template v-slot:opera>
+                      <order-exi-opera />
+                    </template>
+                  </order-exp-inner-review>
                 </nav>
                 <nav class="px_x2 bg-FFF" v-else-if="pan == 101">
                   <order-edit/>
@@ -49,11 +54,13 @@ import OvsCakePan from './expan/OvsCakePan.vue'
 import OvsSendPan from './expan/OvsSendPan.vue'
 import OvsCheckPan from './expan/OvsCheckPan.vue'
 import OrderEdit from '../../creat_edit/OrderEdit.vue'
+import OrderExpInnerReview from '../../review/OrderExpInnerReview.vue'
 
 export default {
   components: { OvsTr, OvsTd, Pagenation, Collapse, CollapseTdItem, OrderExpanelInner, OrderExiOpera, 
       OvsBasePan, OvsCakePan, OvsSendPan, OvsCheckPan,
-    OrderEdit
+    OrderEdit,
+    OrderExpInnerReview
     },
     data() {
         return {
@@ -82,6 +89,9 @@ export default {
       },
       // switch
       expan(k, index, uuid) {
+        this.orderPina().do_one( null )
+        this.insert_order_detaii(uuid)
+
         this.td = index
         this.pan = 0
         
@@ -98,11 +108,13 @@ export default {
         } else if (k == 'EDIT') {
           this.pan = 101
         }
-        this.insert_order_detaii(uuid)
+        console.log('TAB =', 'pan =', this.pan, ' td =', this.td)
       },
       async insert_order_detaii(uuid) {
         let res = await this.serv.order.one(this, uuid)
-        if (res && res.data) { this.orderPina().do_one(res.data) }
+        if (res && res.data) { 
+          setTimeout(e => this.orderPina().do_one(res.data), 400)  
+        }
       }
     }
 }

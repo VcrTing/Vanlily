@@ -1,5 +1,5 @@
 <template>
-    <nav class="fx-l pb_x2 " :class="{ 'mb-0': _kiii_mb, 'inline-input-txt-mode': _txt_mode }">
+    <nav class="fx-l pb_x2 " :class="{ 'inline-input-txt-mode': _txt_mode, 'mb-0': _kiii_mb, 'pb-0': _kiii_mb }">
         <label :class="_class" v-if="header">
             <span v-html="header"></span>&nbsp;
         </label>

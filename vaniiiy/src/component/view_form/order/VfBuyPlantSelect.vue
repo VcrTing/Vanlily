@@ -7,11 +7,12 @@
 <script>
 export default {
     props: [ 'def' ],
+    emits: [ 'resuit' ],
     data() {
         return {
             now: 'web',
             ops: [
-                { txt: 'Website', v: 'website' },
+                { txt: 'Website', v: 'web' },
                 { txt: 'Whatsapp', v: 'whatsapp' },
                 { txt: 'Fackbook', v: 'fackbook' },
                 { txt: 'Email', v: 'email' },
@@ -21,7 +22,7 @@ export default {
     },
     mounted() { this.now = this.def ? this.def : 'web' },
     watch: {
-        now(n, o) { this.$emit('change', n) }
+        now(n, o) { this.$emit('resuit', n) }
     },
     methods: {
 

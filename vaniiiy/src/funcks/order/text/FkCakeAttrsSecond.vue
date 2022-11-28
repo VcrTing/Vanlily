@@ -1,8 +1,8 @@
 <template>
 <p>
     特別要求：
-    <span>名字字粒&nbsp;&nbsp;{{ cake.cake_special_needs }}</span>&nbsp;
-    <button class="btn-succ">已更新</button>
+    <span>{{ cake.cake_special_needs }}</span>&nbsp;
+    <button class="btn-succ righter">已更新</button>
 </p>
 <p>
     蛋糕ID：

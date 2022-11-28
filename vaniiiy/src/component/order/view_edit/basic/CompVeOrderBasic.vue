@@ -2,15 +2,15 @@
     <nav v-if="one">
         <div class="fx-s pt_s">
             <p class="w-333">
-                落單同事：<span v-if="one">{{ one.changer }}</span>
+                落單同事：<span v-if="one">{{ one.changer ? one.changer : '(未記錄)' }}</span>
             </p>
-            <p class="w-333 fx-l">
+            <p class="w-333 fx-l pr_x2">
                 訂單日期：
                 <span v-if="!edit">
                     {{ timed.view(one.date) }}
                 </span>
-                <ui-inline-input v-else class="pb-0 input-4">
-                    <time-one class="ip-br w-100" />
+                <ui-inline-input v-else class="pb-0 fx-1">
+                    <time-one :def="one.date" class="ip-br w-100" @resuit="(n) => form.order_date = n" />
                 </ui-inline-input>
             </p>
             <p class="w-333 fx-l">
@@ -18,40 +18,41 @@
                 <span v-if="!edit">
                     {{ one.order_from }}
                 </span>
-                <ui-inline-input-icon v-else :icon="'mdi-earth-box'" :is_err="false">
-                    <vf-buy-plant-select @change="(v) => one.order_from = v" :def="one.order_from" class="input input-3"></vf-buy-plant-select>
+                <ui-inline-input-icon class="fx-1" v-else :icon="'mdi-earth-box'" :is_err="false">
+                    <vf-buy-plant-select @resuit="(v) => form.order_from = v" :def="form.order_from" class="input w-100" />
                 </ui-inline-input-icon>
             </p>
         </div>
-        <div class="fx-s fx-wp">
-            <p class="w-333 w-100-p fx-l">
-                客戶姓名：
+        <div class="fx-s fx-wp" :class="{ 'pt': (!edit) }">
+            <p class="w-333 fx-l pr_x2">
+                <span>客戶姓名：</span>
                 <span v-if="!edit">
                     {{ one.named ? one.named : '' }}
                 </span>
-                <ui-inline-input-icon v-else :is_err="form_err.user_named" :icon="'mdi-account-tie'">
+                <ui-inline-input-icon class="fx-1" v-else :is_err="form_err.user_named" :icon="'mdi-account-tie'">
                     <input class="input" placeholder="請輸入" v-model="form.user_named">
                 </ui-inline-input-icon>
             </p>
-            <nav class="w-666 w-100-p fx-s">
 
-                <p class="w-50 fx-l">
-                    客戶電話：
-                    <span v-if="!edit">{{ one.phoned }}</span>
-                    <ui-inline-input-icon v-else :is_err="form_err.user_phoned" :icon="'mdi-cellphone'">
-                            <input class="input pr_s_ipt" placeholder="請輸入" v-model="form.user_phoned">
-                    </ui-inline-input-icon>
-                    <fk-search-oid-order @click="mod(0)"/>
-                </p>
-                <p class="w-50 fx-l">
-                    客戶電話：
-                    <span v-if="!edit">{{ one.phoned_from }}</span>
-                    <ui-inline-input-icon v-else :is_err="form_err.user_phoned_from" :icon="'mdi-cellphone'">
-                        <input class="input pr_s_ipt" placeholder="選填" v-model="form.user_phoned_from">
-                    </ui-inline-input-icon>
-                    <fk-search-oid-order @click="mod(0)"/>
-                </p>
-            </nav>
+            <p class="w-333 fx-l pr_x2">
+                客戶電話：
+                <span v-if="!edit">{{ one.phoned }}</span>
+                <ui-inline-input-icon class="fx-1" v-else :is_err="form_err.user_phoned" :icon="'mdi-cellphone'">
+                    <input class="input pr_s_ipt" placeholder="請輸入" v-model="form.user_phoned">
+                </ui-inline-input-icon>
+                <fk-search-oid-order v-if="!edit" @click="mod(0)"/>
+            </p>
+            <p class="w-333 fx-l">
+                客戶電話：
+                <span v-if="!edit">
+                    <span v-if="one.phoned_from">{{ one.phoned_from }}</span>
+                    <span v-else>(無)</span>
+                </span>
+                <ui-inline-input-icon class="fx-1" v-else :is_err="form_err.user_phoned_from" :icon="'mdi-cellphone'">
+                    <input class="input pr_s_ipt" placeholder="選填" v-model="form.user_phoned_from">
+                </ui-inline-input-icon>
+                <fk-search-oid-order v-if="!edit" @click="mod(0)"/>
+            </p>
         </div>
     </nav>
 </template>
@@ -83,7 +84,7 @@ export default {
     },
     data() {
         return {
-            form: { user_named: '', user_phoned: '', user_phoned_from: '', order_from: '' },
+            form: { user_named: '', user_phoned: '', user_phoned_from: '', order_from: '', order_date: '' },
             form_err: { user_named: false, user_phoned: false, user_phoned_from: false }
         }
     },
@@ -98,7 +99,9 @@ export default {
                 this.form.user_named = this.one.named
                 this.form.user_phoned = this.one.phoned
                 this.form.order_from = this.one.order_from
+                this.form.order_date = this.one.date
                 this.form.user_phoned_from = this.one.phoned_from
+
             }
         },
         can() {
@@ -108,8 +111,16 @@ export default {
         },
         coii() {
             if (this.can()) {
-                this.form.order_from = this.one.order_from
-                return this.aiiow ? this.form : null
+                // this.form.order_from = this.one.order_from
+
+                console.log('order_from =', this.form.order_from)
+                return this.aiiow ? {
+                    ordered_date: this.form.order_date,
+                    order_from: this.form.order_from,
+                    customer_name: this.form.user_named,
+                    customer_phone_no_1: this.form.user_phoned,
+                    customer_phone_no_2: this.form.user_phoned_from
+                } : null
             }
         }
     }

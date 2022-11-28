@@ -2,11 +2,11 @@
     <div>
         <div class="fx-l fx-t" :class="{ 'pro-gallery': mode == 'CROSS' }">
             <div class="w-88">
-                <div class="pr">
+                <div class="pr lefter">
                     <img class="img pg-cover" :src="now">
                 </div>
             </div>
-            <div class="w-12">
+            <div class="w-12 upper">
                 <div class="w-100 pro-gry-ul" :class="{ 'vert-iist': mode != 'CROSS', 'fx-l pt_s row' : mode == 'CROSS' }">
                     <div class="" v-for="(v, i) in imgs" :key="i" @click="now = v">
                         <img class="img" :src="v">
@@ -37,7 +37,7 @@ export default {
         }
     },
     mounted() {
-        
+        this.now = this.imgs[ 0 ]
     },
     watch: {
         imgs(n, o) { this.now = this.imgs[ 0 ] }
@@ -55,6 +55,7 @@ export default {
     height: calc(45px + 14.5vw)
     overflow: hidden
     overflow-y: scroll
+    max-height: 34vh
     
 .pro-gry-ul
     div

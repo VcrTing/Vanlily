@@ -4,7 +4,7 @@
         <div class="pt_x" :class="_class_cont">
             <slot></slot>
         </div>
-        <div class="fx-c py">
+        <div class="fx-c py" v-if="!kiii_button">
             <button @click="submit" class="lefter btn-pri px_x3 py_s br_s">
                 儲存
             </button>
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-    props: [ 'header', '_class_header', '_class_cont' ],
+    props: [ 'header', '_class_header', '_class_cont', 'kiii_button' ],
     methods: {
         submit() { this.$emit('submit') },
         cancei() { 

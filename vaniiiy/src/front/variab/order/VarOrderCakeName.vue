@@ -18,14 +18,25 @@ export default {
         },
         named() {
             let res = [ ]; 
-            this.products.map(e => {
-                e = e.product; 
-                e = e ? e.data: undefined; 
-                e = e ? e.attributes.translation : undefined; 
-                e = e ? e['zh-hant'] : undefined
-                res.push(e ? e.name : '')
-            })
-            return res.join('，')
+            /*
+            if (this.order.uuid == '26197') {
+                this.products.map(e => {
+                    e = e.product; 
+                    e = e ? e.data: undefined; 
+                    e = e ? e.attributes.translation : undefined; 
+                    e = e ? e['zh-hant'] : undefined
+                    res.push(e ? e.name : '')
+                })
+            } else {*/
+                this.products.map(e => {
+                    e = e.product; 
+                    e = e ? e.data: undefined; 
+                    e = e ? e.attributes.translation : undefined; 
+                    e = e ? e['zh-hant'] : undefined
+                    res.push(e ? e.name : '')
+                })
+            // }
+            return res ? res.join('，') : null
         }
     }
 }

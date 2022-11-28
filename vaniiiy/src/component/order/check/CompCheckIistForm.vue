@@ -1,37 +1,28 @@
 <template>
-    <div>
-        <form-def :header="'檢查清單'">
-            <cp-order-pan-check/>
-            <div class="py"></div>
-        </form-def>
-    </div>
+    <form-def :header="'檢查清單'" @submit="submit" :kiii_button="true">
+        <div v-for="(v, i) in cakes" :key="i">
+            <cp-one-cake-checklist  :cake="v"/>
+        </div>
+    </form-def>
 </template>
 
 <script>
 import FormDef from "../../../funcks/ui_layout/form/def/FormDef.vue"
-import CpOrderPanCheck from '../pan/CpOrderPanCheck.vue'
+import CpOneCakeChecklist from './inner/CpOneCakeChecklist.vue';
 
 export default {
-    components: { FormDef, CpOrderPanCheck },
+    components: { FormDef, CpOneCakeChecklist },
     computed: {
-        order() { let res = this.orderPina().one; return res ? res : { } },
-        pro_uuid() { return sessionStorage.getItem('vaniiiy_pro_uuid') }
+        cakes() { let res = this.productPina().cakes; return res ? res : [ ] },
     },
-    data() {
-        return {
-            cake: { }
-        }
-    },
+    data() { return { } },
     async mounted() {
-        await this.fetching()
+        // await this.fetching()
+        console.log('cakes =', this.cakes)
     },
     methods: {
-        async fetching() {
-            if (this.order && this.pro_uuid) {
-                let res = await this.serv.check.order_check(this, this.order.uuid, this.pro_uuid)
-                console.log('RES =', res)
-                if (res) { this.cake = res }
-            }
+        async submit() {
+            console.log('清单检查完毕')
         }
     }
 }

@@ -47,7 +47,10 @@ export default {
         },
         coii() {
             if (this.can()) {
-                return this.aiiow ? this.form : null
+                return this.aiiow ? {
+                    remarks_1: this.form.emk1,
+                    remarks_2: this.form.emk2
+                } : null
             }
         }
     }

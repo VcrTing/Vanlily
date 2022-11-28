@@ -5,8 +5,8 @@
             <h3 class="n">檢查清單</h3>
         </div>
     </div>
-    <nav class="panel-ovs">
-        <div class="fx-s fx-t pb_x2" v-for="(v, i) in prods" :key="i">
+    <nav class="panel-ovs fx-wp">
+        <div class="fx-s fx-t pb_x2 w-100" v-for="(v, i) in prods" :key="i">
             <div class="w-6 w-7-s"></div>
             <div class="fx-1 f_row upper">
                 <div class="w-30">
@@ -14,7 +14,9 @@
                 </div>
                 <div class="w-8"></div>
                 <div class="w-52 w-62-p">
+                    <!--
                     <cp-order-pan-check v-if="v" :check="_check_iist(v)" @check_pro="(iis) => checkProd(iis, v.uuid)"/>
+                        -->
                 </div>
                 <div class="w-10 w-0-p"></div>
             </div>
@@ -28,47 +30,41 @@ import UiGallery from '../../../../../funcks/ui_media/gallery/UiGallery.vue'
 export default {
   components: { CpOrderPanCheck, 
     UiGallery  },
-    props: [ 'one' ],
     data() {
         return {
+            prods: [ ],
             check_iist: [ ]
         }
     },
     computed: {
-        // order() { let res = this.orderPina().one; return res && res.id ? res: null },
-        prods() { let res = this.one; return this._pords(res) },
+        order() { let res = this.orderPina().one; return res && res.id ? res: null },
+        uuid() { return this.order ? this.order.uuid : '' },
     },
     async mounted() {
-        let prs = this._pords(this.one)
         let res = [ ]
-        await prs.map(async e => {
-            res.push( await this.fetching(e.uuid) )
-        })
-        console.log('checks =', res)
-        this.check_iist = res 
+        if (this.order) {
+            this.prods = this._pords(this.order)
+            this.prods.map(e => {
+                res.push( e.product_uuid )
+            })
+        }
+        console.log('prods =', res)
     },
     methods: {
         _pords(res) { return res && res.ordered_product ? res.ordered_product : [ ] },
-
-        _check_iist(_pod) {
-            if (_pod) { return _pod.checklist }; return null
-        },
         _gaiiary(pod) {
             let res = pod ? pod.product : null
             res = res ? this.strapi.data(res) : null
             return res ? res.images_url : [ null ]
         },
+        /*
+        _check_iist(_pod) { if (_pod) { return _pod.checklist }; return null },
+        */
 
-        async fetching(pro_uuid) {
-            let res = await this.serv.check.order_check(this, this.one.uuid, pro_uuid)
-            if (res) {
-                return res
-            }
-        },
-        // 
+        async fetching(pro_uuid) { return await this.serv.check.order_check(this, this.uuid, pro_uuid) },
         async checkProd(iist, pro_uuid) {
             console.log('检查项目的结果 =', iist)
-            let res = await this.serv.check.order_check_update(this, this.one.uuid, pro_uuid)
+            let res = await this.serv.check.order_check_update(this, this.uuid, pro_uuid)
         }
     }
 }

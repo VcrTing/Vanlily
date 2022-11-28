@@ -16,7 +16,7 @@
         </div>
 
         <fk-auth-tooi-kit/>
-        <fk-cakes-tookit/>
+        <fk-cakes-tookit v-if="jwt"/>
     </div>
 </template>
 <script>
@@ -26,13 +26,21 @@ export default {
   components: { FkAuthTooiKit, FkCakesTookit },
     data() {
         return {
-            menu: true
+            menu: true,
         }
     },
     watch: {
         menu_funck(n, o) { this.menu = (n == 1) }
     },
     computed: {
+        user() { return this.userPina() },
+        jwt() {
+            let res = ''
+            if (this.user && this.user.jwt) {
+                return this.user.jwt
+            }
+            return res
+        },
         menu_funck() { return this.pina().MENU }
     },
     mounted() { 

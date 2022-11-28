@@ -1,13 +1,12 @@
 <template>
-    <div class="px_x2 py_x">
-        {{ iog(cakes) }}
-        <div v-for="(v, i) in cakes" :key="i">
+    <div class="px_x2 pt_x">
+        <div v-for="(v, i) in cakes" :key="i" class="pb_x">
             <nav class="px_x2 pt_s">
                 <div class="fx-s fx-t">
                     <fk-order-img-msg class="fx-1" :imgs="_imgs(v)"/>
                     <div class="w-25 t-r row-item">
-                        <button @click="checkIist(v)" class="btn-pri_out px py_s">檢查清單</button>
-                        <button v-if="!_kiii_btn" @click="edit(v)" class="btn-pri_out px_x2 py_s">編輯</button>
+                        <button v-if="edit" @click="cakeEdit(v)" class="btn-pri_out px_x2 py_s">編輯</button>
+                        <button v-else @click="checkIist(v)" class="btn-pri_out px py_s">檢查清單</button>
                     </div>
                 </div>
                 <div class="py_x"><hr/></div>
@@ -36,22 +35,30 @@ import UiImgGroup from '../../../../funcks/ui_element/img/UiImgGroup.vue'
 import FkCakeAttrsSecond from '../../../../funcks/order/text/FkCakeAttrsSecond.vue'
 export default {
   components: { UiImgGroup, FkOrderImgMsg, VarCakeName, FkCakeAttrs, FkCakePriceGroup, FkCakeAttrsSecond },
-    props: [ 'order', '_kiii_btn' ],
+    props: [ 'order', 'edit' ],
     data() {
         return {
 
         }
     },
     computed: {
+        cake_of_pina() { return this.productPina().products },
         cakes() { 
             let res = (this.order && this.order.ordered_product) ? this.order.ordered_product : [ ] 
             return res.map(e => {
+
                 e.product = this._prod(e); return e
             })
-        }
+        },
     },
     methods: {
-        _prod(v) { let res = v ? v.product : null; res = res ? this.strapi.data(res) : null; return res},
+        _prod(v) { 
+            let res = v ? v.product : null; 
+            if (res) { return this.strapi.data(res) }
+            else {
+                console.log('pro = ', res.product_uuid)
+            }
+        },
         _imgs(v) {
             let res = (v && v.product) ? v.product : null; return (res && res.images_url) ? res.images_url : [ ]
         },
@@ -59,11 +66,11 @@ export default {
         checkIist(cake) {
             // sessionStorage.setItem('vaniiiy_pro_uuid', cake.product_uuid)
             this.orderPina().do_cake(cake)
-            this.mod(22); 
+            this.mod(24); 
         },
 
         //  編輯 
-        edit(cake) {
+        cakeEdit(cake) {
             // sessionStorage.setItem('vaniiiy_pro_uuid', cake.product_uuid)
             this.orderPina().do_cake(cake)
             console.log('CAKE =', cake); this.mod(22)
