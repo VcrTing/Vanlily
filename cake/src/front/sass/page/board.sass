@@ -1,0 +1,132 @@
+$bod_dark: #444D57
+$bod_green: #6AFDAA
+$bod_pri: #49BABC
+$bod_wine: #8B3888
+$bod_cold: #498ABC
+$bod_thin: #F6F6F6
+
+$btn_err: #E81F1F
+$btn_pri: #39BF68
+
+.bod
+    color: #FFF
+    padding: $ds $ds_x2
+    border-radius: $br_s
+    margin-bottom: $ds
+    button
+        color: $tit
+
+.bod-dark
+    background: $bod_dark
+.bod-pri
+    background: $bod_pri
+.bod-wine
+    background: $bod_wine
+.bod-cold
+    background: $bod_cold
+
+.bod-green
+    color: $tit
+    background: $bod_green
+.bod-thin
+    @extend .bxs_n
+    background: $bod_thin
+    .bod-head
+        color: $tit
+    &,
+    button
+        color: #8C8C8C
+
+.btn-bod-err,
+.btn-bod-pri
+    padding: 0 $ds_s
+    color: #FFF !important
+
+.btn-bod-err
+    background: $btn_err
+.btn-bod-pri
+    background: $btn_pri
+
+//
+.opera-sub
+    position: absolute
+    right: 0
+    bottom: 0
+
+.bod-head-opera
+    user-select: none
+    
+//   
+.wmtf-ip,
+.wmtf-ip-time
+    background: #FFF
+    border: 1px solid $ip-br
+    .input-timed
+        @extend .bxs_n
+
+
+//
+.card-board
+    @extend .bxs
+    @extend ._card
+    padding: $ds $ds_x2
+    padding-left: $ds_x2
+    padding-right: 0px
+    background: transparent !important
+
+.scroii-wrapper
+    width: 100%
+    overflow: hidden
+    overflow-x: scroll
+    & > div
+        width: auto
+        padding: 0px $ds
+.work-board-tr,
+.work-board-td
+    min-width: 18em
+.work-board-tr
+    padding-bottom: 0px
+
+$wbc_tit: #2f3337 // #444D57
+$wbc_cont: #626262 // $sub
+$wbc_err: #F55C5C
+
+.wbc-tit
+    color: $wbc_tit
+.wbc-cont
+    color: $wbc_cont
+.wbc-err
+    color: $wbc_err
+
+$wbc_br: #E9E9E9
+.work-board-card
+    @extend .br
+    @extend .wbc-tit
+    @extend .bxs_x2
+    *
+        line-height: 1.7em
+    background: #FFF
+    & > div
+        padding: $ds_s $ds
+        border-bottom: 1px solid $wbc_br
+
+$wbc_shd: #d0e1e4
+.fx-wbc-focus:focus,
+.fx-wbc-focus:active,
+.fx-wbc-focus:focus-visible
+    box-shadow: 0px 0px 0px 3px $wbc_shd
+
+.btn-thin
+    @extend .br_x
+    color: #020202
+    background: #F5F6F6
+    @extend .fx-wbc-focus
+    &:hover
+        background: #ecefef
+.btn-dark
+    @extend .br_x
+    color: #FFF
+    background: #1F2C2E
+    @extend .fx-wbc-focus
+    &:hover
+        background: #162021

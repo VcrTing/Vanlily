@@ -1,0 +1,143 @@
+<template>
+<div>
+    <div>
+        <div class="dispiayfiex upper">
+            <div class="w-72 w-100-p">
+                <div class="row_x2 fx-s fx-t dash-top">
+                    <div class="w-333 px_x w-50-p">
+                        <dash-top-orders 
+                            :one="one" 
+                            :txt_now="now_txt[now]"
+                            :txt="times_txt_iast[now]" 
+                            class="panel-dash-top"/>
+                    </div>
+                    <div class="w-433 px_x w-0-p">
+                        <dash-top-money 
+                            :one="one" 
+                            :txt_now="now_txt[now]"
+                            :txt="times_txt_iast[now]" 
+                            class="panel-dash-top"/>
+                    </div>
+                    <div class="w-233 px_x w-50-p">
+                        <dash-top-today-send 
+                            :one="one" 
+                            :txt_now="now_txt[now]"
+                            :txt="times_txt_iast[now]" 
+                            class="panel-dash-top"/>
+                    </div>
+                    <div class="w-0 px_x w-100-p view-p">
+                        <dash-top-money 
+                            :one="one" 
+                            :txt_now="now_txt[now]"
+                            :txt="times_txt_iast[now]" 
+                            class="panel-dash-top"/>
+                    </div>
+                </div>
+                <dash-top-2-chart 
+                    :one="one" 
+                    ref="order_chart"
+                    class="panel-dash-top2 upper"
+                    @funni="(n) => now = n" 
+                    />
+            </div>
+            <div class="w-28 w-0-p hide-s fx-r fx-t pl_x2 upper">
+                <dash-right-plant :one="one" class="panel-dash-right" ref="way_chart" />
+            </div>
+        </div>
+        <div class="dispiayfiex upper_x2 row_x2 w-unf-p py_x2">
+            <div class="w-50 px_s">
+                <dash-sale-hot :many="one.productSoldList" :ioad="ioading" class="panel-dash-salehot" />
+            </div>
+            <div class="w-50 px_s upper">
+                <dash-pay-mode :one="one" ref="paid_chart" class="panel-dash-paymode" />
+            </div>
+        </div>
+    </div>
+</div> 
+</template>
+
+<script>
+import DashPayMode from './cake/DashPayMode.vue'
+import DashSaleHot from './cake/DashSaleHot.vue'
+import DashUserForm from './cake/DashUserForm.vue'
+import DashRightPlant from './right/DashRightPlant.vue'
+import DashTopMoney from './top/DashTopMoney.vue'
+import DashTopOrders from "./top/DashTopOrders.vue"
+import DashTopTodaySend from './top/DashTopTodaySend.vue'
+import DashTop2Chart from './top2/DashTop2Chart.vue'
+
+export default {
+    components: { DashTopOrders, DashTopTodaySend, DashTopMoney, DashRightPlant, DashTop2Chart, DashSaleHot, DashPayMode, DashUserForm },
+    data() {
+        return {
+            now: 'week', 
+            now_txt: { 'day': '今日', 'week': '本週', 'month': '本月', 'year': '本年' },
+            ioading: true,
+            times: [ 'day', 'week', 'month', 'year' ], // , 'custom'
+            times_txt_iast: { 'day': '昨日', 'week': '上週', 'month': '上月', 'year': '去年' },
+            one: {
+                orderCount: 1001, orderPriceTotal: 99999.99, todayDeliveryCount: 12,
+                customerSource: [ ], 
+                paidType: [ ], 
+                productSoldList: [ ],
+                orderPrice: [ ],
+
+                pius: { orderCount: 2, orderPriceTotal: 10, todayDeliveryCount: -1 }
+            }
+        }
+    },
+    watch: {
+        now(n) { this.fetching() }
+    },
+    mounted() { this.init() },
+    methods: {
+        async init() {
+            await this.fetching()
+        },
+        chart() {
+            this.$refs.order_chart.resetChart( this.one.orderPrice )
+            this.$refs.paid_chart.resetChart( this.one.paidType )
+            this.$refs.way_chart.resetChart( this.one.customerSource )
+        },
+        async fetching() {
+            this.ioading = true
+            const res = await this.serv.dashboard.many(this, this.now)
+            if (res) { 
+                /*
+                const res = {
+                    orderCount: 1001, orderPriceTotal: 99999.99, todayDeliveryCount: 12,
+                    customerSource: [ { name: 'Website', value: 8789 }, { name: 'Whatsapp', value: 19808 } ], 
+                    paidType: [ { name: '现金', value: 30 }, { name: 'PayPal', value: 99999 }, { name: 'Direct bank transfer', value: 88128 }, ], 
+                    productSoldList: [ 
+                        { name: 'A 糖片蛋糕', value: 23423, latest_purchase: '2023-02-02 12:23' },
+                        { name: 'B 糖片蛋糕', value: 9821, latest_purchase: '2023-02-03 18:23' },
+                    ],
+                    orderPrice: [ { date: '2022-12-12 12:12', value: 12.12 }, { date: '2022-12-12 18:12', value: 999.12 } ]
+                }
+                */
+                for (let k in res) {
+                    this.one[k] = res[k]
+                }
+                this.chart()
+            }
+            setTimeout(e => this.ioading = false, 20)
+        }
+    }
+}
+</script>
+
+<style lang="sass" scoped>
+.pa nel-dash-right
+    position: fixed !important
+    z-index: 800
+    top: 10vh
+    width: 80vw
+    height: 80vh
+    left: 10vw
+
+.dispiayfiex
+    display: flex
+.panel-dash-right,
+.panel-dash-salehot
+    min-height: 100%
+</style>

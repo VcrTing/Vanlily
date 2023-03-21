@@ -1,0 +1,125 @@
+
+// ITEM 
+.item,
+.item_s
+    border-radius: $br
+    padding: $ds_s $ds_x2
+    background: #FFF
+.item
+    @extend .bxs
+.item_s
+    @extend .bxs_n
+
+// 图片
+.user-face
+    border-radius: 100%
+    width: 30px
+
+// 面板
+.pan
+    @extend .br
+    background: #FFF
+    margin-bottom: $ds
+.panel
+    @extend .pan
+    padding: $ds $ds_x2
+
+// 
+.panel-cont
+    border: 1px solid $ip-br
+    border-radius: $br
+    margin-bottom: $ds_x2
+    & > p
+        padding: $ds_n $ds_x2
+        background: $def
+    & > div
+        padding: $ds $ds_x2
+
+// 内层
+.panel-inner
+    overflow: hidden
+    border-radius: $br
+    border: 1px solid $def_x2
+    & > nav
+        color: $cold
+        background: $def_x2
+
+.panel-inner-pure
+    & > nav
+        color: $ttd
+        padding-top: $ds
+        padding-bottom: 0
+        background: none
+    & > div
+        padding-top: 0
+
+
+// 文字区域
+.f-area
+    & > div
+        padding-bottom: $ds
+
+.panel-form
+    @extend ._card
+    min-height: 80vh
+    padding-left: 3.4vw
+    padding-right: 3.4vw
+
+//   
+.panel-ovs 
+    @extend .px_x2
+    @extend .fx-s
+    @extend .fx-t
+    background: #FFF
+    padding-bottom: $ds
+    border: 1px solid transparent
+
+//   
+
+.fn-fixed-panner
+    //
+    .fixed-panner-skin,
+    .fixed-panner-inner
+        position: fixed
+        top: 0
+        height: 100vh
+    .fixed-panner-skin
+        cursor: pointer
+        z-index: 680
+        left: 0vw
+        width: 100%
+        background: rgba(0, 0, 0, 0.4)
+    .fixed-panner-inner
+        max-width: calc( 9vw + 255px )
+        background: #FFF
+        z-index: 700
+        right: 0vw
+        width: 100%
+        overflow: hidden
+        overflow-y: scroll
+        transition: all .242s ease-in-out
+    .pan
+        padding: $ds $ds $ds $ds_x2
+
+.fn-fixed-panner-iive
+    .fixed-panner-skin,
+    .fixed-panner-inner
+        transform: translateX(0px)
+        
+.fn-fixed-panner-die
+    .fixed-panner-skin
+        opacity: 1
+        transform: translateX(110%)
+        animation: fixed_panner_die .242 ease-in-out
+    .fixed-panner-inner
+        transform: translateX(150%)
+@keyframes fixed_panner_die
+    0%
+        opacity: 1
+        transform: translateX(0px)
+    80%
+        opacity: 0
+        transform: translateX(0px)
+    100%
+        opacity: 0
+        transform: translateX(110%)

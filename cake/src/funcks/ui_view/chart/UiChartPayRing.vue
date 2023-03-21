@@ -1,0 +1,74 @@
+<template>
+    <div class="chart-wrapper">
+        <div id="chrt_pay_ring"></div>
+    </div>
+</template>
+
+<script>
+import * as echarts from 'echarts'
+export default {
+    props: [ 'many' ],
+    data() {
+        return {
+            chart: null, option: { }
+        }
+    },
+    methods: {
+        named(many) {
+            const data = this.data(many)
+            return data ? data.map(e => e.name) : [ '現金', 'PayPal', 'Direct bank transfer' ]
+        },
+        data(many = [ ]) {
+            if (!many || many.length <= 0) return [ { name: '現金', value: 0 }, { name: 'PayPal', value: 0 }, { name: 'Direct bank transfer', value: 0 } ];
+            return many
+        },
+        itemGap(many = [ ]) {
+            const _L = this.data(many).length
+            return (_L < 4) ? 24 : ( _L < 7 ? 16 : 12 )
+        },
+
+        reset(many) {
+            this.option = {
+                legend: {
+                    type: 'plain', show: true,
+                    icon: 'circle', // x: 'right', y: 'top', 
+                    top: '12px', right: '10%', 
+                    align: 'right',
+                    orient: 'vertical', 
+                    itemGap: this.itemGap(many),
+                    data: this.named(many), fontSize: '18px'
+                },
+                tooltip: {
+                    trigger: 'item', formatter: '{b} : {c} ({d}%)'
+                },
+                color: [  '#f8c63a', '#84cfef', '#a286d3', '#73a0fa', '#73ddb3', '#7584a1', '#ea7e64',],
+                series: [
+                    {
+                        type: 'pie', data: this.data(many),
+                        radius: ['45%', '72%'], // 环
+                        center: [ "37%", "50%"], // 方位
+                        avoidLabelOverlap: true,
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10, shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.08)'
+                            }
+                        },
+                        labelLine: { show: true, length: 24 },
+                        label: {
+                            show: true, formatter: '{b|{b}}\n\n{c|{c}}', 
+                            fontSize: '0.7em',
+                            rich: { b: { fontSize: '0.82em' }, c: { fontSize: '1em' } }
+                        }, 
+                } ]
+            }
+            this.chart.setOption(this.option)
+        }
+    },
+    mounted() {
+        this.chart = echarts.init( document.getElementById('chrt_pay_ring') )
+        this.reset(null)
+    }
+}
+// [ '现金', '转账', 'Paypal', 'Alipay HK', 'EPS', 'WeChat Pay HK', 'Pay ME' ]
+</script>

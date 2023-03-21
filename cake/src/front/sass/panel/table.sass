@@ -1,0 +1,122 @@
+
+$tb-br: #dedede
+$tb-br-x1: #dcdcdc
+
+.table,
+.table-hot
+    border-radius: 9px
+    .tr
+        @extend .fx-l
+        font-weight: bold
+        padding: $ds_x $ds_x2
+        padding-bottom: $ds
+        padding-top: 2em
+    .td
+        @extend .fx-l
+        min-height: 36px
+        .td-in
+            padding: 1em 0
+            border-top: 1px solid $tb-br
+    .item
+        min-height: 47px
+
+    .td-empty
+        min-height: 5em
+        border-top: 1px solid $tb-br
+
+    .seki
+        background: none
+        @extend .fx-s
+        padding: $ds_s $ds_x2
+        & > div
+            padding-right: $ds
+        & > div:last-child
+            padding-right: 0px !important
+
+.table-line
+    tr
+        padding-bottom: $ds_s
+    nav
+        padding: $ds_s 0
+        border: none
+        border-bottom: 1px solid $cold_Br2
+
+.table-sdw
+    .td:nth-child(2n)
+        background: $def_m !important
+
+// table-hot
+.table-hot
+    .tr
+        color: $sus
+        margin-bottom: 2px
+    .td
+        min-height: 39px
+        border-top: 1px solid $tb-br-x1
+    .td:last-child
+        // border-color: transparent
+
+.table-panner
+    .tr
+        background: $def_x2
+        border-top-left-radius: $br_s
+        border-top-right-radius: $br_s
+    .td
+        border-radius: 0px
+        border-left: 1px solid $def_x2
+        border-right: 1px solid $def_x2
+//   
+.table-witty
+    // overflow: hidden
+    border-radius: $br
+    border: 1px solid $tb-br
+    .tr
+        padding: $ds 0
+        min-height: 36px
+        background: $def_x2
+    .td
+        padding: $ds_x 0
+        border-bottom: 1px solid $tb-br
+    .tr,
+    .td,
+    .td-pr
+        border-radius: $br
+        padding-left: 2.6vw
+    .td:last-child
+        border: none
+
+
+.td-pr
+    & > div
+        padding-right: $ds_s
+
+// FORM SHOW
+.td-form-hide
+    animation: hide_2ms .262s ease-in !important
+
+@keyframes hide_2ms 
+    0%
+        opacity: 1
+        transform: translateY(0px)
+    100%
+        opacity: 0.2
+        transform: translateY(24px)
+
+// 添加
+.btn-tb-plus
+    width: 100%
+    padding: $ds_n $ds
+    border: 1px dashed $ip-br_x2
+    &:hover
+        background: $def_t
+        // color: $primary
+        // border-color: $primary
+.btn-tb-plus_active
+    transition: all .362s ease-in
+    border-color: transparent
+    border-top-color: $ip-br_x2
+
+// EMPTY
+
+.empty
+    min-height: 12em
