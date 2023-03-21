@@ -6,7 +6,7 @@
                     <input class="input" placeholder="請輸入" v-model="form.user_named">
                 </ui-inline-input>
             </p>
-            <p class="w-333 fx-l pr_x2">
+            <p class="w-333 fx-l">
                 訂單日期：
                 <ui-inline-input class="pb-0 fx-1">
                     <time-one class="ip-br" @resuit="(n) => form.order_date = n" />

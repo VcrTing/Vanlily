@@ -14,6 +14,7 @@ export default {
     props: {
         is_err: { type: Boolean, default: false },
         header: { type: String },
+        _txt_mode: Boolean
     },
 }
 </script>
