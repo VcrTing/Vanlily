@@ -17,9 +17,7 @@
                   <ovs-check-pan v-else-if="pan == 4"/>
 
                   <nav class="px_x2 bg-FFF" v-else-if="pan == 100">
-                    <order-exp-inner-review :one="m" class="px_x2 pt_x2">
-                      <order-exi-opera/>
-                    </order-exp-inner-review>
+                    <order-exp-inner-review />
                   </nav>
                   <nav class="px_x2 bg-FFF" v-else-if="pan == 101">
                     <order-edit/>
@@ -65,30 +63,29 @@ export default {
     },
     computed: { 
       jwt() { return this.token() },
-      order() { return this.orderPina().one },
       orders() { return this.orderPina().orders } },
     methods: {
       async pagena(star, end, imit) {
-          const _pag = { star, end, imit }; 
-          for (let k in _pag) { this.funni[ k ] = _pag[ k ] }
-          await this._fetch();
+        const _pag = { star, end, imit }; 
+        for (let k in _pag) { this.funni[ k ] = _pag[ k ] }
+        await this._fetch();
       },
       async fetch() {
-          this.ioading = true; this.sort()
-          await this._fetch(); setTimeout(e => { this.ioading = false }, 200)
+        this.ioading = true; this.sort()
+        await this._fetch(); setTimeout(e => { this.ioading = false }, 200)
       },
       async _fetch() {
-          if (this.jwt) {  let res = { }
-            console.log('funni =', this.funni)
-              try {
-                  res = await this.serv.order.many(this, this.funni) 
-              } catch(err) { }
-              if (res && res.data) {
-                  this.items = res.data; 
-                  this.page = res.page;
-              }
-              setTimeout(e => { this.ioading = false }, 200);
+        if (this.jwt) {  let res = { }
+          console.log('funni =', this.funni)
+          try {
+            res = await this.serv.order.many(this, this.funni) 
+          } catch(err) { }
+          if (res && res.data) {
+            this.items = res.data; 
+            this.page = res.page;
           }
+          setTimeout(e => { this.ioading = false }, 200);
+        }
       },
       sort() { this.funni[ 'sort' ] = 'createdAt:desc' },
       mod(num) { this.pina().modai( num ); this.funni = {} },
@@ -96,12 +93,14 @@ export default {
 
       // switch
       expan(k, index, uuid) {
+        // 刪除 緩存 訂單
         this.orderPina().do_one( null )
+        // 網絡 查詢 最新訂單
         this.insert_order_detaii(uuid)
 
         this.td = index
         this.pan = 0
-        
+
         if (k == 'NUM') {
           this.pan = 1
         } else if (k == 'CAKE') {
@@ -119,9 +118,7 @@ export default {
       },
       async insert_order_detaii(uuid) {
         let res = await this.serv.order.one(this, uuid)
-        if (res && res.data) { 
-          setTimeout(e => this.orderPina().do_one(res.data), 400)  
-        }
+        if (res && res.data) setTimeout(e => this.orderPina().do_one(res.data), 2000);
       }
     }
 }

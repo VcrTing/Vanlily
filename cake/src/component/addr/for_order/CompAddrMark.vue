@@ -1,6 +1,6 @@
 <template>
     <div class="panel-inner pt pb_s">
-        <div class="pb_x px_x2">送貨備註</div>
+        <div class="pb_x px_x2">送貨地址</div>
             <div class="pl_x2">
                 <div class="fx-s pl_x2">
                     <cp-oaa-block :header="'地區 / 地铁線路'" class="w-33">
@@ -17,14 +17,14 @@
             <div class="py"></div>
             <div class="fx-s fx-t pt px_x2">
                 <div class="w-32">
-                    <p class="sub">運費對比</p><p class="pl_x2">&nbsp;</p>
+                    <p class="sub">運費信息</p><p class="pl_x2">&nbsp;</p>
                 </div>
                 <div class="w-28">
                     <p>客付運費價格</p>
                     <p class="py">
                         <span>$</span>
                         &nbsp;&nbsp;&nbsp;
-                        <span class="h5">{{ deiive.delivery_fee }}</span>
+                        <span class="h5">{{ deiive.delivery_fee ? deiive.delivery_fee : 0 }}</span>
                         &nbsp;&nbsp;&nbsp;
                         <span>HKD</span>
                     </p>
@@ -34,7 +34,7 @@
                     <p class="py">
                         <span>$</span>
                         &nbsp;&nbsp;&nbsp;
-                        <span class="h5">{{ deiive.additional_fee }}</span>
+                        <span class="h5">{{ deiive.additional_fee ? deiive.additional_fee : 0 }}</span>
                         &nbsp;&nbsp;&nbsp;
                         <span>HKD</span>
                     </p>
@@ -62,7 +62,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

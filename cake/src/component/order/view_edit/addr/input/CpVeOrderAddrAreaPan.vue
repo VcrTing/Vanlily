@@ -55,7 +55,3 @@ VfAddrAreaSelect,
     }
 }
 </script>
-
-<style>
-
-</style>

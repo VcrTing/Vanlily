@@ -3,6 +3,7 @@ export default {
     user_roie: '/users-permissions/users/changeRole',
 
     orders: '/orders/order',
+    payment: '/orders/payment_record',
 
     product: '/products',
 

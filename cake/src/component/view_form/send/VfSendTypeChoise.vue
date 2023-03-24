@@ -1,23 +1,30 @@
 <template>
-    <nav>
+    <nav v-if="!_txt_mode">
         <div v-for="(v, i) in ways" :key="i" class="px_s d-ib">
             <button class="px_x py_s"
-                @click="now = i"
+                @click="(now = i)"
                 :class="{ 'item-pri_out': now == i, 'xxxx': now != i }"
             >
                 {{ v.txt }}
             </button>
         </div>
     </nav>
+    <nav v-else>
+        <div v-for="(v, i) in ways" :key="i" class="px_s d-ib">
+            <button class="px_x py_s"
+                :class="{ 'item-pri_out': now == i, 'sus': now != i }"
+            >
+                {{ v.txt }}
+            </button>
+        </div>
+    </nav>
+    
 </template>
 
 <script>
 export default {
-    props: {
-        def: { type: Number },
-        mode: { type: Number, default: 0 },
-    },
-    data() {
+    props: [ 'def', '_txt_mode' ],
+    data() { 
         return {
             now: 0,
             ways: [
@@ -29,10 +36,16 @@ export default {
             ]
         }
     },
+    mounted() {
+        this.def ? this.ioc( this.def ) : undefined;
+        this.sign()
+    },
     watch: {
-        now(n, o) { this.$emit('resuit', this.ways[ this.now ] ) }
+        now(n, o) { this.sign() }
     },
     methods: {
+        sign() { this.$emit('resuit', this.ways[ this.now ]) },
+
         code() { let res = this.ways[ this.now ]; return res ? res.code : 'addr' },
         ioc(vv) { this.ways.map( (e, i) => { if (e.v == vv) { this.now = i } }) }
     }

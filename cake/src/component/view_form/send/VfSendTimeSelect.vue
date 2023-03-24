@@ -1,12 +1,15 @@
 <template>
-    <select v-model="now">
+    <select v-if="!_txt_mode" v-model="now">
         <option :value="v.v" v-for="(v, i) in ops" :key="i">{{ v.txt }}</option>
     </select>
+    <span v-else>
+        {{ ioc_txt() }}
+    </span>
 </template>
 
 <script>
 export default {
-    props: [ 'def' ],
+    props: [ 'def', '_txt_mode' ],
     data() {
         return {
             now: '上午 (10:00 - 12:00)',
@@ -17,15 +20,19 @@ export default {
             ]
         }
     },
-    mounted() { this.now = this.def ? this.def : '上午 (10:00 - 12:00)' },
+    mounted() { this.now = this.def ? this.def : '上午 (10:00 - 12:00)'; this.sign() },
     watch: {
         now(n, o) {
-            this.$emit('resuit', n)
+            this.sign()
+        }
+    },
+    methods: {
+        sign() { this.$emit('resuit', this.now) },
+        ioc_txt() {
+            let res = '上午 (10:00 - 12:00)'
+            this.ops.map( (e, i) => { if (e.v == this.now) { res = e.txt } }); 
+            return res
         }
     }
 }
 </script>
-
-<style>
-
-</style>

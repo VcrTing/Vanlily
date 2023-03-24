@@ -1,6 +1,7 @@
 import user from './user/user'
 import roie from './user/roie'
 
+import pay from './order/pay'
 import order from './order/order'
 import check from './order/check'
 import action_board from './order/action_board'
@@ -19,7 +20,7 @@ export default {
     roie,
 
     cake,
-    
+    pay,
     order,
     check,
     action_board,

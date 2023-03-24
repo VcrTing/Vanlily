@@ -4,13 +4,13 @@
         <div class="pt_x2">
             <ui-input :is_err="named_err" class="pb">
                 <div class="input-icon input-icon-l input-auth">
-                    <i class="mdi mdi-account-outline h4 sus"></i>
+                    <i class="mdi mdi-shield-account-outline h5 sus"></i>
                     <input v-model="named" class="input br_s ip-w-100" placeholder="用戶名">
                 </div>
             </ui-input>
             <ui-input :is_err="pass_err" class="pb">
                 <div class="input-icon input-icon-l input-auth">
-                    <i class="mdi mdi-lock-outline h4 sus"></i>
+                    <i class="mdi mdi-lock-outline h5 sus"></i>
                     <input type="password" v-model="pass" @keydown.enter="submit" class="input br_s ip-w-100" placeholder="密碼">
                 </div>
             </ui-input>

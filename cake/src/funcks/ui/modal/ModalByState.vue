@@ -15,11 +15,10 @@ export default {
     },
     mounted() { this.def = this.pina().MODAL },
     computed: {
-        index() { return this.pina().MODAL },
-        open() { return ( this.index > 0 ) }
+        open() { return ( this.pina().MODAL > 0 ) }
     },
     methods: {
-        change() { this.mod(this.open ? 0 : this.def) }
+        change() { this.mod( 0 ) }
     }
 }
 </script>

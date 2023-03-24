@@ -9,9 +9,7 @@
                 <slot name="right"></slot>
             </div>
         </nav>
-        <div class="py px_x2">
-            <slot name="cont"></slot>
-        </div>
+        <slot name="cont"></slot>
     </div>
 </template>
 

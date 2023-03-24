@@ -17,17 +17,24 @@
 $btn-pri-txt: #ffffff
 
 .btn-pri
+    user-select: none
     color: $btn-pri-txt
     background: $primary
     &:hover
         background: $primary_Hover
     @extend .fx-pri-focus
 
+.fx-pri-iht-focus:focus,
+.fx-pri-iht-focus:active,
+.fx-pri-iht-focus:focus-visible
+    box-shadow: 0px 0px 0px 3px $primary_Light_sdw
+
 .btn-pri_light
     color: $btn-pri-txt
     background: $primary_Light
     &:hover
         background: $primary_Light_Hover
+    @extend .fx-pri-iht-focus
 
 .btn-pri_deep
     color: $btn-pri-txt

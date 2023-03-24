@@ -4,7 +4,7 @@
             <span v-html="header"></span>
             &nbsp;
         </label>
-        <div :class="{ 'input-err': is_err, 'pt': header }">
+        <div :class="{ 'input-err': is_err, 'pt': header }" class="ip-w-100">
             <slot v-if="!is_txt_mode"></slot>
             <div v-else class="input input-txt-mode">
                 <slot></slot>

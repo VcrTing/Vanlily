@@ -5,14 +5,15 @@
         </p>
     </div>
     <div v-else class="sus">
-        (該蛋糕無參數)
+        {{ _txt_empty ? _txt_empty : '(該蛋糕無參數)' }}
     </div>
 </template>
 
 <script>
 export default {
     props: {
-        cake: Object
+        cake: Object,
+        _txt_empty: String
     },
     computed: {
 
@@ -23,7 +24,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

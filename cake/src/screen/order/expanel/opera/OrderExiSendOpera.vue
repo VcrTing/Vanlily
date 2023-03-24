@@ -15,9 +15,21 @@ export default {
     mounted() {
         this.opera = [
             {
-                txt: '檢視訂單', icon: 'mdi mdi-pan-right',
+                txt: '申請延遲發貨', icon: 'mdi mdi-send-clock-outline',
+                func: () => {
+                    this.pina().mod(30)
+                }
+            },
+            {
+                txt: '檢視訂單', icon: 'mdi mdi-lightbulb-outline',
                 func: () => {
                     this.$parent.create_or_edit()
+                }
+            },
+            {
+                txt: '修改訂單', icon: 'mdi mdi-keyboard',
+                func: () => {
+
                 }
             },
             /*
@@ -28,18 +40,12 @@ export default {
                 }
             },
             {
-                txt: '申請延遲發貨', icon: 'mdi mdi-send-clock-outline',
-                func: () => {
-                    this.pina().modai(30)
-                }
-            },
-            */
-            {
                 txt: '新增付款記錄', icon: 'mdi mdi-credit-card-settings-outline',
                 func: () => {
                     this.pina().modai(31)
                 }
             },
+            */
         ]
     }
 }

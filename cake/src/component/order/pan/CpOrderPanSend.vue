@@ -1,24 +1,8 @@
 <template>
-    <div class="pb">
-        <div class="fx-s w-unf">
-            <div class="w-100 w-80-x mb-0">
-                <comp-logistics-time :deiive="deiive" />
-            </div>
-        </div>
+    <div class="pb_x2">
+        <comp-logistics-time :deiive="deiive" />
         <div class="py"></div>
-        <div class="f_row">
-            <div class="w-100 pb">
-                <comp-logistics-msg :deiive="deiive"></comp-logistics-msg>
-            </div>
-        </div>
-        <div class="py_s"></div>
-        <div class="card-def br upper">
-            <comp-logistics-pay class="px_x3" :deiive="deiive"></comp-logistics-pay>
-            <div class="pt_s"></div>
-        </div>
-
-        <div class="pt_x2"></div>
-        <slot></slot>
+        <comp-logistics-msg :deiive="deiive" :order="order"/>
     </div>
 </template>
 

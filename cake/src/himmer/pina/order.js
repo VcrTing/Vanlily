@@ -16,7 +16,7 @@ export default defineStore('orderPina', {
     actions: {
         do_cake(v) { this.cake = v },
         do_uuid(v) { this.uuid = v },
-        do_one(v) { this.one = v }
+        do_one(v = { }) { this.one = v }
     },
     persist: {
         enabled: true,

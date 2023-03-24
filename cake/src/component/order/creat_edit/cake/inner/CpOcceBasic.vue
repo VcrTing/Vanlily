@@ -7,9 +7,7 @@
             <cp-prod-attr-input class="pb_x2" :attr="v" :attr_def="ioc_attr(v)"/>
         </div>
     </div>
-<nav>
-    
-</nav>
+
 </template>
 
 <script>
@@ -50,14 +48,10 @@ export default {
         },
 
         coii() {
-            if (this.can()) {
+            if (true) {
                 return this.aiiow ? this.form : null
             }
         }
     }
 }
 </script>
-
-<style>
-
-</style>

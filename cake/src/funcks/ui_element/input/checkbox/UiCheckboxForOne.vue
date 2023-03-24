@@ -1,6 +1,6 @@
 <template>
-    <span v-if="now" @click="tap" class="sts-i-pri"><i class="h5 mdi mdi-check"></i></span>
-    <span v-else @click="tap" class="_checkbox hand"></span>
+    <div v-if="now" @click="tap" class="sts-i-pri"><i class="h5 mdi mdi-check"></i></div>
+    <div v-else @click="tap" class="_checkbox hand"></div>
 </template>
 
 <script>

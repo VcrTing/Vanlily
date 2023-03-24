@@ -11,15 +11,13 @@
     &:hover
         color: #FFF
         background: $primary_Hover
-    &:focus,
-    &:active,
-    &:focus-visible
-        box-shadow: 0px 0px 0px 3px $primary_Shadow
+    @extend .fx-pri-focus
 
 .item-pri_out
     color: $primary
     border-radius: $br_s
     border: 1px solid $primary
+    @extend .fx-pri-focus
         
 .btn-pri_out_deep
     color: $primary_Deep

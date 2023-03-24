@@ -1,13 +1,13 @@
 <template>
-    <div :class="{ 'panel-inner px_x2 py': paner }">
+    <div>
         <div class="pt_s">送貨類別</div>
 
         <div class="pt_s">
             <!-- 送上门 -->
-            <vf-send-type-choise ref="stc" @resuit="(n) => typed = n" class="pt cold row"></vf-send-type-choise>
+            <vf-send-type-choise ref="stc" @resuit="(n) => typed = n" class="pt cold row"/>
             <div class="pt"></div>
-            <div class="fx-l pl_x2 py br pr" :class="{ 'choise-die': !need_comp }">
-                <vf-send-company-choise ref="scc" class="fx-s" @resuit="(n) => company = n"/>
+            <div class="fx-l pl_x2 br pr" :class="{ 'choise-die': !need_comp }">
+                <vf-send-company-choise ref="scc" class="fx-s py" @resuit="(n) => company = n"/>
             </div>
         </div>
 
@@ -24,7 +24,7 @@
                 <cp-ve-order-self-get @resuit="(n) => addr = n" class="upper" v-else/>
         </div>
 
-        <cp-ov-order-price class="pt_x2" :is_edit="edit"/>
+        <cp-ov-order-price class="pt_x2" ref="price" :_edit="creat"/>
     </div>
 </template>
 
@@ -42,22 +42,20 @@ import CpOvOrderPrice from './snipp/CpOvOrderPrice.vue'
 export default {
   components: { VfSendTypeChoise, VfSelfGetRadio, UiInput, VfSendCompanyChoise, CpOvOrderPrice,
         CpVeOrderAddrAreaPan,
-        CpVeOrderAddrSubway,
-        CpVeOrderAddrFioor,
-        CpVeOrderTunmenSubway,
-    CpVeOrderSelfGet       
+        CpVeOrderAddrSubway, CpVeOrderAddrFioor,
+        CpVeOrderTunmenSubway, CpVeOrderSelfGet       
     },
     props: {
-        paner: Boolean, order: Object, edit: Boolean, deiive: Object
+        edit: Boolean, creat: Boolean
     },
     data() {
-        return { addr: { }, typed: { txt: '送上門' , code: 'addr' }, company: { txt: '公公送貨' } }
+        return { 
+            addr: { }, typed: { txt: '送上門' , code: 'addr' }, company: { txt: '公公送貨' } }
     },
     computed: {
         need_comp() {
             let src = this.typed.code
             return (src == 'addr' || src == 'fioor') }
-        // deiive() { let res = this.order; res = res ? res.delivery_info : null; return res }
     },
     watch: {
         typed(n, o) { this.typed = n },
@@ -69,10 +67,22 @@ export default {
     mounted() { this.ioc() },
     methods: { 
         coii() {
-            let res = {
-                delivery_method: this.typed.v,
-                delivery_company: this.need_comp ? this.company.v : null,
-                ...this.addr
+            let res = null
+            const price = this.$refs.price.coii()
+
+            if (price && this.addr) {
+
+                res = {
+                    delivery_method: this.typed.v,
+                    delivery_company: this.need_comp ? this.company.v : null,
+                    ...this.addr,
+                    ...price
+                }
+
+                // 攔截地址 三
+                if (!res.delivery_method.endsWith('自取')) {
+                    if (!res.delivery_address_3) { return null }
+                }
             }
             return res
         },
@@ -89,7 +99,16 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .choise-die
-    background: #f5f5f5
+    max-height: 0em
+    overflow: hidden
+    animation: choise-die .242s ease-in
+@keyframes choise-die
+    0%
+        background: #fff
+        max-height: 8em
+    100%
+        max-height: 0em
+        background: #f5f5f5
 </style>

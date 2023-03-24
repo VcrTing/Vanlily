@@ -4,7 +4,7 @@
             <img class="img" :src="cover">
         </div><div class="w-8"></div>
         <div class="w-52" :class="{ 'w-50': imgs.length <= 4 }">
-            <p class="pb_x">配件圖：</p>
+            <p class="pb_x">蛋糕相冊：</p>
             <ui-img-group :imgs="imgs" @change="(n) => now = n"></ui-img-group>
         </div>
     </nav>

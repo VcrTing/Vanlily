@@ -1,0 +1,164 @@
+<template>
+    <form-def :header="'完善訂單蛋糕資料'" @submit="submit" :msg="msg">
+
+        <div class="pb_x3 pt">
+            <fk-cake-avatar-name :cake="cake" :size="2" :_uuid="true"/>
+        </div>
+
+        <div class="row_x2 fx-l fx-wp ">
+            <div class="w-333" v-for="(v, k) in attrs" :key="k">
+                <ui-input class="pb_x2" :header="k" :is_err="false">
+                    <select class="input" v-model="attribute[k]">
+                        <option v-for="(m, n) in v" :key="n" :value="m.uuid">{{ m.name }}</option>
+                    </select>
+                </ui-input>
+            </div>
+        </div>
+
+        <div class="row_x2 fx-l fx-wp pb_x2">
+            <ui-input class="w-333" :is_err="form_err.quantity" :header="'數量：'">
+                <ui-icon-input :icon="'mdi-numeric'" :_right="true">
+                    <input v-model="form.quantity" class="input bg" placeholder="請輸入" type="number">
+                </ui-icon-input>
+            </ui-input>
+        </div>
+
+        <div class="fx-l fx-wp pb_x2">
+            <ui-input class="w-100" :is_err="false" :header="'特別要求：'">
+                <ui-icon-input :icon="'mdi-format-font'" :_right="true">
+                    <textarea class="input" v-model="form.cake_special_needs" placeholder="特別要求 / 生日牌字粒 / 其他"></textarea>
+                </ui-icon-input>
+            </ui-input>
+        </div>
+        
+        <div class="row_x2 fx-l fx-wp pb_x2">
+            <ui-input class="w-333" :is_err="false" :header="'原價'">
+                <ui-icon-input :icon="'mdi-currency-usd'" :_right="true">
+                    <input v-model="form.original_price" class="input " placeholder="請輸入" type="number">
+                </ui-icon-input>
+            </ui-input>
+            <ui-input class="w-40" :is_err="form_err.unit_price" :header="'單價'">
+                <ui-icon-input :icon="'mdi-currency-usd'" :_right="true">
+                    <input v-model="form.unit_price" class="input " placeholder="請輸入" type="number">
+                </ui-icon-input>
+            </ui-input>
+            <ui-input class="fx-1" :is_err="false" :header="'折扣價'">
+                <ui-icon-input :icon="'mdi-percent'" :_right="true">
+                    <input v-model="form.discounted_price" class="input " placeholder="打折後的蛋糕價格" type="number">
+                </ui-icon-input>
+            </ui-input>
+        </div>
+    </form-def>
+</template>
+
+<script>
+import strapi from '../../../air/tooi/strapi'
+import FkCakeAvatarName from '../../../funcks/product/view/FkCakeAvatarName.vue'
+import UiIconInput from '../../../funcks/ui_element/input/icon/UiIconInput.vue'
+import UiInput from '../../../funcks/ui_element/input/normal/UiInput.vue'
+import FormDef from '../../../funcks/ui_layout/form/def/FormDef.vue'
+export default {
+    components: { FormDef, UiInput, FkCakeAvatarName, UiIconInput },
+    data() {    
+        return {
+            attribute: { }, msg: '',
+            form: { quantity: 1, unit_price: 0, original_price: 0, discounted_price: '', cake_special_needs: '', product_uuid: '' },
+            form_origin: { quantity: 1, unit_price: 0, original_price: 0, discounted_price: '', cake_special_needs: '', product_uuid: '' },
+            form_err: { quantity: false, unit_price: false },
+        }
+    },
+    emits: [ 'resuit' ],
+    watch: {
+        'form.unit_price'(n) { 
+            if (n !== 0) {
+                n = Number(n)
+                n = (n != null && n != '') ? Math.abs(n) : ''
+                this.form.unit_price = n 
+            }
+        },
+
+        'form.original_price'(n) { 
+            if (n !== 0) {
+                n = Number(n)
+                n = (n != null && n != '') ? Math.abs(n) : ''
+                this.form.original_price = n 
+            }
+        },
+
+        'form.discounted_price'(n) { 
+            if (n !== 0) {
+                n = Number(n)
+                n = (n != null && n != '') ? Math.abs(n) : ''
+                this.form.discounted_price = n 
+            }
+        }
+    },
+    computed: {
+        cake() { 
+            const src = this.productPina().cake_of_edit
+            // 構建參數
+            if (src) {
+                const attrs = src.__attributes_relations
+                for(let k in attrs) {
+                    const many = attrs[k]
+                    if (many && many.length > 0) {
+                        const _one = many[0]
+                        this.attribute[k] = _one && _one.uuid ? _one.uuid : ''
+                    }
+                }
+            } return src 
+        },
+        attrs() { return this.cake.__attributes_relations },
+        attrs_array() { return this.cake.attributes_relations ? this.cake.attributes_relations : [ ]  },
+
+        _proP() { return this.productPina() },
+        _coecs() { let src = this._proP.coecs; return src ? src : [ ] },
+        coec() {
+            const uuid = this.cake.uuid; let res = null
+            this._coecs.map( e => {
+                if (e.product_uuid === uuid) { res = e }
+            }); return res
+        }
+    },
+    methods: {
+
+        // 提交
+        submit() {
+            const data = this.coii()
+            if (data && this.attribute) {
+
+                let _atrs = [ ]; this.msg = ''; 
+                for (let k in this.attribute) { _atrs.push( this.attribute[ k ] ) }
+
+                const res = { 'product_uuid': '', ...data, 'attribute': _atrs, 'attribute_of_edit': this.attribute }
+                res['product_uuid'] = this.cake.uuid
+                this._proP.do_coecs( res ); this.pina().mod( 0 );
+            } 
+            else { this.msg = '輸入不完整。' }
+        },
+
+        init() {
+            if (this.coec) {
+                console.log('執行 reset =', this.coec, this.cake)
+                this.reset( this.coec )
+                this.reset_attr( this.coec.attribute_of_edit )
+            } else {
+                this.form.unit_price = this.cake.__price
+                this.form.original_price = this.cake.__regular_price
+            }
+        },
+
+        //
+        reset_attr( attr_of_edit ) {  for (let k in attr_of_edit) { this.attribute[ k ] = attr_of_edit[ k ] } },
+
+        ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
+        reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } },
+        coii() {
+            for (let k in this.form_err) { if (!this.form[k]) { this.form_err[k] = true; return undefined; } else { this.form_err[k] = false } }
+            delete this.form.id; return this.form
+        },
+
+    },
+    mounted() { this.init() },
+}
+</script>

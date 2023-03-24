@@ -34,39 +34,27 @@ export default {
         UiIconInput, UiInput
     },
     props: {
+        edit: Boolean,
         cake: Object
     },
     data() {
         return {
-            form: {  pai: '', zili: '', gz: '', gz_mark: '' },
+            form: { pai: '', zili: '', gz: '', gz_mark: '' },
+            form_origin: { pai: '', zili: '', gz: '', gz_mark: '' },
             form_err: {  pai: false, zili: false, gz: false, gz_mark: false },
         }
     },
-    computed: {
-        aiiow() { return !(this.form_err.pai || this.form_err.zili || this.form_err.gz || this.form_err.gz_mark) }
+    mounted() { 
+        if (this.edit) { this.reset( this.one ) }
     },
     methods: {
-        reset() {
-            if (this.one) {
-                this.form.pai = ''
-            }
-        },
-        can() {
-            if (!this.form.pai) { this.form_err.pai = true; return null }
-            if (!this.form.zili) { this.form_err.zili = true; return null }
-            if (!this.form.gz) { this.form_err.gz = true; return null }
-            if (!this.form.gz_mark) { this.form_err.gz_mark = true; return null }
-            return true
-        },
+        ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
+        reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } },
         coii() {
-            if (this.can()) {
-                return this.aiiow ? this.form : null
-            }
-        }
+            for (let k in this.form_err) { if (!this.form[k]) { this.form_err[k] = true; return undefined; } }
+            delete this.form.id
+            return this.form
+        },
     }
 }
 </script>
-
-<style>
-
-</style>

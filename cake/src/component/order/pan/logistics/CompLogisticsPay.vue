@@ -1,53 +1,58 @@
 <template>
-    <div>
-        <p class="sub pb pt_s">新增付款記錄</p>
-        <nav class="fx-s">
-            <div class="fx-1 fx-s row">
-                <ui-inline-input class="w-30" :header="'付款日期：'" :is_err="form_err.pay_time">
-                    <time-one class="ip-br"/>
-                </ui-inline-input>
-                <ui-inline-input class="w-28" :header="'付款方式：'" :is_err="form_err.pay_way">
-                    <vf-payway-select class="input" @change="(v) => pay_way"></vf-payway-select>
-                </ui-inline-input>
-                <ui-inline-input class="w-42" :header="'費用：'" :is_err="form_err.num" :_class="'t-r'">
-                    <input v-model="form.num" class="input fx-1" type="number" placeholder="請輸入">
-                </ui-inline-input>
-            </div>
-            <div class="pl righter">
-                <button class="btn-pri btn-input">確認</button>
-            </div>
-        </nav>
+    <div v-if="form_origin.payment_fee">
+        <co-logistic-pay-form v-if="form.edit" :form="form" @submit="submit" :ioad="ioading"/>
+        <co-logistic-pay-body v-else :form="form"/>
+    </div>
+    <div v-else>
+        <co-logistic-pay-skei/>
     </div>
 </template>
 
 <script>
-import UiInlineInput from '../../../../funcks/ui_element/input/inline/UiInlineInput.vue'
-import TimeOne from '../../../../funcks/ui_element/timed/one/TimeOne.vue'
-import VfPaywaySelect from '../../../view_form/order/VfPaywaySelect.vue'
+import CoLogisticPayBody from '../Iogistics_form/CoLogisticPayBody.vue'
+import CoLogisticPayForm from '../Iogistics_form/CoLogisticPayForm.vue'
+import CoLogisticPaySkei from '../Iogistics_form/CoLogisticPaySkei.vue'
 export default {
-  components: { UiInlineInput, VfPaywaySelect, TimeOne },
+    components: { CoLogisticPayForm, CoLogisticPayBody, CoLogisticPaySkei },
+    props: [ 'order', '_edit' ],
     data() {
         return {
-            form: {
-                num: '',
-                pay_way: '',
-                pay_time: ''
-            },
-            form_err: {
-                num: false,
-                pay_way: false,
-                pay_time: false
+            ioading: true, 
+            form_origin: { payment_date: '', payment_method: '', payment_method_title: '', payment_fee: '', edit: false },
+            form: { payment_date: '', payment_method: '', payment_method_title: '', payment_fee: '', edit: false },
+        }
+    },
+    mounted() { this.fetching() },
+    emits: [ 'success' ],
+    methods: {
+        async fetching() {
+            this.ioading = true
+            const res = await this.serv.check.order_send(this, this.order.uuid)
+            if (res) {
+                for (let k in this.form_origin) { if (res[k]) { this.form_origin[ k ] = res[ k ] } }
+                this.reset()
+            }
+            setTimeout(e => this.ioading = false, 20)
+        },
+        reset() { 
+            this.form_origin.edit = this._edit ? this._edit : false
+            for (let k in this.form_origin) { this.form[ k ] = this.form_origin[ k ] } 
+        },
+
+        // 提交
+        async submit( data ) {
+            if (this.ioading == false) {
+                this.ioading = true
+                if (data) {
+                    const res = await this.serv.pay.edit( this, this.order.uuid, data)
+                    if (res) {
+                        this.$emit('success')
+                        this.form.edit = false;
+                    }
+                    setTimeout(() => { this.ioading = false }, 20)
+                }
             }
         }
     }
 }
 </script>
-
-<style lang="sass">
-.btn-input
-    min-width: calc(4em + 2vw)
-    padding-left: 6px
-    padding-right: 6px
-.mw-7em
-    min-width: 7em
-</style>

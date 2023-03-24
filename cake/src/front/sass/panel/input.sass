@@ -38,6 +38,11 @@ $ip-br_x2: #c2c2c2
     @extend .input-def
     margin: 0px
     padding: $ds $ds_x3
+    padding-right: $ds
+.form-td
+    .input
+        padding: $ds $ds
+        padding-right: $ds_s
 
 .input-td
     min-height: 36px
@@ -48,6 +53,11 @@ $ip-br_x2: #c2c2c2
 @media screen and ( max-width: 1444px )
     .area, .input, .select
         padding: $ds $ds_x2
+        padding-right: $ds
+    .form-td
+        .input
+            padding: $ds $ds
+            padding-right: 2px
     .input-td
         padding-top: $ds_s
         padding-bottom: $ds_s
@@ -55,9 +65,14 @@ $ip-br_x2: #c2c2c2
     .area, .input, .select
         padding: $ds
         padding-right: 2px
+    .form-td
+        .input
+            padding: $ds $ds_s
+            padding-right: 2px
     .input-td
         padding-top: $ds_s
         padding-bottom: $ds_s
+
 
 .input-td .vuejs3-datepicker__value
     min-height: 20px
@@ -201,6 +216,8 @@ $checkbox: #c2c2c2
     & > div
         @extend .mh
         padding: $ds 0px
+    .input-icon-l > div
+        padding-left: 3.2em !important
 
 // 过滤
 .input-filter
@@ -280,9 +297,7 @@ input[type=checkbox]
 
 @import ./input_other
 
-
-.ip-ini-icon
-    margin-bottom: 0px
-    &,
-    .input
+.input-inline,
+.input-inline-icon
+    input
         width: 100%

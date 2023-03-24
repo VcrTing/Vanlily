@@ -26,7 +26,6 @@ import VarOrderDeiiveAddr from '../../../../front/variab/deiive/VarOrderDeiiveAd
 export default {
     props: [ 'deiive' ],
     components: {
-
         VarOrderDeiiveAddr
     },
     computed: {
@@ -36,7 +35,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

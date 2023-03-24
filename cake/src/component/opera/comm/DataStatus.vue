@@ -1,25 +1,22 @@
 <template>
     <select v-model="status">
-        <option :value="1">開啟</option>
-        <option :value="0">關閉</option>
+        <option :value="'true'">開啟</option>
+        <option :value="'false'">關閉</option>
     </select>
 </template>
 <script>
 export default {
-    props: [ '_item' ],
+    props: [ 'def' ],
     data() {
         return {
-            status: 1
+            status: 'false'
         }
     },
     mounted() {
-        this.status = this.fetch()
+        this.status = this.def ? 'true' : 'false'
     },
     methods: {
-        fetch() {
-            let res = this._item.status
-            return res
-        }
+        
     }
 }
 </script>

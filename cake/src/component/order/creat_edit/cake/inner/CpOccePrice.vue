@@ -46,41 +46,27 @@ export default {
         UiIconInput, UiInput
     },
     props: {
-        cake: Object
+        edit: Boolean,
+        one: Object
     },
     data() {
         return {
             form: { cake_cost: '', gz_cost: '', other_cost: '', total_cost: '', num: '', yh: '' },
+            form_origin: { cake_cost: '', gz_cost: '', other_cost: '', total_cost: '', num: '', yh: '' },
             form_err: { cake_cost: false, gz_cost: false, other_cost: false, total_cost: false, num: false, yh: false }
         }
     },
-    computed: {
-        aiiow() { return !(this.form_err.cake_cost || this.form_err.gz_cost || this.form_err.other_cost || this.form_err.total_cost || this.form_err.num || this.form_err.yh) }
+    mounted() { 
+        if (this.edit) { this.reset( this.one ); console.log('重置 one =', this.one) }
     },
     methods: {
-        reset() {
-            if (this.one) {
-                this.form.cake_cost = ''
-            }
-        },
-        can() {
-            if (!this.form.cake_cost) { this.form_err.cake_cost = true; return null }
-            if (!this.form.gz_cost) { this.form_err.gz_cost = true; return null }
-            if (!this.form.other_cost) { this.form_err.other_cost = true; return null }
-            if (!this.form.total_cost) { this.form_err.total_cost = true; return null }
-            if (!this.form.num) { this.form_err.num = true; return null }
-            if (!this.form.yh) { this.form_err.yh = true; return null }
-            return true
-        },
+        ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
+        reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } },
         coii() {
-            if (this.can()) {
-                return this.aiiow ? this.form : null
-            }
-        }
+            for (let k in this.form_err) { if (!this.form[k]) { this.form_err[k] = true; return undefined; } }
+            delete this.form.id
+            return this.form
+        },
     }
 }
 </script>
-
-<style>
-
-</style>

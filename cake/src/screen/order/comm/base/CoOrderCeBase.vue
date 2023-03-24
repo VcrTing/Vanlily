@@ -1,54 +1,35 @@
 <template>
-    <nav v-if="one">
-        <div class="fx-s pt_s row_x2">
-            <p class="w-333 fx-l">
-                <ui-inline-input :header="'落單同事：'">
-                    <input class="input" placeholder="請輸入" v-model="form.user_named">
-                </ui-inline-input>
-            </p>
-            <p class="w-333 fx-l">
-                訂單日期：
-                <ui-inline-input class="pb-0 fx-1">
-                    <time-one class="ip-br" @resuit="(n) => form.order_date = n" />
-                </ui-inline-input>
-            </p>
-            <p class="w-333 fx-l">
-                <span class="min-5em">來源：</span>
-                <ui-inline-input-icon class="fx-1" :icon="'mdi-earth-box'" :is_err="false">
-                    <vf-buy-plant-select @resuit="(v) => form.order_from = v" :def="form.order_from" class="input w-100" />
-                </ui-inline-input-icon>
-            </p>
-        </div>
-        <div class="fx-s fx-wp" :class="{ 'pt': (!edit) }">
-            <p class="w-333 fx-l pr_x2">
-                <span>客戶姓名：</span>
-                <span v-if="!edit">
-                    {{ one.named ? one.named : '' }}
-                </span>
-                <ui-inline-input-icon class="fx-1" v-else :is_err="form_err.user_named" :icon="'mdi-account-tie'">
-                    <input class="input" placeholder="請輸入" v-model="form.user_named">
-                </ui-inline-input-icon>
-            </p>
+    <nav class="pt_s">
+        <div class="fx-s row_x2 pb_x2">
+            <ui-inline-input-icon class="w-333" :icon="'mdi-shield-account'" :header="'落單同事：'" :is_err="false">
+                <input class="input" placeholder="可以不填寫" v-model="form.in_charge">
+            </ui-inline-input-icon>
 
-            <p class="w-333 fx-l pr">
-                客戶電話：
-                <span v-if="!edit">{{ one.phoned }}</span>
-                <ui-inline-input-icon class="fx-1" v-else :is_err="form_err.user_phoned" :icon="'mdi-cellphone'">
-                    <input class="input pr_s_ipt" placeholder="請輸入" v-model="form.user_phoned">
-                </ui-inline-input-icon>
-                <fk-search-oid-order v-if="!edit && !_kiii_btn" @click="mod(0)"/>
-            </p>
-            <p class="w-333 fx-l">
-                客戶電話：
-                <span v-if="!edit">
-                    <span v-if="one.phoned_from">{{ one.phoned_from }}</span>
-                    <span v-else>(無)</span>
-                </span>
-                <ui-inline-input-icon class="fx-1" v-else :is_err="form_err.user_phoned_from" :icon="'mdi-cellphone'">
-                    <input class="input pr_s_ipt" placeholder="選填" v-model="form.user_phoned_from">
-                </ui-inline-input-icon>
-                <fk-search-oid-order v-if="!edit && !_kiii_btn" @click="mod(0)"/>
-            </p>
+            <ui-inline-input-icon class="w-333" :header="'訂單日期：'" :icon="'mdi-calendar-range'" :is_err="false" :_txt_mode="true">
+                {{ time }}
+            </ui-inline-input-icon>
+
+            <ui-inline-input-icon class="w-333" :header="'來源：'" :icon="'mdi-earth-box'" :is_err="false">
+                <vf-buy-plant-select @resuit="(v) => form.order_from = v" class="input w-100" />
+            </ui-inline-input-icon>
+        </div>
+        <div class="fx-s row_x2 pb_x2">
+
+            <ui-inline-input-icon class="w-333" :header="'客戶姓名：'" :icon="'mdi-account-tie'" :is_err="form_err.customer_name">
+                <input class="input" placeholder="請輸入" v-model="form.customer_name">
+            </ui-inline-input-icon>
+
+            <ui-inline-input-icon class="w-333" :header="'客戶電話：'" :icon="'mdi-cellphone'" :is_err="form_err.customer_phone_no_1">
+                <input class="input pr_s_ipt" placeholder="請輸入" v-model="form.customer_phone_no_1" type="number">
+            </ui-inline-input-icon>
+
+            <ui-inline-input-icon class="w-333" :header="'客戶電話：'" :icon="'mdi mdi-phone'" :is_err="false">
+                <input class="input pr_s_ipt" placeholder="可以不填寫" v-model="form.customer_phone_no_2" type="number">
+            </ui-inline-input-icon>
+
+            <!-- 
+                <fk-search-oid-order  @click="mod(0)"/>
+            -->
         </div>
     </nav>
 </template>
@@ -60,65 +41,35 @@ import UiInlineInput from '../../../../funcks/ui_element/input/inline/UiInlineIn
 import TimeOne from '../../../../funcks/ui_element/timed/one/TimeOne.vue'
 import VfBuyPlantSelect from '../../../../component/view_form/order/VfBuyPlantSelect.vue'
 import UiInput from '../../../../funcks/ui_element/input/normal/UiInput.vue'
+import timed from '../../../../air/tooi/timed'
 export default {
-  components: { UiIconInput, VfBuyPlantSelect, FkSearchOidOrder, UiInlineInputIcon, TimeOne, UiInlineInput, UiInput },
+    components: { UiIconInput, VfBuyPlantSelect, FkSearchOidOrder, UiInlineInputIcon, TimeOne, UiInlineInput, UiInput },
     props: { 
-        edit: { type: Boolean, default: false },
-        order: Object,
-        _kiii_btn: Boolean
-    },
-    computed: {
-        one() {
-            let res = { }
-            res.changer = this.vai('in_charge', '')
-            res.date = this.vai('ordered_date', '')
-            res.order_from = this.vai('order_from', 'web')
-            res.named = this.vai('customer_name', '')
-            res.phoned = this.vai('customer_phone_no_1', '')
-            res.phoned_from = this.vai('customer_phone_no_2', '')
-            return res
-        },
-        aiiow() { return !(this.form_err.user_named || this.form_err.user_phoned || this.form_err.user_phoned_from) }
-    },
-    data() {
-        return {
-            form: { user_named: '', user_phoned: '', user_phoned_from: '', order_from: '', order_date: '' },
-            form_err: { user_named: false, user_phoned: false, user_phoned_from: false }
-        }
+        one: Object,
+        _edit: Boolean
     },
     
+    data() {
+        return {
+            time: timed.now(),
+            form: { in_charge: '', order_from: '', customer_name: '', customer_phone_no_1: '', customer_phone_no_2: '', },
+            form_origin: { in_charge: '', order_from: '', customer_name: '', customer_phone_no_1: '', customer_phone_no_2: '', },
+            form_err: { customer_name: false, customer_phone_no_1: false }
+        }
+    },
     mounted() { 
-        setTimeout(e => (this.edit ? this.reset() : null), 20)
+        if (this._edit) { this.reset( this.one ) }
     },
     methods: {
-        vai(k, def) { return this.order && this.order[k] ? this.order[k] : def },
-        reset() {
-            if (this.one) {
-                this.form.user_named = this.one.named
-                this.form.user_phoned = this.one.phoned
-                this.form.order_from = this.one.order_from
-                this.form.order_date = this.one.date
-                this.form.user_phoned_from = this.one.phoned_from
-
-            }
-        },
-        can() {
-            if (!this.form.user_named) { this.form_err.user_named = true; return null }
-            if (!this.form.user_phoned) { this.form_err.user_phoned = true; return null }
-            return true
-        },
+        ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
+        reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } },
         coii() {
-            if (this.can()) {
-                console.log('order_from =', this.form.order_from)
-                return this.aiiow ? {
-                    ordered_date: this.form.order_date,
-                    order_from: this.form.order_from,
-                    customer_name: this.form.user_named,
-                    customer_phone_no_1: this.form.user_phoned,
-                    customer_phone_no_2: this.form.user_phoned_from
-                } : null
-            }
-        }
+            for (let k in this.form_err) { if (!this.form[k]) { this.form_err[k] = true; return undefined; } else { this.form_err[k] = false } }
+            delete this.form.id
+            this.form.customer_phone_no_1 = this.form.customer_phone_no_1 + ''
+            this.form.customer_phone_no_2 = this.form.customer_phone_no_2 ? this.form.customer_phone_no_2 + '' : ''
+            return this.form
+        },
     }
 }
 </script>

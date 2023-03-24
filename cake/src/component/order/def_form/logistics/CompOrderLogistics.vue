@@ -16,7 +16,6 @@
         </div>
         <div class="pb_x"></div>
         <div class="card-def br pb-0">
-            <comp-logistics-pay class="px_x3"></comp-logistics-pay>
         </div>
     </div>
 </template>
@@ -24,14 +23,8 @@
 <script>
 import CardInvite from '../../../card/invite/CardInvite.vue'
 import CompLogisticsMsg from './block/CompLogisticsMsg.vue'
-import CompLogisticsPay from './block/CompLogisticsPay.vue'
 import CompLogisticsTime from './block/CompLogisticsTime.vue'
 export default {
-  components: { CompLogisticsTime, CompLogisticsMsg, CardInvite, CompLogisticsPay },
-
+    components: { CompLogisticsTime, CompLogisticsMsg, CardInvite },
 }
 </script>
-
-<style>
-
-</style>

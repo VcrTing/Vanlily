@@ -4,7 +4,7 @@
             <input class="input-td w-100 ip-br self-input" v-model="fkey" placeholder="請輸入內容，篩選蛋糕..."/>
         </div>
         <button @click="choise(v)" class="" v-for="(v, i) in items" :key="i">
-            <fk-cake-avatar-name :cake="v"/>
+            <fk-cake-avatar-name :cake="v"  :_uuid="true"/>
         </button>
         <div class="py_s"></div>
         <pagenation v-if="!funning" class="pagenation-inn" :count="many.length" :_big="false" :_limit="imit" @page="page"/>
@@ -36,6 +36,9 @@ export default {
                 this.page(1, this.imit, this.imit)
             }
         },
+    },
+    mounted() {
+        console.log('全部蛋糕 =', this.products)
     },
     computed: {
         products() { return this.productPina().products },

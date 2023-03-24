@@ -26,7 +26,7 @@ import VuejsDatepicker from 'vuejs3-datepicker'
 		},
 		components: { VuejsDatepicker },
 		mounted() {
-			
+			setTimeout(() => this.result(this.timed), 2)
 		},
 		methods: {
 			now() {

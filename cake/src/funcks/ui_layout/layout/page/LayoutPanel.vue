@@ -20,7 +20,6 @@ export default {
             default: 'w-unf-r'
         }
     },
-  components: { Crumbs },
-
+    components: { Crumbs },
 }
 </script>

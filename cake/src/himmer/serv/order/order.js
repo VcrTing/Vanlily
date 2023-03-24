@@ -38,11 +38,18 @@ const order_patch = async function(vue, uuid, data) {
 
 }
 
-
+// 創建訂單
+const creat = async function(vue, data) {
+    let res = await vue.net.post('orders', vue.token(), data)
+    console.log('創建結果 =', res)
+    return res && res.status < 399
+}
 
 export default {
     one,
     many,
+    creat,
+
     status,
     change_new,
     order_patch
