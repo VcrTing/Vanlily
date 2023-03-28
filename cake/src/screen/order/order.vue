@@ -1,7 +1,7 @@
 <template>
     <div>
-        <router-view/>
-        <modal-source></modal-source>
+      <router-view/>
+      <modal-source/>
     </div>
 </template>
 <script>

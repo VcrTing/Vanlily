@@ -1,12 +1,13 @@
 <template>
-    <nav class="pt">
+    <nav class="" v-if="!txt_mode">
         <ui-input class="w-100 py" :header="'備註一：'" :is_err="false">
             <textarea class="input" placeholder="可以不填寫" v-model="form.remarks_1"></textarea>
         </ui-input>
-
-        <ui-input class="w-100 py" :header="'備註二：'" :is_err="false">
-            <textarea class="input" placeholder="可以不填寫" v-model="form.remarks_2"></textarea>
-        </ui-input>
+    </nav>
+    <nav v-else>
+        <span>備註一:&nbsp;&nbsp;</span>
+        <span v-if="form.remarks_1">{{ form.remarks_1 }}</span>
+        <span v-else></span>
     </nav>
 </template>
 <script>
@@ -15,7 +16,8 @@ export default {
   components: { UiInput },
     props: { 
         one: Object,
-        _edit: Boolean
+        _edit: Boolean,
+        txt_mode: Boolean
     },
     
     data() {

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="pt_s">送貨類別</div>
+        <div class="pt_s cold">送貨資料</div>
 
         <div class="pt_s">
             <!-- 送上门 -->
@@ -12,70 +12,58 @@
         </div>
 
         <div class="pl_x2 pt_x2 pb">
-                <!-- 送货 -->
-                <cp-ve-order-addr-area-pan @resuit="(n) => addr = n" class="upper" v-if="need_comp"/>
-                <!-- 送達地鐵站 -->
-                <cp-ve-order-addr-subway @resuit="(n) => addr = n" class="upper" v-else-if="typed.code == 'subway_aii'"/>
-                <!-- 樓下交收 -->
-                <!--cp-ve-order-addr-fioor v-else class="upper"/ -->
-                <!-- 屯门站 -->
-                <cp-ve-order-tunmen-subway @resuit="(n) => addr = n" class="upper" v-else-if="typed.code == 'subway_tunmen'"/>
-                <!-- 606 自取 -->
-                <cp-ve-order-self-get @resuit="(n) => addr = n" class="upper" v-else/>
+            <co-order-address-field :mode="mode" :form="form"/>
         </div>
 
-        <cp-ov-order-price class="pt_x2" ref="price" :_edit="creat"/>
+        <cp-ov-order-price class="pt_x2" ref="price" :_edit="creat || _edit"/>
     </div>
 </template>
 
 <script>
-import UiInput from '../../../../funcks/ui_element/input/normal/UiInput.vue'
-import VfSelfGetRadio from '../../../view_form/addr/VfSelfGetRadio.vue'
 import VfSendCompanyChoise from '../../../view_form/send/VfSendCompanyChoise.vue'
 import VfSendTypeChoise from '../../../view_form/send/VfSendTypeChoise.vue'
-import CpVeOrderAddrAreaPan from './input/CpVeOrderAddrAreaPan.vue'
-import CpVeOrderAddrFioor from './input/CpVeOrderAddrFioor.vue'
-import CpVeOrderAddrSubway from './input/CpVeOrderAddrSubway.vue'
-import CpVeOrderSelfGet from './input_2/CpVeOrderSelfGet.vue'
-import CpVeOrderTunmenSubway from './input_2/CpVeOrderTunmenSubway.vue'
+import CoOrderAddressField from './CoOrderAddressField.vue'
 import CpOvOrderPrice from './snipp/CpOvOrderPrice.vue'
 export default {
-  components: { VfSendTypeChoise, VfSelfGetRadio, UiInput, VfSendCompanyChoise, CpOvOrderPrice,
-        CpVeOrderAddrAreaPan,
-        CpVeOrderAddrSubway, CpVeOrderAddrFioor,
-        CpVeOrderTunmenSubway, CpVeOrderSelfGet       
-    },
-    props: {
-        edit: Boolean, creat: Boolean
-    },
+    components: { VfSendTypeChoise, VfSendCompanyChoise, CpOvOrderPrice, CoOrderAddressField },
+    props: [ '_edit', 'creat' ],
     data() {
         return { 
-            addr: { }, typed: { txt: '送上門' , code: 'addr' }, company: { txt: '公公送貨' } }
-    },
-    computed: {
-        need_comp() {
-            let src = this.typed.code
-            return (src == 'addr' || src == 'fioor') }
-    },
-    watch: {
-        typed(n, o) { this.typed = n },
-        company(n, o) {
-            this.company = n
-            if (this.need_comp) { console.log('收集 COMAPNY =', n) }
+            typed: { txt: '送上門' , code: 'addr' }, company: { txt: '公公送貨' },
+
+            form: {
+                delivery_address_1: '',
+                delivery_address_2: '',
+                delivery_address_3: ''
+            }
         }
     },
-    mounted() { this.ioc() },
+    computed: {
+        mode() { return this.typed.code},
+        need_comp() { return (this.mode == 'addr' || this.mode == 'fioor') },
+        
+    },
+    watch: {
+        'form.delivery_address_1'(n) { 
+        },
+        'form.delivery_address_2'(n) { 
+        },
+        'form.delivery_address_3'(n) { 
+        },
+        typed(n, o) { this.typed = n },
+        company(n, o) { this.company = n }
+    },
     methods: { 
         coii() {
             let res = null
             const price = this.$refs.price.coii()
 
-            if (price && this.addr) {
+            if (price && this.form) {
 
                 res = {
                     delivery_method: this.typed.v,
                     delivery_company: this.need_comp ? this.company.v : null,
-                    ...this.addr,
+                    ...this.form,
                     ...price
                 }
 
@@ -86,13 +74,24 @@ export default {
             }
             return res
         },
-        ioc() {
-            if (this.edit ) {
-                const txt = this.deiive ? this.deiive.delivery_method : ''
-                this.$refs.stc.ioc( txt )
-                const company = this.deiive ? this.deiive.delivery_company : ''
-                if (company) { this.$refs.scc.ioc(company) }
-                console.log('定位 =', txt, company)
+        reset(deiiv = null) {
+            if (this._edit && deiiv) {
+                
+                // comp
+                const meth = deiiv.delivery_method
+                this.$refs.stc.ioc( meth )
+                const company = deiiv.delivery_company
+                this.$refs.scc.ioc(company)
+
+                // 地址
+                this.form.delivery_address_1 = deiiv.delivery_address_1
+                setTimeout(e => { 
+                    this.form.delivery_address_2 = deiiv.delivery_address_2
+                    this.form.delivery_address_3 = deiiv.delivery_address_3
+                }, 200)
+
+                // 价格
+                this.$refs.price.reset(deiiv)
             }
         }
     }

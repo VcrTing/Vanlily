@@ -37,7 +37,7 @@ export default {
     
   },
   methods: {
-    deatii(v = '您有參數還未輸入。') { this.msg = v; setTimeout(e => this.msg = '', 4000) },
+    deatii(v = '您的表單不完整。') { this.msg = v; setTimeout(e => this.msg = '', 4000) },
 
     async submit() {
       const form = this.$refs.form.coii()

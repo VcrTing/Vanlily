@@ -3,7 +3,6 @@
         <div v-for="(v, i) in cakes" :key="i" class="pt_x2 pb px_x4" :class="{ 'mui_cake_bg': (i % 2 == 1) }">
             <nav class="py_x2 px_x2">
                 <div class="fx-s fx-t">
-        {{ iog(v) }}
                     <fk-order-img-msg class="fx-1" :imgs="_imgs(v)"/>
                     <div class="w-25 t-r row-item">
                         <button class="btn-err px py_s" @click="cakeTrash(v)">刪除</button>
@@ -64,7 +63,7 @@ export default {
     methods: {
         has( cake ) { let res = null
             this.coecs.map(e => {
-                if (e.product_uuid == cake.uuid) { res = e }
+                if (e.product_uuid == cake.uuid || e.product_uuid == cake.product_uuid) { res = e }
             }); return res ? true : false
         },
 
@@ -79,10 +78,9 @@ export default {
         },
         _imgs(v) { return (v && v.images_url) ? v.images_url : [ ] },
         //  編輯 
-        cakeEdit(cake) { this.productPina().do_cake_of_edit(cake); this.mod(1022) },
+        cakeEdit(cake) { this.productPina().do_cake_of_edit(cake); this.mod(22) },
         // 刪除
-        cakeTrash(cake) { this.$emit('trash', cake.uuid); // console.log('刪除 0 =', cake) 
-        },
+        cakeTrash(cake) { this.$emit('trash', cake.uuid); console.log('刪除 0 =', cake) },
 
         coii() {
             if (this.coecs.length > 0) { return this.coecs } return null

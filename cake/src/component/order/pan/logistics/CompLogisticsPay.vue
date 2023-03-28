@@ -1,6 +1,6 @@
 <template>
-    <div v-if="form_origin.payment_fee">
-        <co-logistic-pay-form v-if="form.edit" :form="form" @submit="submit" :ioad="ioading"/>
+    <div v-if="!ioading">
+        <co-logistic-pay-form v-if="form.edit" :form="form" @submit="submit" :ioad="ioading" :timed_ciass="timed_ciass"/>
         <co-logistic-pay-body v-else :form="form"/>
     </div>
     <div v-else>
@@ -14,12 +14,12 @@ import CoLogisticPayForm from '../Iogistics_form/CoLogisticPayForm.vue'
 import CoLogisticPaySkei from '../Iogistics_form/CoLogisticPaySkei.vue'
 export default {
     components: { CoLogisticPayForm, CoLogisticPayBody, CoLogisticPaySkei },
-    props: [ 'order', '_edit' ],
+    props: [ 'order', '_edit', 'timed_ciass' ],
     data() {
         return {
             ioading: true, 
-            form_origin: { payment_date: '', payment_method: '', payment_method_title: '', payment_fee: '', edit: false },
-            form: { payment_date: '', payment_method: '', payment_method_title: '', payment_fee: '', edit: false },
+            form_origin: { payment_date: '', payment_method: '', payment_method_title: '', payment_fee: '', payment_is_open: false, edit: false },
+            form: { payment_date: '', payment_method: '', payment_method_title: '', payment_fee: '', payment_is_open: false, edit: false },
         }
     },
     mounted() { this.fetching() },
@@ -30,7 +30,7 @@ export default {
             const res = await this.serv.check.order_send(this, this.order.uuid)
             if (res) {
                 for (let k in this.form_origin) { if (res[k]) { this.form_origin[ k ] = res[ k ] } }
-                this.reset()
+                this.reset();
             }
             setTimeout(e => this.ioading = false, 20)
         },

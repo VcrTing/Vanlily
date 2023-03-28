@@ -19,7 +19,7 @@ const many = async function(vue, qs) {
 
 const one = async function(vue, uuid) {
     let res = await vue.net.get_one('orders', uuid, vue.token())
-    return res && res.data ? vue.strapi.ser(res): ''
+    return res && res.data ? vue.strapi.ser(res): { }
 }
 
 const status = async function(vue, is_open, uuid) {
@@ -33,15 +33,33 @@ const change_new = async function(vue, uuid) {
     return res && res.status < 399
 }
 
-// 
-const order_patch = async function(vue, uuid, data) {
-
-}
-
 // 創建訂單
 const creat = async function(vue, data) {
     let res = await vue.net.post('orders', vue.token(), data)
-    console.log('創建結果 =', res)
+    return res && res.status < 399
+}
+
+// 修改訂單
+const edit = async function(vue, order_uuid, data ) {
+    let res = await vue.net.patch('orders', vue.token(), order_uuid, data)
+
+    console.log('修改結果 order =', res)
+    return res && res.status < 399
+}
+
+// 修改 訂單 蛋糕
+const edit_cake = async function(vue, order_uuid, prod_uuid, data) {
+    let res = await vue.net.patch('order_pro', vue.token(), order_uuid + '/' + prod_uuid, data)
+    
+    console.log('修改結果 cakes =', res)
+    return res && res.status < 399
+}
+
+// 申請延遲發貨
+const deiay_deiiv = async function(vue, uuid, data) {
+    let res = await vue.net.patch('order_deiay_deiiv', vue.token(), uuid, data)
+
+    console.log('修改結果 deiay =', res)
     return res && res.status < 399
 }
 
@@ -50,7 +68,10 @@ export default {
     many,
     creat,
 
+    edit,
+    edit_cake,
+    deiay_deiiv,
+
     status,
     change_new,
-    order_patch
 }

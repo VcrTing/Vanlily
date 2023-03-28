@@ -4,14 +4,16 @@
         <div class="fx-1">
             
             <div class="pb_x2">
-                <comp-logistics-time :deiive="deiive" />
+                <comp-logistics-time :order="order"/>
                 <div class="py"></div>
-                <comp-logistics-msg :deiive="deiive" :order="order"/>
+                <comp-logistics-msg :order="order"/>
             </div>
 
             <div class="card-def br upper">
                 <p class="sub pb pt_s">付款記錄</p>
-                <comp-logistics-pay class="px_x3" v-if="order && order.uuid" :order="order"/>
+                <comp-logistics-pay 
+                    :timed_ciass="'ip-time-top'"
+                    class="px_x3" v-if="order && order.uuid" :order="order"/>
                 <co-logistic-pay-skei v-else/>
             </div>
             <div class="pt_x3 fx-c">

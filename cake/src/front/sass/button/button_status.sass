@@ -1,6 +1,13 @@
 $succ: #6ae81d // 6BE81F
 $err: #f45d5b // F55C5C
+$err_shd: #fad1d1 // F55C5C
     
+
+.fx-err-focus:focus,
+.fx-err-focus:active,
+.fx-err-focus:focus-visible
+    box-shadow: 0px 0px 0px 3px $err_shd
+
 .succ
     color: $succ
 .btn-err,
@@ -9,8 +16,11 @@ $err: #f45d5b // F55C5C
     color: #FFF
     cursor: pointer
     background: $succ
+    user-select: none
+    transition: all .122s ease-in
 .btn-err
     background: $err
+    @extend .fx-err-focus
 
 .err
     color: $err

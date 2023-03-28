@@ -1,49 +1,26 @@
 <template>
     <div class="panel-inner pt pb_s">
-        <div class="sub pb_x px_x2">送貨地區</div>
-        <div class="pl_x2">
-            <div class="fx-s pl_x2">
-                <cp-oaa-block :header="'國家 / 地區'" class="w-33">
-                    {{ vai('delivery_address_1') }}&nbsp;
-                </cp-oaa-block>
-                <cp-oaa-block :header="'地區'" class="w-33">
-                    {{ vai('delivery_address_2') }}&nbsp;
-                </cp-oaa-block>
-                <cp-oaa-block :header="'市政 / 區域'" class="w-33">
-                    {{ vai('delivery_address_3') }}&nbsp;
-                </cp-oaa-block>
-            </div>
-        </div>
-        <div class="py"></div>
-        <div class="pl_x2 pt">
-            <div class="fx-s fx-t pl_x2">
-                <cp-oaa-block :header="'地址備註'" class="w-33">
-                    
-                </cp-oaa-block>
-                <cp-oaa-block :header="'公寓、套房、單位等'" class="w-33">
-                    {{ vai('delivery_address_4') }}&nbsp;
-                </cp-oaa-block>
-                <cp-oaa-block :header="'門牌號碼和街道名稱'" class="w-33">
-                    {{ vai('delivery_address_5') }}&nbsp;
-                </cp-oaa-block>
-            </div>
+        <div class="pb_x px_x2 cold">送貨類別</div>
+        <div class="px_x4">
+            <p class="fx-s">
+                <vf-send-type-choise v-if="deiiv.delivery_method" :def="deiiv.delivery_method" :_txt_mode="true"/>
+                <span v-else>{{ deiiv.delivery_method }}</span>
+            </p>
+            <p class="py">
+                <vf-send-company-choise class="fx-l" :def="deiiv.delivery_company" :_txt_mode="true"/>
+            </p>
         </div>
     </div>
 </template>
 
 <script>
+import VfSendCompanyChoise from '../../view_form/send/VfSendCompanyChoise.vue'
+import VfSendTypeChoise from '../../view_form/send/VfSendTypeChoise.vue'
 import CpOaaBlock from './cp/CpOaaBlock.vue'
 export default {
-    components: { CpOaaBlock },
+    components: { CpOaaBlock, VfSendCompanyChoise, VfSendTypeChoise },
     props: {
-        deiive: Object
+        deiiv: Object
     },
-    methods: {
-        vai(k) { return this.deiive ? this.deiive[k] : '' },
-    }
 }
 </script>
-
-<style>
-
-</style>

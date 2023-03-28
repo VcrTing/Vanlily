@@ -29,7 +29,7 @@ export default {
                         res = e
                     }
                 }); 
-                console.log(this.attrs_origin, this.attrs)
+                // console.log('MY COEC =', res)
                 return res
             } return { }
         },

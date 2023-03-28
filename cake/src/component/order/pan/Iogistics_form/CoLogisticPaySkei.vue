@@ -1,5 +1,5 @@
 <template>
-    <div class="fx-s">
+    <div class="fx-s mh-47">
         <div class="row_x2 fx-s fx-1">
             <div class="w-28">
                 <skeieton-h :fs="'h4'"/>

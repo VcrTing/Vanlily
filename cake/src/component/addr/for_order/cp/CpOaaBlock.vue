@@ -1,8 +1,8 @@
 <template>
   
 <div>
-    <p>{{header}}</p>
-    <p class="pl_x2">
+    <p class="cold">{{header}}</p>
+    <p class="pl-2em">
         <slot></slot>
     </p>
 </div>
@@ -16,7 +16,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

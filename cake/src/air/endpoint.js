@@ -3,6 +3,9 @@ export default {
     user_roie: '/users-permissions/users/changeRole',
 
     orders: '/orders/order',
+    order_pro: '/orders/product',
+    order_deiay_deiiv: '/orders/delay_delivery',
+
     payment: '/orders/payment_record',
 
     product: '/products',

@@ -10,7 +10,7 @@
                 <vf-send-time-select class="input" @resuit="(n) => form.delivery_time = n"/>
             </ui-inline-input-icon>
 
-            <ui-inline-input-icon class="w-333" :header="'實際送貨時間：'" :icon="'mdi-clock-time-five-outline'" :_right="true" :is_err="false">
+            <ui-inline-input-icon class="w-333" :header="'實際送貨時間：'" :_class="'label-7em'" :icon="'mdi-clock-time-five-outline'" :_right="true" :is_err="false">
                 <input class="input" placeholder="00:00" v-model="form.actual_delivery_time"/>
             </ui-inline-input-icon>
         </div>
@@ -24,7 +24,7 @@
                 <input class="input" placeholder="請輸入" v-model="form.delivery_man_phone_no" type="number"/>
             </ui-inline-input-icon>
 
-            <ui-inline-input-icon class="w-333" :header="'取貨時間：'" :_class="'min-8em'" :icon="'mdi-clock-time-five-outline'" :_right="true" :is_err="false">
+            <ui-inline-input-icon class="w-333" :header="'取貨時間：'" :_class="'label-7em'" :icon="'mdi-clock-time-five-outline'" :_right="true" :is_err="false">
                 <input class="input" placeholder="00:00" v-model="form.delivery_man_pickup_time"/>
             </ui-inline-input-icon>
         </div>
@@ -44,23 +44,19 @@ export default {
   components: { UiIconInput, VfBuyPlantSelect, FkSearchOidOrder, UiInlineInputIcon, TimeOne, UiInlineInput, UiInput, VfSendTimeSelect },
     props: { 
         one: Object,
-        is_edit: Boolean
+        _edit: Boolean
     },
     
     data() {
         return {
-            time: timed.now(),
             form: { delivery_date: '', delivery_time: '', delivery_man_name: '', delivery_man_phone_no: '', delivery_man_pickup_time: '', actual_delivery_time: '' },
             form_origin: { delivery_date: '', delivery_time: '', delivery_man_name: '', delivery_man_phone_no: '', delivery_man_pickup_time: '', actual_delivery_time: '' },
             form_err: { delivery_man_name: false, delivery_man_phone_no: false }
         }
     },
-    mounted() { 
-        if (this.is_edit) { this.reset( this.one ) }
-    },
     methods: {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
-        reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } },
+        reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } console.log('deiiver v =', v) },
         coii() {
             for (let k in this.form_err) { if (!this.form[k]) { this.form_err[k] = true; return undefined; } else { this.form_err[k] = false } }
             delete this.form.id

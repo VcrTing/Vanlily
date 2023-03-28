@@ -4,7 +4,7 @@
             <nav class="px_x2 pt_s">
                 <div class="fx-s fx-t">
                     <div class="fx-1">
-                        加载中
+                        <sk-order-img-msg/>
                     </div>
                     
                     <div class="w-25 t-r row-item">
@@ -29,27 +29,9 @@
     </div>
 </template>
 <script>
-import VarCakeName from '../../../front/variab/cake/VarCakeName.vue'
-import FkOrderImgMsg from '../../../funcks/order/img/FkOrderImgMsg.vue'
-import FkCakePriceGroup from '../../../funcks/order/text/FkCakePriceGroup.vue'
-import FkCakeAttrs from '../../../funcks/order/text/FkCakeAttrs.vue'
-import UiImgGroup from '../../../funcks/ui_element/img/UiImgGroup.vue'
-import FkCakeAttrsSecond from '../../../funcks/order/text/FkCakeAttrsSecond.vue'
 import SkeietonH from '../SkeietonH.vue'
+import SkOrderImgMsg from '../../../funcks/order/img/SkOrderImgMsg.vue'
 export default {
-  components: { UiImgGroup, FkOrderImgMsg, VarCakeName, FkCakeAttrs, FkCakePriceGroup, FkCakeAttrsSecond, SkeietonH },
-    props: [ 'order', 'edit' ],
-    data() {
-        return {
-
-        }
-    },
-    computed: {
-        
-    },
-    methods: {
-        
-    },
-    mounted() { }
+  components: { SkeietonH, SkOrderImgMsg },
 }
 </script>

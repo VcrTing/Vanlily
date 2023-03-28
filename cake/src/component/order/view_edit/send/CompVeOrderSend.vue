@@ -29,13 +29,6 @@
                 <span>{{ deiiv.delivery_man_pickup_time }}</span>
             </p>
         </div>
-        <div class="fx-s py">
-            <vf-send-type-choise v-if="deiiv.delivery_method" :def="deiiv.delivery_method" :_txt_mode="true"/>
-            <span v-else>{{ deiiv.delivery_method }}</span>
-        </div>
-        <p class="py">
-            <vf-send-company-choise class="fx-l" :def="deiiv.delivery_company" :_txt_mode="true"/>
-        </p>
     </div>
 </template>
 <script>

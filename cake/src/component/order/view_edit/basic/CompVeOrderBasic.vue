@@ -1,6 +1,6 @@
 <template>
     <nav>
-        <div class="fx-s pb">
+        <div class="fx-s pb_s">
             <p class="w-333">
                 落單同事：
                 <span v-if="one && one.in_charge">{{ one.in_charge }}</span>
@@ -17,26 +17,27 @@
                 <vf-buy-plant-select v-if="one.order_from" :def="one.order_from" :_txt_mode="true"/>
             </p>
         </div>
-        <div class="fx-s pb">
+        <div class="fx-s">
             <p class="w-333">
                 客戶姓名：
                 <span>{{ one.customer_name ? one.customer_name : '' }}</span>
             </p>
-            <p class="w-333">
+            <p class="fx-1">
                 客戶電話：
                 <span>
                     <span v-if="one.customer_phone_no_1">{{ one.customer_phone_no_1 }}</span>
                     <span v-else>(無)</span>
                 </span>
-                <fk-search-oid-order @click="mod(0)"/>
+                <fk-search-oid-order :phone="one.customer_phone_no_1" v-if="!kiii_history"/>
             </p>
-            <p class="w-333">
+            
+            <p class="w-333" v-if="!kiii_phone_2">
                 客戶電話：
                 <span>
                     <span v-if="one.customer_phone_no_2">{{ one.customer_phone_no_2 }}</span>
                     <span v-else>(無)</span>
                 </span>
-                <fk-search-oid-order @click="mod(0)"/>
+                <fk-search-oid-order :phone="one.customer_phone_no_2" v-if="!kiii_history"/>
             </p>
         </div>
     </nav>
@@ -49,7 +50,7 @@ import VfGetWaySelect from '../../../view_form/send/VfGetWaySelect.vue'
 export default {
   components: { VfBuyPlantSelect, FkSearchOidOrder, TimeOne, VfGetWaySelect },
     props: { 
-        order: Object
+        order: Object, kiii_phone_2: Boolean, kiii_history: Boolean
     },
     computed: {
         one() {

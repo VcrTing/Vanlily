@@ -1,6 +1,6 @@
 <template>
     <div class="panel-inner pt pb_s">
-        <div class="pb_x px_x2">送貨地址</div>
+        <div class="pb_x px_x2 cold">送貨地址</div>
             <div class="pl_x2">
                 <div class="fx-s pl_x2">
                     <cp-oaa-block :header="'地區 / 地铁線路'" class="w-33">

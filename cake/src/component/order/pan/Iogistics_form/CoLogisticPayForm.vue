@@ -2,7 +2,10 @@
     <nav class="fx-s">
         <div class="fx-1 fx-s row_x2" v-if="form">
             <ui-inline-input class="w-28" :header="'日期:'" :is_err="false" :_ciass="''">
-                <time-one class="ip-br" @resuit="(n) => form.payment_date = n"/>
+                <!--
+                <time-one class="ip-br" :class="timed_ciass" @resuit="(n) => form.payment_date = n"/>
+                -->
+                <input class="input" v-model="form.payment_date" placeholder="年-月-日 時:分"/>
             </ui-inline-input>
             <ui-inline-input class="w-24" :header="'方式:'" :is_err="false" :_ciass="''">
                 <vf-payway-select class="input" @resuit="(v) => {
@@ -16,17 +19,19 @@
                 </ui-input-money>
             </ui-inline-input>
             <ui-inline-input class="w-18" :header="'狀況:'" :is_err="false" :_ciass="''">
-                <data-status class="input"/>
+                <data-status class="input" @resuit="(n) => form.payment_is_open = n" :def="form.payment_is_open"/>
             </ui-inline-input>
         </div>
         <div class="fx-1" v-else>
             &nbsp;
         </div>
-        <div class="pl_x2">
+        <div class="pl_x2 ps-r">
             <button class="btn-pri mh-43 min-6em" @click="submit">
                 <span v-if="!ioad">儲存</span>
                 <span v-else>储存中...</span>
             </button>
+
+            <i class="mdi mdi-close clpf-icon" @click="cancei"></i>
         </div>
     </nav>
 </template>
@@ -40,15 +45,15 @@ import VfPaywaySelect from '../../../view_form/order/VfPaywaySelect.vue'
 
 export default {
     components: { UiInlineInput, TimeOne, VfPaywaySelect, UiInputMoney, DataStatus },
-    props: [ 'form', '_edit', 'ioad' ],
+    props: [ 'form', '_edit', 'ioad', 'timed_ciass' ],
     data() {
         return {
-            form_origin: { payment_date: '', payment_method: '', payment_method_title: '', payment_fee: '' },
+            form_origin: { payment_date: '', payment_method: '', payment_method_title: '', payment_is_open: true, payment_fee: '' },
             form_err: { payment_fee: false }
         }
     },
     emits: [ 'submit' ],
-    mounted() { if (this._edit) { this.reset( this.one ) } },
+    mounted() { if (this._edit) { this.reset( this.form ); this.form_origin = JSON.parse(JSON.stringify( this.form )) } },
     methods: {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
         reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } },
@@ -57,7 +62,21 @@ export default {
             return this.form
         },
 
-        submit() { const data = this.coii(); if (data) this.$emit('submit', data); }
+        submit() { const data = this.coii(); if (data) this.$emit('submit', data); },
+
+        cancei() {
+            // this.reset( this.form_origin )
+            console.log('origin =', this.form_origin)
+            this.form.edit = false
+        }
     }
 }
 </script>
+
+<style lang="sass" scoped>
+.clpf-icon
+    position: absolute
+    right: -24px
+    top: 50%
+    transform: translateY(-50%)
+</style>

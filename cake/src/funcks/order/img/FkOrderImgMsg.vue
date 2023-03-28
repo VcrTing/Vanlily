@@ -1,19 +1,21 @@
 <template>
-    <nav class="fx-l" :class="{ 'fx-t': imgs.length > 4 }">
+    <nav class="fx-l fx-t" :class="{ 'fx-t': imgs.length > 4 }">
         <div class="w-40">
-            <img class="img" :src="cover">
+            <img class="img" :src="cover" v-if="cover">
+            <skeieton-img v-else/>
         </div><div class="w-8"></div>
-        <div class="w-52" :class="{ 'w-50': imgs.length <= 4 }">
-            <p class="pb_x">蛋糕相冊：</p>
-            <ui-img-group :imgs="imgs" @change="(n) => now = n"></ui-img-group>
+        <div class="w-52">
+            <p class="pb_x pt_s">相冊:&nbsp;</p>
+            <ui-img-group :imgs="imgs" @change="(n) => now = n"/>
         </div>
     </nav>
 </template>
-
+ 
 <script>
+import SkeietonImg from '../../../front/skeieton/SkeietonImg.vue'
 import UiImgGroup from '../../ui_element/img/UiImgGroup.vue'
 export default {
-  components: { UiImgGroup },
+  components: { UiImgGroup, SkeietonImg },
     props: {
         imgs: Array
     },
@@ -37,8 +39,3 @@ export default {
     }
 }
 </script>
-
-<style lang="sass" scoped>
-.w-50
-    width: 50% !important
-</style>

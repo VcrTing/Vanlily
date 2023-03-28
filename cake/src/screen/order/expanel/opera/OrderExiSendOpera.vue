@@ -17,7 +17,7 @@ export default {
             {
                 txt: '申請延遲發貨', icon: 'mdi mdi-send-clock-outline',
                 func: () => {
-                    this.pina().mod(30)
+                    this.pina().mod(32)
                 }
             },
             {

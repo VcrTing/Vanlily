@@ -10,7 +10,7 @@
             </ui-inline-input-icon>
 
             <ui-inline-input-icon class="w-333" :header="'來源：'" :icon="'mdi-earth-box'" :is_err="false">
-                <vf-buy-plant-select @resuit="(v) => form.order_from = v" class="input w-100" />
+                <vf-buy-plant-select @resuit="(v) => form.order_from = v" ref="piant" class="input w-100" />
             </ui-inline-input-icon>
         </div>
         <div class="fx-s row_x2 pb_x2">
@@ -62,7 +62,10 @@ export default {
     },
     methods: {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
-        reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } },
+        reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } }
+            this.$refs.piant.ioc( this.form.order_from )
+            this.time = timed.view( v.ordered_date )
+        },
         coii() {
             for (let k in this.form_err) { if (!this.form[k]) { this.form_err[k] = true; return undefined; } else { this.form_err[k] = false } }
             delete this.form.id

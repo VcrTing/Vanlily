@@ -2,7 +2,7 @@
     <div class="" :class="{ 'panel-inner px_x2 pt': paner }">
         <div class="pt_s">送貨地區</div>
         <div class="pl_x2 py">
-            <cp-ve-order-addr-area-pan class="pl_x2 fx-t"/>
+            Area Pan
         </div>
         <div class="pl_x2 pt">
             <div class="fx-s fx-t pl_x2">
@@ -27,10 +27,9 @@
 <script>
 import UiInlineInput from '../../../../funcks/ui_element/input/inline/UiInlineInput.vue'
 import VfAddrAreaSelect from "../../../view_form/addr/VfAddrAreaSelect.vue"
-import CpVeOrderAddrAreaPan from './input/CpVeOrderAddrAreaPan.vue'
 
 export default {
-    components: { VfAddrAreaSelect, UiInlineInput, CpVeOrderAddrAreaPan },
+    components: { VfAddrAreaSelect, UiInlineInput },
     props: {
         paner: Boolean,
         order: Object

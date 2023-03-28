@@ -130,16 +130,19 @@ export default {
                 let _atrs = [ ]; this.msg = ''; 
                 for (let k in this.attribute) { _atrs.push( this.attribute[ k ] ) }
 
-                const res = { 'product_uuid': '', ...data, 'attribute': _atrs, 'attribute_of_edit': this.attribute }
+                const res = { 'uuid': '', 'product_uuid': '', ...data, 'attribute': _atrs, 'attribute_of_edit': this.attribute }
+                res['uuid'] = this.cake.uuid
                 res['product_uuid'] = this.cake.uuid
-                this._proP.do_coecs( res ); this.pina().mod( 0 );
+
+                this._proP.do_coecs( res ); 
+                this.pina().mod( 0 );
             } 
             else { this.msg = '輸入不完整。' }
         },
 
         init() {
             if (this.coec) {
-                console.log('執行 reset =', this.coec, this.cake)
+                
                 this.reset( this.coec )
                 this.reset_attr( this.coec.attribute_of_edit )
             } else {

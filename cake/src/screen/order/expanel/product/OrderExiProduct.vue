@@ -12,7 +12,7 @@
                 <div class="py_x"><hr/></div>
                 <div class="fx-s fx-t">
                     <div class="w-43">
-                        <p>款式：<var-cake-name :prod="v.product"/></p>
+                        <p>名稱:&nbsp;&nbsp;<var-cake-name :prod="v.product"/></p>
                         <fk-cake-attrs :cake="v"/>
                     </div>
                     <div class="w-35">
@@ -52,9 +52,7 @@ export default {
     },
     methods: {
         _prod(v) { 
-            let res = v ? v.product : null; 
-            if (res) { return this.strapi.data(res) }
-            else { }
+            let res = v ? v.product : null; return res ? this.strapi.data(res) : null
         },
         _imgs(v) {
             let res = (v && v.product) ? v.product : null; return (res && res.images_url) ? res.images_url : [ ]

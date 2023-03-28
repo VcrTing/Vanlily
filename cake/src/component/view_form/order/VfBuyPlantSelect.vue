@@ -29,6 +29,9 @@ export default {
     },
     methods: {
         sign() { this.$emit('resuit', this.now) },
+        ioc(v) {
+            this.now = v ? v : 'web';
+        },
         ioc_txt() {
             let res = 'Website'
             this.ops.map(e => {

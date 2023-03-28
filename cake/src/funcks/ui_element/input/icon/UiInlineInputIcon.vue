@@ -1,7 +1,7 @@
 <template>
     <nav class="fx-l" :class="{ 'inline-input-txt-mode': _txt_mode }">
-        <label class="label-inline" v-if="header">
-            <span v-html="header" :class="_class"></span>&nbsp;
+        <label class="label-inline" v-if="header" :class="_class">
+            {{ header }}&nbsp;
         </label>
         <div class="fx-1" :class="{ 'input-err': is_err }">
             <nav :class="{'input-icon-r': _right, 'input-icon-l': !_right,  }">
@@ -20,7 +20,10 @@ export default {
         header: { type: String },
         is_err: { type: Boolean, default: true },
         icon: String,
-        _class: String,
+        _class: {
+            type: String,
+            default: ''
+        },
         _right: Boolean,
         _txt_mode: Boolean
     },
