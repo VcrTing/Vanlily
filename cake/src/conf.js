@@ -15,4 +15,6 @@ export default {
     API: URI + '/api',
 
     ENDPOINT,
+
+    VERSION: '0.81'
 }
