@@ -4,8 +4,8 @@
             <template v-slot:tit>
                 <div class="item_s py-0">
                     <div class="w-100 px_x2">
-                        <ul class="ul-def ul-tab b fx-l">
-                            <li @click="change(v.tab)" :class="{ 'active': now == v.tab }" v-for="(v, i) in tabs" :key="i">
+                        <ul class="ul-def ul-tab fx-l">
+                            <li @click="change(v.tab)" :class="{ 'active b': now == v.tab }" v-for="(v, i) in tabs" :key="i">
                                 <a>
                                     {{ v.txt }}
                                 </a>
@@ -15,11 +15,13 @@
                 </div>
             </template>
             <template v-slot:cont>
-                <div class="item_s">
-                    <div>
-                        <order-exi-tab-soft v-if="now == 1"></order-exi-tab-soft>
-                        <order-exi-tab-invite v-else-if="now == 2"></order-exi-tab-invite>
-                        <order-exi-tab-addr v-else-if="now == 3"></order-exi-tab-addr>
+                <div class="">
+                    <div class="item_s">
+                        <order-exi-tab-soft v-if="now == 1"/>
+                        <order-exi-tab-invite v-else-if="now == 2"/>
+                        <order-exi-tab-addr v-else-if="now == 3"/>
+
+                        <div v-else></div>
                     </div>
                 </div>
             </template>

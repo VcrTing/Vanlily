@@ -12,6 +12,10 @@
         <!-- 清單 -->
         <comp-check-iist-form v-if="page == 24"/>
 
+        <!-- 蛋糕 -->
+        <co-order-cake-creat v-if="page == 26"/>
+        <co-cake-choise v-if="page == 27"/>
+
         <!-- 支付
         <cp-pay-record-creat-edit v-if="page == 31"/>
         -->
@@ -38,13 +42,15 @@ import CoCakeChoise from '../cake/CoCakeChoise.vue'
 import DeiayDeiive from '../../screen/order/creat_edit/DeiayDeiive.vue'
 import DeiayDeiiveReview from '../../screen/order/review/DeiayDeiiveReview.vue'
 import CoFormerlyOrders from '../order/formerly/CoFormerlyOrders.vue'
+import CoOrderCakeCreat from '../order/cake/CoOrderCakeCreat.vue'
 export default {
     components: {
         ModalByState, CompOrderCakeCreat, CompOrderCakeEdit,
         CompSourceSoftPlus, CompSourceAddrPlus,
         CompSourceInvitePlus, CpPayRecordCreatEdit,
         CompDeliveDeiayCe, CompCheckIistForm,
-        CoCakeChoise, DeiayDeiive, DeiayDeiiveReview, CoFormerlyOrders
+        CoCakeChoise, DeiayDeiive, DeiayDeiiveReview, CoFormerlyOrders,
+        CoOrderCakeCreat
     },
     computed: { 
         page() { return this.pina().MODAL }

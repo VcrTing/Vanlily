@@ -1,6 +1,7 @@
 <template>
     <select 
         v-model="now"
+        :class="{ 'input-phcd': is_phad }"
         >
         <option :value="v.txt" v-for="(v, i) in ops" :key="i">{{ v.txt }}</option>
     </select>
@@ -9,17 +10,21 @@
 <script>
 import vanlily_addr from '../../../air/vanlily_addr'
 export default {
-    props: [ 'def', '_funni_mode' ],
+    emits: [ 'resuit' ],
     data() {
         return {
-            now: '',
-            ops: vanlily_addr.addr
+            now: '全部地區',
+            ops: [ ]
         }
     },
+    computed: {
+        is_phad() { return (this.now == '全部地區') }
+    },
     mounted() { 
-
-        this.now = this.def ? this.def : this.ops[0].txt; 
-        // this.sign() 
+        let has = false
+        this.ops = JSON.parse(JSON.stringify( vanlily_addr.addr ))
+        this.ops.map(e => { if (e.txt == '全部地區') { has = true } })
+        !has ? this.ops.unshift({ txt: '全部地區', v: '' }) : undefined;
     },
     watch: {
         now(n, o) { this.sign() }

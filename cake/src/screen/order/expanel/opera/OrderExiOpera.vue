@@ -1,7 +1,7 @@
 <template>
     <div class="fx-c pb">
         <button class="btn-pri_out px py_t mx_s fx-c" v-for="(v, i) in opera" :key="i"
-            @click="aiiow ? v.func() : null"
+            @click="v.func()"
         >
             <i class="h5" :class="v.icon"></i>
             <span class="pl_s">{{ v.txt }}</span>
@@ -18,7 +18,7 @@ export default {
             {
                 txt: '申請延遲發貨', icon: 'mdi mdi-send-clock-outline',
                 func: () => {
-                    this.pina().modai(32)
+                    this.pina().mod(32)
                 }
             },
             {

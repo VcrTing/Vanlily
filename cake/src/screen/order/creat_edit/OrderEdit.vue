@@ -26,7 +26,8 @@
         </div>
 
         <div v-if="order.id" class="fx-c upper">
-            <fo-button :tit="'檢視'"/>
+            
+            <fo-button :tit="'返回'"/>
             <span class="px_s"></span>
             <ui-submit @click="submit" :msg="msg"/>
         </div>

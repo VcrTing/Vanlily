@@ -22,6 +22,9 @@ export default {
             form: { payment_date: '', payment_method: '', payment_method_title: '', payment_fee: '', payment_is_open: false, edit: false },
         }
     },
+    computed: {
+        
+    },
     mounted() { this.fetching() },
     emits: [ 'success' ],
     methods: {

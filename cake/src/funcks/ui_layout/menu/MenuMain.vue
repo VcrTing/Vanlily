@@ -2,7 +2,7 @@
     <div>
 
         <div class="version pl_x2">
-            版本:&nbsp;&nbsp;<span>{{ conf.VERSION }}</span>
+            版本&nbsp;&nbsp;<span>{{ conf.VERSION }}</span>
         </div>
 
         <div class="logo">

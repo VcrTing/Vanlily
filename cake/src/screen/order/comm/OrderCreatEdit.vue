@@ -23,10 +23,11 @@
       <div class="py"></div>
       <co-order-ce-remark ref="remark" :one="order" :_edit="_edit"/>
 
+      <!--
       <modal-by-state class="modal-w-min">
         <co-cake-choise @resuit="saveCake" v-if="mod == 1023"/>
-        <co-order-cake-creat v-if="mod == 1022"/>
       </modal-by-state>
+      -->
     </div>
 </template>
 
@@ -50,9 +51,20 @@ export default {
     CoOrderCeCakesEdit, UiErrTag},
   computed: {
     mod() { return this.pina().MODAL },
+    cake_of_choise() { return this.productPina().cake_of_choise },
+
     coecs() { const src = this.productPina().coecs; return src ? src : [ ] },
     products() { let src = this.productPina().products; return src ? src : [ ] },
+    
     has_deiay() { const src = this.order ? this.order.delay_delivery : null; return ( src && src.id ) },
+  },
+  watch: {
+    cake_of_choise(n) { 
+      if (n && n.uuid) {
+        this.cakes.push( n );
+        this.productPina().do_cake_of_choise({ });
+      }
+    }
   },
   props: [ '_edit', 'order' ],
   data() {
@@ -71,8 +83,8 @@ export default {
       this.$refs.addr.reset( addr )
 
       let prods = this.order.ordered_product
+
       this.cakes = prods ? prods.map(e => e.__cake) : [ ]
-      
       this.order.coecs ? this.order.coecs.map(cs => this.productPina().do_coecs( cs )) : undefined;
     },
 
@@ -90,28 +102,24 @@ export default {
         }: null
     },
 
-    //
-    saveCake(v) {
-      if (v.uuid) {
-        v.ordered_product = {
-          quantity: 0, unit_price: 0, original_price: 0, discounted_price: 0, 
-          cake_special_needs: '', product_uuid: v.uuid, attribute: [ ]
-        }; 
-        if ( v.attributes ) {
-          for (let k in v.attributes) {
-            v.ordered_product['attribute']
-          }
-        }
-        this.cakes.push( v )
-      }
-    },
-    piusCake() { this.pina().mod(1023) },
+    piusCake() { this.pina().mod(27) },
 
     // 刪除
-    trashCake(uuid) {
+    trashCake(idx) {
       let res = [ ]
-      this.cakes.map(e => { if (e.uuid !== uuid) { res.push( e ) } });
+      this.cakes.map((e, i) => {
+        if (i == idx) {
+
+        } else {
+          res.push( e )
+        }
+      })
       this.cakes = res
+    },
+
+    // 查看延遲發貨
+    viewDeiay() {
+      this.pina().mod(33)
     }
   }
 }

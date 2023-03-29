@@ -12,6 +12,8 @@ export default defineStore('productPina', {
 
             cake_of_edit: { },
             coecs: [ ], // do_cake_of_edit_compieteds
+
+            cake_of_choise: { },
         }
     }, 
     getters:{
@@ -29,6 +31,7 @@ export default defineStore('productPina', {
     }, 
     actions: {
         do_cake_of_edit(v = { }) { this.cake_of_edit = v },
+        do_cake_of_choise(v = { }) { this.cake_of_choise = v },
 
         do_coecs(v = { }) { 
             if (this.coecs.length > 0) {

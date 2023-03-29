@@ -16,7 +16,9 @@ import PanelInner from '../../../../funcks/ui/panel/PanelInner.vue'
 export default {
     components: { PanelInner, CompPayRecordLine, CompLogisticsPay },
     computed: {
-      order() { let src = this.orderPina().one; return src && src.payment_date ? src : null },
+      order() { 
+        let src = this.orderPina().one; 
+        return src && src.id ? src : null },
     },
     data() {
       return {

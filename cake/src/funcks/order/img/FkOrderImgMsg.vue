@@ -1,7 +1,7 @@
 <template>
-    <nav class="fx-l fx-t" :class="{ 'fx-t': imgs.length > 4 }">
+    <nav class="fx-l fx-t fk-order-img-msg" :class="{ 'fx-t': imgs.length > 4 }">
         <div class="w-40">
-            <img class="img" :src="cover" v-if="cover">
+            <img class="img cake-cover" :src="cover" v-if="cover">
             <skeieton-img v-else/>
         </div><div class="w-8"></div>
         <div class="w-52">
@@ -39,3 +39,13 @@ export default {
     }
 }
 </script>
+
+<style lang="sass" scoped>
+.fk-order-img-msg
+    min-height: 14em
+
+.cake-cover
+    transition: all .242s ease-in
+    &:hover
+        transform: scale(1.02)
+</style>

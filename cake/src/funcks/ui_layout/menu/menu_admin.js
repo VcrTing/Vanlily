@@ -5,11 +5,11 @@ export default [
     },
     {
         txt: '訂單', icon: 'mdi mdi-clipboard-text-outline',
-        index: 1, link: '/admin/order/view/query/'
+        index: 1, link: '/admin/order/'
     },
     {
         txt: '行事板', icon: 'mdi mdi-bulletin-board',
-        index: 2, link: '/admin/work/board'
+        index: 2, link: '/admin/work/board/'
     },
     {
         txt: '會計', icon: 'mdi mdi-calculator-variant-outline',
@@ -47,7 +47,7 @@ export default [
     },
 
     {
-        txt: '用户权限', icon: 'mdi mdi-account-switch-outline',
+        txt: '用戶權限', icon: 'mdi mdi-account-switch-outline',
         index: 4, link: '/admin/member_iist',
     },
 

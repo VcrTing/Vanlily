@@ -59,8 +59,9 @@ import VuejsDatepicker from 'vuejs3-datepicker'
             }
 		},
 		components: { VuejsDatepicker },
-		mounted() { this.t = this.def; 
-			if (this.init) { setTimeout(() => this.reset(), 20) }
+		mounted() { 
+			this.t = this.def; 
+			if (this.init) { setTimeout(() => this.reset(), 2) }
 		},
 		watch: {
 			t(n) {

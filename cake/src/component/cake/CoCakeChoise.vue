@@ -63,8 +63,30 @@ export default {
     },
     emits: [ 'resuit' ],
     methods: {
+        _ser_cake(v) {
+            /*
+            if (v.uuid) {
+                v.ordered_product = {
+                    quantity: 0, unit_price: 0, original_price: 0, discounted_price: 0, 
+                    cake_special_needs: '', product_uuid: v.uuid, attribute: [ ]
+                }; 
+                if ( v.attributes ) {
+                    for (let k in v.attributes) {
+                        v.ordered_product['attribute']
+                    }
+                }
+            }
+            */
+            console.log('新加入的蛋糕 =', v)
+            return v
+        },
+
         vai(k, def = { }) { return this.cake && this.cake[ k ] ? this.cake[ k ] : def },
-        submit() { this.$emit('resuit', this.cake); this.cancei() },
+        submit() { 
+            this.$emit('resuit', this._ser_cake( this.cake ));
+            this.productPina().do_cake_of_choise( this.cake );
+            this.cancei() 
+        },
         cancei() { this.pina().mod( 0 ) }
     }
 }

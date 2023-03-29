@@ -45,7 +45,10 @@
             </div>
         </div>
         
-        <order-exi-opera :aiiow="order && order.id"/>
+        <order-exi-opera 
+            class="upper_x2"
+            @edit="$emit('edit')"
+            v-if="order && order.id"/>
     </div>
 </template>
 
@@ -73,7 +76,8 @@ export default {
     components: { CompVeOrderBasic, PanelInner, OrderExiProduct, CompVeOrderSend, CompVeOrderAddrArea, CompVeOrderAddrMark,
         OrderExiRemark, OrderExiPay, CompAddrArea, CompAddrMark, SkOrderExiProduct,
         OrderExiOpera, SkeietonH, SkeietonCont, UiHeader, UiErrTag },
-    
+
+    emits: [ 'edit' ],
     computed: {
         order() { let res = this.orderPina().one; return res && res.id ? res: null },
         has_deiay() { const src = this.order ? this.order.delay_delivery : null; return ( src && src.id ) },

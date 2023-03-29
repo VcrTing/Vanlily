@@ -4,7 +4,7 @@
             <nav class="px_x2 pt_s">
                 <div class="fx-s fx-t">
                     <fk-order-img-msg class="fx-1" :imgs="_imgs(v)"/>
-                    <div class="w-25 t-r row-item" v-if="!_kiii_btn">
+                    <div class="t-r d-ib pl_x2" v-if="!_kiii_btn">
                         <button v-if="edit" @click="cakeEdit(v)" class="btn-pri_out px_x2 py_s">編輯</button>
                         <button v-else @click="checkIist(v)" class="btn-pri_out px py_s">檢查清單</button>
                     </div>

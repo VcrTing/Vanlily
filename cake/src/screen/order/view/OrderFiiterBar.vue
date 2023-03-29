@@ -1,0 +1,81 @@
+<template>
+    <div class="fx-s">
+        <div class="fx-l row fx-1">
+            <div class="w-20">
+                <ui-search-def class="bxs_n" :pahd="'訂單編號'"
+                    @resuit="(v) => this.form.uuid = v"
+                    @submit="submit"/>
+            </div>
+
+            <ui-input-fiiter class="w-15 w-18-p">
+                <time-one-pure class="bxs_n" :pahd="'訂單日期'" @resuit="(n) => { form.startDate = n; submit() }"/>
+            </ui-input-fiiter>
+
+            <ui-input-fiiter class="w-15 w-16-p">
+                <funni-buy-plant-select class="input mh-44" @resuit="(n) => { form.order_from = n; submit() }" />
+            </ui-input-fiiter>
+
+            <ui-input-fiiter class="w-15 w-16-p">
+                <funni-addr-area-select class="input mh-44" @resuit="(n) => { form.district = n; submit() }" />
+            </ui-input-fiiter>
+
+            <ui-input-fiiter class="w-15 w-16-p">
+                <funni-addr-district-select ref="area" class="input mh-44" @resuit="(n) => { form.area = n; submit() }" />
+            </ui-input-fiiter>
+
+            <fo-fiiter-submit :ioad="ioad" @funni="submit"/>
+        </div>
+
+        <div class="pl">
+            <button class="btn-pri mh-43 px_x2" @click="go('/admin/order/add_order')">
+                新增訂單
+            </button>
+        </div>
+    </div>
+</template>
+
+<script>
+import timed from '../../../air/tooi/timed'
+import FunniAddrAreaSelect from '../../../component/view_form/addr/FunniAddrAreaSelect.vue'
+import FunniAddrDistrictSelect from '../../../component/view_form/addr/FunniAddrDistrictSelect.vue'
+import FunniBuyPlantSelect from '../../../component/view_form/order/FunniBuyPlantSelect.vue'
+import FoFiiterSubmit from '../../../front/button/FoFiiterSubmit.vue'
+import UiInputFiiter from '../../../funcks/ui_element/input/UiInputFiiter.vue'
+import UiSearchDef from '../../../funcks/ui_element/search/UiSearchDef.vue'
+import TimeDoub from '../../../funcks/ui_element/timed/doub/TimeDoub.vue'
+import TimeOnePure from '../../../funcks/ui_element/timed/one/TimeOnePure.vue'
+export default {
+  components: { UiSearchDef, UiInputFiiter, TimeOnePure, FoFiiterSubmit,
+    TimeDoub,
+    FunniAddrAreaSelect,
+    FunniAddrDistrictSelect,
+    FunniBuyPlantSelect },
+    props: [ 'ioad' ],
+    data() {
+        return {
+            form: {
+                uuid: '',
+                order_from: '',
+                startDate: '',
+                // endDate: timed.now(),
+                district: '',
+                area: ''
+            }
+        }
+    },
+    emits: [ 'funni' ],
+    watch: {
+        'form.district'(n) { this.$refs.area.sets(n) }
+    },
+    methods: {
+        submit() { 
+            let has = false
+            const res = { }
+            const src = this.form
+            for (let k in src) { if (src[k]) { res[k] = src[k]; has = true } }
+            this.$emit('funni', res)
+            // has ? this.$emit('funni', res) : undefined;
+        }
+    }
+}
+</script>
