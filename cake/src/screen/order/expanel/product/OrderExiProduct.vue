@@ -1,7 +1,7 @@
 <template>
-    <div class="px_x2 pt_x">
+    <div class="px_x2">
         <div v-for="(v, i) in cakes" :key="i" class="pb_x">
-            <nav class="px_x2 pt_s">
+            <nav class="px_x2 pt">
                 <div class="fx-s fx-t">
                     <fk-order-img-msg class="fx-1" :imgs="_imgs(v)"/>
                     <div class="t-r d-ib pl_x2" v-if="!_kiii_btn">
@@ -11,11 +11,11 @@
                 </div>
                 <div class="py_x"><hr/></div>
                 <div class="fx-s fx-t">
-                    <div class="w-43">
+                    <div class="w-43 pr">
                         <p>名稱:&nbsp;&nbsp;<var-cake-name :prod="v.product"/></p>
                         <fk-cake-attrs :cake="v"/>
                     </div>
-                    <div class="w-35">
+                    <div class="w-35 pr">
                         <fk-cake-attrs-second :cake="v"/>
                     </div>
                     <div class="w-22">

@@ -15,9 +15,10 @@
             <p class="w-333">
                 來源：
                 <vf-buy-plant-select v-if="one.order_from" :def="one.order_from" :_txt_mode="true"/>
+                <span v-else>其他</span>
             </p>
         </div>
-        <div class="fx-s">
+        <div class="fx-s fx-t">
             <p class="w-333">
                 客戶姓名：
                 <span>{{ one.customer_name ? one.customer_name : '' }}</span>
@@ -28,7 +29,7 @@
                     <span v-if="one.customer_phone_no_1">{{ one.customer_phone_no_1 }}</span>
                     <span v-else>(無)</span>
                 </span>
-                <fk-search-oid-order :phone="one.customer_phone_no_1" v-if="!kiii_history"/>
+                <fk-search-oid-order v-if="one.customer_phone_no_1 && !kiii_history" :phone="one.customer_phone_no_1"/>
             </p>
             
             <p class="w-333" v-if="!kiii_phone_2">
@@ -37,7 +38,7 @@
                     <span v-if="one.customer_phone_no_2">{{ one.customer_phone_no_2 }}</span>
                     <span v-else>(無)</span>
                 </span>
-                <fk-search-oid-order :phone="one.customer_phone_no_2" v-if="!kiii_history"/>
+                <fk-search-oid-order v-if="one.customer_phone_no_2 && !kiii_history" :phone="one.customer_phone_no_2"/>
             </p>
         </div>
     </nav>

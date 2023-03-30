@@ -19,7 +19,9 @@
             />
           </nav>
           <nav class="px_x2 bg-FFF" v-else-if="pan == 101">
-            <order-edit/>
+            <order-edit
+              @review="expan('CHECK_AII', i, m.uuid)"
+            />
           </nav>
         </div>
       </template>

@@ -3,10 +3,10 @@
         <div class="pb_x px_x2 cold">送貨地址</div>
             <div class="pl_x2">
                 <div class="fx-s pl_x2">
-                    <cp-oaa-block :header="'地區 / 地铁線路'" class="w-33">
+                    <cp-oaa-block :header="'地區 / 地铁線路'" class="w-33" :def="is_seif_get ? '(自取)' : null">
                         {{ vai('delivery_address_1') }}&nbsp;
                     </cp-oaa-block>
-                    <cp-oaa-block :header="'地域 / 地鐵站'" class="w-33">
+                    <cp-oaa-block :header="'地域 / 地鐵站'" class="w-33" :def="is_seif_get ? '(自取)' : null">
                         {{ vai('delivery_address_2') }}&nbsp;
                     </cp-oaa-block>
                     <cp-oaa-block :header="'備註 / 詳細地址'" class="w-33">
@@ -53,6 +53,10 @@ export default {
     computed: {
         d_type() {
             return (this.deiive) ? this.deiive.delivery_type : null
+        },
+        is_seif_get() {
+            const src = (this.deiive) ? this.deiive.delivery_method + '' : ''
+            return (src.endsWith('自取') || src.startsWith('自取'))
         }
     },
     methods: {

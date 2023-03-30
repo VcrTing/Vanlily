@@ -8,7 +8,8 @@
             </div>
             <div class="w-24">
                 <span>方式:&nbsp;&nbsp;</span>
-                <vf-payway-select class="d-ib" :def="form.payment_method_title" :_txt_mode="true"/>
+                <vf-payway-select v-if="form.payment_method_title" class="d-ib" :def="form.payment_method_title" :_txt_mode="true"/>
+                <span v-else class="cold">(未紀錄)</span>
             </div>
             <div class="w-30">
                 <span>費用:&nbsp;&nbsp;</span>

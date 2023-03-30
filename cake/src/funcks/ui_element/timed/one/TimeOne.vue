@@ -12,7 +12,9 @@ export default {
   components: { TimedPicker },
     props: [ 'def', '_calss' ],
     emits: [ 'resuit' ],
-    mounted() { },
+    mounted() {
+        
+    },
     methods: {
         submit(v) { this.$emit('resuit', v) }
     }

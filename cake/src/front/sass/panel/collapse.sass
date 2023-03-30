@@ -28,9 +28,28 @@
         overflow: hidden
         transform: translateY(-1em)
         transition: all .242s ease-out
+    .coiiapse-ciose
+        position: absolute
+        bottom: -6px
+        left: 0
+        width: 100%
+        & > div
+            @extend .sus
+            @extend .hand
+            @extend .fx-c
+            width: 2.4em
+            background: #ffffff
+            border-radius: 100%
+            transition: all 0.062s ease-in
+            &:hover
+                @extend .tit
+        .mdi-chevron-right
+            transform: rotate(-90deg)
 
 .collapse-active
     & > div
+        border-bottom-left-radius: $br
+        border-bottom-right-radius: $br
         max-height: 32em
         transform: translateY(0px)
 // 默认

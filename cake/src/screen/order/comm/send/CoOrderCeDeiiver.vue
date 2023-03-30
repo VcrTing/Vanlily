@@ -3,15 +3,18 @@
 
         <div class="fx-s row_x2 pb_x2">
             <ui-inline-input-icon class="w-333" :header="'送貨日期：'" :_right="true" :is_err="form_err.delivery_date">
-                <time-one class="ip-br" @resuit="(n) => form.delivery_date = n"/>
+                <!--
+                <time-one class="ip-br" @resuit="(n) => form.delivery_date = n" :def="form.delivery_date"/>
+                    -->
+                <time-one-pure ref="date" class="ip-br" :pahd="'請選擇'" :def="form.delivery_date" @resuit="(n) => form.delivery_date = n" :init="false"/>
             </ui-inline-input-icon>
  
             <ui-inline-input-icon class="w-333" :header="'送貨時段：'" :_right="true" :is_err="false">
-                <vf-send-time-select class="input" @resuit="(n) => form.delivery_time = n"/>
+                <vf-send-time-select ref="send_time" class="input" @resuit="(n) => form.delivery_time = n" :def="form.delivery_time"/>
             </ui-inline-input-icon>
 
             <ui-inline-input-icon class="w-333" :header="'實際送貨時間：'" :_class="'label-7em'" :icon="'mdi-clock-time-five-outline'" :_right="true" :is_err="false">
-                <input class="input" placeholder="00:00" v-model="form.actual_delivery_time"/>
+                <input class="input" placeholder="00:00" v-model="form.actual_delivery_time" :def="form.actual_delivery_time"/>
             </ui-inline-input-icon>
         </div>
 
@@ -40,8 +43,9 @@ import VfBuyPlantSelect from '../../../../component/view_form/order/VfBuyPlantSe
 import UiInput from '../../../../funcks/ui_element/input/normal/UiInput.vue'
 import timed from '../../../../air/tooi/timed'
 import VfSendTimeSelect from '../../../../component/view_form/send/VfSendTimeSelect.vue'
+import TimeOnePure from '../../../../funcks/ui_element/timed/one/TimeOnePure.vue'
 export default {
-  components: { UiIconInput, VfBuyPlantSelect, FkSearchOidOrder, UiInlineInputIcon, TimeOne, UiInlineInput, UiInput, VfSendTimeSelect },
+  components: { UiIconInput, VfBuyPlantSelect, FkSearchOidOrder, UiInlineInputIcon, TimeOne, UiInlineInput, UiInput, VfSendTimeSelect, TimeOnePure },
     props: { 
         one: Object,
         _edit: Boolean
@@ -56,7 +60,11 @@ export default {
     },
     methods: {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
-        reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } console.log('deiiver v =', v) },
+        reset(v = { }) { 
+            if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } console.log('deiiver v =', v) 
+            this.$refs.send_time.ioc(this.form.delivery_time)
+            this.$refs.date.ioc(this.form.delivery_date)
+        },
         coii() {
             for (let k in this.form_err) { if (!this.form[k]) { this.form_err[k] = true; return undefined; } else { this.form_err[k] = false } }
             delete this.form.id

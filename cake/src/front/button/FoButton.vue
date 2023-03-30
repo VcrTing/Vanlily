@@ -1,5 +1,7 @@
 <template>
-    <button class="btn-pri_out px_x2 py_s">
+    <button class="px_x2 py_s"
+        :class="{ 'btn-pri': pri, 'btn-pri_out': !pri }"
+    >
         <span v-if="icon">
             <i class="mdi" :class="icon"></i>
         </span>
@@ -9,6 +11,6 @@
 
 <script>
 export default {
-    props: [ 'icon', 'tit' ]
+    props: [ 'icon', 'tit', 'pri' ]
 }
 </script>

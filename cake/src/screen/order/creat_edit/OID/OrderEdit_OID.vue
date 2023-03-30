@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import UiFormOpera from '../../../funcks/ui_element/form/UiFormOpera.vue'
-import OrderExpanelInnerEdit from '../expanel_edit/OrderExpanelInnerEdit.vue'
+import UiFormOpera from '../../../../../funcks/ui_element/form/UiFormOpera.vue'
+import OrderExpanelInnerEdit from '../../../expanel_edit/OrderExpanelInnerEdit.vue'
 export default {
   components: { OrderExpanelInnerEdit, UiFormOpera },
   emits: [ 'coise' ],

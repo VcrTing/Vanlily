@@ -118,7 +118,7 @@ export default {
             this._coecs.map( e => {
                 if (e.product_uuid === uuid) { res = e }
             }); return res
-        }
+        },
     },
     methods: {
 

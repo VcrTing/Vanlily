@@ -5,8 +5,8 @@
         </ui-input>
     </nav>
     <nav v-else>
-        <span>備註一:&nbsp;&nbsp;</span>
-        <span v-if="form.remarks_1">{{ form.remarks_1 }}</span>
+        <p>備註一:&nbsp;&nbsp;</p>
+        <div v-if="form.remarks_1">{{ form.remarks_1 }}</div>
         <span v-else></span>
     </nav>
 </template>

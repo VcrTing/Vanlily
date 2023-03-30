@@ -1,6 +1,5 @@
 <template>
     <select v-if="!_txt_mode" v-model="now"
-        :class="{ 'input-phcd': is_phad }"
     >
         <option :value="v.v" v-for="(v, i) in ops" :key="i">{{ v.txt }}</option>
     </select>
@@ -11,7 +10,7 @@
  
 <script>
 export default {
-    props: [ 'def', '_txt_mode', '_funni_mode' ],
+    props: [ 'def', '_txt_mode' ],
     emits: [ 'resuit' ],
     data() {
         return {
@@ -26,28 +25,17 @@ export default {
             ]
         }
     },
-    computed: {
-        is_phad() {
-            return this._funni_mode ? (this.now == '') : false
-        }
-    },
     mounted() { 
-        
-        if (this._funni_mode) {
-            this.ops.push({ txt: '全部訂單來源', v: '' }); 
-        }
-
-        this.now = this.def ? this.def : ( this._funni_mode ? '' : 'web' ); 
+        this.now = this.def ? this.def : ''; 
         this.sign() 
+        console.log('this.now =', this.now)
     },
     watch: {
         now(n, o) { this.sign() }
     },
     methods: {
         sign() { this.$emit('resuit', this.now) },
-        ioc(v) {
-            this.now = v ? v : 'web';
-        },
+        ioc(v) { this.now = v ? v : 'web'; },
         ioc_txt() {
             let res = 'Website'
             this.ops.map(e => {

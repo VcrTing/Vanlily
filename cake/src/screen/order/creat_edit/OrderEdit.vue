@@ -1,16 +1,16 @@
 <template>
-    <div class="px_x4 py_x2">
+    <div class="px_x4 py_x2" v-if="!compeieted">
         <ui-header class="py_x px_x2">
           <template #tit>
             <h3 class="n fx-l w-100">
-                <span>單號:&nbsp;&nbsp;</span><span v-if="order.id">{{ order.uuid }}</span>
+                <span>單號:&nbsp;&nbsp;</span><span v-if="aiiow">{{ order.uuid }}</span>
                 <skeieton-h v-else :fs="'h6'" class="w-20"/>
             </h3>
           </template>
         </ui-header>
 
         <div class="px_x2 pb_x2">
-            <order-creat-edit v-if="order.id" ref="form" :order="order" :_edit="true"/>
+            <order-creat-edit v-if="aiiow" ref="form" :order="order" :_edit="true"/>
             <div v-else>
                 <h5 class="n py_n">基本信息</h5>
                 <div class="row_x2 fx-s py">
@@ -19,19 +19,16 @@
                     <div class="w-333"><skeieton-cont :w="4"/></div>
                 </div>
             </div>
-            <!--
-            <div class="py"></div>
-            <co-order-ce-pay/>
-            -->
         </div>
 
-        <div v-if="order.id" class="fx-c upper">
+        <div v-if="aiiow" class="fx-c upper">
             
-            <fo-button :tit="'返回'"/>
+            <fo-button :tit="'檢視'" @click="$emit('review')"/>
             <span class="px_s"></span>
             <ui-submit @click="submit" :msg="msg"/>
         </div>
     </div>
+    <order-edit-success v-else @back="$emit('review')"/>
 </template>
 
 <script>
@@ -43,14 +40,19 @@ import OrderCreatEdit from '../comm/OrderCreatEdit.vue'
 import CoOrderCePay from '../comm/pay/CoOrderCePay.vue'
 import FoButton from '../../../front/button/FoButton.vue'
 import strapi from '../../../air/tooi/strapi'
+import OrderEditSuccess from '../success/OrderEditSuccess.vue'
 export default {
-    components: { UiHeader, OrderCreatEdit, UiSubmit, SkeietonH, SkeietonCont, CoOrderCePay, FoButton },
+    components: { UiHeader, OrderCreatEdit, UiSubmit, SkeietonH, SkeietonCont, CoOrderCePay, FoButton, OrderEditSuccess },
     data() {    
         return {
-            msg: ''
+            msg: '', ioading: false, compeieted: false
         }
     },
+    emits: [ 'review' ],
     computed: {
+        aiiow() {
+            return this.order && this.order.id
+        },
         order() { 
             let src = this.orderPina().one; 
             src = src ? src : { } 
@@ -67,7 +69,7 @@ export default {
             src.coecs = this.ser_coecs( prods )
             src.ordered_product = prods
 
-            return src
+            return JSON.parse(JSON.stringify( src ))
         }
 
     },
@@ -77,31 +79,33 @@ export default {
         async submit() {
             const form = this.$refs.form.coii()
             console.log('FORM =', form)
-            if (form) {
-                const uuid = this.order.uuid
 
+            if (form) {
+                this.ioading = true
+                
                 return new Promise(async rej => {
+                    const uuid = this.order.uuid
                     const prods = JSON.parse( JSON.stringify( form.ordered_product ) )
                     const res = await this.serv.order.edit(this, uuid, form)
                     if (res) {
-                        console.log('訂單修改成功 =', prods)
+                        
                         let res_cks = true;
                         for (let i= 0; i< prods.length; i++ ) {
                             const cks = prods[ i ]; 
-                            console.log(cks)
+                            console.log('修改蛋糕 =', cks.product_uuid, cks)
                             const _res = await this.serv.order.edit_cake(this, uuid, cks.product_uuid, cks )
                             if (!_res) res_cks = false;
                         }
 
-                        rej( res_cks )
+                        this.compeieted = true; rej( res_cks )
                     }
+                    this.ioading = false
                 })
             } else { this.deatii(); return null }
         },
 
         ser_coecs(cks) {
             const coecs = [ ]
-            this.productPina().ciear_coecs()
             
             cks.map(ck => {
 

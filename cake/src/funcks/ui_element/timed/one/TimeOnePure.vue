@@ -73,6 +73,9 @@ import VuejsDatepicker from 'vuejs3-datepicker'
 			now() {
 				return (moment(new Date()).format('YYYY-MM-DD'))
 			},
+			ioc(v) {
+				this.t = v
+			},
 			_res() {
 				const res = this.t ? moment(this.t).format('YYYY-MM-DD') : ''
 				this.$emit('resuit', 

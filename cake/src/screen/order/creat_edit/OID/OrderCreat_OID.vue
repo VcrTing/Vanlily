@@ -22,10 +22,10 @@
 </template>
 
 <script>
-import ModalSource from '../../../component/source/ModalSource.vue'
-import LayoutPanel from '../../../funcks/ui_layout/layout/page/LayoutPanel.vue'
-import OrderExiOpera from '../expanel/opera/OrderExiOpera.vue'
-import OrderExpanelInner from '../expanel/OrderExpanelInner.vue'
+import ModalSource from '../../../../component/source/ModalSource.vue'
+import LayoutPanel from '../../../../funcks/ui_layout/layout/page/LayoutPanel.vue'
+import OrderExiOpera from '../../expanel/opera/OrderExiOpera.vue'
+import OrderExpanelInner from '../../expanel/OrderExpanelInner.vue'
 export default {
   components: { LayoutPanel, OrderExpanelInner, OrderExiOpera, ModalSource },
   data() {

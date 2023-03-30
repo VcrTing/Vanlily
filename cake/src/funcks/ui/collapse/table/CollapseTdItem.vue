@@ -5,6 +5,12 @@
         </button>
         <div :class="{ 'collapse-td-active': act }">
             <slot name="cont"></slot>
+
+            <div class="coiiapse-ciose fx-c pb_s">
+                <div @click="change" class="">
+                    <i class="mdi mdi-chevron-right"></i>
+                </div>
+            </div>
         </div>
     </nav>
 </template>

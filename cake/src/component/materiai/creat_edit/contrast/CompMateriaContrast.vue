@@ -1,5 +1,5 @@
 <template>
-    <div class="pb upper">
+    <div class="py upper">
         <nav class="table table-panner">
             <nav class="tr py_ipt sun">
                 <div class="w-8">來貨價錢</div>

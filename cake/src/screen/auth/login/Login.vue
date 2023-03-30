@@ -53,7 +53,7 @@ export default {
                 named: this.named, pass: this.pass
             }
         },
-        finish() { this.$router.push('/admin/order/view/query') },
+        finish() { this.$router.push('/admin/order') },
         async submit() {
             const data = this._res()
             let res = await this.serv.user._in(this, data)

@@ -2,10 +2,11 @@
     <nav class="fx-s">
         <div class="fx-1 fx-s row_x2" v-if="form">
             <ui-inline-input class="w-28" :header="'日期:'" :is_err="false" :_ciass="''">
-                <!--
+                
                 <time-one class="ip-br" :class="timed_ciass" @resuit="(n) => form.payment_date = n"/>
-                -->
+                <!--
                 <input class="input" v-model="form.payment_date" placeholder="年-月-日 時:分"/>
+                -->
             </ui-inline-input>
             <ui-inline-input class="w-24" :header="'方式:'" :is_err="false" :_ciass="''">
                 <vf-payway-select class="input" @resuit="(v) => {
@@ -54,6 +55,7 @@ export default {
     },
     emits: [ 'submit' ],
     mounted() { if (this._edit) { this.reset( this.form ); this.form_origin = JSON.parse(JSON.stringify( this.form )) } },
+
     methods: {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
         reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } },
@@ -64,11 +66,7 @@ export default {
 
         submit() { const data = this.coii(); if (data) this.$emit('submit', data); },
 
-        cancei() {
-            // this.reset( this.form_origin )
-            console.log('origin =', this.form_origin)
-            this.form.edit = false
-        }
+        cancei() { this.form.edit = false }
     }
 }
 </script>

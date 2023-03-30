@@ -12,7 +12,7 @@
                 <div class="py_x2"><hr/></div>
                 <div class="fx-s fx-t">
                     <div class="w-43">
-                        <p>款式：<var-cake-name :prod="v"/></p>
+                        <p>名稱:&nbsp;&nbsp;<var-cake-name :prod="v"/></p>
                         <co-coecs-attr v-if="has( v )" :cake="v"/>
                         <div v-else class="err">蛋糕參數未完善</div>
                     </div>
@@ -20,14 +20,14 @@
                         <co-coecs-basic v-if="has( v )" :cake="v"/>
                         <div v-else>
                             <p>特別要求</p>
-                            <p class="err">信息未完善</p>
+                            <p class="err">信息不完整</p>
                         </div>
                     </div>
                     <div class="w-22">
                         <co-coecs-price v-if="has( v )" :cake="v"/>
                         <div v-else class="">
                             <p>蛋糕單價:&nbsp;&nbsp;<view-money :money="v.__price"/></p>
-                            <p class="err">價格信息未完善</p>
+                            <p class="err">價格信息不完整</p>
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,16 @@ export default {
         cakeTrash(cake) { this.$emit('trash', cake.uuid); console.log('刪除 0 =', cake) },
 
         coii() {
-            if (this.coecs.length > 0) { return this.coecs } return null
+            let res = null
+            if (this.cakes.length > 0 && this.coecs.length) { 
+                res = [ ]
+                this.cakes.map(ck => {
+                    this.coecs.map( cs => {
+                        if (ck.uuid == cs.product_uuid) res.push( cs );
+                    })
+                })
+            } 
+            return res
         }
     },
     mounted() { }

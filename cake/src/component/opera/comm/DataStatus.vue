@@ -5,7 +5,7 @@
     </select>
     <span v-else>
         <span v-if="status == 'true'">開啟</span>
-        <option v-else>關閉</option>
+        <option v-else class="err">關閉</option>
     </span>
 </template>
 <script>

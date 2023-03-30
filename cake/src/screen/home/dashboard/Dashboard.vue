@@ -76,7 +76,7 @@ export default {
             times: [ 'day', 'week', 'month', 'year' ], // , 'custom'
             times_txt_iast: { 'day': '昨日', 'week': '上週', 'month': '上月', 'year': '去年' },
             one: {
-                orderCount: 1001, orderPriceTotal: 99999.99, todayDeliveryCount: 12,
+                orderCount: 0, orderPriceTotal: 0, todayDeliveryCount: 0,
                 customerSource: [ ], 
                 paidType: [ ], 
                 productSoldList: [ ],
@@ -115,6 +115,7 @@ export default {
                     orderPrice: [ { date: '2022-12-12 12:12', value: 12.12 }, { date: '2022-12-12 18:12', value: 999.12 } ]
                 }
                 */
+               console.log(res)
                 for (let k in res) {
                     this.one[k] = res[k]
                 }

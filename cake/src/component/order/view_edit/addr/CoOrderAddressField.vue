@@ -40,7 +40,7 @@
         <!-- 屯门站 -->
         <div class="fx-s row_x2" v-else-if="mode == 'subway_tunmen'">
             <div class="w-26">
-                <ui-input :header="'地鐵站'" :is_txt_mode="true">
+                <ui-input :header="'地鐵站'" :_txt_mode="true">
                     屯門
                 </ui-input>
             </div>

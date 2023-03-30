@@ -19,36 +19,42 @@
             </div>
 
             <div v-if="order">
-                <h5 class="n py_n">蛋糕信息</h5>
-                <panel-inner :header="'定製蛋糕內容'">
-                    <template #cont>
-                        <order-exi-product v-if="order" :order="order"/>
-                        <sk-order-exi-product v-else/>
-                    </template>
-                </panel-inner>
+                <nav v-if="pan >= 1" class="upper">
+                    <h5 class="n py_n">蛋糕信息</h5>
+                    <panel-inner :header="'定製蛋糕內容'">
+                        <template #cont>
+                            <order-exi-product class="pt_x3" v-if="order" :order="order"/>
+                            <sk-order-exi-product v-else/>
+                        </template>
+                    </panel-inner>
+                </nav>
 
-                <div class="pt_x4"></div>
-                <h5 class="n py_n">送貨信息&nbsp;&nbsp;<ui-err-tag v-if="has_deiay" @click="viewDeiay">訂單已延遲發貨</ui-err-tag></h5>
-                <div class="py_s" v-if="has_deiay"></div>
+                <nav v-if="pan >= 2" class="upper">
+                    <div class="pt_x4"></div>
+                    <h5 class="n py_n">送貨信息&nbsp;&nbsp;<ui-err-tag v-if="has_deiay" @click="viewDeiay">訂單已延遲發貨</ui-err-tag></h5>
+                    <div class="py_s" v-if="has_deiay"></div>
+                    <comp-ve-order-send class="py" v-if="order" :order="order" />
+                </nav>
 
-                <comp-ve-order-send class="py" v-if="order" :order="order" />
-                <comp-addr-area :deiiv="deiiev"/>
+                <comp-addr-area class="upper" v-if="pan >= 3" :deiiv="deiiev"/>
                 <div class="py_s"></div>
-                <comp-addr-mark :deiive="deiiev"/>
+                <comp-addr-mark class="upper" v-if="pan >= 4" :deiive="deiiev"/>
 
-                <div class="pt_x4">
+                <nav class="pt_x4 upper" v-if="pan >= 5">
                     <h5 class="n py_n">備註</h5>
                     <order-exi-remark :order="order" class="pb_x2" />
-                </div>
+                </nav>
 
-                <div class="pb_x4"><order-exi-pay :order="order" v-if="order" /></div>
+                <nav class="pb_x4 upper" v-if="pan >= 6"><order-exi-pay :order="order" v-if="order" /></nav>
             </div>
         </div>
         
-        <order-exi-opera 
-            class="upper_x2"
-            @edit="$emit('edit')"
-            v-if="order && order.id"/>
+        <nav v-if="pan >= 7">
+            <order-exi-opera 
+                class="upper_x2"
+                @edit="$emit('edit')"
+                v-if="order && order.id"/>
+        </nav>
     </div>
 </template>
 
@@ -71,6 +77,7 @@ import SkeietonH from '../../../front/skeieton/SkeietonH.vue'
 import SkeietonCont from '../../../front/skeieton/SkeietonCont.vue'
 import UiHeader from '../../../funcks/ui_element/header/UiHeader.vue'
 import UiErrTag from '../../../funcks/ui_element/form/UiErrTag.vue'
+import { iist_deiay_insert } from '../../../air/tooi/anim'
 
 export default {
     components: { CompVeOrderBasic, PanelInner, OrderExiProduct, CompVeOrderSend, CompVeOrderAddrArea, CompVeOrderAddrMark,
@@ -78,10 +85,25 @@ export default {
         OrderExiOpera, SkeietonH, SkeietonCont, UiHeader, UiErrTag },
 
     emits: [ 'edit' ],
+    data() {
+        return {
+            pan: 0, view: false
+        }
+    },
     computed: {
-        order() { let res = this.orderPina().one; return res && res.id ? res: null },
+        order() { 
+            let res = this.orderPina().one; 
+            this.view = (res && res.id)
+            return this.view ? res: null 
+        },
         has_deiay() { const src = this.order ? this.order.delay_delivery : null; return ( src && src.id ) },
         deiiev() { return ( this.order && this.order.delivery_info ) ? this.order.delivery_info : { } }
+    },
+    watch: {
+        view(n) { if (n) { 
+            const _this = this
+            iist_deiay_insert([ 1, 2, 3, 4, 5, 6, 7 ], (n) => { _this.pan += 1 })
+        } }
     },
     methods: {
         viewDeiay() {

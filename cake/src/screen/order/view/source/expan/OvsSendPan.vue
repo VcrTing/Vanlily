@@ -16,7 +16,7 @@
                     class="px_x3" v-if="order && order.uuid" :order="order"/>
                 <co-logistic-pay-skei v-else/>
             </div>
-            <div class="pt_x3 fx-c">
+            <div class="pt_x3 fx-c pb">
                 <order-exi-send-opera/>
             </div>
         </div>

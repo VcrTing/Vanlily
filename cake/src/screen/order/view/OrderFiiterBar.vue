@@ -1,13 +1,13 @@
 <template>
     <div class="fx-s">
         <div class="fx-l row fx-1">
-            <div class="w-20">
-                <ui-search-def class="bxs_n" :pahd="'訂單編號'"
-                    @resuit="(v) => this.form.uuid = v"
+            <div class="w-20 w-22-p">
+                <ui-search-def class="bxs_n" :pahd="'訂單編號 / 電話號碼'"
+                    @resuit="recivQ"
                     @submit="submit"/>
             </div>
 
-            <ui-input-fiiter class="w-15 w-18-p">
+            <ui-input-fiiter class="w-15 w-17-p">
                 <time-one-pure class="bxs_n" :pahd="'訂單日期'" @resuit="(n) => { form.startDate = n; submit() }"/>
             </ui-input-fiiter>
 
@@ -55,6 +55,7 @@ export default {
         return {
             form: {
                 uuid: '',
+                phone_no: '',
                 order_from: '',
                 startDate: '',
                 // endDate: timed.now(),
@@ -68,6 +69,15 @@ export default {
         'form.district'(n) { this.$refs.area.sets(n) }
     },
     methods: {
+        recivQ( q ) {
+            q = q + ''
+            if (q.length > 6) {
+                this.form.phone_no = q
+            } else {
+                this.form.uuid = q
+            }
+        },
+
         submit() { 
             let has = false
             const res = { }

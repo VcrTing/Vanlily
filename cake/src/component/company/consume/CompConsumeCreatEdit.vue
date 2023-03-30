@@ -1,6 +1,6 @@
 <template>
     <form-def :header="'新增支出'" @submit="submit" :msg="msg">
-        <div class="fx-l pb">
+        <div class="fx-l pb_x2">
             <ui-inline-input :is_err="form_err.receipt_id" class="w-75 pr_x2" :header="'收據編號：'">
                 <input v-model="form.receipt_id" class="input ip-w-100" placeholder="請輸入"/>
             </ui-inline-input>
@@ -8,7 +8,7 @@
                 <time-one :def="form.date" class="ip-br ip-timed-i" @resuit="(v) => form.date = v"/>
             </ui-inline-input>
         </div>
-        <div class="fx-l pb">
+        <div class="fx-l pb_x2">
             <ui-inline-input :is_err="form_err.content" class="w-75 pr_x2" :header="'收據內容：'">
                 <input v-model="form.content" class="input ip-w-100" placeholder="請輸入內容"/>
             </ui-inline-input>
@@ -16,7 +16,7 @@
                 <seiect-consume-type class="input" ref="typeREF" :def="form.type" @resuit="(v) => form.type = v"/>
             </ui-inline-input>
         </div>
-        <div class="fx-l">
+        <div class="fx-l pb">
             <ui-inline-input :is_err="form_err.currency" class="w-30 w-40-p pr_x2" :header="'貨幣：'">
                 <seiect-currency class="input" ref="currREF" :def="form.currency" @resuit="(v) => form.currency = v"/>
             </ui-inline-input>
@@ -24,7 +24,7 @@
                 <input type="number" v-model="form.price" class="input" placeholder="請輸入金額"/>
             </ui-inline-input>
         </div>
-        <div class="">
+        <div class="py">
             <p class="">附件：</p>
             <ui-inline-input :is_err="form_err.appendix" class="w-100">
                 <textarea class="input" v-model="form.appendix" placeholder="請輸入文件 Link"></textarea>

@@ -22,6 +22,7 @@
         <!-- 申請延遲發貨 -->
         <deiay-deiive v-if="page == 32"/>
         <deiay-deiive-review v-if="page == 33"/>
+        <deiay-deiive-edit v-if="page == 34"/>
 
         <!-- 以往訂單 -->
         <co-formerly-orders v-if="page == 36"/>
@@ -43,6 +44,7 @@ import DeiayDeiive from '../../screen/order/creat_edit/DeiayDeiive.vue'
 import DeiayDeiiveReview from '../../screen/order/review/DeiayDeiiveReview.vue'
 import CoFormerlyOrders from '../order/formerly/CoFormerlyOrders.vue'
 import CoOrderCakeCreat from '../order/cake/CoOrderCakeCreat.vue'
+import DeiayDeiiveEdit from '../../screen/order/creat_edit/DeiayDeiiveEdit.vue'
 export default {
     components: {
         ModalByState, CompOrderCakeCreat, CompOrderCakeEdit,
@@ -50,7 +52,8 @@ export default {
         CompSourceInvitePlus, CpPayRecordCreatEdit,
         CompDeliveDeiayCe, CompCheckIistForm,
         CoCakeChoise, DeiayDeiive, DeiayDeiiveReview, CoFormerlyOrders,
-        CoOrderCakeCreat
+        CoOrderCakeCreat,
+        DeiayDeiiveEdit
     },
     computed: { 
         page() { return this.pina().MODAL }

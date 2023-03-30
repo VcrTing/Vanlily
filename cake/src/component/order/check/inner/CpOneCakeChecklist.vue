@@ -3,7 +3,7 @@
         <fk-cake-avatar-name class="h5" v-if="!ioading" :cake="_prod()"/>
         <sk-cake-avatar-name v-else/>
 
-        <div class="pt"></div>
+        <div class="pt_x"></div>
         <cp-order-pan-check 
             class="upper py_x2"
             v-if="!ioading" 
