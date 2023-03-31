@@ -14,7 +14,10 @@ export default {
     components: { FormDef, CpOneCakeChecklist },
     computed: {
         order() { let res = this.orderPina().one; return res ? res : { } },
-        cakes() { let res = this.productPina().cakes; return res ? res : [ ] },
+        cakes() { 
+            let res = this.productPina().cakes; 
+            console.log('check iist cakes =', res)
+            return res ? res : [ ] },
     },
     methods: {
         submit() { }

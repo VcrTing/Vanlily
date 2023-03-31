@@ -17,6 +17,14 @@ const many = async function(vue, qs) {
     return res ? vue.strapi.ser(res) : { }
 }
 
+const many_customer = async function(vue, phone_no, star = 1, imit = 20) {
+    let res = await vue.net.get('orders', vue.token(), {
+        'sort[0]': 'createdAt:desc', 'pagination[page]': star, 'pagination[pageSize]': imit,
+        phone_no
+    })
+    return res ? vue.strapi.ser(res) : { }
+}
+
 const one = async function(vue, uuid) {
     let res = await vue.net.get_one('orders', uuid, vue.token())
     return res && res.data ? vue.strapi.ser(res): { }
@@ -74,4 +82,6 @@ export default {
 
     status,
     change_new,
+
+    many_customer,
 }

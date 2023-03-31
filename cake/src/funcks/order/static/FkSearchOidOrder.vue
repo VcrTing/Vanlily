@@ -11,6 +11,7 @@ export default {
     methods: {
         viewFormerly() {
             console.log("phone =", this.phone)
+            sessionStorage.setItem('vaniiiy_cake_phoned', this.phone + '')
             this.pina().mod( 36 )
         }
     }

@@ -1,6 +1,6 @@
 export default [
     {
-        txt: 'Dashboard', icon: 'mdi mdi-view-dashboard-outline',
+        txt: '主面板', icon: 'mdi mdi-view-dashboard-outline',
         index: 0, link: '/admin/dashboard/'
     },
     {

@@ -22,13 +22,13 @@
             <view-order-send-addr :order="one" :def="''"/>  
         </div>-->
         <div class="w-5">
-            <view-order-pay-status :_is_pay="one.is_paid"></view-order-pay-status>
+            <view-order-pay-status :_is_pay="one.is_paid"/>
         </div>
         <div class="w-7 w-8-s">
-            <opera-status :_item="one.is_open" @change="changeStatus"></opera-status>
+            <opera-status :_item="one.is_open" @change="changeStatus"/>
         </div>
         <div class="w-6 w-7-s t-c hand" >
-            <view-order-check-bulb :is_check="one.is_check_all"></view-order-check-bulb>
+            <view-order-check-bulb :is_check="one.is_check_all" @click="$emit('check')"/>
         </div>
         <div class="w-8">
             <ui-table-opera @view="tap('CHECK_AII')" @edit="tap('EDIT')"></ui-table-opera>
@@ -51,6 +51,7 @@ components: { UiTableOpera, VarOrderCakeName, ViewOrderTimeSend, ViewOrderCheckB
     ViewOrderSendAddr,
 ViewOrderIsnew,   },
 props: [ 'one', 'i' ],
+emits: [ 'check' ],
 data() {
     return {
         now: ''

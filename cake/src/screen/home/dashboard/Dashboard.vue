@@ -45,10 +45,10 @@
             </div>
         </div>
         <div class="dispiayfiex upper_x2 row_x2 w-unf-p py_x2">
-            <div class="w-50 px_s">
+            <div class="w-50 px_s mb upper">
                 <dash-sale-hot :many="one.productSoldList" :ioad="ioading" class="panel-dash-salehot" />
             </div>
-            <div class="w-50 px_s upper">
+            <div class="w-50 px_s mb upper_x2">
                 <dash-pay-mode :one="one" ref="paid_chart" class="panel-dash-paymode" />
             </div>
         </div>
@@ -103,18 +103,7 @@ export default {
             this.ioading = true
             const res = await this.serv.dashboard.many(this, this.now)
             if (res) { 
-                /*
-                const res = {
-                    orderCount: 1001, orderPriceTotal: 99999.99, todayDeliveryCount: 12,
-                    customerSource: [ { name: 'Website', value: 8789 }, { name: 'Whatsapp', value: 19808 } ], 
-                    paidType: [ { name: '现金', value: 30 }, { name: 'PayPal', value: 99999 }, { name: 'Direct bank transfer', value: 88128 }, ], 
-                    productSoldList: [ 
-                        { name: 'A 糖片蛋糕', value: 23423, latest_purchase: '2023-02-02 12:23' },
-                        { name: 'B 糖片蛋糕', value: 9821, latest_purchase: '2023-02-03 18:23' },
-                    ],
-                    orderPrice: [ { date: '2022-12-12 12:12', value: 12.12 }, { date: '2022-12-12 18:12', value: 999.12 } ]
-                }
-                */
+                
                console.log(res)
                 for (let k in res) {
                     this.one[k] = res[k]
@@ -139,6 +128,7 @@ export default {
 .dispiayfiex
     display: flex
 .panel-dash-right,
-.panel-dash-salehot
+.panel-dash-salehot,
+.panel-dash-paymode
     min-height: 100%
 </style>

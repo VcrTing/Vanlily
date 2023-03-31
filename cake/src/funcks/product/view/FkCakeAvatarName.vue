@@ -10,7 +10,7 @@
     </div>
     <div v-else class="fx-s">
         <div class="fk-cake-an-cover">
-            <ui-img v-if="cake.images_url" :src="cake.images_url[0]"/>
+            <ui-img v-if="cake && cake.images_url" :src="cake.images_url[0]"/>
         </div>
         <div class="fx-1 pl_x2 fx-l">
             <div v-if="_uuid && cake">[{{ cake.uuid }}]&nbsp;&nbsp;</div>

@@ -2,11 +2,11 @@
     <nav class="">
         <div class="fx-l row_x2 pb_x2" v-if="!txt_mode">
             <ui-inline-input-icon class="w-333" :header="'送貨日期：'" :_right="true" :is_err="form_err.delivery_date">
-                <time-one-pure class="ip-br" ref="date" :def="one.delivery_date" :init="false" :pahd="'請選擇'" @resuit="(n) => form.delivery_date = n"/>
+                <time-one-pure class="ip-br ip-bg" ref="date" :def="form.delivery_date" :init="false" :pahd="'請選擇'" @resuit="(n) => form.delivery_date = n"/>
             </ui-inline-input-icon>
  
             <ui-inline-input-icon class="w-42" :header="'送貨時間：'" :_right="true" :is_err="false">
-                <vf-send-time-select class="input" :def="one.delivery_time" @resuit="(n) => form.delivery_time = n"/>
+                <vf-send-time-select class="input" ref="time" :def="form.delivery_time" @resuit="(n) => form.delivery_time = n"/>
             </ui-inline-input-icon>
         </div>
         <div class="fx-l pb_x2" v-else>
@@ -53,6 +53,7 @@ export default {
                 for (let k in this.form) { this.form[ k ] = v[ k ] } 
                 // console.log('deiay deiiver v =', v) 
                 this.$refs.date ? this.$refs.date.ioc( this.form.delivery_date ) : undefined;
+                this.$refs.time ? this.$refs.time.ioc( this.form.delivery_time ) : undefined;
             } 
         },
         coii() {

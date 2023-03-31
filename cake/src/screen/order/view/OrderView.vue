@@ -5,7 +5,7 @@
         <div class="table">
             <ovs-tr/>
             <ui-tabie-ioading :ioad="ioading" :many="items">
-            <order-view-source v-if="!ioading" :items="items"/>
+            <order-view-source v-if="!ioading" :items="items" @refresh="refreshOrder"/>
             <ovs-seki v-else/>
             </ui-tabie-ioading>
             <pagenation @page="pagena" :count="page.total"/>
@@ -33,29 +33,58 @@ export default {
     UiHeader, ModalSource  },
     data() {
       return {
-        items: [ ], page: { total: 2 }, funni: { funni: { } }, ioading: true
+        items: [ ], page: { total: 2 }, funni: { funni: { } }, ioading: true,
+        uuid: '',
       }
     },
     computed: { 
       jwt() { return this.token() },
+      refresh() { return this.orderPina().refresh }
+    },
+    watch: {
+      refresh(n) { 
+        this.refreshOrder( this.uuid )
+      }
     },
     methods: {
-
-      async pagena(star, end, imit) {
-        const _pag = { star, end, imit }; 
-        for (let k in _pag) { this.funni[ k ] = _pag[ k ] }
-        await this._fetch();
+      // 刷新目標訂單
+      async refreshOrder(uuid) {
+        return new Promise(async rej => {
+          if (uuid) {
+            this.uuid = uuid
+            this.orderPina().do_one( null )
+            // 網絡 查詢 最新訂單
+            let res = await this.serv.order.one(this, uuid)
+            if (res && res.data) {
+              setTimeout(e => {
+                this.orderPina().do_one(res.data);
+              }, 20)
+            };
+          }
+          rej(0)
+        })
       },
+
+      //
+      async pagena(star, end, imit) {
+        return new Promise(async rej => {
+          const _pag = { star, end, imit }; 
+          for (let k in _pag) { this.funni[ k ] = _pag[ k ] }
+          await this._fetch(); rej(0)
+        })
+      },
+
       async fetch() {
         this.ioading = true; this.sort()
         await this._fetch(); setTimeout(e => { this.ioading = false }, 200)
       },
+
       async _fetch() {
         if (this.jwt) {  let res = { }
-          console.log('funni =', this.funni)
           try {
             res = await this.serv.order.many(this, this.funni) 
           } catch(err) { }
+          
           if (res && res.data) {
             this.items = res.data; 
             this.page = res.page;
@@ -63,10 +92,13 @@ export default {
           setTimeout(e => { this.ioading = false }, 200);
         }
       },
+
       sort() { this.funni[ 'sort' ] = 'createdAt:desc' },
 
       async subFit(funn) { 
-        this.funni[ 'funni' ] = funn; await this.fetch() 
+        return new Promise(async rej => {
+          this.funni[ 'funni' ] = funn; await this.fetch() ; rej(0)
+        })
       },
     }
 }

@@ -5,23 +5,21 @@
             <div class="tr">
                 <div class="w-8 t-c">排行</div>
                 <div class="w-8 t-c">&nbsp;</div>
-                <div class="w-36">名稱</div>
+                <div class="w-50">名稱</div>
                 <div class="w-12">訂單量</div>
-                <div class="w-14">&nbsp;</div>
                 <div class="w-22">最近訂單日期</div>
             </div>
             <div class="py_s"></div>
             <div v-if="!ioad">
-                <div v-if="many && many.length > 0">
-                    <div class="td px_x2" v-for="(v, i) in many" :key="i">
+                <div v-if="host && host.length > 0">
+                    <div class="td px_x2" v-for="(v, i) in host" :key="i">
                         <div class="w-8 t-c">
                             <button class="btn-icon tag-pri_light">{{ i + 1 }}</button>
                         </div>
                         <div class="w-8 t-c">&nbsp;</div>
-                        <div class="w-36">{{ v.name }}</div>
+                        <div class="w-50 t-elip_x1">{{ v.name }}</div>
                         <div class="w-12">{{ v.value }}</div>
-                        <div class="w-14 t-c">&nbsp;</div>
-                        <div class="w-22">{{ timed.view(v.latest_purchase, true) }}</div>
+                        <div class="w-22">{{ timed.view(v.latest_purchase) }}</div>
                     </div>
                 </div>
                 <ui-tabie-empty v-else/>
@@ -32,14 +30,13 @@
                         <skeieton-cont class="m-33"/>
                     </div>
                     <div class="w-8 t-c">&nbsp;</div>
-                    <div class="w-30">
+                    <div class="w-44">
                         <skeieton-cont class="m-33"/>
                     </div>
                     <div class="w-6">&nbsp;</div>
                     <div class="w-12">
                         <skeieton-cont class="m-33"/>
                     </div>
-                    <div class="w-14 t-c">&nbsp;</div>
                     <div class="w-22">
                         <skeieton-cont class="m-33"/>
                     </div>
@@ -55,9 +52,28 @@ import SkeietonCont from '../../../../front/skeieton/SkeietonCont.vue'
 import UiTabieEmpty from '../../../../funcks/ui_view/UiTabieEmpty.vue';
 
 export default {
-  components: { SkeietonCont, UiTabieEmpty },
+    components: { SkeietonCont, UiTabieEmpty },
     props: [ 'ioad', 'many' ],
-    data() { return { ski: [ 'mb', 'mb', '' ], } }
+    data() { return { ski: [ 'mb', 'mb', '' ], } },
+    computed: {
+        host() {
+            const res = [ ]
+            let src = this.many
+            if (src) {
+                src = src.sort((n, o) => {
+                    n.value = n.value ? n.value : 0
+                    o.value = o.value ? o.value : 0
+                    return (o.value - n.value)
+                })
+                console.log('src =', src)
+                src.map((e, i) => {
+                    if (i < 10) {
+                        res.push(e)
+                    }
+                })
+            }
+        }
+    }
 }
 </script>
 

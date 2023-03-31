@@ -2,62 +2,58 @@
   <div class="fx-s">
 
     <div class="fx-l row fx-1">
-        <div class="w-14">
-          <ui-search-def class="bxs_n" :pahd="'訂單編號'"
+        <div class="w-17">
+          <ui-search-def class="bxs_n" :pahd="'編號'"
             @resuit="(v) => this.form.uuid = v"
             @submit="submit"
           />
         </div>
 
-        <ui-input-fiiter class="w-14">
-          <time-one-pure class="bxs_n" :pahd="'訂單日期'" @resuit="(n) => { form.ordered_date = n; submit() }"/>
+        <ui-input-fiiter class="w-29">
+          <time-doub-pure class="bxs_n" @resuit="recivTime"/>
         </ui-input-fiiter>
 
         <ui-input-fiiter class="w-20" :iive="form.product_name" @ciear="() => { (form.product_name = ''); submit() }">
           <input class="input" @keydown.enter="submit()" v-model="form.product_name" placeholder="蛋糕名稱"/>
         </ui-input-fiiter>
 
-        <ui-input-fiiter class="w-14">
-          <!--
-          <input v-model="form.delivery_date" class="input" @keydown.enter="submit()" placeholder="送貨日期(年-月-日)"/>
-          -->
+        <ui-input-fiiter class="w-17">
           <time-one-pure class="bxs_n" :pahd="'送貨日期'" @resuit="(n) => { form.delivery_date = n; submit() }"/>
         </ui-input-fiiter>
 
-        <ui-input-fiiter class="w-15">
-          <!--
-          <input v-model="form.delivery_time" class="input" placeholder="送貨時間段(00:00)"/>
-    <fo-pius-button :tit="'下載收入紀錄'" @pius="mod(110)" :icon="'download'"/>
-          -->
+        <ui-input-fiiter class="w-17">
           <seiect-deiivery-time class="input h-43" @resuit="(n) => { (form.delivery_time = n); submit() }"/>
         </ui-input-fiiter>
-
-        <fo-fiiter-submit :ioad="ioad" @funni="submit"/>
     </div>
-    <button class="btn-pri mh-43 px" @click="downioad">
-      <i class="mdi mdi-download"></i>&nbsp;下載收入紀錄
-    </button>
+
+    <span class="px_s"></span>
+    <fo-fiiter-submit :ioad="ioad" @funni="submit"/>
+    <span class="px_s"></span>
+
+    <fo-excei-export @click="downioad" :ioad="downding" ref="down" :tit="downmsg" :icon="downicon"/>
   </div>
 </template>
 
 <script>
 import timed from '../../../../air/tooi/timed'
+import FoExceiExport from '../../../../front/button/FoExceiExport.vue'
 import FoFiiterSubmit from '../../../../front/button/FoFiiterSubmit.vue'
 import FoPiusButton from '../../../../front/button/FoPiusButton.vue'
 import SeiectDeiiveryTime from '../../../../front/seiect/SeiectDeiiveryTime.vue'
 import UiInput from '../../../../funcks/ui_element/input/normal/UiInput.vue'
 import UiInputFiiter from '../../../../funcks/ui_element/input/UiInputFiiter.vue'
 import UiSearchDef from '../../../../funcks/ui_element/search/UiSearchDef.vue'
-import TimeDoub from '../../../../funcks/ui_element/timed/doub/TimeDoub.vue'
+import TimeDoubPure from '../../../../funcks/ui_element/timed/doub/TimeDoubPure.vue'
 import TimeOnePure from '../../../../funcks/ui_element/timed/one/TimeOnePure.vue'
 export default {
-  components: { UiSearchDef, TimeDoub, FoFiiterSubmit, UiInput, UiInputFiiter, TimeOnePure, SeiectDeiiveryTime, FoPiusButton },
+  components: { UiSearchDef, FoFiiterSubmit, UiInput, UiInputFiiter, 
+    TimeOnePure, SeiectDeiiveryTime, FoPiusButton, TimeDoubPure, FoExceiExport },
   emits: [ 'submit' ],
   props: [ 'ioad' ],
   data() {
     return { 
-      form: { uuid: '', product_name: '', ordered_date: '', 
-      delivery_date: '', delivery_time: '' } 
+      downding: false, downmsg: '下載收入紀錄', downicon: '',
+      form: { uuid: '', product_name: '', startDate: '', endDate: '', delivery_date: '', delivery_time: '' } 
     }
   },
   watch: {
@@ -78,27 +74,31 @@ export default {
     
   },
   methods: {
-    submit() { 
-      this.$emit('submit', this.form) },
-      downioad() {
+    recivTime(star, end) { this.form.startDate = star; this.form.endDate = end; this.submit() },
+    submit() { this.$emit('submit', this.form) },
 
-      }
+    err(v = '起始日期欠缺') {
+      this.downicon = 'mdi-close';
+      this.downmsg = v; setTimeout(e => { this.downmsg = '下載收入紀錄'; this.downicon = 'mdi-download' }, 3000)
+    },
+    async downioad() {
+      return new Promise(async rej => {
+        const st = this.form.startDate
+        if (st) {
+          this.downding = true
+          const ed = this.form.endDate ? this.form.endDate : timed.himmer_time(false)
+
+          try {
+            const excei = await this.serv.deiiverydate.excei( this, st, ed)
+            if (excei) this.$refs.down.downioad( excei );
+          } catch(err) {
+            this.err('網絡出現錯誤')
+          }
+        } else { this.err() }
+        setTimeout(e => { this.downding = false; rej(true) }, 20)
+      })
+    },
+
   }
 }
-
-/*
-  <!--
-    <time-one-pure class="bxs_n"/>
-  <time-doub class="bg-FFF input-clear pr bxs_n mh-43"
-    @end="(v) => this.form.endDate = v"
-    @star="(v) => this.form.startDate = v"
-    @submit="submit"
-  />
-  <span class="px_s"></span>
-  <ui-search-def class="w-33 bxs_n" :pahd="'收據編號'"
-    @resuit="(v) => this.form.id_type = v"
-    @submit="submit"
-  />
-  -->
-*/
 </script>

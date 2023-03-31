@@ -10,15 +10,18 @@
 </template>
 <script>
 export default {
-    props: [ 'one', 'aiiow' ],
+    props: [ 'one', 'aiiow', 'order' ],
     emits: [ 'edit' ],
     data() { return { opera: [ ] } },
+    computed: {
+        has_deiay() { const src = this.order ? this.order.delay_delivery : null; return ( src && src.id ) },
+    },
     mounted() {
         this.opera = [
             {
-                txt: '申請延遲發貨', icon: 'mdi mdi-send-clock-outline',
+                txt: this.has_deiay ? '檢視延遲發貨' : '申請延遲發貨', icon: this.has_deiay ? 'mdi mdi-send-clock' : 'mdi mdi-send-clock-outline',
                 func: () => {
-                    this.pina().mod(32)
+                    this.pina().mod( this.has_deiay ? 33 : 32)
                 }
             },
             {

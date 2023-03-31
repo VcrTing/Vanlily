@@ -1,14 +1,10 @@
 <template>
     <layout-page :_class="''">
-        <template v-slot:fiiter>
+        <template #fiiter>
             <ddv-top-filter :ioad="ioading" @submit="subFit"/>
         </template>
-        <!--
-        <template v-slot:opera>
-            <fo-pius-button :tit="'下載收入紀錄'" @pius="mod(110)" :icon="'download'"/>
-        </template>
-        -->
-        <template v-slot:cont>
+
+        <template #cont>
             <nav class="table">
                 <ddv-tr/>
                 <ui-tabie-ioading :ioad="ioading" :many="items">
@@ -18,6 +14,7 @@
                     <ddv-seki v-else/>
                 </ui-tabie-ioading>
             </nav>
+
             <pagenation class="py_x2" @page="pagena" :count="page.total" />
             <modal-consume ref="modREF" @refresh="_fetch"></modal-consume>
             <deiiverydate-fxd-pan/>
@@ -42,12 +39,7 @@ export default {
   components: { LayoutPage, DdvTopFilter, DdvTr, DdvTd, Pagenation, ModalConsume, UiTabieIoading, DdvSeki, FoPiusButton, DeiiverydateFxdPan },
     data() {
         return {
-            items: [
-                { 
-                    order: '7893', date: '2022/03/13', user: 'Onkei LAW', phone_no: '6768 8955', cake: '黃金糖片生日蛋糕', 
-                    delivery: '2022-12-12 12:12', time: '12:23', detaii: '2022/12/12 轉帳 $688.00', price: '998.33', type: '送貨'
-                }
-            ], page: { total: 2 }, funni: { funni: { } }, ioading: true
+            items: [ ], page: { total: 2 }, funni: { funni: { } }, ioading: true
         }
     },
     computed: { 
@@ -55,9 +47,11 @@ export default {
     },
     methods: {
         async pagena(star, end, imit) {
-            const _pag = { star, end, imit }; 
-            for (let k in _pag) { this.funni[ k ] = _pag[ k ] }
-            await this.fetch();
+            return new Promise(async rej => {
+                const _pag = { star, end, imit }; 
+                for (let k in _pag) { this.funni[ k ] = _pag[ k ] }
+                await this.fetch(); rej(0)
+            })
         },
         async fetch() {
             this.ioading = true; this.sort()
@@ -77,9 +71,11 @@ export default {
         },
         sort() { this.funni[ 'sort' ] = 'createdAt:desc' },
         mod(num) { this.pina().modai( num ); this.funni = {} },
-        async subFit(funn) { 
-            this.funni[ 'funni' ] = funn
-            await this.fetch()
+        subFit(funn) { 
+            return new Promise(async rej => {
+                this.funni[ 'funni' ] = funn
+                await this.fetch(); rej(0)
+            })
         },
     }
 }

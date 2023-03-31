@@ -72,9 +72,9 @@ export default {
         recivQ( q ) {
             q = q + ''
             if (q.length > 6) {
-                this.form.phone_no = q
+                this.form.phone_no = q; this.form.uuid = ''
             } else {
-                this.form.uuid = q
+                this.form.uuid = q; this.form.phone_no = ''
             }
         },
 

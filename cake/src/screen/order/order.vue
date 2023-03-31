@@ -7,7 +7,7 @@
 <script>
 import ModalSource from '../../component/source/ModalSource.vue'
 export default {
-  components: {ModalSource  },
+  components: { ModalSource  },
     
 }
 </script>

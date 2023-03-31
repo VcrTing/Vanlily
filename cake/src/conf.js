@@ -16,5 +16,5 @@ export default {
 
     ENDPOINT,
 
-    VERSION: '0.83'
+    VERSION: 'APR.1'
 }

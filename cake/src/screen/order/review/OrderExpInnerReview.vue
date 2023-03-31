@@ -51,6 +51,7 @@
         
         <nav v-if="pan >= 7">
             <order-exi-opera 
+                :order="order"
                 class="upper_x2"
                 @edit="$emit('edit')"
                 v-if="order && order.id"/>

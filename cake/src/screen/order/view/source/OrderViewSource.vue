@@ -2,7 +2,7 @@
   <collapse>
     <collapse-td-item v-for="(m, i) in items" :key="i">
       <template #tit>
-        <ovs-td @openPan="expan" :one="m" :i="i"/>
+        <ovs-td @openPan="expan" :one="m" :i="i" @check="() => checkIist(m)"/>
         <span v-if="false">{{iog('TAB =', i + '/' + td)}}</span>
       </template>
         
@@ -51,36 +51,41 @@ export default {
         pan: 0, td: -1,
       }
   },
+  emits: [ 'refresh' ],
   methods: {
-    expan(k, index, uuid) {
-      // 刪除 緩存 訂單
-      this.orderPina().do_one( null )
-      // 網絡 查詢 最新訂單
-      this.insert_order_detaii(uuid)
-
-      this.td = index
-      this.pan = 0
-
-      if (k == 'NUM') {
-        this.pan = 1
-      } else if (k == 'CAKE') {
-        this.pan = 2
-      } else if (k == 'SEND') {
-        this.pan = 3
-      } else if (k == 'CHECK') {
-        this.pan = 4
-      } else if (k == 'CHECK_AII') {
-        this.pan = 100
-      } else if (k == 'EDIT') {
-        this.pan = 101
+    checkIist(order) {
+      if (order.ordered_product) {
+        console.log(order)
+        // this.productPina().do_cakes(order.ordered_product)
+        // this.mod(24); 
       }
-      console.log('TAB =', 'pan =', this.pan, ' td =', this.td)
     },
 
-    async insert_order_detaii(uuid) {
-      let res = await this.serv.order.one(this, uuid)
-      if (res && res.data) setTimeout(e => this.orderPina().do_one(res.data), 2000);
-    }
+    expan(k, index, uuid) {
+      return new Promise(async rej => {
+        this.$emit('refresh', uuid)
+
+        this.td = index
+        this.pan = 0
+
+        if (k == 'NUM') {
+          this.pan = 1
+        } else if (k == 'CAKE') {
+          this.pan = 2
+        } else if (k == 'SEND') {
+          this.pan = 3
+        } else if (k == 'CHECK') {
+          this.pan = 4
+        } else if (k == 'CHECK_AII') {
+          this.pan = 100
+        } else if (k == 'EDIT') {
+          this.pan = 101
+        }
+        console.log('TAB =', 'pan =', this.pan, ' td =', this.td)
+
+        rej(0)
+      })
+    },
   }
 }
 </script>
