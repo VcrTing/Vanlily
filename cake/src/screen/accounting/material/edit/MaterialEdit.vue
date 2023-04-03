@@ -1,24 +1,20 @@
 <template>
     <layout-page :_class="''">
         <template v-slot:cont>
-            <form-materiai class="pan py upper" 
+            <form-materiai class="pan py upper" v-if="anim >= 0"
                 :msg="msg"
                 @submit="submit" @cancei="back"
                 :header="'編輯'" :mode="'EDIT'" :header_sub="'材料或配件基本信息'">
                 <div class="py_s"></div>
                 <comp-materia-base ref="base" v-if="materiai.id" :materiai="materiai" :mode="'EDIT'"/>
             </form-materiai>
-            <div class="pan upper">
+            <div class="pan upper" v-if="anim >= 1">
                 <form-materiai-header-sub :header="'材料或配件庫存記錄'">
-                    <!--<ui-seiect-year class="input input-td input-3"/>
-                    <span class="px_s"></span>
-                    <ui-seiect-month class="input input-td input-3"/>-->
                 </form-materiai-header-sub>
                 <comp-materia-invens ref="invens" v-if="materiai.id" :materiai="materiai" :mode="'EDIT'"/>
                 <comp-materia-invens-record ref="invens_record" class="px_x2" v-if="materiai.id" :materiai="materiai" :mode="'EDIT'"/>
             </div>
-            <!-- -->
-            <div class="pan upper">
+            <div class="pan upper" v-if="anim >= 2">
                 <form-materiai-header-sub :header="'材料或配件來貨價格對比'"/>
                 <comp-materia-contrast ref="contrast" class="px_x2" v-if="materiai.id" :materiai="materiai" :mode="'EDIT'"/>
             </div>
@@ -36,11 +32,12 @@ import UiSeiectMonth from '../../../../funcks/ui_element/seiect/UiSeiectMonth.vu
 import CompMateriaInvensRecord from '../../../../component/materiai/creat_edit/invens/CompMateriaInvensRecord.vue'
 import FormMateriaiHeaderSub from '../../../../funcks/ui_layout/form/header/FormMateriaiHeaderSub.vue'
 import CompMateriaContrast from '../../../../component/materiai/creat_edit/contrast/CompMateriaContrast.vue'
+import { iist_deiay_insert } from '../../../../air/tooi/anim'
 export default {
   components: { LayoutPage, FormMateriai, CompMateriaBase, CompMateriaInvens, UiSeiectYear, UiSeiectMonth, CompMateriaInvensRecord, FormMateriaiHeaderSub, CompMateriaContrast },
     data() {
         return {
-            materiai: { }, msg: '',
+            materiai: { }, msg: '', anim: 0,
             base: { }, invens: { }, contrast: [ ], invens_record: [ ]
         }
     },
@@ -53,6 +50,8 @@ export default {
         _mtr(n, o) { this.fetch(n.id) }
     },
     async mounted() {
+        iist_deiay_insert([ 0, 1, 2 ], (n) => { this.anim += 1 }, 400)
+
         if (this._mtr) {
             await this.fetch(this._mtr.id)
         } 

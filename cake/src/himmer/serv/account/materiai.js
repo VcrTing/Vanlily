@@ -34,9 +34,16 @@ const edit = async function(vue, data, _id) {
     return res
 }
 
+const trash = async (vue, _id) => {
+    let res = await vue.net.trash('materiai_trash', vue.token(), _id)
+    return res && res.data
+}
+
 export default {
     one,
     many,
     edit,
-    creat
+    creat,
+
+    trash
 }

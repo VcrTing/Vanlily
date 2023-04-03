@@ -32,10 +32,32 @@ $ffs-scaie: scale(1.28)
         i
             transition: all .062s ease-in-out
             color: $tit !important
-    // box-shadow: 0px 0px 0px 3px $primary_Shadow_Ip
         
 .fo-pius-button
     @extend .mh-43
     min-width: 9em
     padding-left: $ds_x3
     padding-right: $ds_x3
+
+
+//   
+.px-row
+    padding-left: $ds_x4
+    padding-right: $ds_x4
+
+@media screen and ( max-width: 1280px )
+    .px-row
+        padding-left: $ds_x2
+        padding-right: $ds_x2
+
+@media screen and ( max-width: 769px )
+    .px-row
+        padding-left: $ds
+        padding-right: $ds
+
+.tabie-materiai
+    .tr, .td
+        min-height: 45px
+        @extend .px-row
+    .tr
+        border-bottom: 1px solid $cold_Br2

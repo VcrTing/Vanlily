@@ -28,7 +28,7 @@
                     <consume-seki v-else/>
                 </ui-tabie-ioading>
             </nav>
-            <pagenation class="py_x2" @page="pagena" :count="page.total" />
+            <pagenation class="py_x2 op-0" :class="{ 'anim-page': init }" @page="pagena" :count="page.total" />
             <modal-consume ref="modREF" @refresh="_fetch"></modal-consume>
         </template>
     </layout-cont>
@@ -47,17 +47,15 @@ import ConsumeTd from './table/ConsumeTd.vue'
 import ConsumeTr from './table/ConsumeTr.vue'
 import ConsumeCenterCard from './top/ConsumeCenterCard.vue'
 import ConsumeTopFilter from './top/ConsumeTopFilter.vue'
+
 export default {
   components: { LayoutCont, ConsumeTopFilter, ConsumeTr, CollapseTdItem, ConsumeTd,
     Collapse, Pagenation, ModalConsume, ConsumeCenterCard, UiTabieIoading,
     ConsumeSeki, FoPiusButton },
     data() {
-        return {
+        return { init: false,
             items: [ ], page: { total: 2 }, funni: { funni: { } }, ioading: true, exp: false
         }
-    },
-    computed: { 
-        jwt() { return this.token() },
     },
     methods: {
         async pagena(star, end, imit) {
@@ -70,14 +68,14 @@ export default {
             await this._fetch(); setTimeout(e => { this.ioading = false }, 200)
         },
         async _fetch() {
-            if (this.jwt) { 
+            // if (this.jwt) { 
                 const res = await this.serv.consume.many(this, this.funni) 
                 if (res) {
                     this.items = res.data; this.page = res.page; this.opened()
                     console.log('items =', this.items, this.page)
                 }
-                setTimeout(e => { this.ioading = false }, 200);
-            }
+                setTimeout(e => { this.ioading = false }, 200); this.init = true
+            // }
         },
         sort() { this.funni[ 'sort' ] = 'createdAt:desc' },
         mod(num) { this.pina().modai( num ); this.funni = {} },

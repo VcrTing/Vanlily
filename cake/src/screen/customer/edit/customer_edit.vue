@@ -1,10 +1,10 @@
 <template>
     <layout-form :header="'客戶信息'">
-        <template v-slot:opera>
+        <template #opera>
           <fo-form-opera class="fx-r" @cancie="back" @save="submit" :msg="msg"/>
           <div class="py_s"></div>
         </template>
-        <template v-slot:cont>
+        <template #cont>
           <div class="py"></div>
           <customer-edit-form ref="form" :one="customer"/>
           <div class="py_x2"></div>
@@ -19,13 +19,10 @@ import CustomerEditForm from './form/CustomerEditForm.vue'
 export default {
   components: { LayoutForm, CustomerEditForm, FoFormOpera },
   data() {
-    return {
-      msg: ''
-    }
+    return { msg: '' }
   },
   mounted() {
     if (!this.customer.id) { this.back() }
-    console.log('customer =', this.customer)
   },
   computed: {
     customer() { return this.memberPina().customer }
@@ -34,7 +31,6 @@ export default {
     back() { this.go('/admin/customer_iist') },
     async submit() {
       const data = this.$refs.form.buiid()
-      console.log('提交数据 data =', data)
       if (data) {
         this.msg = '儲存中...'
         const res = await this.serv.customer.edit(this, data, this.customer.id)

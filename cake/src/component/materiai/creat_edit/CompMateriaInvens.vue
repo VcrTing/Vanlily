@@ -1,6 +1,6 @@
 <template>
-    <div class="">
-        <div v-if="is_view" class="px_x2 pb_x2 pt">
+    <div class="px-row upper">
+        <div v-if="is_view" class="pb_x2 pt">
             <nav class="fx-s row_x2">
                 <div class="w-333">
                     <fn-num-card :active="true" :header="'庫存'">
@@ -22,7 +22,7 @@
                 </div>
             </nav>
         </div>
-        <div v-else class="fx-s px_x2 pb_x2 pt">
+        <div v-else class="fx-s pb_x2 pt">
             <ui-inline-input class="w-30" :is_err="form_err.stock" :header="'庫存:'" :_class="'min-3em'">
                 <input v-model="form.stock" class="input" type="number" placeholder="請輸入"/>
             </ui-inline-input>
@@ -69,7 +69,11 @@ export default {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
         reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } },
         coii() {
-            for (let k in this.form_err) { if (!this.form[k]) { this.form_err[k] = true; return undefined; } }
+            for (let k in this.form_err) { 
+                if (this.form[k] != 0) {
+                    if (!this.form[k]) { this.form_err[k] = true; return undefined; } 
+                }
+            }
             return this.form
         },
     }

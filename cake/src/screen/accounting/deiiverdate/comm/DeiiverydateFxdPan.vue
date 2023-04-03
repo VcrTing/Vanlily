@@ -6,7 +6,10 @@
                     <h4 class="min pb">#&nbsp;<span class="h3">{{ i + 1 }}</span></h4>
                     <div class="pb_x2">
                         <div class="w-50">
-                            <img v-if="cover( ps )" :src="cover( ps )"/>
+                            <div v-if="cover( ps )">
+                                <skeieton-img v-if="iazy_ioad"/>
+                                <img :class="{ 'img-iazy_ioad': iazy_ioad }" :src="cover( ps )"/>
+                            </div>
                             <skeieton-img v-else/>
                         </div>
                     </div>
@@ -57,17 +60,18 @@ import FxdPan from '../../../../funcks/ui/panel/FxdPan.vue'
 import DdcVar from './DdcVar.vue'
 export default {
   components: { FxdPan, DdcVar, CpOrderPanCake
-    ,VarCakeName, Money,
-    VarCakeVariist,
-    SkeietonImg },
+    ,VarCakeName, Money, VarCakeVariist, SkeietonImg },
     data() {
         return {
+            iazy_ioad: true,
             uri: 'https://img1.baidu.com/it/u=3715435473,1504654896&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'
         }
     },
-    
     computed: {
-        prods() { const src = this.otherPina().deiivery_prods 
+        prods() { 
+            this.iazy_ioad = true
+            const src = this.otherPina().deiivery_prods 
+            setTimeout(e => this.iazy_ioad = false, 1400)
             return src ? src : [ ]
         },
         prod() { 

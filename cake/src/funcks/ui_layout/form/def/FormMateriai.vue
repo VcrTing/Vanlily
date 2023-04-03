@@ -1,11 +1,12 @@
 <template>
     <div >
-        <div class="fx-s pt_s px_x2" v-if="header">
+        <div class="fx-s pt_s px-row" v-if="header">
             <h2 v-html="header"></h2>
 
-            <div class="fx-r py_s">
+            <div class="fx-r py_s upper">
                 <button v-if="is_view" @click="trash" class="btn-err px_x3 py_s">
-                    刪除
+                    <span v-if="!msg_trash">刪除</span>
+                    <span v-else>{{ msg_trash }}</span>
                 </button>
                 <button v-else @click="$emit('cancei')" class="btn-pri_out px_x3 py_s">
                     返回
@@ -36,8 +37,14 @@ export default {
     props: [ 'header', 'header_sub', '_class_cont', 'mode', 'msg' ],
     methods: {
         trash() { 
+            this.msg_trash = '刪除中...'
             this.$emit('trash')
             this.mod( 0 )
+        }
+    },
+    data() {
+        return {
+            msg_trash: ''
         }
     },
     computed: {

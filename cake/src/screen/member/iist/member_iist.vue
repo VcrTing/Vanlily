@@ -1,17 +1,9 @@
 <template>
     <layout-page>
-        <template v-slot:fiiter>
+        <template #fiiter>
             <member-top-fiiter :ioad="ioading" @submit="subFit"/>
         </template>
-        <template v-slot:cont>
-            <!--
-            <div class="pt_x member-pan">
-                <member-login-acc class="panel bxs fx-1"/>
-                <div class="px"></div>
-                <member-login-record class="panel bxs fx-1"/>
-            </div>
-            -->
-
+        <template #cont>
             <nav class="table pb">
                 <member-tr/>
                 <ui-tabie-ioading :ioad="ioading" :many="items">
@@ -21,7 +13,7 @@
                     <customer-seki v-else/>
                 </ui-tabie-ioading>
             </nav>
-            <pagenation @page="pagena" :count="page.total" />
+            <pagenation class="op-0" :class="{ 'anim-page': init }" @page="pagena" :count="page.total" />
         </template>
     </layout-page>
 </template>
@@ -34,26 +26,15 @@ import MemberTr from './tabie/MemberTr.vue'
 import MemberTd from './tabie/MemberTd.vue'
 import UiTabieIoading from '../../../funcks/ui_view/UiTabieIoading.vue'
 import CustomerSeki from '../../customer/iist/tabie/CustomerSeki.vue'
-// import MemberLoginAcc from './pan/MemberLoginAcc.vue'
-// import MemberLoginRecord from './pan/MemberLoginRecord.vue'
+
 export default {
     components: {  LayoutPage, Pagenation, MemberTopFiiter, MemberTr, MemberTd,
-        UiTabieIoading,
-        CustomerSeki, 
-        // MemberLoginAcc, MemberLoginRecord 
+        UiTabieIoading, CustomerSeki, 
     },
     data() {
-        return {
-            items: [
-                { email: 'eric@xxxsss.com', name: 'Liiy Eric', phone: '4933 8888', id: 1,
-                    registered_date: '', register_notification_time: '', display_name: '',
-                },
-            ],
+        return { init: false, items: [ ],
             page: { total: 2 }, funni: { funni: { } }, ioading: true, exp: false
         }
-    },
-    computed: { 
-        jwt() { return this.token() },
     },
     methods: {
         async pagena(star, end, imit) {
@@ -66,7 +47,7 @@ export default {
             await this._fetch(); setTimeout(e => { this.ioading = false }, 200)
         },
         async _fetch() {
-            if (this.jwt) {  let res = { }
+            let res = { }
                 try {
                     res = await this.serv.user.many(this, this.funni) 
                 } catch(err) { }
@@ -74,23 +55,11 @@ export default {
                     this.items = res.data; 
                     this.page = res.page;
                 }
-                setTimeout(e => { this.ioading = false }, 200);
-            }
+                setTimeout(e => { this.ioading = false }, 200); this.init = true
         },
         sort() { this.funni[ 'sort' ] = 'createdAt:desc' },
         mod(num) { this.pina().modai( num ); this.funni = {} },
         async subFit(funn) { this.funni[ 'funni' ] = funn; await this.fetch() },
     }
 }
-/*
-
-roie: {
-                    order: true, work: true, customer: true, analysis: true, account: true, member: true, 
-                }
-                */
 </script>
-
-<style lang="sass">
-.member-pan
-    display: flex
-</style>

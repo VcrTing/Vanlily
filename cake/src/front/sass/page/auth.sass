@@ -2,7 +2,7 @@ $auth: #F0F2F5
 .backimg
     background-size: cover
     background-repeat: no-repeat
-    background-position: right -10vh
+    background-position: right -12vh
 
 .auth-wrapper
     width: 100vw
@@ -17,7 +17,8 @@ $auth: #F0F2F5
         @extend .backimg
         position: absolute
         background-size: cover
-        background-position: right -8vh
+        background-position: right -9.2vh
+        animation: auth_img 1.22s ease
     
     .auth-cont
         width: 100%
@@ -29,6 +30,16 @@ $auth: #F0F2F5
         position: absolute
         transform: translateX(-50%)
         max-width: calc( 120px + 72vw )
+
+@keyframes auth_img
+    0%
+        opacity: 0.92
+        transform: translateX(-3px) translateY(8px)
+    100%
+        opacity: 1
+        transform: translateX(0px) translateY(0px)
+        
+    
 // 大于 1444
 @media screen and ( min-width: 1400px )
     .auth-cont
@@ -40,18 +51,49 @@ $auth: #F0F2F5
 .auth-panel
     width: 100%
     height: auto
-    max-width: 28em
+    max-width: 27.8em
     min-height: 240px
     padding: 0 $ds_x2
-    transform: translateY(0vh)
+    transform: translateY(-3vh)
     background: none !important
     & > nav
         width: 100%
         border-radius: $br
-        // background: #FFF
-
+        animation: auth_panel .62s ease
     .auth-logo
-        max-width: 13.2em !important
+        width: auto
+        min-height: 10.2em !important
+        max-height: 10.2em !important
+
+    .fo-submit
+        animation: auth_submit 1.82s ease
+
+@keyframes auth_panel
+    0%
+        opacity: 0.92
+        transform: translateX(6px)
+    100%
+        opacity: 1
+        transform: translateX(0px)
+        
+@keyframes auth_submit
+    0%
+        opacity: 0
+        transform: translateY(12px)
+    100%
+        opacity: 1
+        transform: translateY(0px)
+
+// 小于 769
+@media screen and ( max-width: 769px )
+    .auth-cont
+        left: 50% !important
+    .auth-panel
+        width: 100% !important
+    .auth-wrapper
+        .auth-img
+            background-position: 33% 3.2vh !important
+        
 
 .input-auth
     i
@@ -65,3 +107,22 @@ $auth: #F0F2F5
         border-radius: $br
         background: none // #FFFFFFCC
         
+//   
+.auth-ip
+    opacity: 0
+
+.auth-ip-1,
+.auth-ip-2,
+.auth-ip-3,
+.auth-ip-4,
+.auth-ip-5
+    opacity: 1
+    animation: auth_ip_1 0.62 ease !important
+
+@keyframes auth_ip_1
+    0%
+        opacity: 0
+        transform: translateY(12px)
+    100%
+        opacity: 1
+        transform: translateY(0px)

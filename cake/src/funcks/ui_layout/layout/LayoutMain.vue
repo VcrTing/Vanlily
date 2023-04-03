@@ -2,12 +2,12 @@
     <div class="html"
         :class="{ 'html-active': menu, 'html-hide': !menu }"
     >
-        <div class="menu">
+        <div class="menu softer">
             <slot name="menu"></slot>
         </div>
         <div class="menu-bg" @click="close"></div>
         <div class="content">
-            <div class="top">
+            <div class="top softer">
                 <slot name="top"></slot>
             </div>
             <div class="center">

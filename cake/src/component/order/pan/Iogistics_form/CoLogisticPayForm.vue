@@ -50,11 +50,18 @@ export default {
     data() {
         return {
             form_origin: { payment_date: '', payment_method: '', payment_method_title: '', payment_is_open: true, payment_fee: '' },
-            form_err: { payment_fee: false }
+            form_err: { payment_fee: false },
+            form_of_save: null
         }
     },
     emits: [ 'submit' ],
-    mounted() { if (this._edit) { this.reset( this.form ); this.form_origin = JSON.parse(JSON.stringify( this.form )) } },
+    mounted() { 
+        if (this._edit) { 
+            this.reset( this.form ); 
+            this.form_of_save = JSON.parse(JSON.stringify( this.form )) 
+            console.log('EDIT =', this._edit, this.form_of_save)
+        } 
+    },
 
     methods: {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },

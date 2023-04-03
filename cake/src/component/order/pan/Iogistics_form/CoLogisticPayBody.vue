@@ -4,7 +4,7 @@
             <div class="w-28">
                 <span>日期:&nbsp;&nbsp;</span>
                 <span v-if="form.payment_date">{{ form.payment_date }}</span>
-                <span v-else class="cold">(未紀錄)</span>
+                <span v-else class="err">(未紀錄)</span>
             </div>
             <div class="w-24">
                 <span>方式:&nbsp;&nbsp;</span>

@@ -53,11 +53,18 @@ const patch = async function(uri, token, pk, data ) {
     return res && res.status <= 399 ? res.data : null
 }
 
+const trash = async function(uri, token, pk ) {
+    const url = conf.API + conf.ENDPOINT[ uri ] + '/' + pk
+    let res = await axios.delete(url, { headers: tool.headers(token) })
+    return res && res.status <= 399 ? res.data : null
+}
+
 export default {
     _get,
     get,
     get_one,
 
     post,
-    patch
+    patch,
+    trash
 }

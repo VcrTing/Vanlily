@@ -1,9 +1,9 @@
 <template>
     <div v-if="!ioad">
-        <div v-if="many && many.length > 0" class="upper">
+        <div v-if="many && many.length > 0" class="empty upper">
             <slot></slot>
         </div>
-        <div v-else class="py_x2 fx-c empty upper">
+        <div v-else class="fx-c empty upper">
             <div class="py pt_x">
                 空數據
             </div>

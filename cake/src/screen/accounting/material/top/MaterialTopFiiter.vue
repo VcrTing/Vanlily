@@ -2,7 +2,7 @@
     <div class="fx-l">
         <ui-search-def class="input-7 bxs_n" ref="search" 
           @submit="submit()"
-          @resuit="(n) => search(n)" :pahd="'請輸入'"/>
+          @resuit="(n) => search(n)" :pahd="'可搜索類別、全名、品牌、備註或規格名稱'"/>
         <span class="px_s"></span>
         <fo-fiiter-submit :ioad="ioad" @funni="submit()"/>
     </div>
@@ -19,21 +19,12 @@ export default {
   data() {
     return {
       funi: {
-        /*
-        specification: '',
-        remarks: '',
-        brand: '',
-        name: '',
-        type: ''
-        */
         search: ''
       }
     }
   },
   watch: {
-    q(n, o) {
-      this.$emit('submit', n)
-    }
+    q(n, o) { this.$emit('submit', n) }
   },
   methods: {
     submit() { this.$emit('submit', this.funi) },

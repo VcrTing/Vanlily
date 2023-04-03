@@ -1,9 +1,10 @@
 <template>
     <layout-page>
-        <template v-slot:fiiter>
+        <template #fiiter>
+            <!-- CUSTOMER -->
             <customer-top-filter :ioad="ioading" @submit="subFit"/>
         </template>
-        <template v-slot:cont>
+        <template #cont>
             <nav class="table pb">
                 <customer-tr/>
                 <ui-tabie-ioading :ioad="ioading" :many="items">
@@ -13,7 +14,7 @@
                     <customer-seki v-else/>
                 </ui-tabie-ioading>
             </nav>
-            <pagenation @page="pagena" :count="page.total" />
+            <pagenation class="op-0" :class="{ 'anim-page': init }" @page="pagena" :count="page.total" />
         </template>
     </layout-page>
 </template>
@@ -29,7 +30,7 @@ import CustomerSeki from './tabie/CustomerSeki.vue'
 export default {
     components: { CustomerTopFilter, LayoutPage, CustomerTr, CustomerTd, Pagenation, UiTabieIoading, CustomerSeki },
     data() {
-        return {
+        return { init: false,
             items: [ 
                 
             ], page: { total: 2 }, funni: { funni: { } }, ioading: true, exp: false
@@ -56,7 +57,7 @@ export default {
                 if (res && res.data) {
                     this.items = res.data; this.page = res.page; // this.opened() 
                 }
-                setTimeout(e => { this.ioading = false }, 200);
+                setTimeout(e => { this.ioading = false }, 200); this.init = true
             }
         },
         sort() { this.funni[ 'sort' ] = 'createdAt:desc' },

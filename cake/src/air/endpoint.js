@@ -18,6 +18,7 @@ export default {
     order_is_new: '/orders/is_new_to',
 
     materiai_access: '/materials-accessories',
+    materiai_trash: '/materials-accessories',
 
     consume: '/accountings',
     customer: '/customers',

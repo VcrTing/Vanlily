@@ -20,3 +20,30 @@
     100%
         opacity: 1
         transform: translateY(0px)
+
+//   
+
+.anim-fiiter
+    opacity: 1
+    animation: anim_fiiter .242s ease-in
+
+@keyframes anim_fiiter
+    0%
+        opacity: 0
+    100%
+        opacity: 1
+
+.anim-page
+    opacity: 1
+    animation: anim_page .482s ease-in
+
+@keyframes anim_page
+    0%
+        opacity: 0
+    100%
+        opacity: 1
+        
+.img-iazy_ioad
+    max-height: 0px
+    overflow: hidden
+    @extend .anim-page

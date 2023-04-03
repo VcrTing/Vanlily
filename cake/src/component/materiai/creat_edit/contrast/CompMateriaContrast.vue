@@ -33,7 +33,10 @@
                     <div class="w-20">{{ v.delivery_address }}</div>
                     <div class="w-7">{{ v.moq }}</div>
                     <div class="w-10">{{ v.phone_no }}</div>
-                    <div class="w-10">{{ v.update_date }}</div>
+                    <div class="w-10 fx-s">
+                        <div>{{ v.update_date }}</div>
+                        <i class="mdi mdi-trash-can-outline hand err" @click="trash(i)"></i>
+                    </div>
                 </nav>
                 <comp-mc-form v-else :def="v" @insert="(n) => { v.is_edit = false }" class="td px_x2 pb_x pt_s"/>
             </div>
@@ -72,6 +75,8 @@ export default {
         reset() { this.items = this.materiai.price_comparison.map(e => { e.is_edit = false; return e }) },
 
         coii() { return this.items },
+        trash(idx) { this.items.splice(idx, 1) },
+
         reset_f() {
             this.fs_c = [ ]
             setTimeout(e => this.fs_c = [ false ], 1)

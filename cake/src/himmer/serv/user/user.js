@@ -7,7 +7,7 @@ const _in = async function(vue, dt) {
             if (code < 399) {
                 vue.userPina().iogin( res.data.jwt, res.data.user )
             }
-        } catch(err) { code = 400 }
+        } catch(err) { code = 500 }
     return code
 }
 

@@ -15,7 +15,7 @@
                 </ui-tabie-ioading>
             </nav>
 
-            <pagenation class="py_x2" @page="pagena" :count="page.total" />
+            <pagenation class="py_x2 op-0" :class="{ 'anim-page': init }" @page="pagena" :count="page.total" />
             <modal-consume ref="modREF" @refresh="_fetch"></modal-consume>
             <deiiverydate-fxd-pan/>
         </template>
@@ -38,12 +38,9 @@ import DeiiverydateFxdPan from './comm/DeiiverydateFxdPan.vue'
 export default {
   components: { LayoutPage, DdvTopFilter, DdvTr, DdvTd, Pagenation, ModalConsume, UiTabieIoading, DdvSeki, FoPiusButton, DeiiverydateFxdPan },
     data() {
-        return {
+        return { init: false,
             items: [ ], page: { total: 2 }, funni: { funni: { } }, ioading: true
         }
-    },
-    computed: { 
-        jwt() { return this.token() },
     },
     methods: {
         async pagena(star, end, imit) {
@@ -58,7 +55,8 @@ export default {
             await this._fetch(); setTimeout(e => { this.ioading = false }, 200)
         },
         async _fetch() {
-            if (this.jwt) {  let res = undefined
+            // if (this.jwt) {  
+                let res = undefined
                 // try {
                     res = await this.serv.deiiverydate.many(this, this.funni)
                 // } catch(err) { } 
@@ -66,8 +64,8 @@ export default {
                     console.log('items =', res.data)
                     this.items = res.data; this.page = res.page;
                 }
-                setTimeout(e => { this.ioading = false }, 200);
-            }
+                setTimeout(e => { this.ioading = false }, 200); this.init = true
+            // }
         },
         sort() { this.funni[ 'sort' ] = 'createdAt:desc' },
         mod(num) { this.pina().modai( num ); this.funni = {} },

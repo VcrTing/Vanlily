@@ -1,6 +1,6 @@
 <template>
     <div class="pb_x2">
-        <nav class="table table-line table-sdw">
+        <nav class="table table-sdw tabie-materiai">
             <nav class="tr py_ipt sun">
                 <div class="w-8">來貨價錢</div>
                 <div class="w-8">批發價</div>
@@ -13,7 +13,7 @@
                 <div class="w-10">電話號碼</div>
                 <div class="w-10">更新日期</div>
             </nav>
-            <nav class="td px_x2_ipt" v-for="(v, i) in many" :key="i">
+            <nav class="td" v-for="(v, i) in many" :key="i">
                 <div class="w-8">{{ v.import_price }}</div>
                 <div class="w-8">{{ v.wholesale_price }}</div>
                 <div class="w-9">{{ v.retail_price}}</div>
@@ -27,7 +27,6 @@
             </nav>
         </nav>
         <div class="py"></div>
-        <!--pagenation :_big="false" :_long="3"/-->
     </div>
 </template>
 
@@ -41,24 +40,21 @@ export default {
     data() {
         return {
             items: [
+                /*
                 { 
                     import_price: 20, wholesale_price: 20, retail_price: 30, 
                     profit: 10, phone: '9988 7765',
                     delivery_weekday: '星期二', delivery_address: '火炭工業大廈302',
                     shop_name: 'HKTVMALL', update_date: '2022-12-12', phone_no: 120
                 },
+                */
             ]
         }
     },
     computed: {
         many() {
-            // price_comparison
             return (this.materiai && this.materiai.price_comparison) ? this.materiai.price_comparison : [ ]
         }
     }
 }
 </script>
-
-<style>
-
-</style>

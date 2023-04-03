@@ -33,22 +33,8 @@
         </ui-inline-input-td>
         
         <div class="w-100 fx-r pt">
-        <!--
-            <span @click="$emit('ciose')" class="sus_son hand">關閉</span>
-            <span class="px"></span>-->
             <ui-table-opera :_mode="3" @create="creat" @ciose="$emit('ciose')"/>
         </div>
-        <!--
-                <div class="w-8">{{ v.price_come }}</div>
-                <div class="w-8">{{ v.price_pf }}</div>
-                <div class="w-9">{{ v.price_saie}}</div>
-                <div class="w-8">{{ v.iirun }}</div>
-                <div class="w-12">{{ v.store }}</div>
-                <div class="w-8">{{ v.send_day }}</div>
-                <div class="w-20">{{ v.addr }}</div>
-                <div class="w-7">{{ v.moq }}</div>
-                <div class="w-10">{{ v.phone }}</div>
-                <div class="w-10">{{ v.date_update }}</div>-->
     </div>
 </template>
 
@@ -117,6 +103,18 @@ export default {
         setTimeout(e => {
             if (this.def && this.def.id) { this.form = this.def }
         }, 10)
+    },
+
+    watch: {
+        'form.import_price' (n) {
+            this.form.import_price = Math.abs( n )
+        },
+        'form.wholesale_price' (n) {
+            this.form.wholesale_price = Math.abs( n )
+        },
+        'form.retail_price' (n) {
+            this.form.retail_price = Math.abs( n )
+        }
     }
 }
 </script>

@@ -8,7 +8,7 @@
             <order-view-source v-if="!ioading" :items="items" @refresh="refreshOrder"/>
             <ovs-seki v-else/>
             </ui-tabie-ioading>
-            <pagenation @page="pagena" :count="page.total"/>
+            <pagenation class="op-0" :class="{ 'anim-page': init }" @page="pagena" :count="page.total"/>
             <div class="py"></div>
         </div>
         <modal-source/>
@@ -34,7 +34,7 @@ export default {
     data() {
       return {
         items: [ ], page: { total: 2 }, funni: { funni: { } }, ioading: true,
-        uuid: '',
+        uuid: '', init: false
       }
     },
     computed: { 
@@ -89,7 +89,7 @@ export default {
             this.items = res.data; 
             this.page = res.page;
           }
-          setTimeout(e => { this.ioading = false }, 200);
+          setTimeout(e => { this.ioading = false }, 200); this.init = true
         }
       },
 

@@ -1,9 +1,9 @@
 <template>
-    <div class="fx-l row_x2">
-        <ui-input class="w-33" :header="'名称'" :is_err="named_err">
-            <input class="input w-100" v-model="one.username" placeholder="请输入"/>
+    <div class="fx-l row_x2 upper">
+        <ui-input class="w-33" :header="'名稱'" :is_err="named_err">
+            <input class="input w-100" v-model="one.username" placeholder="請輸入客戶名稱"/>
         </ui-input>
-        <ui-input class="w-33" :header="'电话'" :is_txt_mode="true">
+        <ui-input class="w-33" :header="'電話'" :is_txt_mode="true">
             {{ one.phone_no }}
         </ui-input>
         <div class="w-33"></div>

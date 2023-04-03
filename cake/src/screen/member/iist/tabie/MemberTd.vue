@@ -1,9 +1,9 @@
 <template>
     <div class="td item mb">
-        <div class="w-23">{{ one.email }}</div>
+        <div class="w-26">{{ one.email }}</div>
         <div class="w-15">{{ one.username }}</div>
         <div class="w-14">{{ one.phone }}</div>
-        <div class="w-30">
+        <div class="w-27">
             <!--
             <comp-td-roie-edit :pans="one.roie"/>
             -->

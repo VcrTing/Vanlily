@@ -1,12 +1,12 @@
 <template>
     <nav class="fx-s px_x2">
-        <div class="w-70">
+        <div class="w-50">
             <span class="hand anim_htmi_top_menu" @click="menu(1)">
                 <i class="mdi mdi-menu h4"></i>
             </span>
         </div>
-        <div class="w-30">
-            <div class="fx-r" @click="auth">
+        <div class="fx-1">
+            <div class="fx-r softer" @click="auth">
                 <div class="user-name pr ttd hand">
                     {{ up.named }}
                 </div>

@@ -1,6 +1,6 @@
 <template>
     <div class="pb upper">
-        <nav class="table table-panner">
+        <nav class="table table-panner tabie-materiai">
             <nav class="tr py_ipt">
                 <div class="w-30">店鋪名</div>
                 <div class="w-22">來貨日期</div>
@@ -8,12 +8,8 @@
                 <div class="w-21">數量</div>
                 <div class="w-5">&nbsp;</div>
             </nav>
-            <!--
-            <ui-tabie-empty :many="items">
-            </ui-tabie-empty>
-            -->
             <div v-for="(v, i) in items" :key="i">
-                <nav class="td px_x2_ipt" v-if="!v.is_edit">
+                <nav class="td px-row" v-if="!v.is_edit">
                     <div class="w-30">
                         {{ v.shop_name }}
                         <span class="px pri h5" @click="v.is_edit = true">
@@ -43,6 +39,7 @@ import PanelInner from '../../../../funcks/ui/panel/PanelInner.vue'
 import UiTableOpera from '../../../../funcks/ui_element/table/opera/UiTableOpera.vue'
 import UiTabieEmpty from '../../../../funcks/ui_view/UiTabieEmpty.vue'
 import CompMirForm from './form/CompMirForm.vue'
+
 export default {
   components: { PanelInner, CompMirForm, UiTableOpera, UiTabieEmpty },
     props: {

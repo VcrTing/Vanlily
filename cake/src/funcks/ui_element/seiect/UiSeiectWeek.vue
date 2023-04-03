@@ -7,9 +7,7 @@
 <script>
 
 export default {
-    props: {
-        def: Number
-    },
+    props: { def: Number },
     emits: [ 'resuit' ],
     data() { return { now: 0 } },
     mounted() { this.now = this.def ? this.def : 1 },
@@ -23,7 +21,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

@@ -18,11 +18,13 @@
         <div class="fx-s pb">
             <p class="w-333">
                 送貨人員：
-                <span>{{ deiiv.delivery_man_name }}</span>
+                <span v-if="deiiv.delivery_man_name">{{ deiiv.delivery_man_name }}</span>
+                <span v-else class="cold">(未紀錄)</span>
             </p>
             <p class="w-333"> 
                 電話：
-                <span>{{ deiiv.delivery_man_phone_no }}</span>
+                <span v-if="deiiv.delivery_man_phone_no">{{ deiiv.delivery_man_phone_no }}</span>
+                <span v-else class="cold">(未紀錄)</span>
             </p>
             <p class="w-333">
                 取貨時間：

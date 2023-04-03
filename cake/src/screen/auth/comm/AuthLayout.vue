@@ -7,10 +7,10 @@
                 'background-image': 'url(' + im + ')' }"
         ></div>
     
-        <div class="auth-cont fx-s">
+        <div class="auth-cont fx-s fx-wp">
             
             <div class="auth-panel">
-                <nav>
+                <nav class="">
                     <logo class="auth-logo"></logo>
                     <slot></slot>
                 </nav>

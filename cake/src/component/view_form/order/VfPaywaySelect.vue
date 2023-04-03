@@ -2,7 +2,7 @@
     <select v-if="!_txt_mode" v-model="now">
         <option :value="v.v" v-for="(v, i) in ops" :key="i">{{ v.txt }}</option>
     </select>
-    <div v-else>
+    <div v-else class="t-elip_x1">
         {{ ioc_txt(def) }}
     </div>
 </template>
@@ -19,6 +19,8 @@ export default {
                 { txt: 'Bank card', v: 'bankcard' },
                 { txt: 'Ali Pay', v: 'alipay' },
                 { txt: 'Wechat Pay', v: 'wxpay' },
+                { txt: '未知', v: '' },
+                { txt: '銀行轉帳 / 轉數快FPS / Alipay HK (支付寶香港) / 商業Payme 付款', v: '銀行轉帳 / 轉數快FPS / Alipay HK (支付寶香港) / 商業Payme 付款'}
             ]
         }
     },

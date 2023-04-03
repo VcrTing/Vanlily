@@ -6,7 +6,7 @@
 
         <slot name="opera"></slot>
 
-        <div class="panel-form mt px_x2 py">
+        <div class="panel-form mt px_x2 py upper">
             <h3>{{ header }}</h3>
             <slot name="cont"></slot>
         </div>
