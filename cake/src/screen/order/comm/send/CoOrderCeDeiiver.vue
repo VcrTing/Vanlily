@@ -61,7 +61,7 @@ export default {
     methods: {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
         reset(v = { }) { 
-            if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } console.log('deiiver v =', v) 
+            if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } }
             this.$refs.send_time.ioc(this.form.delivery_time)
             this.$refs.date.ioc(this.form.delivery_date)
         },

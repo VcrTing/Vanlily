@@ -26,9 +26,7 @@ const _funni = (funni) => {
 }
 
 const many = async function(vue, qs) {
-    console.log('user qs =', _funni(qs))
     let res = await vue.net.get('user', vue.token(), _funni(qs))
-    console.log('user =', res)
     return res ? vue.strapi.ser_pure(res) : { }
 }
 

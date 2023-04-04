@@ -57,7 +57,8 @@ export default {
         }
     },
     mounted() { 
-        if (this.edit) { this.reset( this.one ); console.log('重置 one =', this.one) }
+        if (this.edit) { this.reset( this.one );
+    }
     },
     methods: {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },

@@ -57,7 +57,6 @@ export default {
 
         async fetching(pro_uuid) { return await this.serv.check.order_check(this, this.uuid, pro_uuid) },
         async checkProd(iist, pro_uuid) {
-            console.log('检查项目的结果 =', iist)
             let res = await this.serv.check.order_check_update(this, this.uuid, pro_uuid)
         }
     }

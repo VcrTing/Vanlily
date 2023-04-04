@@ -11,8 +11,6 @@ const many = async function(vue, page, size = 100) {
 
 // 
 const prod_patch = async function(vue, uuid, prod_id, data) {
-    console.log('产品修改 =', uuid, ' ', prod_id)
-    console.log('DATA =', data)
 }
 
 export default {

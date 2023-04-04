@@ -23,7 +23,7 @@
                     <material-seki v-else/>
                 </ui-tabie-ioading>
             </nav>
-            <pagenation class="op-0" :class="{ 'anim-page': init }" @page="pagena" :count="page.total" />
+            <pagenation class="py_x2 op-0" :class="{ 'anim-page': init }" @page="pagena" :count="page.total" />
         </template>
     </layout-cont>
 </template>

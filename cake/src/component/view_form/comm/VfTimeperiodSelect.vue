@@ -24,12 +24,7 @@ export default {
     mounted() { this.now = this.def ? this.def : 1 },
     watch: {
         now(n, o) {
-            console.log('選入')
         }
     }
 }
 </script>
-
-<style>
-
-</style>

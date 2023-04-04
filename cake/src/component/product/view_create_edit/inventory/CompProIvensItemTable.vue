@@ -31,13 +31,8 @@ export default {
         mode: { type: String, default: 'PLUS' }
     },
     data() { return { plus: true } },
-    mounted() { console.log('MANY =', this.many) },
     methods: {
         change(f) { this.plus = f }
     },
 }
 </script>
-
-<style>
-
-</style>

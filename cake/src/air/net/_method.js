@@ -16,13 +16,12 @@ const get = async function(uri, token, data){
         params: data,
         headers: tool.headers(token)
     })
-    console.log(url, ' DATA =', data)
     return res
 }
 */
 
 const _get = async function(uri, token, params) {
-    console.log('URI =', (conf.API + conf.ENDPOINT[ uri ] + params))
+    // console.log('URI =', (conf.API + conf.ENDPOINT[ uri ] + params))
     return await axios.get(
         (conf.API + conf.ENDPOINT[ uri ] + params)
         , { headers: tool.headers(token) })
@@ -35,8 +34,8 @@ const get = async function( uri, token, data ) {
 
 const get_one = async function( uri, cdt, token, data = {} ) {
     const url = conf.API + conf.ENDPOINT[ uri ] + '/' + cdt
-    console.log('URI =', url)
-    console.log('{ headers: tool.headers(token) } =', { headers: tool.headers(token) })
+    // console.log('URI =', url)
+    // console.log('{ headers: tool.headers(token) } =', { headers: tool.headers(token) })
     let res = await axios.get(url, { headers: tool.headers(token) })
     return res && res.status == 200 ? res.data : [ ]
 }

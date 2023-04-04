@@ -41,19 +41,17 @@ export default defineStore('productPina', {
                 this.coecs.map( _cps => {
                     if ((_cps.product_uuid == v.product_uuid)) {
                         res.push( v ); 
-                        has = true; console.log('替换 v =', v)
+                        has = true;
                     } else {
                         res.push( _cps )
                     }
                 }); 
-                console.log('PINA res =', res);
                 (!has) ? res.push( v ) : undefined;
                 this.coecs = res
 
             } else {
                 this.coecs.push( v )
             }
-            console.log('PINA COECS =', this.coecs)
         },
         ciear_coecs() { this.coecs = [ ] },
         

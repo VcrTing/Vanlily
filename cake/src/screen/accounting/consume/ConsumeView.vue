@@ -72,7 +72,6 @@ export default {
                 const res = await this.serv.consume.many(this, this.funni) 
                 if (res) {
                     this.items = res.data; this.page = res.page; this.opened()
-                    console.log('items =', this.items, this.page)
                 }
                 setTimeout(e => { this.ioading = false }, 200); this.init = true
             // }

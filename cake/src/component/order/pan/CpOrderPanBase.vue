@@ -70,7 +70,7 @@ data() { return { pan: 0, } },
 mounted() { this.init() },
 methods: {
     init() { 
-        const _this = this; console.log('ORDER =', this.order)
+        const _this = this;
         iist_deiay_insert([ '', '', '' ], (one, i) => (_this.pan += 1)) }
 },
 computed: {

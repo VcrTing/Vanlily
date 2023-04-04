@@ -1,5 +1,5 @@
 <template>
-    <div class="fk-cake-picker-menu" :class="{ 'fk-cpm-active': open }">
+    <div v-if="products.length > 0" class="fk-cake-picker-menu" :class="{ 'fk-cpm-active': open }">
         <div class="px_x2 pt">
             <input class="input-td w-100 ip-br self-input" v-model="fkey" placeholder="請輸入內容，篩選蛋糕..."/>
         </div>
@@ -9,6 +9,16 @@
         <div class="py_s"></div>
         <pagenation v-if="!funning" class="pagenation-inn" :count="many.length" :_big="false" :_limit="imit" @page="page"/>
         <div class="py_s"></div>
+    </div>
+    <div class="py_x4" v-else>
+        <div class="empty fx-c">
+            <div class="fo-fiiter-submit-ioading">
+                <i class="mdi mdi-loading h3"/>
+            </div>
+            <div class="pl">
+                正在拉取蛋糕數據，請稍等一分鐘。
+            </div>
+        </div>
     </div>
 </template>
 
@@ -37,11 +47,8 @@ export default {
             }
         },
     },
-    mounted() {
-        console.log('全部蛋糕 =', this.products)
-    },
     computed: {
-        products() { return this.productPina().products },
+        products() { const src = this.productPina().products; return src && src.length >= 0 ? src : [ ] },
     },
     methods: {
         choise(cake) {

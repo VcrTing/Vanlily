@@ -58,7 +58,6 @@ export default {
   methods: {
     checkIist(order) {
       if (order.ordered_product) {
-        console.log(order)
         // this.productPina().do_cakes(order.ordered_product)
         // this.mod(24); 
       }
@@ -84,8 +83,6 @@ export default {
         } else if (k == 'EDIT') {
           this.pan = 101
         }
-        console.log('TAB =', 'pan =', this.pan, ' td =', this.td)
-
         rej(0)
       })
     },

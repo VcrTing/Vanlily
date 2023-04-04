@@ -65,11 +65,8 @@ export default {
     },
     methods: {
         create_or_update() {
-            console.log('數據 =', this.form)
+            
         }
     }
 }
 </script>
-
-<style lang="sass" scoped>
-</style>

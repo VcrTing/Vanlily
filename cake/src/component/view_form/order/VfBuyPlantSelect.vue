@@ -28,7 +28,6 @@ export default {
     mounted() { 
         this.now = this.def ? this.def : ''; 
         this.sign() 
-        console.log('this.now =', this.now)
     },
     watch: {
         now(n, o) { this.sign() }

@@ -56,11 +56,8 @@ export default {
         }
     },
     methods: {
-        change(n) { this.plus = n; console.log(this.plus) }
+        change(n) { this.plus = n;
+        }
     }
 }
 </script>
-
-<style>
-
-</style>

@@ -13,9 +13,7 @@ const funni = (funni) => {
 }
 
 const many = async function(vue, qs) {
-    console.log('qs =', funni(qs))
     let res = await vue.net.get('customer', vue.token(), funni(qs))
-    console.log('customer =', res)
     return res ? vue.strapi.ser(res) : { }
 }
 
@@ -34,9 +32,17 @@ const edit = async function(vue, data, _id) {
     return res
 }
 
+const excei = async (vue) => {
+    let res = await vue.net.post('customer_excei', vue.token())
+    if ((res + '').endsWith('xlsx')) { }
+    return res ? res : null
+}
+
 export default {
     one,
     many,
     edit,
-    creat
+    creat,
+
+    excei
 }

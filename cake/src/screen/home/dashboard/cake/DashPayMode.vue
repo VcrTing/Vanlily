@@ -20,5 +20,5 @@ export default {
 </script>
 <style lang="sass" scoped>
 .card-dash 
-    min-height: 12em
+    min-height: 18em
 </style>

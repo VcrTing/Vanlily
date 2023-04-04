@@ -54,7 +54,6 @@ export default {
 
     async submit() {
       const form = this.$refs.form.coii()
-      console.log('FORM =', form)
       
       if (form) {
         this.deatii('儲存中...')

@@ -33,7 +33,6 @@ export default {
                         res = e
                     }
                 }); 
-                console.log('coec =', res)
                 return res
             } return { }
         },

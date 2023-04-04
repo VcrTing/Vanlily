@@ -38,10 +38,8 @@ export default {
         sign(n) { this.$emit('scroii', n, ) },
 
         scroiiTo(v = 0, pk_scroiier) {
-            // console.log('pk_scroiier =', pk_scroiier, ' my idx =', this.idx)
             this.is_controed = true
             const dom = document.getElementById('scroii_' + this.pk)
-            // console.log('scroii v =', this.pk)
             if (dom) { dom.scrollLeft = v; }
         }
     }

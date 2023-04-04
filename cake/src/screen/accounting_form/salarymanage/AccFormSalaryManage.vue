@@ -43,10 +43,5 @@ export default {
             form_err: { tit: false, date: false }
         }
     },
-    mounted() { console.log('FORM') }
 }
 </script>
-
-<style>
-
-</style>

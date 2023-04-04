@@ -60,7 +60,6 @@ export default {
             this.reset( this.form ); 
         }
         this.form_of_save = JSON.parse(JSON.stringify( this.form )) 
-        console.log('form_of_save =', this.form_of_save) 
     },
 
     methods: {

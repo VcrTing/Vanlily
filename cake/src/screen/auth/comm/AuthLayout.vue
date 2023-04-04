@@ -33,7 +33,7 @@ export default {
     },
     methods: {
         moveBk(x, y, dom) {
-            x = x ? (x / 300) : 1
+            x = x ? (x / 200) : 1
             y = y ? (y / 50) : 1; y = 0 - y
             dom.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
         }

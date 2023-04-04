@@ -109,3 +109,26 @@
 .collapse-card-item
     & > div > div
         margin-top: $ds
+
+// EXPAN
+.expan-die
+    max-height: 0px
+    padding: 0
+    overflow: hidden
+    animation: expan_die .122s ease
+
+@keyframes expan_die
+    0%
+        max-height: 12em
+    100%
+        max-height: 0px
+        
+.expan-iive
+    max-height: 12em
+    overflow: visible
+    animation: expan_iive .362s ease
+@keyframes expan_iive
+    0%
+        max-height: 0px
+    100%
+        max-height: 12em

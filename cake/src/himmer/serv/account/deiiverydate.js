@@ -36,7 +36,6 @@ const excei = async function(vue, startDate, endDate) {
     let res = await vue.net.post('deiivery_date_excei', vue.token(), {
         startDate, endDate
     })
-    console.log('export res =', res)
     return res
 }
 

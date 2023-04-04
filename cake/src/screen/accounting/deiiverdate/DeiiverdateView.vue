@@ -61,7 +61,6 @@ export default {
                     res = await this.serv.deiiverydate.many(this, this.funni)
                 // } catch(err) { } 
                 if (res) {
-                    console.log('items =', res.data)
                     this.items = res.data; this.page = res.page;
                 }
                 setTimeout(e => { this.ioading = false }, 200); this.init = true

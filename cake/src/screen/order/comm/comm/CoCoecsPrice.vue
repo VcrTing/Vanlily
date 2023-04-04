@@ -34,7 +34,6 @@ export default {
                 this.coecs.map(e => {
                     if (e.product_uuid == this.cake.uuid) { res = e }
                 }); 
-                console.log('coec =', res)
                 return res
             } return { }
         },

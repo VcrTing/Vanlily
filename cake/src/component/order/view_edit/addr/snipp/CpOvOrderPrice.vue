@@ -77,7 +77,6 @@ export default {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
         reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } },
         coii() {
-            console.log('this.form.delivery_fee =', this.form.delivery_fee)
             if (this.form.delivery_fee != 0) {
                 if (this.form.delivery_fee == null || this.form.delivery_fee == '') {
                     this.form_err.delivery_fee = true

@@ -6,7 +6,7 @@
         <div class="w-16">{{ one.order_count }}</div>
         <div class="w-26 w-20-p">&nbsp;</div>
         <div class="w-11 t-c">
-            <ui-table-opera :_mode="2" @edit="() => {
+            <ui-table-opera :_mode="-1" @edit="() => {
                 memberPina().do_customer(one);
                 go('customer/edit');
                 }"></ui-table-opera>

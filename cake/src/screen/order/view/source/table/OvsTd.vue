@@ -98,7 +98,6 @@ methods: {
         this.$parent.change()
     },
     itemEdit() {
-        console.log('編輯')
     },
     // 訂單狀態
     async changeStatus(v) {

@@ -28,9 +28,6 @@ export default {
             const basic = this.$refs.basic.coii()
             const custext = this.$refs.custext.coii()
             const price = this.$refs.price.coii()
-            console.log('cake basic =', basic)
-            console.log('cake custext =', custext)
-            console.log('cake price =', price)
         },
 
         async submit() {
@@ -41,8 +38,5 @@ export default {
             
         },
     },
-    async mounted() {
-        console.log('要修改的 蛋糕 =', this.cake)
-    }
 }
 </script>

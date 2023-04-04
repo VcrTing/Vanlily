@@ -44,7 +44,7 @@ export default {
         async doing(way, data) { 
             let res = await this.serv.addr[ way ](this, data) 
             if (res) {
-                console.log('處理添加 / 修改成功')
+                
             }
         },
 

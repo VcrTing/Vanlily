@@ -5,7 +5,7 @@
             <ui-input :class="{ 'auth-ip-1': anime >= 1 }" :is_err="named_err" class="pb_x2 auth-ip">
                 <div class="input-icon input-icon-l input-auth">
                     <i class="mdi mdi-shield-account-outline h5 sus"></i>
-                    <input v-model="named" class="input  input-sus" placeholder="用戶名">
+                    <input v-model="named" @keydown.enter="submit" class="input input-sus" placeholder="用戶名 / 郵箱">
                 </div>
             </ui-input>
             <ui-input :class="{ 'auth-ip-2': anime >= 2 }" :is_err="pass_err" class="pb_x auth-ip">
@@ -58,7 +58,9 @@ export default {
         },
         pass(n, o) {
             this.pass_err = n ? !this.vid.input.vid_named(n) : false
-        },
+        }
+    },
+    computed: {
         err() { return (this.pass_err && this.named_err) }
     },
     methods: {
@@ -66,6 +68,11 @@ export default {
             this.named_err = (!this.named)
             this.pass_err = (!this.pass)
             return this.err ? null : { named: this.named, pass: this.pass }
+        },
+        reset() {
+            setTimeout(e => {
+                this.named_err = false; this.pass_err = false;
+            }, 2400)
         },
         finish() { this.$router.push('/admin/order') },
         async submit() {
@@ -78,8 +85,10 @@ export default {
                 } else if (res >= 500) {
                     this.msg = '網絡錯誤'
                 }
+                setTimeout(e => this.msg = '', 4200)
+            } else {
+                this.reset()
             }
-            setTimeout(e => this.msg = '', 4200)
         }
     }
 }

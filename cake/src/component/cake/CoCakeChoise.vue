@@ -58,7 +58,6 @@ export default {
     },
     watch: {
         cake(n) {
-            console.log('蛋糕 =', n)
         }
     },
     emits: [ 'resuit' ],
@@ -77,7 +76,6 @@ export default {
                 }
             }
             */
-            console.log('新加入的蛋糕 =', v)
             return v
         },
 

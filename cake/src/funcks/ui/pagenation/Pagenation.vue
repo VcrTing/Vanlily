@@ -51,7 +51,7 @@ export default {
         },
         _long: {
             type: Number,
-            default: 6
+            default: 7
         },
         _big: {
             type: Boolean,
@@ -97,7 +97,7 @@ export default {
         // 長度
         long() { let i = this._long; return this.total > i ? i : this.total },
         // 固定的 中位頁碼
-        cen() { return Math.ceil(this.long / 2) },
+        cen() { return Math.floor(this.long / 2) },
         // 變動的 中位頁碼
         center() { return this.start + this.cen }
     },

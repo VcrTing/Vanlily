@@ -28,7 +28,6 @@ export default {
         submit() {
             const src = this.$refs.form.buiid()
             if (src) {
-                console.log('SRC =', src)
             }
         }
     }

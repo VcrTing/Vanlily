@@ -59,14 +59,9 @@ export default {
         uuid() { return '0001' }
     },
     methods: {
-        changeTyped(v) { console.log(v); this.form.typed = v },
-        create_or_update() {
-            console.log(this.form)
-        }
+        changeTyped(v) {
+            this.form.typed = v },
+        create_or_update() { }
     }
 }
 </script>
-
-<style>
-
-</style>

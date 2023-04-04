@@ -45,6 +45,7 @@ import UiInputFiiter from '../../../../funcks/ui_element/input/UiInputFiiter.vue
 import UiSearchDef from '../../../../funcks/ui_element/search/UiSearchDef.vue'
 import TimeDoubPure from '../../../../funcks/ui_element/timed/doub/TimeDoubPure.vue'
 import TimeOnePure from '../../../../funcks/ui_element/timed/one/TimeOnePure.vue'
+
 export default {
   components: { UiSearchDef, FoFiiterSubmit, UiInput, UiInputFiiter, 
     TimeOnePure, SeiectDeiiveryTime, FoPiusButton, TimeDoubPure, FoExceiExport },

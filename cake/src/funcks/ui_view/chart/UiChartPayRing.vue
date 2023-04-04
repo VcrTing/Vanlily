@@ -31,9 +31,8 @@ export default {
             this.option = {
                 legend: {
                     type: 'plain', show: true,
-                    icon: 'circle', // x: 'right', y: 'top', 
-                    top: '12px', right: '10%', 
-                    align: 'right',
+                    icon: 'circle', // 
+                    x: 'left', y: 'bottom', 
                     orient: 'vertical', 
                     itemGap: this.itemGap(many),
                     data: this.named(many), fontSize: '18px'
@@ -45,8 +44,8 @@ export default {
                 series: [
                     {
                         type: 'pie', data: this.data(many),
-                        radius: ['45%', '72%'], // 环
-                        center: [ "37%", "50%"], // 方位
+                        radius: ['32%', '52%'], // 环
+                        center: [ "50%", "36%"], // 方位
                         avoidLabelOverlap: true,
                         emphasis: {
                             itemStyle: {
@@ -72,3 +71,8 @@ export default {
 }
 // [ '现金', '转账', 'Paypal', 'Alipay HK', 'EPS', 'WeChat Pay HK', 'Pay ME' ]
 </script>
+
+<style lang="sass" scoped>
+#chrt_pay_ring
+    min-height: 30em !important
+</style>

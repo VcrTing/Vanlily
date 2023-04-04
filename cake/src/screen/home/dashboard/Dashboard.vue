@@ -7,6 +7,7 @@
                     <div class="w-333 px_x w-50-p">
                         <dash-top-orders 
                             :one="one" 
+                            :ioad="ioading"
                             :txt_now="now_txt[now]"
                             :txt="times_txt_iast[now]" 
                             class="panel-dash-top"/>
@@ -14,6 +15,7 @@
                     <div class="w-433 px_x w-0-p">
                         <dash-top-money 
                             :one="one" 
+                            :ioad="ioading"
                             :txt_now="now_txt[now]"
                             :txt="times_txt_iast[now]" 
                             class="panel-dash-top"/>
@@ -21,6 +23,7 @@
                     <div class="w-233 px_x w-50-p">
                         <dash-top-today-send 
                             :one="one" 
+                            :ioad="ioading"
                             :txt_now="now_txt[now]"
                             :txt="times_txt_iast[now]" 
                             class="panel-dash-top"/>
@@ -28,6 +31,7 @@
                     <div class="w-0 px_x w-100-p view-p">
                         <dash-top-money 
                             :one="one" 
+                            :ioad="ioading"
                             :txt_now="now_txt[now]"
                             :txt="times_txt_iast[now]" 
                             class="panel-dash-top"/>
@@ -61,9 +65,11 @@ import DashPayMode from './cake/DashPayMode.vue'
 import DashSaleHot from './cake/DashSaleHot.vue'
 import DashUserForm from './cake/DashUserForm.vue'
 import DashRightPlant from './right/DashRightPlant.vue'
+
 import DashTopMoney from './top/DashTopMoney.vue'
 import DashTopOrders from "./top/DashTopOrders.vue"
 import DashTopTodaySend from './top/DashTopTodaySend.vue'
+
 import DashTop2Chart from './top2/DashTop2Chart.vue'
 
 export default {
@@ -98,19 +104,18 @@ export default {
             this.$refs.order_chart.resetChart( this.one.orderPrice )
             this.$refs.paid_chart.resetChart( this.one.paidType )
             this.$refs.way_chart.resetChart( this.one.customerSource )
+            setTimeout(e => this.ioading = false, 20)
         },
         async fetching() {
             this.ioading = true
             const res = await this.serv.dashboard.many(this, this.now)
             if (res) { 
                 
-               console.log(res)
                 for (let k in res) {
                     this.one[k] = res[k]
                 }
                 this.chart()
             }
-            setTimeout(e => this.ioading = false, 20)
         }
     }
 }

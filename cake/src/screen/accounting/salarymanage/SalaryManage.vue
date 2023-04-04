@@ -76,13 +76,8 @@ export default {
     computed: {
         son() { let src = this.$route.path.split('salarymanage').filter(e => (e != '' && e != '/')); return src.length > 1 }  
     },
-    mounted() { console.log('SON =', this.$route.path.split('salarymanage').filter(e => e != '')) },
     methods: {
         mod(num) { this.pina().modai( num ) }
     }
 }
 </script>
-
-<style>
-
-</style>

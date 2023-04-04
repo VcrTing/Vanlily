@@ -79,7 +79,6 @@ export default {
 
         async submit() {
             const form = this.$refs.form.coii()
-            console.log('FORM =', form)
 
             if (form) {
                 this.ioading = true
@@ -93,7 +92,6 @@ export default {
                         let res_cks = true;
                         for (let i= 0; i< prods.length; i++ ) {
                             const cks = prods[ i ]; 
-                            console.log('修改蛋糕 =', cks.product_uuid, cks)
                             const _res = await this.serv.order.edit_cake(this, uuid, cks.product_uuid, cks )
                             if (!_res) res_cks = false;
                         }

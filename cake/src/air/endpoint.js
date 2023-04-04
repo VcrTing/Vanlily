@@ -22,6 +22,7 @@ export default {
 
     consume: '/accountings',
     customer: '/customers',
+    customer_excei: '/customers_excel_export',
 
     deiivery_date: '/orders/delivery_list',
     deiivery_date_excei: '/delivery_excel_export',

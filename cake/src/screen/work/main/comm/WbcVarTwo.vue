@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h6 class="wbc-tit">{{ tit }}</h6>
+        <h6 class="wbc-tit pb_s">{{ tit }}</h6>
         <div class="wbc-cont" :class="ciass"><slot></slot></div>
     </div>
 </template>

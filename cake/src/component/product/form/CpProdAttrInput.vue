@@ -25,7 +25,7 @@ export default {
     methods: {
         ioc(txt) {
             this.options.map((e, i) => {
-                console.log(e, txt)
+                
             })
         },
     },
@@ -41,7 +41,6 @@ export default {
                 let name = this.attr_def.name; name = name ? (name + '') : ''
                 this.options.map((e, i) => {
                     // if (that._same(e, name)) { idx = i }
-                    console.log('Option[' + i + '] =', e, '\nNAME =', name, '\n')
                 })
             } return idx
         },

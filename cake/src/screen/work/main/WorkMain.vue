@@ -6,11 +6,14 @@
 
         <template v-slot:cont>
             <div class="card-board upper">
-                <p class="h3 pt pri_light_son">
+                <h2 class="pb pri_son">
                     <span v-if="funni.funni">
-                        {{ funni.funni.delivery_date }}
+                        {{ timed.view(funni.funni.delivery_date, false, '-') }}
                     </span>
-                </p>
+                </h2>
+                <div class="fs_s wbc-cont">
+                    共&nbsp;{{ totai }}&nbsp;個訂單
+                </div>
                 <work-board-wrapper class="t-c pt" :pk="'tr'" @scroii="(v) => scroii(v, 'tr')" :idx="-1" ref="tr_scroii_">
                     <div class="work-board-tr" v-for="(v, i) in companys" :key="i">{{ v.txt }}</div>
                 </work-board-wrapper>
@@ -37,6 +40,7 @@
 </template>
 
 <script>
+import timed from '../../../air/tooi/timed'
 import ModalSource from '../../../component/source/ModalSource.vue'
 import UiLineTimed from '../../../funcks/ui_element/line/UiLineTimed.vue'
 import LayoutBan from '../../../funcks/ui_layout/layout/page/LayoutBan.vue'
@@ -45,13 +49,13 @@ import WorkMainTr from './board/WorkMainTr.vue'
 import WorkBoardWrapper from './comm/WorkBoardWrapper.vue'
 import WbcMod from './mod/WbcMod.vue'
 import WorkMainTopFilter from './top/WorkMainTopFilter.vue'
+
 export default {
-  components: { LayoutBan, WorkMainTopFilter, WorkMainTr, WorkBoardWrapper, UiLineTimed, WorkMainTd,
-    WbcMod,
-    ModalSource },
+    components: { LayoutBan, WorkMainTopFilter, WorkMainTr, WorkBoardWrapper, UiLineTimed, WorkMainTd,
+        WbcMod, ModalSource },
     data() {
         return {
-            items: [ ], items_map: { },
+            items: [ ], items_map: { }, totai: 0,
             times: [
                 { txt: '上午 (10:00 - 12:00)', v: '上午 (10:00 - 12:00)', code: '10:00' },
                 { txt: '中午 (12:00 - 15:00)', v: '中午 (12:00 - 15:00)', code: '12:00' },
@@ -95,7 +99,6 @@ export default {
                 })
                 res.push(o)
             })
-            console.log('res =', res)
             return res
         },
     },
@@ -121,8 +124,11 @@ export default {
         },
 
         // 序列化數據
-        async ser_items(many) {
+        async ser_items(many = [ ]) {
             return new Promise(async rej => {
+                
+                this.totai = many.length
+
                 // 序列化 company
                 many = many.map(e => {
                     const deiiv = e.delivery_info ? e.delivery_info : { }
@@ -140,7 +146,6 @@ export default {
                 many = many.map(e => { 
                     const k = e.__k; if (!res[k]) { res[k] = [ ] } res[k].push( e ); return e
                 })
-                console.log('ITEM =', res)
                 this.items_map = res; 
                 rej( many )
             })
@@ -171,3 +176,8 @@ export default {
     }
 }
 </script>
+
+<style lang="sass" scoped>
+h2
+    font-weight: 600
+</style>

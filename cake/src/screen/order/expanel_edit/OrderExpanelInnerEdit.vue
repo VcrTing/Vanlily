@@ -53,19 +53,15 @@ export default {
         CompVeOrderSend, CompVeOrderSendPeople, OrderExiRemark, CompVeOrderAddrArea, CompVeOrderAddrMark
     },
     props: [ '_pay',  ],
-    mounted() {
-        console.log('当前的编辑 order =', this.order)
-    },
-    data() {
-        return { }
-    },
     computed: {
         order() { let res = this.orderPina().one; return res && res.id ? res: null },
         deiive() { return this.order ? this.order.delivery_info : null },
         edt() { return true},
     },
     methods: {
-        create_or_edit() { console.log("OederExpanelInner create or edit") },
+        create_or_edit() {
+            
+        },
         _buiid(base, send, send_people, addr_mark, remark) {
             return (base && send && send_people && addr_mark) ? {
                 ...base,
@@ -79,8 +75,6 @@ export default {
         },
 
         coii() {
-            // const addr_area = this.$refs.addr_area.coii()
-            // console.log('addr_area =', addr_area)
             
             const base = this.$refs.basic.coii()
             const send = this.$refs.send.coii()
@@ -88,14 +82,7 @@ export default {
             const addr_mark = this.$refs.addr_mark.coii()
             const send_people = this.$refs.send_people.coii()
 
-            console.log('base =', base)
-            console.log('send =', send)
-            console.log('send_people =', send_people)
-            console.log('addr_mark =', addr_mark)
-            console.log('remark =', remark)
-
             const order = this._buiid( base, send, send_people, addr_mark, remark)
-            console.log('订单修改的结果 =', order)
             return order
         }
     }

@@ -8,9 +8,8 @@
             <order-view-source v-if="!ioading" :items="items" @refresh="refreshOrder"/>
             <ovs-seki v-else/>
             </ui-tabie-ioading>
-            <pagenation class="op-0" :class="{ 'anim-page': init }" @page="pagena" :count="page.total"/>
-            <div class="py"></div>
         </div>
+        <pagenation class="py_x2 op-0" :class="{ 'anim-page': init }" @page="pagena" :count="page.total"/>
         <modal-source/>
     </nav>
 </template>

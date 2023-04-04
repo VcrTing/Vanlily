@@ -29,7 +29,6 @@ export default {
                         res = e
                     }
                 }); 
-                // console.log('MY COEC =', res)
                 return res
             } return { }
         },

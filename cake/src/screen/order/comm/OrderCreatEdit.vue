@@ -87,11 +87,7 @@ export default {
       let prods = this.order.ordered_product
 
       this.cakes = prods ? prods.map(e => e.__cake) : [ ]
-      console.log('EDIT cakes =', this.cakes)
-      console.log('EDIT coecs =', this.order.coecs)
       this.order.coecs ? this.order.coecs.map(cs => this.productPina().do_coecs( cs )) : undefined;
-      console.log('EDIT PINA coecs =', this.productPina().coecs)
-
     },
 
     coii() {

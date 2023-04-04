@@ -70,7 +70,6 @@ export default {
                         od.__product = this.ser_cake(od)
                         return od
                     })
-                    console.log('items =', this.items)
                 }
                 setTimeout(e => this.ioading = false, 20)
 

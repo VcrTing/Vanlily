@@ -41,8 +41,6 @@ export default {
     },
     methods: {
         submit() {
-            console.log('FORM =', this.form)
-
             this.$emit('funi', this.form)
         }
     }

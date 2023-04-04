@@ -4,11 +4,11 @@
             <var-cake-cover :prod="cake"/>
         </div>
         <div class="fx-1 pl_x3">
-            <h4 class="t-elip_x1">
+            <h4 class="t-elip_x1 softer">
                 <var-cake-name :prod="cake" v-if="cake"/>
                 <div v-else>&nbsp;</div>
             </h4>
-            <div class="pt_x fx-l">
+            <div class="pt_x fx-l upper">
                 <div class="fx-l pr_x2">
                     單號:
                     &nbsp;&nbsp;{{ num }}
@@ -37,11 +37,5 @@ import ViewOrderPayStatus from '../view/order_status/pay/ViewOrderPayStatus.vue'
 export default {
     components: { VarCakeName, VarCakeCover, ViewOrderPayStatus },
     props: [ 'cake', 'date', 'num', 'remark', 'paid' ],
-    mounted() {
-        console.log('cake =', this.cake)
-    },
-    computed: {
-
-    }
 }
 </script>

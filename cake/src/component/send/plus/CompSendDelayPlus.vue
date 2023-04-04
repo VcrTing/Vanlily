@@ -41,11 +41,9 @@ export default {
         // item() { return this.pina().orders[0] }
     },
     methods: {
-        creat_or_update() { console.log('申請延遲發貨 提交！！！') }
+        creat_or_update() {
+            
+        }
     }
 }
 </script>
-
-<style>
-
-</style>

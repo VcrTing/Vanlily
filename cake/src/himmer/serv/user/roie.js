@@ -13,9 +13,7 @@ const funni = (funni) => {
 }
 
 const many = async function(vue, qs) {
-    console.log('qs =', funni(qs))
     let res = await vue.net.get('user_roie', vue.token(), funni(qs))
-    console.log('user_roie =', res)
     return res ? vue.strapi.ser(res) : { }
 }
 

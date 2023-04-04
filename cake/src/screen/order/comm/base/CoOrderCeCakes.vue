@@ -62,7 +62,6 @@ export default {
     },
     methods: {
         has( cake ) { let res = null
-            console.log('判斷的 has =', cake, this.coecs)
             this.coecs.map(e => {
                 if (e.product_uuid == cake.uuid) { res = e }
             }); return res ? true : false

@@ -51,7 +51,6 @@ export default {
         reset(v = { }) { 
             if (v) { 
                 for (let k in this.form) { this.form[ k ] = v[ k ] } 
-                // console.log('deiay deiiver v =', v) 
                 this.$refs.date ? this.$refs.date.ioc( this.form.delivery_date ) : undefined;
                 this.$refs.time ? this.$refs.time.ioc( this.form.delivery_time ) : undefined;
             } 

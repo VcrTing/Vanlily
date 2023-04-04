@@ -1,12 +1,12 @@
 <template>
   <layout-main>
-    <template v-slot:menu>
+    <template #menu>
       <menu-main />
     </template>
-    <template v-slot:top>
+    <template #top>
       <top-main/>
     </template>
-    <template v-slot:cont>
+    <template #cont>
       <router-view/>
     </template>
   </layout-main>
@@ -18,6 +18,5 @@ import MenuMain from '../../funcks/ui_layout/menu/MenuMain.vue'
 import TopMain from '../../funcks/ui_layout/top/TopMain.vue'
 export default {
   components: { MenuMain, LayoutMain, TopMain  },
-    
 }
 </script>

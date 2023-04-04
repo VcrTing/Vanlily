@@ -5,7 +5,7 @@
             <customer-top-filter :ioad="ioading" @submit="subFit"/>
         </template>
         <template #cont>
-            <nav class="table pb">
+            <nav class="table">
                 <customer-tr/>
                 <ui-tabie-ioading :ioad="ioading" :many="items">
                     <div v-if="!ioading">
@@ -14,7 +14,7 @@
                     <customer-seki v-else/>
                 </ui-tabie-ioading>
             </nav>
-            <pagenation class="op-0" :class="{ 'anim-page': init }" @page="pagena" :count="page.total" />
+            <pagenation class="py_x2 op-0" :class="{ 'anim-page': init }" @page="pagena" :count="page.total" />
         </template>
     </layout-page>
 </template>

@@ -4,23 +4,45 @@
 
 <script>
 export default {
-    async mounted() {
-        await this.many()
+    data() {
+        return {
+            imit: 100, items: [ ],
+            star: 1, has: true
+        }
+    },
+    mounted() {
+        this.many()
     },
     methods: {
-        async many() {
+        async _many() {
+            let res = null
             try {
-                let res = await this.serv.cake.many(this)
-                if (res && res.data) {
-                    this.productPina().do_products(res.data)
-                    console.log('CAKES =', res.data)
+                res = await this.serv.cake.many(this, this.star)
+            } catch(err) {
+                await this._many();
+                return null
+            }
+            res = (res && res.data) ? res.data : [ ]
+            if (res.length >= this.imit) {
+                res.map(e => this.items.push(e)); this.star += 1; this.has = true
+                await this._many()
+            } else {
+                this.has = false
+            }
+            return null
+        },
+        many() {
+            const _this = this
+            return new Promise(async rej => {
+                _this.items = [ ]
+                _this.has = true
+                await _this._many();
+                if (this.items.length > 0 && !this.has) {
+                    this.productPina().do_products( this.items )
                 }
-            } catch(err) { }
+                rej(0)
+            })
         }
     }
 }
 </script>
-
-<style>
-
-</style>

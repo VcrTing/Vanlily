@@ -80,7 +80,6 @@ export default {
             if (data) {
                 this.msg = '儲存中...'
                 try {
-                    console.log('數據 =', data)
                     let res = await this.serv.materiai.edit(this, data, this._mtr.id)
                     if (res) {
                         this.back(); setTimeout(() => this.msg = '', 200)

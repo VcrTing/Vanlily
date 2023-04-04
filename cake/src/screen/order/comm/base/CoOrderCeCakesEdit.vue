@@ -80,7 +80,7 @@ export default {
         //  編輯 
         cakeEdit(cake) { this.productPina().do_cake_of_edit(cake); this.mod(22) },
         // 刪除
-        cakeTrash(cake) { this.$emit('trash', cake.uuid); console.log('刪除 0 =', cake) },
+        cakeTrash(cake) { this.$emit('trash', cake.uuid); },
 
         coii() {
             let res = null

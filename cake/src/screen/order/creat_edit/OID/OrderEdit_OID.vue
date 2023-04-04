@@ -29,7 +29,6 @@ export default {
       this.ioading = true
       const res = this.coii()
       if (res) {
-        console.log('结果 =', res)
       }
     },
     coii() {

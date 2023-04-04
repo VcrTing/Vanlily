@@ -4,20 +4,19 @@
         <nav class="table-hot">
             <div class="tr">
                 <div class="w-8 t-c">排行</div>
-                <div class="w-8 t-c">&nbsp;</div>
-                <div class="w-50">名稱</div>
+                <div class="w-3"></div>
+                <div class="w-55">名稱</div>
                 <div class="w-12">訂單量</div>
                 <div class="w-22">最近訂單日期</div>
             </div>
-            <div class="py_s"></div>
             <div v-if="!ioad">
                 <div v-if="host && host.length > 0">
                     <div class="td px_x2" v-for="(v, i) in host" :key="i">
                         <div class="w-8 t-c">
                             <button class="btn-icon tag-pri_light">{{ i + 1 }}</button>
                         </div>
-                        <div class="w-8 t-c">&nbsp;</div>
-                        <div class="w-50 t-elip_x1">{{ v.name }}</div>
+                        <div class="w-3"></div>
+                        <div class="w-55 t-elip_x1">{{ v.name }}</div>
                         <div class="w-12">{{ v.value }}</div>
                         <div class="w-22">{{ timed.view(v.latest_purchase) }}</div>
                     </div>
@@ -29,8 +28,8 @@
                     <div class="w-8 t-c">
                         <skeieton-cont class="m-33"/>
                     </div>
-                    <div class="w-8 t-c">&nbsp;</div>
-                    <div class="w-44">
+                    <div class="w-3"></div>
+                    <div class="w-49">
                         <skeieton-cont class="m-33"/>
                     </div>
                     <div class="w-6">&nbsp;</div>
@@ -57,6 +56,7 @@ export default {
     data() { return { ski: [ 'mb', 'mb', '' ], } },
     computed: {
         host() {
+            
             const res = [ ]
             let src = this.many
             if (src) {
@@ -65,13 +65,14 @@ export default {
                     o.value = o.value ? o.value : 0
                     return (o.value - n.value)
                 })
-                console.log('src =', src)
                 src.map((e, i) => {
                     if (i < 10) {
                         res.push(e)
                     }
                 })
             }
+
+            return res
         }
     }
 }

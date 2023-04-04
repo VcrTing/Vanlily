@@ -20,7 +20,7 @@ const many = async function(vue, qs) {
 const many_customer = async function(vue, phone_no, star = 1, imit = 20) {
     let res = await vue.net.get('orders', vue.token(), {
         'sort[0]': 'createdAt:desc', 'pagination[page]': star, 'pagination[pageSize]': imit,
-        phone_no
+        'phone_no': Number(phone_no)
     })
     return res ? vue.strapi.ser(res) : { }
 }
@@ -51,7 +51,6 @@ const creat = async function(vue, data) {
 const edit = async function(vue, order_uuid, data ) {
     let res = await vue.net.patch('orders', vue.token(), order_uuid, data)
 
-    console.log('修改結果 order =', res)
     return res && res.status < 399
 }
 
@@ -59,7 +58,6 @@ const edit = async function(vue, order_uuid, data ) {
 const edit_cake = async function(vue, order_uuid, prod_uuid, data) {
     let res = await vue.net.patch('order_pro', vue.token(), order_uuid + '/' + prod_uuid, data)
     
-    console.log('修改結果 cakes =', res)
     return res && res.status < 399
 }
 
@@ -67,7 +65,6 @@ const edit_cake = async function(vue, order_uuid, prod_uuid, data) {
 const deiay_deiiv = async function(vue, uuid, data) {
     let res = await vue.net.patch('order_deiay_deiiv', vue.token(), uuid, data)
 
-    console.log('修改結果 deiay =', res)
     return res && res.status < 399
 }
 

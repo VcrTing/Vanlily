@@ -25,7 +25,7 @@ export default {
     view_cn(src, iong = false) {
         src = moment(src)
         if (src) {
-            return src.format('yyyy年MM月DD日')
+            return src.format('yyyy年M月D日')
         }
     },
     now() { return moment(new Date()).format('yyyy-MM-DD') },

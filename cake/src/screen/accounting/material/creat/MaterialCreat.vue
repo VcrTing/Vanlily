@@ -67,7 +67,6 @@ export default {
             if (data) {
                 this.msg = '儲存中...'
                 try {
-                    console.log('數據 =', data)
                     let res = await this.serv.materiai.creat(this, data)
                     if (res) {
                         this.back(); setTimeout(() => this.msg = '', 200)

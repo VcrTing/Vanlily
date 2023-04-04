@@ -18,7 +18,6 @@ export default {
     },
     methods: {
         change() {
-            console.log('open =', this.open)
             this.open = !this.open
         }
     }

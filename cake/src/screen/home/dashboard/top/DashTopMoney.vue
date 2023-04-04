@@ -4,18 +4,18 @@
         <nav class="fx-s">
             <div class="h0">
                 <span>HKD&nbsp;</span>
-                <fk-countup v-if="one.orderPriceTotal" :v="one.orderPriceTotal"/>
+                <fk-countup v-if="!ioad" :v="one.orderPriceTotal"/>
                 <span v-else>0.00</span>
             </div>
             <button class="btn-pri_light btn-icon h3_son d-ib">
                 <i class="mdi mdi-currency-usd"></i>
             </button>
         </nav>
-        <div>
+        <!--div>
             <span>比<span>{{ txt }}</span>{{ ia_add }}</span>
             <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span class="pri_light_son"><span>{{ num }}</span>%</span>
-        </div>
+        </div-->
     </div>
 </template>
 
@@ -26,6 +26,7 @@ import Money from '../../../../funcks/ui/money/Money.vue'
 export default {
   components: { Money, FkCountup },
     props: {
+        ioad: Boolean,
         one: Object,
         txt: String,
         txt_now: String
