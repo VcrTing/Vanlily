@@ -8,8 +8,10 @@
                 <div class="w-54">
                     送貨時段：
                     <vf-send-time-select :def="deiiv.delivery_time" :_txt_mode="true"/>
+                    <!--
                     &nbsp;&nbsp;
                     <button class="btn-succ">已更新</button>
+                    -->
                 </div>
             </div>
             <div class="w-50 fx-l fx-t">

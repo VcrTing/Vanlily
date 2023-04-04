@@ -6,8 +6,8 @@
                 <span v-if="form.payment_date">{{ form.payment_date }}</span>
                 <span v-else class="err">(未紀錄)</span>
             </div>
-            <div class="w-24">
-                <span>方式:&nbsp;&nbsp;</span>
+            <div class="w-24 fx-l">
+                <div>方式:&nbsp;&nbsp;</div>
                 <vf-payway-select v-if="form.payment_method_title" class="d-ib" :def="form.payment_method_title" :_txt_mode="true"/>
                 <span v-else class="cold">(未紀錄)</span>
             </div>

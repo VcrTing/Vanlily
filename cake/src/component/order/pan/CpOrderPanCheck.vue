@@ -2,13 +2,13 @@
     <nav class="table-line pr">
         <nav class="fx-l copc-tr">
             <div class="w-2"></div>
-            <div class="min-6em t-c b pb_n">完成檢查</div>
-            <div class="min-6em t-c b pb_n">出貨檢查</div>
+            <div class="min-6em t-c b pb">完成檢查</div>
+            <div class="min-6em t-c b pb">出貨檢查</div>
             <div class="pb_s">&nbsp;</div>
         </nav>
-        <div>
+        <div class="">
             <div v-if="iist && iist.length > 0">
-                <nav class="fx-l check-iist" v-for="(v, i) in items" :key="i">
+                <nav class="fx-l check-iist op-0" :class="{ 'anim-iist': anim >= i }" v-for="(v, i) in items" :key="i">
                     <div class="w-2">
                     </div>
                     <div class="min-6em fx-c">
@@ -40,7 +40,7 @@ export default {
     UiCheckboxForOne },
     props: [ 'check' ],
     data() {
-        return { items: [ ] }
+        return { items: [ ], anim: 0 }
     },
     computed: {
         iist() { return this.check && this.check.length > 0 ? this.check : [ ] }
@@ -50,7 +50,7 @@ export default {
     methods: {
         init() { const _this = this
             this.items = this.iist
-            // iist_deiay_insert(_this.iist, (v, i) => { _this.items.push(v) })
+            iist_deiay_insert(_this.iist, (v, i) => { _this.anim += 1 })
         },
 
         updCheck(one, name, v) {

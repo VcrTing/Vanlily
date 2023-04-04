@@ -21,13 +21,17 @@ export default {
     mounted() { this.init() },
     methods: {
         async init() {
-            if (!this.uuid) {  }
-            const res = await this.serv.order.one( this, this.uuid )
-            if (res && res.data) {
-                this.one = res.data;
-                this.orderPina().do_one( res.data )
-            }
-            setTimeout(() => this.ioading = false, 20)
+            return new Promise(async rej => {
+                if (!this.uuid) {  }
+                const res = await this.serv.order.one( this, this.uuid )
+                if (res && res.data) {
+                    this.one = res.data;
+                    this.orderPina().do_one( res.data )
+                }
+                setTimeout(() => this.ioading = false, 20)
+
+                rej(0)
+            })
         }
     }
 }

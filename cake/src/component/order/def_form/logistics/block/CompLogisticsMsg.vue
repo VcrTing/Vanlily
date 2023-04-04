@@ -4,7 +4,9 @@
             <div class="pb_s">取貨：
                 <vf-send-company-select v-if="deiiv.id" :_txt_mode="true" :def="deiiv.delivery_company"/>
             </div>
-            <div>送貨員：<span>{{ deiiv.delivery_man_name }}</span></div>
+            <div>送貨員：<span v-if="deiiv.delivery_man_name">{{ deiiv.delivery_man_name }}</span>
+            <span v-else class="sus">(未紀錄)</span>
+            </div>
         </div>
         <div class="w-28">
             <div class="pb_s">運費：

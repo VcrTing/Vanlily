@@ -17,7 +17,7 @@
                 <co-logistic-pay-skei v-else/>
             </div>
             <div class="pt_x3 fx-c pb">
-                <order-exi-send-opera/>
+                <order-exi-send-opera @edit="$emit('edit')" @review="$emit('review')"/>
             </div>
         </div>
     </nav>
@@ -33,6 +33,7 @@ import CompLogisticsMsg from '../../../../../component/order/def_form/logistics/
 export default {
     components: { OrderExiOperaForSend, OrderExiSendOpera, CompLogisticsPay, CoLogisticPaySkei, CompLogisticsTime, CompLogisticsMsg   },
     data() { return { send: { } } },
+    emits: [ 'review', 'edit'],
     computed: {
         order() { let res = this.orderPina().one; return res && res.id ? res: null },
     },

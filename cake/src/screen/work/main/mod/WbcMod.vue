@@ -1,5 +1,5 @@
 <template>
-    <modal-by-state class="modal-w-min">
+    <modal-by-state class="modal-w-min" v-if="pan > 1000">
         <wbc-order-check-iist v-if="pan === 1001"/>
         <wbc-order-review v-else-if="pan === 1002"/>
     </modal-by-state>

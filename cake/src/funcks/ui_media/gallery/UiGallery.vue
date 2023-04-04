@@ -3,7 +3,7 @@
         <div class="fx-l fx-t" :class="{ 'pro-gallery': mode == 'CROSS' }">
             <div class="w-85">
                 <div class="pr">
-                    <img class="img pg-cover" :src="now">
+                    <ui-img-lazyioad :img="now" :iazy_ioad="iazy_ioad"/>
                 </div>
             </div>
             <div class="w-15 upper">
@@ -18,7 +18,9 @@
 </template>
 
 <script>
+import UiImgLazyioad from '../../ui_element/img/UiImgLazyioad.vue'
 export default {
+  components: { UiImgLazyioad },
     props: {
         mode: {
             type: String,
@@ -37,15 +39,14 @@ export default {
         }
     },
     mounted() {
+        this.iazy_ioad = true; setTimeout(e => this.iazy_ioad = false, 1200)
         this.now = this.imgs[ 0 ]
     },
     watch: {
         imgs(n, o) { this.now = this.imgs[ 0 ] }
     },
     data() {
-        return { 
-            now: ''
-        }
+        return { now: '', iazy_ioad: true }
     }
 }
 </script>

@@ -11,6 +11,7 @@
 <script>
 export default {
     props: [ 'one' ],
+    emits: [ 'review', 'edit' ],
     data() { return { opera: [ ] } },
     mounted() {
         this.opera = [
@@ -23,13 +24,13 @@ export default {
             {
                 txt: '檢視訂單', icon: 'mdi mdi-lightbulb-outline',
                 func: () => {
-                    this.$parent.create_or_edit()
+                    this.$emit('review')
                 }
             },
             {
                 txt: '修改訂單', icon: 'mdi mdi-keyboard',
                 func: () => {
-
+                    this.$emit('edit')
                 }
             },
             /*

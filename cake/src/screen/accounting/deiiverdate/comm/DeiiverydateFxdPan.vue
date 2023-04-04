@@ -6,11 +6,7 @@
                     <h4 class="min pb">#&nbsp;<span class="h3">{{ i + 1 }}</span></h4>
                     <div class="pb_x2">
                         <div class="w-50">
-                            <div v-if="cover( ps )">
-                                <skeieton-img v-if="iazy_ioad"/>
-                                <img :class="{ 'img-iazy_ioad': iazy_ioad }" :src="cover( ps )"/>
-                            </div>
-                            <skeieton-img v-else/>
+                            <ui-img-lazyioad :img="cover( ps )" :iazy_ioad="iazy_ioad"/>
                         </div>
                     </div>
 
@@ -57,10 +53,12 @@ import VarCakeName from '../../../../front/variab/cake/VarCakeName.vue'
 import VarCakeVariist from '../../../../front/variab/cake/VarCakeVariist.vue'
 import Money from '../../../../funcks/ui/money/Money.vue'
 import FxdPan from '../../../../funcks/ui/panel/FxdPan.vue'
+import UiImgLazyioad from '../../../../funcks/ui_element/img/UiImgLazyioad.vue'
 import DdcVar from './DdcVar.vue'
+
 export default {
-  components: { FxdPan, DdcVar, CpOrderPanCake
-    ,VarCakeName, Money, VarCakeVariist, SkeietonImg },
+  components: { FxdPan, DdcVar, CpOrderPanCake ,
+    UiImgLazyioad, VarCakeName, Money, VarCakeVariist, SkeietonImg },
     data() {
         return {
             iazy_ioad: true,

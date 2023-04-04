@@ -31,11 +31,13 @@
             </div>
 
             <wbc-mod/>
+            <modal-source/>
         </template>
     </layout-ban>
 </template>
 
 <script>
+import ModalSource from '../../../component/source/ModalSource.vue'
 import UiLineTimed from '../../../funcks/ui_element/line/UiLineTimed.vue'
 import LayoutBan from '../../../funcks/ui_layout/layout/page/LayoutBan.vue'
 import WorkMainTd from './board/WorkMainTd.vue'
@@ -45,7 +47,8 @@ import WbcMod from './mod/WbcMod.vue'
 import WorkMainTopFilter from './top/WorkMainTopFilter.vue'
 export default {
   components: { LayoutBan, WorkMainTopFilter, WorkMainTr, WorkBoardWrapper, UiLineTimed, WorkMainTd,
-    WbcMod },
+    WbcMod,
+    ModalSource },
     data() {
         return {
             items: [ ], items_map: { },
@@ -108,17 +111,7 @@ export default {
             } else {
                 res.push(this.$refs['tr_scroii_'])
             }
-            /*
-            else {
-                this.times.map((_t, i) => {
-                    if (idx != i) {
-                        const _pk_tds = k + '_scroii_' + i
-                        res.push( _pk_tds )
-                    }
-                })
-                res.push('tr_scroii_')
-            }
-            */
+
             res.map(e => {
                 if (e) {
                     const _fun = e['scroiiTo']
@@ -129,25 +122,28 @@ export default {
 
         // 序列化數據
         async ser_items(many) {
-            // 序列化 company
-            many = many.map(e => {
-                const deiiv = e.delivery_info ? e.delivery_info : { }
-                if (this.ziqus.indexOf(deiiv.delivery_method) >= 0) {
-                    deiiv[ '_deiiv_company' ] = deiiv.delivery_method
-                } else {
-                    deiiv[ '_deiiv_company' ] = deiiv.delivery_company
-                }
-                e.__k = deiiv.delivery_time + '_' + deiiv._deiiv_company
-                e.delivery_info = deiiv
-                return e
+            return new Promise(async rej => {
+                // 序列化 company
+                many = many.map(e => {
+                    const deiiv = e.delivery_info ? e.delivery_info : { }
+                    if (this.ziqus.indexOf(deiiv.delivery_method) >= 0) {
+                        deiiv[ '_deiiv_company' ] = deiiv.delivery_method
+                    } else {
+                        deiiv[ '_deiiv_company' ] = deiiv.delivery_company
+                    }
+                    e.__k = deiiv.delivery_time + '_' + deiiv._deiiv_company
+                    e.delivery_info = deiiv
+                    return e
+                })
+                let res = { }
+                // 序列化 出 map
+                many = many.map(e => { 
+                    const k = e.__k; if (!res[k]) { res[k] = [ ] } res[k].push( e ); return e
+                })
+                console.log('ITEM =', res)
+                this.items_map = res; 
+                rej( many )
             })
-            let res = { }
-            // 序列化 出 map
-            many = many.map(e => { 
-                const k = e.__k; if (!res[k]) { res[k] = [ ] } res[k].push( e ); return e
-            })
-            console.log('ITEM =', res)
-            this.items_map = res; return many
         },
 
         // 基礎事物
@@ -156,7 +152,8 @@ export default {
             await this._fetch(); setTimeout(e => { this.ioading = false }, 200)
         },
         async _fetch() {
-            if (this.jwt) {  let res = undefined
+            return new Promise(async rej => {
+                let res = undefined
                 try {
                     res = await this.serv.action_board.many(this, this.funni)
                 } catch(err) { }
@@ -164,7 +161,9 @@ export default {
                     this.items = await this.ser_items(res.data); this.page = res.page; // this.opened() 
                 }
                 setTimeout(e => { this.ioading = false }, 200);
-            }
+
+                rej(0)
+            })
         },
         sort() { this.funni[ 'sort' ] = 'createdAt:desc' },
         mod(num) { this.pina().modai( num ); this.funni = {} },

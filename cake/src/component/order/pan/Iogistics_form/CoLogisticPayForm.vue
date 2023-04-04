@@ -58,9 +58,9 @@ export default {
     mounted() { 
         if (this._edit) { 
             this.reset( this.form ); 
-            this.form_of_save = JSON.parse(JSON.stringify( this.form )) 
-            console.log('EDIT =', this._edit, this.form_of_save)
-        } 
+        }
+        this.form_of_save = JSON.parse(JSON.stringify( this.form )) 
+        console.log('form_of_save =', this.form_of_save) 
     },
 
     methods: {
@@ -73,7 +73,11 @@ export default {
 
         submit() { const data = this.coii(); if (data) this.$emit('submit', data); },
 
-        cancei() { this.form.edit = false }
+        cancei() { 
+            for (let k in this.form_of_save) {
+                this.form[ k ] = this.form_of_save[ k ]
+            }
+            this.form.edit = false }
     }
 }
 </script>

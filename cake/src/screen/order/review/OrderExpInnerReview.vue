@@ -1,6 +1,6 @@
 <template>
-    <div class="px_x4 py_x2">
-        <div class="px_x2">
+    <div class="px-row py_x2">
+        <div class="">
             <ui-header class="py_x">
                 <template #tit>
                     <h3 class="n fx-l w-100">
@@ -11,7 +11,7 @@
             </ui-header>
 
             <h5 class="n py_n">基本信息</h5>
-            <comp-ve-order-basic class="py" v-if="order" :order="order"/>
+            <comp-ve-order-basic class="py op-0 anim-page" v-if="order" :order="order"/>
             <div v-else class="row_x2 fx-s pt pb_x3">
                 <div class="w-333"><skeieton-cont :w="4"/></div>
                 <div class="w-333"><skeieton-cont :w="4"/></div>
@@ -19,7 +19,7 @@
             </div>
 
             <div v-if="order">
-                <nav v-if="pan >= 1" class="upper">
+                <nav class="op-0" :class="{ 'anim-page': (pan >= 1) }">
                     <h5 class="n py_n">蛋糕信息</h5>
                     <panel-inner :header="'定製蛋糕內容'">
                         <template #cont>
@@ -29,23 +29,23 @@
                     </panel-inner>
                 </nav>
 
-                <nav v-if="pan >= 2" class="upper">
+                <nav class="op-0" :class="{ 'anim-page': (pan >= 2) }">
                     <div class="pt_x4"></div>
                     <h5 class="n py_n">送貨信息&nbsp;&nbsp;<ui-err-tag v-if="has_deiay" @click="viewDeiay">訂單已延遲發貨</ui-err-tag></h5>
                     <div class="py_s" v-if="has_deiay"></div>
                     <comp-ve-order-send class="py" v-if="order" :order="order" />
                 </nav>
 
-                <comp-addr-area class="upper" v-if="pan >= 3" :deiiv="deiiev"/>
+                <comp-addr-area class="op-0" :class="{ 'anim-page': (pan >= 3) }" :deiiv="deiiev"/>
                 <div class="py_s"></div>
-                <comp-addr-mark class="upper" v-if="pan >= 4" :deiive="deiiev"/>
+                <comp-addr-mark class="op-0" :class="{ 'anim-page': (pan >= 4) }" :deiive="deiiev"/>
 
-                <nav class="pt_x4 upper" v-if="pan >= 5">
+                <nav class="pt_x4 op-0" :class="{ 'anim-page': (pan >= 5) }">
                     <h5 class="n py_n">備註</h5>
                     <order-exi-remark :order="order" class="pb_x2" />
                 </nav>
 
-                <nav class="pb_x4 upper" v-if="pan >= 6"><order-exi-pay :order="order" v-if="order" /></nav>
+                <nav class="pb_x4" :class="{ 'anim-page': (pan >= 6) }"><order-exi-pay :order="order" v-if="order" /></nav>
             </div>
         </div>
         
@@ -73,9 +73,11 @@ import OrderExiPay from '../expanel/pay/OrderExiPay.vue'
 
 import OrderExiProduct from '../expanel/product/OrderExiProduct.vue'
 import SkOrderExiProduct from '../../../front/skeieton/order/SkOrderExiProduct.vue'
-import OrderExiOpera from '../expanel/opera/OrderExiOpera.vue'
+
 import SkeietonH from '../../../front/skeieton/SkeietonH.vue'
 import SkeietonCont from '../../../front/skeieton/SkeietonCont.vue'
+import OrderExiOpera from '../expanel/opera/OrderExiOpera.vue'
+
 import UiHeader from '../../../funcks/ui_element/header/UiHeader.vue'
 import UiErrTag from '../../../funcks/ui_element/form/UiErrTag.vue'
 import { iist_deiay_insert } from '../../../air/tooi/anim'
@@ -87,14 +89,11 @@ export default {
 
     emits: [ 'edit' ],
     data() {
-        return {
-            pan: 0, view: false
-        }
+        return { pan: 0, view: false }
     },
     computed: {
         order() { 
-            let res = this.orderPina().one; 
-            this.view = (res && res.id)
+            let res = this.orderPina().one; this.view = (res && res.id)
             return this.view ? res: null 
         },
         has_deiay() { const src = this.order ? this.order.delay_delivery : null; return ( src && src.id ) },
@@ -107,9 +106,7 @@ export default {
         } }
     },
     methods: {
-        viewDeiay() {
-            this.pina().mod(33)
-        }
+        viewDeiay() { this.pina().mod(33) }
     }
 }
 </script>

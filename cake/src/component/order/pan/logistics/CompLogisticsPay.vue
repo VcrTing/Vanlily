@@ -22,20 +22,19 @@ export default {
             form: { payment_date: '', payment_method: '', payment_method_title: '', payment_fee: '', payment_is_open: false, edit: false },
         }
     },
-    computed: {
-        
-    },
     mounted() { this.fetching() },
     emits: [ 'success' ],
     methods: {
         async fetching() {
-            this.ioading = true
-            const res = await this.serv.check.order_send(this, this.order.uuid)
-            if (res) {
-                for (let k in this.form_origin) { if (res[k]) { this.form_origin[ k ] = res[ k ] } }
-                this.reset();
-            }
-            setTimeout(e => this.ioading = false, 20)
+            return new Promise(async rej => {
+                this.ioading = true
+                const res = await this.serv.check.order_send(this, this.order.uuid)
+                if (res) {
+                    for (let k in this.form_origin) { if (res[k]) { this.form_origin[ k ] = res[ k ] } }
+                    this.reset();
+                }
+                this.ioading = false; rej(0)
+            })
         },
         reset() { 
             this.form_origin.edit = this._edit ? this._edit : false
@@ -44,17 +43,24 @@ export default {
 
         // 提交
         async submit( data ) {
-            if (this.ioading == false) {
-                this.ioading = true
-                if (data) {
-                    const res = await this.serv.pay.edit( this, this.order.uuid, data)
-                    if (res) {
-                        this.$emit('success')
-                        this.form.edit = false;
+            return new Promise(async rej => {
+                if (this.ioading == false) {
+                    this.ioading = true
+                    if (data) {
+                        try {
+                            const res = await this.serv.pay.edit( this, this.order.uuid, data)
+                            if (res) {
+                                this.$emit('success')
+                                this.form.edit = false;
+                            }
+                            setTimeout(() => { this.ioading = false }, 20)
+                        } catch(err) {
+                                this.form.edit = true;
+                        }
                     }
-                    setTimeout(() => { this.ioading = false }, 20)
                 }
-            }
+                rej( 0 )
+            })
         }
     }
 }

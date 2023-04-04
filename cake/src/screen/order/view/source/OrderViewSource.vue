@@ -10,15 +10,18 @@
         <div v-if="td == i">
           <ovs-base-pan v-if="pan == 1"/>
           <ovs-cake-pan v-else-if="pan == 2"/>
-          <ovs-send-pan v-else-if="pan == 3"/>
+          <ovs-send-pan v-else-if="pan == 3"
+            @edit="expan('EDIT', i, m.uuid)"
+            @review="expan('CHECK_AII', i, m.uuid)"
+          />
           <ovs-check-pan v-else-if="pan == 4"/>
 
-          <nav class="px_x2 bg-FFF" v-else-if="pan == 100">
+          <nav class="px-row bg-FFF" v-else-if="pan == 100">
             <order-exp-inner-review 
               @edit="expan('EDIT', i, m.uuid)"
             />
           </nav>
-          <nav class="px_x2 bg-FFF" v-else-if="pan == 101">
+          <nav class="px-row bg-FFF" v-else-if="pan == 101">
             <order-edit
               @review="expan('CHECK_AII', i, m.uuid)"
             />

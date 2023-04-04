@@ -63,7 +63,7 @@ export default {
     },
 
     methods: {
-        deatii(v = '您的表單不完整。', t = 1) { this.msg = v; setTimeout(e => this.msg = '', 4000 * t) },
+        deatii(v = '表單不完整。', t = 1) { this.msg = v; setTimeout(e => this.msg = '', 4000 * t) },
 
         buiid() {
             const deiiv = this.$refs.deiiv.coii();

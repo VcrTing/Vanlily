@@ -1,6 +1,6 @@
 <template>
-    <div class="px_x4 py_x2" v-if="!compeieted">
-        <ui-header class="py_x px_x2">
+    <div class="px-row py_x2" v-if="!compeieted">
+        <ui-header class="py_x">
           <template #tit>
             <h3 class="n fx-l w-100">
                 <span>單號:&nbsp;&nbsp;</span><span v-if="aiiow">{{ order.uuid }}</span>
@@ -9,7 +9,7 @@
           </template>
         </ui-header>
 
-        <div class="px_x2 pb_x2">
+        <div class="pb_x2">
             <order-creat-edit v-if="aiiow" ref="form" :order="order" :_edit="true"/>
             <div v-else>
                 <h5 class="n py_n">基本信息</h5>
@@ -41,6 +41,7 @@ import CoOrderCePay from '../comm/pay/CoOrderCePay.vue'
 import FoButton from '../../../front/button/FoButton.vue'
 import strapi from '../../../air/tooi/strapi'
 import OrderEditSuccess from '../success/OrderEditSuccess.vue'
+
 export default {
     components: { UiHeader, OrderCreatEdit, UiSubmit, SkeietonH, SkeietonCont, CoOrderCePay, FoButton, OrderEditSuccess },
     data() {    

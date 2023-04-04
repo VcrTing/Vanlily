@@ -43,10 +43,8 @@ export default {
         ioc(vv) { this.now = vv },
 
         ioc_txt(vv) {
-            let res = ''
-            this.ways.map(e => {
-                if (e.v == vv) { res = e.txt }
-            })
+            let res = '(未紀錄)'
+            this.ways.map(e => { if (e.v == vv) { res = e.txt } })
             return res
         }
     }
