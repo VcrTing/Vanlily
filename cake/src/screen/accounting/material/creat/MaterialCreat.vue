@@ -63,18 +63,22 @@ export default {
             } return res
         },
         async submit() {
-            const data = this.coii()
-            if (data) {
-                this.msg = '儲存中...'
-                try {
-                    let res = await this.serv.materiai.creat(this, data)
-                    if (res) {
-                        this.back(); setTimeout(() => this.msg = '', 200)
+            return new Promise(async rej => {
+                const data = this.coii()
+                if (data) {
+                    this.msg = '儲存中...'
+                    try {
+                        let res = await this.serv.materiai.creat(this, data)
+                        if (res) {
+                            this.back(); setTimeout(() => this.msg = '', 200)
+                        }
+                    } catch (err) {
+                        this.msg = '網絡錯誤！'
                     }
-                } catch (err) {
-                    this.msg = '網絡錯誤！'
                 }
-            }
+
+                rej(0)
+            })
         },
         back() { this.go('/admin/accounting/material/') }
     }

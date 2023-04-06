@@ -62,18 +62,17 @@
 
 <script>
 import DashPayMode from './cake/DashPayMode.vue'
-import DashSaleHot from './cake/DashSaleHot.vue'
-import DashUserForm from './cake/DashUserForm.vue'
 import DashRightPlant from './right/DashRightPlant.vue'
+import DashTop2Chart from './top2/DashTop2Chart.vue'
 
 import DashTopMoney from './top/DashTopMoney.vue'
 import DashTopOrders from "./top/DashTopOrders.vue"
 import DashTopTodaySend from './top/DashTopTodaySend.vue'
 
-import DashTop2Chart from './top2/DashTop2Chart.vue'
+import DashSaleHot from './cake/DashSaleHot.vue'
 
 export default {
-    components: { DashTopOrders, DashTopTodaySend, DashTopMoney, DashRightPlant, DashTop2Chart, DashSaleHot, DashPayMode, DashUserForm },
+    components: { DashTopOrders, DashTopTodaySend, DashTopMoney, DashRightPlant, DashTop2Chart, DashSaleHot, DashPayMode },
     data() {
         return {
             now: 'week', 
@@ -96,6 +95,7 @@ export default {
         now(n) { this.fetching() }
     },
     mounted() { this.init() },
+    
     methods: {
         async init() {
             await this.fetching()
@@ -107,15 +107,23 @@ export default {
             setTimeout(e => this.ioading = false, 20)
         },
         async fetching() {
-            this.ioading = true
-            const res = await this.serv.dashboard.many(this, this.now)
-            if (res) { 
-                
-                for (let k in res) {
-                    this.one[k] = res[k]
+            return new Promise(async rej => {
+
+                this.ioading = true
+                const res = await this.serv.dashboard.many(this, this.now)
+
+                if (res) { 
+                    
+                    for (let k in res) {
+                        this.one[k] = res[k]
+                    }
+
+                    console.log('DASH RES =', res)
+                    this.chart()
                 }
-                this.chart()
-            }
+
+                rej(0)
+            })
         }
     }
 }

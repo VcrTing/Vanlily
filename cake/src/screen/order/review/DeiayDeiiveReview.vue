@@ -44,11 +44,15 @@ export default {
         }
     },
     mounted() {
-        if (this._deiiev.id) {
-            this.deiiev = JSON.parse(JSON.stringify( this._deiiev ))
-        } else {
-            this.pina().mod( 0 )
-        }
+        return new Promise(rej => {
+            if (this._deiiev.id) {
+                this.deiiev = JSON.parse(JSON.stringify( this._deiiev ))
+            } else {
+                this.pina().mod( 0 )
+            }
+
+            rej(0)
+        })
     },
     computed: {
         order() { let res = this.orderPina().one; return res && res.id ? res: null },

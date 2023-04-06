@@ -1,13 +1,14 @@
 textarea
     width: 100%
 // 
+$ip_pchd: #8C8C8C
 .input-sus
     i
-        color: $sus !important
+        color: $ip_pchd !important
     &:-moz-placeholder,
     &:-ms-input-placeholder,
     &::-webkit-input-placeholder
-        color: $sus !important
+        color: $ip_pchd !important
     
 $ip-br: #e1e1e1
 $ip-br_Hover: #d3d3d3
@@ -235,10 +236,10 @@ $checkbox: #c2c2c2
     background: #FFF
     border: none !important
     .input
-        @extend .br_s
-        @extend .bxs_n
+        @extend .br
+        // @extend .bxs_n
         // @extend .input-sus
-        border: none !important
+        // border: none !important
         width: 100% 
     .vuejs3-datepicker
         width: 100%

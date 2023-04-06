@@ -64,8 +64,11 @@ export default {
             await this.fetch();
         },
         async fetch() {
-            this.ioading = true; this.sort()
-            await this._fetch(); setTimeout(e => { this.ioading = false }, 200)
+            return new Promise(async rej => {
+                this.ioading = true; this.sort()
+                await this._fetch(); setTimeout(e => { this.ioading = false }, 200);
+                rej(0)
+            })
         },
         async _fetch() {
             // if (this.jwt) { 

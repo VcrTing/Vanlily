@@ -6,7 +6,7 @@
         <div class="w-5  w-6-s hand" @click="tap('NUM')">{{ one.uuid }}</div>
         <div class="w-8  w-9-s" @click="tap('NUM')">{{ timed.view(one.ordered_date) }}</div>
         <div class="w-11  w-11-s">
-            <var-order-user-name :order="one" :def="'未命名'"/>    
+            <var-order-user-name :order="one" :def="'未知'"/>    
         </div>
         <div class="w-20 w-20-s hand pr t-elip_x2" @click="tap('CAKE')">
             <var-order-cake-name :order="one"/>    
@@ -18,9 +18,7 @@
             <view-order-send-type class="hand" :_typed="deiive_way"></view-order-send-type>
         </div>
         <div class="w-6  w-0-s">{{ over_time }}</div>
-        <!--<div class="w-13 w-0-s hand pr t-elip_x2" @click="tap('SEND')">
-            <view-order-send-addr :order="one" :def="''"/>  
-        </div>-->
+        
         <div class="w-5">
             <view-order-pay-status :_is_pay="one.is_paid"/>
         </div>
@@ -46,12 +44,13 @@ import VarOrderCakeName from '../../../../../front/variab/order/VarOrderCakeName
 import UiTableOpera from '../../../../../funcks/ui_element/table/opera/UiTableOpera.vue'
 import ViewOrderSendAddr from '../../../../../component/view/order/addr/ViewOrderSendAddr.vue'
 import ViewOrderIsnew from '../../../../../component/view/order/ViewOrderIsnew.vue'
+
 export default {
 components: { UiTableOpera, VarOrderCakeName, ViewOrderTimeSend, ViewOrderCheckBulb, ViewOrderSendType, ViewOrderPayStatus, OperaStatus, VarOrderUserName,
-    ViewOrderSendAddr,
-ViewOrderIsnew,   },
+    ViewOrderSendAddr, ViewOrderIsnew,   },
+
 props: [ 'one', 'i' ],
-emits: [ 'check' ],
+emits: [ 'check', 'openPan' ],
 data() {
     return {
         now: ''
@@ -60,13 +59,6 @@ data() {
 computed: {
     deiive() {
         let src = this.one; return src ? src.delivery_info : undefined
-    },
-    // 收貨地址
-    shipping() {
-        let src = this.one; src = src ? src.shipping_address : undefined
-        if (src) {
-            return src.address_1
-        } return ' '
     },
     // 送達時間
     over_time() {
@@ -81,33 +73,38 @@ computed: {
         return src ? src : ''
     },
 },
-mounted() {
-
-},
 methods: {
     tap(k) {
-        if (k == this.now) {
-            this.$parent.change()
-        } else {
-            this.$parent.open()
-        }
-        this.now = k; this.$emit('openPan', k, this.i, this.one.uuid)
+        return new Promise(rej => {
+            if (k == this.now) {
+                this.$parent.change()
+            } else {
+                this.$parent.open()
+            }
+            this.now = k; 
+            this.$emit('openPan', k, this.i, this.one.uuid)
+            rej(0)
+        })
     },
 
-    itemView() {
-        this.$parent.change()
-    },
-    itemEdit() {
-    },
+    itemView() { this.$parent.change() },
+
+    itemEdit() { },
+
     // 訂單狀態
-    async changeStatus(v) {
-        await this.serv.order.status(this, v, this.one.uuid)
+    changeStatus(v) {
+        return new Promise(async rej => {
+            await this.serv.order.status(this, v, this.one.uuid)
+            rej(0)
+        })
     },
     // 订单 NEW
-    async kiiiNew() {
-        // const un = this.userPina().username
-        this.$refs.is_new.kiii()
-        await this.serv.order.change_new(this, this.one.uuid)
+    kiiiNew() {
+        return new Promise(async rej => {
+            this.$refs.is_new.kiii()
+            await this.serv.order.change_new(this, this.one.uuid)
+            rej(0)
+        })
     }
 }
 }

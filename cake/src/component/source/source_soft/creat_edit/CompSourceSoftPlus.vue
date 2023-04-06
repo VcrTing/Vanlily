@@ -48,12 +48,16 @@ export default {
         },
 
         async creat_or_update() {
-            if (!this.named_err && this.named) {
-                let res = this._build()
-                res = await this.is_plus ? 
-                    this.doing('creat', res): 
-                    this.doing('update', res)
-            }
+            return new Promise(async rej => {
+                if (!this.named_err && this.named) {
+                    let res = this._build()
+                    res = await this.is_plus ? 
+                        this.doing('creat', res): 
+                        this.doing('update', res)
+                }
+
+                rej(0)
+            })
         }
     }
 }

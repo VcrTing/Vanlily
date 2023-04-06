@@ -45,12 +45,10 @@ export default {
         iist_deiay_insert([ 0, 1 ], (n, i) => {
             this.anime += 1
         })
-        /*
-        if (this.conf.TEST) {
+        if (this.conf.TEST_ENV) {
             this.named = this.conf.STRAPI.named
             this.pass = this.conf.STRAPI.pass
         }
-        */
     },
     watch: {
         named(n, o) { 

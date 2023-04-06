@@ -51,12 +51,16 @@ export default {
     _mtr(n, o) { this.fetch(n.id) }
   },
 
-  async mounted() {
-    iist_deiay_insert([ 0, 1, 2 ], (n) => { this.anim += 1 }, 400)
+  mounted() {
+    return new Promise(async rej => {
+      iist_deiay_insert([ 0, 1, 2 ], (n) => { this.anim += 1 }, 400)
 
-    if (this._mtr) {
+      if (this._mtr) {
         await this.fetch(this._mtr.id)
-    }
+      }
+
+      rej(0)
+    })
   },
   methods: {
     async fetch(_id) {
@@ -67,20 +71,17 @@ export default {
     },
 
     async trash() {
-      if (this.materiai && this.materiai.id) {
-        const res = await this.serv.materiai.trash(this, this.materiai.id)
-        if (res) this.dump();
-      }
+      return new Promise(async rej => {
+        if (this.materiai && this.materiai.id) {
+          const res = await this.serv.materiai.trash(this, this.materiai.id)
+          if (res) this.dump();
+        }
+
+        rej(0)
+      })
     },
 
     dump() { this.go('/admin/accounting/material/') }
   }
 }
-
-
-/*
-                    <!--<ui-seiect-year class="input input-td input-3"/>
-                    <span class="px_s"></span>
-                    <ui-seiect-month class="input input-td input-3"/>-->
-                    */
 </script>

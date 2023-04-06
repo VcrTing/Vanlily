@@ -30,46 +30,52 @@ export default {
         },
 
         reset(many) {
-            this.option = {
-                tooltip: { trigger: 'axis', axisPointer: { type: 'cross', label: { backgroundColor: 'rgb(92, 97, 109)' } } },
-                grid: {
-                    top: '16px', left: "8px", right: "0px", bottom: '0.4%',
-                    containLabel: true
-                },
-                xAxis: {
-                    data: this.mon(many),  
-                    axisLine: { show: false },
-                    boundaryGap: true, // 左右留白
-                    axisTick: { length: 1, lineStyle: { type: 'dashed' } },
-                },
-                yAxis: {
-                    min: this.min(many),
-                    axisLabel: { fontSize: '0.83em', },
-                },
-                series: [
-                    {
-                        data: this.data(many), type: 'line', smooth: false, // 曲线展示
-                        symbol: 'none', symbolSize: 2, // 拐点
-                        label: { show: false },
-                        lineStyle: { width: 2.4, color: '#379efe', opacity: 1 },
-                        itemStyle: {
-                            borderWidth: 3,
-                            borderColor: 'yellow', color: 'blue'
-                        },
-                        areaStyle: {
-                            color: {
-                                type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
-                                colorStops: [
-                                    { offset: 0, color: '#d5e3fc' }, 
-                                    { offset: 1, color: '#d5e3fc55' }
-                                ], global: false
+            return new Promise(rej => {
+
+                this.option = {
+                    tooltip: { trigger: 'axis', axisPointer: { type: 'cross', label: { backgroundColor: 'rgb(92, 97, 109)' } } },
+                    grid: {
+                        top: '16px', left: "8px", right: "0px", bottom: '0.4%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        data: this.mon(many),  
+                        axisLine: { show: false },
+                        boundaryGap: true, // 左右留白
+                        axisTick: { length: 1, lineStyle: { type: 'dashed' } },
+                    },
+                    yAxis: {
+                        min: this.min(many),
+                        axisLabel: { fontSize: '0.83em', },
+                    },
+                    series: [
+                        {
+                            data: this.data(many), type: 'line', smooth: false, // 曲线展示
+                            symbol: 'none', symbolSize: 2, // 拐点
+                            label: { show: false },
+                            lineStyle: { width: 2.4, color: '#379efe', opacity: 1 },
+                            itemStyle: {
+                                borderWidth: 3,
+                                borderColor: 'yellow', color: 'blue'
                             },
-                            shadowColor: '#379efe'
+                            areaStyle: {
+                                color: {
+                                    type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
+                                    colorStops: [
+                                        { offset: 0, color: '#d5e3fc' }, 
+                                        { offset: 1, color: '#d5e3fc55' }
+                                    ], global: false
+                                },
+                                shadowColor: '#379efe'
+                            }
                         }
-                    }
-                ]
-            }
-            this.chart.setOption(this.option)
+                    ]
+                }
+
+                this.chart.setOption(this.option)
+
+                rej(0)
+            })
         }
     },
     mounted() {

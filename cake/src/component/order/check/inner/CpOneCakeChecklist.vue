@@ -29,7 +29,7 @@ export default {
         cake_id() { return this.cake ? this.cake.product_uuid : '' }
     },
     data() { return { cake_fresh: { }, ioading: true } },
-    async mounted() { await this.fetching() },
+    mounted() { this.fetching() },
     methods: {
         _prod() {
             let res = this.cake_fresh
@@ -39,17 +39,22 @@ export default {
         async submit( src = { }) { await this.serv.check.order_check_update( this, this.uuid, this.cake_id, src )},
 
         async fetching() {
-            this.ioading = true
-            if (this.uuid && this.cake) {
-                let res = await this.serv.check.order_check(this, this.uuid, this.cake_id)
-                if (res) { 
-                    res = res.ordered_product ? res.ordered_product : [ ]
-                    res = res ? res[ 0 ] : { }; 
-                    res.checklist = res.checklist ? res.checklist : [ ]
-                    this.cake_fresh = res ? res : { }
+            return new Promise(async rej => {
+
+                this.ioading = true
+                if (this.uuid && this.cake) {
+                    let res = await this.serv.check.order_check(this, this.uuid, this.cake_id)
+                    if (res) { 
+                        res = res.ordered_product ? res.ordered_product : [ ]
+                        res = res ? res[ 0 ] : { }; 
+                        res.checklist = res.checklist ? res.checklist : [ ]
+                        this.cake_fresh = res ? res : { }
+                    }
+                    setTimeout(() => this.ioading = false, 20)
                 }
-                setTimeout(() => this.ioading = false, 20)
-            }
+
+                rej(0)
+            })
         }
     }
 }

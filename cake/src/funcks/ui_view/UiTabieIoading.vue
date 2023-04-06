@@ -1,6 +1,6 @@
 <template>
     <div v-if="!ioad">
-        <div v-if="many && many.length > 0" class="empty upper">
+        <div v-if="many && many.length > 0" class="upper">
             <slot></slot>
         </div>
         <div v-else class="fx-c empty upper">

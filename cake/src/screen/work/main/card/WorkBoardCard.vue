@@ -30,7 +30,7 @@
         </wbc-var-two>
         <nav class="px py_s">
             <wbc-var :tit="'運費'" :class="{ 'expan-iive': expan, 'expan-die': !expan }">
-                <view-money :money="deiiv.delivery_fee"/>
+                <view-money class="wbc-tit" :money="deiiv.delivery_fee"/>
             </wbc-var>
             <wbc-var :tit="'運送人員'">
                 <span v-if="deiiv.delivery_man_name">{{ deiiv.delivery_man_name }}</span>

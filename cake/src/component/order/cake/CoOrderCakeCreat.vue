@@ -124,31 +124,37 @@ export default {
 
         // 提交
         submit() {
-            const data = this.coii()
-            if (data && this.attribute) {
+            return new Promise(async rej => {
+                const data = this.coii()
+                if (data && this.attribute) {
 
-                let _atrs = [ ]; this.msg = ''; 
-                for (let k in this.attribute) { _atrs.push( this.attribute[ k ] ) }
+                    let _atrs = [ ]; this.msg = ''; 
+                    for (let k in this.attribute) { _atrs.push( this.attribute[ k ] ) }
 
-                const res = { 'uuid': '', 'product_uuid': '', ...data, 'attribute': _atrs, 'attribute_of_edit': this.attribute }
-                res['uuid'] = this.cake.uuid
-                res['product_uuid'] = this.cake.uuid
+                    const res = { 'uuid': '', 'product_uuid': '', ...data, 'attribute': _atrs, 'attribute_of_edit': this.attribute }
+                    res['uuid'] = this.cake.uuid
+                    res['product_uuid'] = this.cake.uuid
 
-                this._proP.do_coecs( res ); 
-                this.pina().mod( 0 );
-            } 
-            else { this.msg = '輸入不完整。' }
+                    this._proP.do_coecs( res ); 
+                    this.pina().mod( 0 );
+                } 
+                else { this.msg = '輸入不完整。' }
+
+                rej(0)
+            })
         },
 
         init() {
-            if (this.coec) {
-                
-                this.reset( this.coec )
-                this.reset_attr( this.coec.attribute_of_edit )
-            } else {
-                this.form.unit_price = this.cake.__price
-                this.form.original_price = this.cake.__regular_price
-            }
+            return new Promise(rej => {
+                if (this.coec) {
+                    this.reset( this.coec )
+                    this.reset_attr( this.coec.attribute_of_edit )
+                } else {
+                    this.form.unit_price = this.cake.__price
+                    this.form.original_price = this.cake.__regular_price
+                }
+                rej(0)
+            })
         },
 
         //

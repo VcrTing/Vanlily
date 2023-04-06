@@ -21,7 +21,7 @@ const get = async function(uri, token, data){
 */
 
 const _get = async function(uri, token, params) {
-    // console.log('URI =', (conf.API + conf.ENDPOINT[ uri ] + params))
+    if (conf.TEST_ENV) console.log('URI =', (conf.API + conf.ENDPOINT[ uri ] + params));
     return await axios.get(
         (conf.API + conf.ENDPOINT[ uri ] + params)
         , { headers: tool.headers(token) })
@@ -34,8 +34,7 @@ const get = async function( uri, token, data ) {
 
 const get_one = async function( uri, cdt, token, data = {} ) {
     const url = conf.API + conf.ENDPOINT[ uri ] + '/' + cdt
-    // console.log('URI =', url)
-    // console.log('{ headers: tool.headers(token) } =', { headers: tool.headers(token) })
+    if (conf.TEST_ENV) console.log('URI ONE =', url);
     let res = await axios.get(url, { headers: tool.headers(token) })
     return res && res.status == 200 ? res.data : [ ]
 }

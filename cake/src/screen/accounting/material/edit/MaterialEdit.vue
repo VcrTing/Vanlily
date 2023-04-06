@@ -33,6 +33,7 @@ import CompMateriaInvensRecord from '../../../../component/materiai/creat_edit/i
 import FormMateriaiHeaderSub from '../../../../funcks/ui_layout/form/header/FormMateriaiHeaderSub.vue'
 import CompMateriaContrast from '../../../../component/materiai/creat_edit/contrast/CompMateriaContrast.vue'
 import { iist_deiay_insert } from '../../../../air/tooi/anim'
+
 export default {
   components: { LayoutPage, FormMateriai, CompMateriaBase, CompMateriaInvens, UiSeiectYear, UiSeiectMonth, CompMateriaInvensRecord, FormMateriaiHeaderSub, CompMateriaContrast },
     data() {
@@ -49,12 +50,17 @@ export default {
     watch: {
         _mtr(n, o) { this.fetch(n.id) }
     },
-    async mounted() {
-        iist_deiay_insert([ 0, 1, 2 ], (n) => { this.anim += 1 }, 400)
+    mounted() {
+        return new Promise(async rej => {
 
-        if (this._mtr) {
-            await this.fetch(this._mtr.id)
-        } 
+            iist_deiay_insert([ 0, 1, 2 ], (n) => { this.anim += 1 }, 400)
+
+            if (this._mtr) {
+                await this.fetch(this._mtr.id)
+            } 
+
+            rej(0)
+        })
     },
     methods: {
         coii() {
@@ -76,18 +82,20 @@ export default {
             } return res
         },
         async submit() {
-            const data = this.coii()
-            if (data) {
-                this.msg = '儲存中...'
-                try {
-                    let res = await this.serv.materiai.edit(this, data, this._mtr.id)
-                    if (res) {
-                        this.back(); setTimeout(() => this.msg = '', 200)
+            return new Promise(async rej => {
+                const data = this.coii()
+                if (data) {
+                    this.msg = '儲存中...'
+                    try {
+                        let res = await this.serv.materiai.edit(this, data, this._mtr.id)
+                        if (res) {
+                            this.back(); setTimeout(() => this.msg = '', 200)
+                        }
+                    } catch (err) {
+                        this.msg = '網絡錯誤！'
                     }
-                } catch (err) {
-                    this.msg = '網絡錯誤！'
                 }
-            }
+            })
         },
         back() { this.go('/admin/accounting/material/') },
         async fetch(_id) {

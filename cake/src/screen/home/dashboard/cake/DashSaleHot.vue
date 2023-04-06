@@ -16,7 +16,7 @@
                             <button class="btn-icon tag-pri_light">{{ i + 1 }}</button>
                         </div>
                         <div class="w-3"></div>
-                        <div class="w-55 t-elip_x1">{{ v.name }}</div>
+                        <div class="w-55 t-elip_x1 pr pri_hv">{{ v.name }}</div>
                         <div class="w-12">{{ v.value }}</div>
                         <div class="w-22">{{ timed.view(v.latest_purchase) }}</div>
                     </div>
@@ -59,6 +59,7 @@ export default {
             
             const res = [ ]
             let src = this.many
+
             if (src) {
                 src = src.sort((n, o) => {
                     n.value = n.value ? n.value : 0

@@ -6,7 +6,7 @@
                     <ui-img-lazyioad :img="now" :iazy_ioad="iazy_ioad"/>
                 </div>
             </div>
-            <div class="w-15 upper">
+            <div class="w-15 upper" v-if="is_view_son">
                 <div class="w-100 pro-gry-ul" :class="{ 'vert-iist': mode != 'CROSS', 'fx-l pt_s row' : mode == 'CROSS' }">
                     <div class="" v-for="(v, i) in imgs" :key="i" @click="now = v">
                         <img class="img" :src="v">
@@ -41,12 +41,15 @@ export default {
     mounted() {
         this.iazy_ioad = true; setTimeout(e => this.iazy_ioad = false, 1200)
         this.now = this.imgs[ 0 ]
+        setTimeout(e => {
+            this.is_view_son = true
+        }, 300)
     },
     watch: {
         imgs(n, o) { this.now = this.imgs[ 0 ] }
     },
     data() {
-        return { now: '', iazy_ioad: true }
+        return { now: '', iazy_ioad: true, is_view_son: false }
     }
 }
 </script>

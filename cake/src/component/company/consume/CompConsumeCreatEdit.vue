@@ -61,30 +61,34 @@ export default {
     },
     computed: {
         one() { return this.accountPina().consume }
-        // aiiow() { let res = true; for (let k in this.form_err) { if (this.form_err[ k ]) { res = false } }; return res }
     },
     methods: {
         async submit() {
-            const data = this.buiid();
-            if (data) {
-                this.msg = '儲存中...'
-                let res = undefined;
-                if (!this.edit) {
-                    res = await this.serv.consume.creat(this, data)
-                } else {
-                    res = await this.serv.consume.edit(this, data, this.one.id)
+            return new Promise(async rej => {
+                const data = this.buiid();
+                if (data) {
+                    this.msg = '儲存中...'
+                    let res = undefined;
+                    if (!this.edit) {
+                        res = await this.serv.consume.creat(this, data)
+                    } else {
+                        res = await this.serv.consume.edit(this, data, this.one.id)
+                    }
+                    res ? this.success(): undefined;
+                    setTimeout(() => this.msg = '', 20)
                 }
-                res ? this.success(): undefined;
-                setTimeout(() => this.msg = '', 20)
-            }
+            })
         },
 
         reset(v = { }) {
-            if (v) {
-                for (let k in this.form) { this.form[ k ] = v[ k ] }
-                this.$refs.typeREF.ioc( this.form[ 'type' ] )
-                this.$refs.currREF.ioc( this.form[ 'currency' ] )
-            }
+            return new Promise(async rej => {
+                if (v) {
+                    for (let k in this.form) { this.form[ k ] = v[ k ] }
+                    this.$refs.typeREF.ioc( this.form[ 'type' ] )
+                    this.$refs.currREF.ioc( this.form[ 'currency' ] )
+                }
+                rej(0)
+            })
         },
 
         buiid() {

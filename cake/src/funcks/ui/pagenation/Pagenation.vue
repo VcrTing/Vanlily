@@ -27,7 +27,7 @@
                 </select>
                 <nav class="px">
                     <span>跳至</span>
-                    <input v-model="now" placeholder="某" type="text">
+                    <input v-model="q" @blur="search" @keydown.enter="search" placeholder="某" type="text">
                     <span>/{{ total }} 頁</span>
                 </nav>
             </div>
@@ -58,27 +58,35 @@ export default {
             default: true
         }
     },
-    mounted() { this.sign() },
+    mounted() { this.sign(); this.q = this.now },
     created() { if ( this._limit ) { this.limit = this._limit } },
     data() {
         return {
+            q: '',
             now: 1,
             start: 1,
             limit: 10,
         }
     },
     watch: {
-        limit(n, o) { this.sign() },
+        limit(n, o) { this.now = 1 },
         now(n, o) {
-            // 大於 center
-            n = n > this.total ? this.total : n
-            if (n > 0) {
-                // 開始變動，改動 start
-                this.start = this.num_start( n )
-                this.sign()
-            } else {
-                if (n == '') { } else { if (isNaN(Number.parseInt(n))) { this.now = 1 } }
-            }
+            return new Promise(rej => {
+                // n = Number(n)
+                // if (!isNaN(n)) {
+                    // 大於 center
+                    n = n > this.total ? this.total : n
+                    if (n > 0) {
+                        // 開始變動，改動 start
+                        this.start = this.num_start( n )
+                        this.sign()
+                    } else {
+                        if (n == '') { } else { if (isNaN(Number.parseInt(n))) { this.now = 1 } }
+                    }
+                // }
+                this.q = this.now + ''
+                rej(0)
+            })
         },
     },
     computed: {
@@ -87,6 +95,7 @@ export default {
             { txt: '16條/頁', limit: 16 },
             { txt: '32條/頁', limit: 32 },
             { txt: '50條/頁', limit: 50 },
+            { txt: '75條/頁', limit: 75 },
             { txt: '100條/頁', limit: 100 },
             // { txt: '200條/頁', limit: 200 }
         ] },
@@ -102,8 +111,8 @@ export default {
         center() { return this.start + this.cen }
     },
     methods: {
-        num(n) {
-            n += this.now
+        num(n, pius = true) {
+            if (pius) n += this.now;
             n = n < 1 ? this.total : n
             n = n > this.total ? 1 : n
             this.now = n
@@ -133,6 +142,20 @@ export default {
         // 保存壹般設置
         save() {
             
+        },
+
+        search() {
+            return new Promise(rej => {
+                try {
+                    const src = Number.parseInt(this.q)
+                    if (!isNaN(src)) {
+                        this.num( src, false )
+                    }
+                } catch(err) {
+                    
+                }
+                rej( 0 )
+            })
         }
     },
 }

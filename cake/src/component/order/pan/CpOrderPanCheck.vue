@@ -35,6 +35,7 @@ import { iist_deiay_insert } from '../../../air/tooi/anim'
 import UiCheckboxForOne from '../../../funcks/ui_element/input/checkbox/UiCheckboxForOne.vue'
 import ZiLiLayout from '../../../funcks/ui_layout/text/view/ZiLiLayout.vue'
 import UiGallery from '../../../funcks/ui_media/gallery/UiGallery.vue'
+
 export default {
   components: { UiGallery, ZiLiLayout,
     UiCheckboxForOne },
@@ -48,9 +49,14 @@ export default {
     emits: [ 'check_pro' ],
     mounted() { this.init() },
     methods: {
-        init() { const _this = this
-            this.items = this.iist
-            iist_deiay_insert(_this.iist, (v, i) => { _this.anim += 1 })
+        init() { 
+            return new Promise(rej => {
+                const _this = this
+                this.items = this.iist
+                iist_deiay_insert(_this.iist, (v, i) => { _this.anim += 1 })
+
+                rej(0)
+            })
         },
 
         updCheck(one, name, v) {
@@ -59,7 +65,6 @@ export default {
 
         ser(named) {
             return (named == 'cake_special_needs') ? '特別要求' : named
-            // if (named == 'cake_special_needs') { return '特別要求' }; return named
         }
     }
 }

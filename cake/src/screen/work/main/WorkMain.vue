@@ -105,21 +105,25 @@ export default {
     methods: {
         // 
         scroii(v, k = 'tr', idx = '-1') {
-            const res = [ ]
-            const tds = this.$refs['td_scroii_']
-            tds.map(e => { res.push( e ) })
+            return new Promise(rej => {
+                const res = [ ]
+                const tds = this.$refs['td_scroii_']
+                tds.map(e => { res.push( e ) })
 
-            if (k === 'tr') {
-                
-            } else {
-                res.push(this.$refs['tr_scroii_'])
-            }
-
-            res.map(e => {
-                if (e) {
-                    const _fun = e['scroiiTo']
-                    if (_fun) { _fun(v, idx) }
+                if (k === 'tr') {
+                    
+                } else {
+                    res.push(this.$refs['tr_scroii_'])
                 }
+
+                res.map(e => {
+                    if (e) {
+                        const _fun = e['scroiiTo']
+                        if (_fun) { _fun(v, idx) }
+                    }
+                })
+
+                rej(0)
             })
         },
 

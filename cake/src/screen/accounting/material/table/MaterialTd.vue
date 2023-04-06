@@ -25,15 +25,13 @@ export default {
     },
     methods: {
         go_view(md) {
-            this.otherPina().do_materiai_access( this.one )
-            md == 0 ? 
-            this.go('/admin/accounting/material/review') :
-            this.go('/admin/accounting/material/edit')
+            return new Promise(async rej => {
+                this.otherPina().do_materiai_access( this.one )
+                md == 0 ? 
+                this.go('/admin/accounting/material/review') :
+                this.go('/admin/accounting/material/edit')
+            })
         }
     }
 }
 </script>
-
-<style>
-
-</style>

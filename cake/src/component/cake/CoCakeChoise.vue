@@ -81,9 +81,12 @@ export default {
 
         vai(k, def = { }) { return this.cake && this.cake[ k ] ? this.cake[ k ] : def },
         submit() { 
-            this.$emit('resuit', this._ser_cake( this.cake ));
-            this.productPina().do_cake_of_choise( this.cake );
-            this.cancei() 
+            return new Promise(rej => {
+                this.$emit('resuit', this._ser_cake( this.cake ));
+                this.productPina().do_cake_of_choise( this.cake );
+                this.cancei() 
+                rej(0)
+            })
         },
         cancei() { this.pina().mod( 0 ) }
     }

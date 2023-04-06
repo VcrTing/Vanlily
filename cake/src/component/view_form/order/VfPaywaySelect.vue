@@ -14,13 +14,14 @@ export default {
         return {
             now: '',
             ops: [
+                { txt: '未知', v: '' },
                 { txt: 'PayPal', v: 'paypal' },
                 { txt: '現金', v: 'cash' },
                 { txt: 'Bank card', v: 'bankcard' },
                 { txt: 'Ali Pay', v: 'alipay' },
                 { txt: 'Wechat Pay', v: 'wxpay' },
-                { txt: '未知', v: '' },
-                { txt: '銀行轉帳 / 轉數快FPS / Alipay HK (支付寶香港) / 商業Payme 付款', v: '銀行轉帳 / 轉數快FPS / Alipay HK (支付寶香港) / 商業Payme 付款'}
+                { txt: '銀行轉帳 / 轉數快FPS / Alipay HK (支付寶香港) / 商業Payme 付款', v: '銀行轉帳 / 轉數快FPS / Alipay HK (支付寶香港) / 商業Payme 付款' },
+                { txt: '消費劵 - 如使用支付寶Alipay HK 或 WeChat HK 微信，請使用Yedpay', v: '消費劵 - 如使用支付寶Alipay HK 或 WeChat HK 微信，請使用Yedpay' }
             ]
         }
     },

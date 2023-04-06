@@ -45,34 +45,38 @@ export default {
         },
 
         reset(many) {
-            this.option = {
-                legend: {
-                    orient: 'vertical', icon: 'circle', 
-                    x: 'left', y: 'bottom', itemGap: this.itemGap(many),
-                    data: this.named(many)
-                },
-                color: [ '#72a0fb', '#72deb2', '#7684a2', '#f8c63a', '#ea7e64' ],
-                series: [
-                    {
-                    type: 'pie',
-                    radius: ['40%', '62%'],
-                    center: [ "50%", "38%"], // 方位
-                    avoidLabelOverlap: true,
-                    label: {
-                        show: true, formatter: '{b}\n\n{c|{c}}', 
-                        fontSize: '0.82em', // alignTo: 'edge', position: 'outer'
-                        rich: { c: { fontSize: '0.82em' } }
+
+            return new Promise(rej => {
+                this.option = {
+                    legend: {
+                        orient: 'vertical', icon: 'circle', 
+                        x: 'left', y: 'bottom', itemGap: this.itemGap(many),
+                        data: this.named(many)
                     },
-                    labelLine: { show: true, length: 12, lineStyle: { color: '#cfcfcf' } },
-                    emphasis: {
-                        label: { show: true, fontSize: '1em' }
-                    },
-                    data: this.data( many )
-                    }
-                ]
-            }
-            this.chart.setOption(this.option)
-            // this.chart.resize()
+                    color: [ '#72a0fb', '#72deb2', '#7684a2', '#f8c63a', '#ea7e64' ],
+                    series: [
+                        {
+                            type: 'pie',
+                            radius: ['40%', '62%'],
+                            center: [ "50%", "38%"], // 方位
+                            avoidLabelOverlap: true,
+                            label: {
+                                show: true, formatter: '{b}\n\n{c|{c}}', 
+                                fontSize: '0.82em', // alignTo: 'edge', position: 'outer'
+                                rich: { c: { fontSize: '0.82em' } }
+                            },
+                            labelLine: { show: true, length: 12, lineStyle: { color: '#cfcfcf' } },
+                            emphasis: {
+                                label: { show: true, fontSize: '1em' }
+                            },
+                            data: this.data( many )
+                        }
+                    ]
+                }
+                this.chart.setOption(this.option)
+
+                rej(0)
+            })
         }
     },
     mounted() {

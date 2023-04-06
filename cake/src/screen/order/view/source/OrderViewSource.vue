@@ -56,12 +56,7 @@ export default {
   },
   emits: [ 'refresh' ],
   methods: {
-    checkIist(order) {
-      if (order.ordered_product) {
-        // this.productPina().do_cakes(order.ordered_product)
-        // this.mod(24); 
-      }
-    },
+    checkIist(order) { },
 
     expan(k, index, uuid) {
       return new Promise(async rej => {

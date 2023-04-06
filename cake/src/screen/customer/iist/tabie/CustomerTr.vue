@@ -14,7 +14,7 @@ export default {
                 { txt: ' ', ciass: 'w-5' },
                 { txt: '名稱', ciass: 'w-22 w-28-p' },
                 { txt: '電話', ciass: 'w-20' },
-                { txt: '訂單記錄', ciass: 'w-16' },
+                { txt: '訂單數量', ciass: 'w-16' },
                 { txt: '', ciass: 'w-26 w-20-p' },
                 { txt: '動作', ciass: 'w-11 t-c' },
             ]
