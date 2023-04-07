@@ -17,6 +17,8 @@
             <pagenation class="py_x2 op-0" :class="{ 'anim-page': init }" @page="pagena" :count="page.total" />
         </template>
     </layout-page>
+
+    <modal-source/>
 </template>
 
 <script>
@@ -27,8 +29,10 @@ import CustomerTr from './tabie/CustomerTr.vue'
 import Pagenation from '../../../funcks/ui/pagenation/Pagenation.vue'
 import UiTabieIoading from '../../../funcks/ui_view/UiTabieIoading.vue'
 import CustomerSeki from './tabie/CustomerSeki.vue'
+import ModalSource from '../../../component/source/ModalSource.vue'
+
 export default {
-    components: { CustomerTopFilter, LayoutPage, CustomerTr, CustomerTd, Pagenation, UiTabieIoading, CustomerSeki },
+    components: { CustomerTopFilter, LayoutPage, CustomerTr, CustomerTd, Pagenation, UiTabieIoading, CustomerSeki, ModalSource },
     data() {
         return { init: false,
             items: [ 

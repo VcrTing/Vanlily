@@ -1,5 +1,9 @@
 <template>
     <form-def :header="'檢查清單'" @submit="submit" :kiii_button="true">
+        <div class="fx-l">
+            <div>單號&nbsp;&nbsp;</div>
+            <div v-if="order">{{ order.uuid }}</div>
+        </div>
         <div v-for="(v, i) in cakes" :key="i">
             <cp-one-cake-checklist :cake="v" :uuid="order.uuid"/>
         </div>

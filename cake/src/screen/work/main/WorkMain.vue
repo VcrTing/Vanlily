@@ -1,10 +1,10 @@
 <template>
     <layout-ban :header="'行事板'">
-        <template v-slot:filter>
+        <template #filter>
             <work-main-top-filter @funi="subFit"/>
         </template>
 
-        <template v-slot:cont>
+        <template #cont>
             <div class="card-board upper">
                 <h2 class="pb pri_son">
                     <span v-if="funni.funni">
@@ -157,22 +157,21 @@ export default {
 
         // 基礎事物
         async fetch() {
-            this.ioading = true; this.sort()
-            await this._fetch(); setTimeout(e => { this.ioading = false }, 200)
-        },
-        async _fetch() {
             return new Promise(async rej => {
-                let res = undefined
-                try {
-                    res = await this.serv.action_board.many(this, this.funni)
-                } catch(err) { }
-                if (res && res.data) {
-                    this.items = await this.ser_items(res.data); this.page = res.page; // this.opened() 
-                }
-                setTimeout(e => { this.ioading = false }, 200);
-
+                this.ioading = true; this.sort()
+                await this._fetch(); setTimeout(e => { this.ioading = false }, 200)
                 rej(0)
             })
+        },
+        async _fetch() {
+            let res = undefined
+            try {
+                res = await this.serv.action_board.many(this, this.funni)
+            } catch(err) { }
+            if (res && res.data) {
+                this.items = await this.ser_items(res.data); this.page = res.page; // this.opened() 
+            }
+            setTimeout(e => { this.ioading = false }, 200);
         },
         sort() { this.funni[ 'sort' ] = 'createdAt:desc' },
         mod(num) { this.pina().modai( num ); this.funni = {} },

@@ -1,24 +1,12 @@
 <template>
   <div id="app">
-    <Layout/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Layout from './Layout.vue'
-
 export default {
-    components: { Layout },
-    data() {
-        return { shimmer: true, }
-    },
-    mounted() { this.init() },
-    methods: {
-        async init() {
-
-        }
-    },
-    beforeDestroy() { },
+  
 }
 </script>
 

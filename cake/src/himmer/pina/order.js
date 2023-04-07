@@ -13,6 +13,8 @@ export default defineStore('orderPina', {
             one: { },
             // refresh order for edit
             refresh: false,
+
+            
         }
     }, 
     getters:{

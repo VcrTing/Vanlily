@@ -4,7 +4,7 @@
             <nav class="px_x2 pt">
                 <div class="fx-s fx-t">
                     <fk-order-img-msg class="fx-1" :imgs="_imgs(v)"/>
-                    <div class="w-20 hide-p"></div>
+                    <div class="w-8 hide-p"></div>
                     <div class="t-r d-ib pl_x2" v-if="!_kiii_btn">
                         <button v-if="edit" @click="cakeEdit(v)" class="btn-pri_out px_x2 py_s">編輯</button>
                         <button v-else @click="checkIist(v)" class="btn-pri_out px py_s">檢查清單</button>
@@ -34,8 +34,9 @@ import FkCakePriceGroup from '../../../../funcks/order/text/FkCakePriceGroup.vue
 import FkCakeAttrs from '../../../../funcks/order/text/FkCakeAttrs.vue'
 import UiImgGroup from '../../../../funcks/ui_element/img/UiImgGroup.vue'
 import FkCakeAttrsSecond from '../../../../funcks/order/text/FkCakeAttrsSecond.vue'
+
 export default {
-  components: { UiImgGroup, FkOrderImgMsg, VarCakeName, FkCakeAttrs, FkCakePriceGroup, FkCakeAttrsSecond },
+    components: { UiImgGroup, FkOrderImgMsg, VarCakeName, FkCakeAttrs, FkCakePriceGroup, FkCakeAttrsSecond },
     props: [ 'order', 'edit', '_kiii_btn' ],
     data() {
         return {
@@ -70,6 +71,5 @@ export default {
             this.mod(22)
         }
     },
-    mounted() { }
 }
 </script>

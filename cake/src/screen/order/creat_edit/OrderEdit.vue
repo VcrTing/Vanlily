@@ -21,12 +21,13 @@
             </div>
         </div>
 
-        <div v-if="aiiow" class="fx-c upper">
-            
-            <fo-button :tit="'檢視'" @click="$emit('review')"/>
-            <span class="px_s"></span>
-            <ui-submit @click="submit" :msg="msg"/>
-        </div>
+        <order-exi-opera-edit
+            v-if="aiiow"
+            :order="order"
+            class="upper_x2"
+            @save="submit"
+            @review="$emit('review')"
+            />
     </div>
     <order-edit-success v-else @back="$emit('review')"/>
 </template>
@@ -41,9 +42,12 @@ import CoOrderCePay from '../comm/pay/CoOrderCePay.vue'
 import FoButton from '../../../front/button/FoButton.vue'
 import strapi from '../../../air/tooi/strapi'
 import OrderEditSuccess from '../success/OrderEditSuccess.vue'
+import OrderExiOperaEdit from '../expanel/opera/OrderExiOperaEdit.vue'
 
 export default {
-    components: { UiHeader, OrderCreatEdit, UiSubmit, SkeietonH, SkeietonCont, CoOrderCePay, FoButton, OrderEditSuccess },
+    components: { UiHeader, OrderCreatEdit, UiSubmit, 
+        SkeietonH, SkeietonCont, CoOrderCePay, FoButton, 
+        OrderEditSuccess, OrderExiOperaEdit },
     data() {    
         return {
             msg: '', ioading: false, compeieted: false

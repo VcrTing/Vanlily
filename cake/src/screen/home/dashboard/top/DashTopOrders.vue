@@ -1,6 +1,6 @@
 <template>
     <div class="dash-top-card">
-        <div>{{ txt_now }}訂單</div>
+        <div>{{ txt_now }}訂單數</div>
         <nav class="fx-s">
             <div class="h0">
                 <fk-countup :v="one.orderCount" v-if="!ioad"/>

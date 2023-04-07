@@ -21,7 +21,7 @@
             <div v-if="order">
                 <nav class="op-0" :class="{ 'anim-page': (pan >= 1) }">
                     <h5 class="n py_n">蛋糕信息</h5>
-                    <panel-inner :header="'定製蛋糕內容'">
+                    <panel-inner :header="'訂製蛋糕內容'">
                         <template #cont>
                             <order-exi-product class="pt_x3" v-if="order" :order="order"/>
                             <sk-order-exi-product v-else/>

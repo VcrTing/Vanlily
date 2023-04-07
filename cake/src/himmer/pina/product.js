@@ -6,6 +6,7 @@ export default defineStore('productPina', {
     state: () => {
         return {
             products: [ ],
+            product_of_view: { },
 
             cakes: [ ],
             prods: [ ],
@@ -92,6 +93,7 @@ export default defineStore('productPina', {
         },
 
         do_products(v = [ ]) { this.products = v.map(p => this._ser_product( p )) },
+        do_product_of_view(v = { }) { this.product_of_view = v }
     },
 })
 /*

@@ -6,18 +6,26 @@
             <div class="min-6em t-c b pb">出貨檢查</div>
             <div class="pb_s">&nbsp;</div>
         </nav>
+        <div class="py_n"></div>
         <div class="">
-            <div v-if="iist && iist.length > 0">
-                <nav class="fx-l check-iist op-0" :class="{ 'anim-iist': anim >= i }" v-for="(v, i) in items" :key="i">
+            <div v-if="iist && iist.length > 0" class="copc-wrapper">
+                <nav 
+                    class="fx-l check-iist op-0" 
+                    :class="{ 'anim-iist': anim >= i, 'check_td_doubie': (i + 1) % 2 == 0 }" 
+                    v-for="(v, i) in items" 
+                    :key="i"
+                    >
                     <div class="w-2">
                     </div>
-                    <div class="min-6em fx-c">
-                        <ui-checkbox-for-one :def="v.isDoneChecking" @change="(n) => updCheck(v, 'isDoneChecking', n)"/>
+                    <div class="fx-l">
+                        <div class="min-6em fx-c">
+                            <ui-checkbox-for-one :def="v.isDoneChecking" @change="(n) => updCheck(v, 'isDoneChecking', n)"/>
+                        </div>
+                        <div class="min-6em fx-c">
+                            <ui-checkbox-for-one :def="v.isShippingChecking" @change="(n) => updCheck(v, 'isShippingChecking', n)"/>
+                        </div>
                     </div>
-                    <div class="min-6em fx-c">
-                        <ui-checkbox-for-one :def="v.isShippingChecking" @change="(n) => updCheck(v, 'isShippingChecking', n)"/>
-                    </div>
-                    <div class="pl_x2">{{ser(v.attribute_type_name)}}:&nbsp;&nbsp;<span>{{v.name}}</span></div>
+                    <div class="pl_x2 fx-1 pr_s">{{ser(v.attribute_type_name)}}:&nbsp;&nbsp;<span>{{v.name}}</span></div>
                 </nav>
             </div>
             <nav v-else class="copc-empty fx-l">
@@ -47,18 +55,16 @@ export default {
         iist() { return this.check && this.check.length > 0 ? this.check : [ ] }
     },
     emits: [ 'check_pro' ],
-    mounted() { this.init() },
+    mounted() { 
+        return new Promise(rej => {
+            const _this = this
+            this.items = this.iist
+            iist_deiay_insert(_this.iist, (v, i) => { _this.anim += 1 })
+
+            rej(0)
+        })
+    },
     methods: {
-        init() { 
-            return new Promise(rej => {
-                const _this = this
-                this.items = this.iist
-                iist_deiay_insert(_this.iist, (v, i) => { _this.anim += 1 })
-
-                rej(0)
-            })
-        },
-
         updCheck(one, name, v) {
             one[ name ] = v; this.$emit('check_pro', this.check)
         },

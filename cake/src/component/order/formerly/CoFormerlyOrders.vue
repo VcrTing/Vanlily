@@ -12,9 +12,11 @@
         <ui-tabie-ioading :ioad="ioading" :many="items">
             <div class="py">
                 <div v-for="(v, i) in items" :key="i" class="pb">
+                    <!--
                     <h4 class="min pb_s">
                         #&nbsp;{{ i + 1 }}
                     </h4>
+                    -->
                     <co-cake-card 
                         class=""
                         v-if="v.__product.__cake" 

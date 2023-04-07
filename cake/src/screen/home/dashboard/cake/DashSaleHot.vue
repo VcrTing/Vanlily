@@ -16,7 +16,7 @@
                             <button class="btn-icon tag-pri_light">{{ i + 1 }}</button>
                         </div>
                         <div class="w-3"></div>
-                        <div class="w-55 t-elip_x1 pr pri_hv">{{ v.name }}</div>
+                        <div class="w-55 t-elip_x1 pr pri_light_hv" @click="viewCake()">{{ v.name }}</div>
                         <div class="w-12">{{ v.value }}</div>
                         <div class="w-22">{{ timed.view(v.latest_purchase) }}</div>
                     </div>
@@ -54,26 +54,31 @@ export default {
     components: { SkeietonCont, UiTabieEmpty },
     props: [ 'ioad', 'many' ],
     data() { return { ski: [ 'mb', 'mb', '' ], } },
+
     computed: {
         host() {
-            
             const res = [ ]
-            let src = this.many
+            const src = this.sortCakes( this.many )
+            src.map((e, i) => { if (i < 10) res.push(e); })
 
+            return res
+        }
+    },
+    methods: {
+        sortCakes(src) {
+            
             if (src) {
-                src = src.sort((n, o) => {
+                return src.sort((n, o) => {
                     n.value = n.value ? n.value : 0
                     o.value = o.value ? o.value : 0
                     return (o.value - n.value)
                 })
-                src.map((e, i) => {
-                    if (i < 10) {
-                        res.push(e)
-                    }
-                })
             }
+            return [ ]
+        },
 
-            return res
+        viewCake() {
+
         }
     }
 }

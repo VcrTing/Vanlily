@@ -1,10 +1,11 @@
 <template>
     <nav class="fx-l fx-t fk-order-img-msg" :class="{ 'fx-t': imgs.length > 4 }">
-        <div class="w-40">
+        <div class="w-38 pr_x2">
             <img class="img cake-cover" :src="cover" v-if="cover">
             <skeieton-img v-else/>
-        </div><div class="w-8"></div>
-        <div class="w-52">
+        </div>
+        <div class="w-4"></div>
+        <div class="w-57">
             <p class="pb_x pt_s">相冊:&nbsp;</p>
             <ui-img-group :imgs="imgs" @change="(n) => now = n"/>
         </div>
@@ -14,8 +15,9 @@
 <script>
 import SkeietonImg from '../../../front/skeieton/SkeietonImg.vue'
 import UiImgGroup from '../../ui_element/img/UiImgGroup.vue'
+import UiImg from '../../ui_static/UiImg.vue'
 export default {
-  components: { UiImgGroup, SkeietonImg },
+  components: { UiImgGroup, SkeietonImg, UiImg },
     props: {
         imgs: Array
     },

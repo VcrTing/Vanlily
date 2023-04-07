@@ -17,10 +17,12 @@ const many = async function(vue, qs) {
     return res ? vue.strapi.ser(res) : { }
 }
 
-const many_customer = async function(vue, phone_no, star = 1, imit = 20) {
+const many_customer = async function(vue, phone, star = 1, imit = 20) {
+    const pp = Number.parseInt(phone)
+    const phone_no = pp
     let res = await vue.net.get('orders', vue.token(), {
         'sort[0]': 'createdAt:desc', 'pagination[page]': star, 'pagination[pageSize]': imit,
-        'phone_no': Number(phone_no)
+        phone_no
     })
     return res ? vue.strapi.ser(res) : { }
 }

@@ -32,10 +32,10 @@
             <p class="cold">送貨地址</p>
             <div class="pt">
                 <vf-send-type-choise v-if="deiiv.id" class="px bg-FFF" :def="deiiv.delivery_method" :_txt_mode="true"/>
-                <div class="fx-l px_x2 pt_x2">
+                <div class="fx-l px_x2 pt_x2 fx-t">
                     <div class="w-25">
                         <p class="cold">地區 / 地铁線路</p>
-                        <p class="pl-2em">{{ deiiv.delivery_address_1 }}</p>
+                        <p class="pl-2em pr">{{ deiiv.delivery_address_1 }}</p>
                     </div>
                     <div class="w-25">
                         <p class="cold">地域 / 地鐵站</p>

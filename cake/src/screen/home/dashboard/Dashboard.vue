@@ -1,6 +1,5 @@
 <template>
 <div>
-    <div>
         <div class="dispiayfiex upper">
             <div class="w-72 w-100-p">
                 <div class="row_x2 fx-s fx-t dash-top">
@@ -56,7 +55,8 @@
                 <dash-pay-mode :one="one" ref="paid_chart" class="panel-dash-paymode" />
             </div>
         </div>
-    </div>
+
+        <co-cake-msg-fxd-pan/>
 </div> 
 </template>
 
@@ -70,15 +70,17 @@ import DashTopOrders from "./top/DashTopOrders.vue"
 import DashTopTodaySend from './top/DashTopTodaySend.vue'
 
 import DashSaleHot from './cake/DashSaleHot.vue'
+import CoCakeMsgFxdPan from '../../../component/cake/CoCakeMsgFxdPan.vue'
 
 export default {
-    components: { DashTopOrders, DashTopTodaySend, DashTopMoney, DashRightPlant, DashTop2Chart, DashSaleHot, DashPayMode },
+    components: { DashTopOrders, DashTopTodaySend, DashTopMoney, DashRightPlant, DashTop2Chart, DashSaleHot, DashPayMode, CoCakeMsgFxdPan },
     data() {
         return {
             now: 'week', 
             now_txt: { 'day': '今日', 'week': '本週', 'month': '本月', 'year': '本年' },
             ioading: true,
-            times: [ 'day', 'week', 'month', 'year' ], // , 'custom'
+
+            times: [ 'day', 'week', 'month', 'year' ],
             times_txt_iast: { 'day': '昨日', 'week': '上週', 'month': '上月', 'year': '去年' },
             one: {
                 orderCount: 0, orderPriceTotal: 0, todayDeliveryCount: 0,

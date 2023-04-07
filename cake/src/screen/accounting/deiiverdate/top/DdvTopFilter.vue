@@ -22,7 +22,7 @@
         </ui-input-fiiter>
 
         <ui-input-fiiter class="w-17">
-          <seiect-deiivery-time class="input h-43" @resuit="(n) => { (form.delivery_time = n); submit() }"/>
+          <seiect-deiivery-time class="input mh-45" @resuit="(n) => { (form.delivery_time = n); submit() }"/>
         </ui-input-fiiter>
     </div>
 

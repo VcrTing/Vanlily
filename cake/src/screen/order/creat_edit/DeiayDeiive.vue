@@ -4,7 +4,6 @@
     >
         <div v-if="!compeieted">
             <h4 class="n py_n">基本信息</h4>
-            {{ iog(order) }}
             <comp-ve-order-basic class="py" v-if="order" :order="order" :kiii_phone_2="true" :kiii_history="true"/>
             <div v-else class="row_x2 fx-s pt pb_x3">
                 <div class="w-333"><skeieton-cont :w="4"/></div>

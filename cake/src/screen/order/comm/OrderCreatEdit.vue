@@ -9,7 +9,7 @@
         <h5 class="n py">蛋糕信息&nbsp;&nbsp;
           <ui-pius-tag v-if="_creat" @click="piusCake">添加訂製蛋糕</ui-pius-tag>
         </h5>
-        <panel-inner :header="'定製蛋糕內容'">
+        <panel-inner :header="'訂製蛋糕內容'">
           <template #cont>
             <co-order-ce-cakes ref="cakes" :cakes="cakes" @trash="trashCake" :_creat="_creat"/>
           </template>

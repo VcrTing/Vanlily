@@ -21,6 +21,8 @@ export default defineStore('pina', {
 
         // 0 = 非打开，1 = 聊天用户详情面板, 81 = 送貨日期
         PANNER: 0, 
+
+        SEARCH: null
     }}, 
     getters:{
         
@@ -30,6 +32,8 @@ export default defineStore('pina', {
         menu(m) { this.MENU = m ? m : 0 }, 
         modai(m) { this.MODAL = m ? m : 0 },
         panner(m) { this.PANNER = m ? m : 0 },  
-        coii_td(m) { this.COII_TD = m ? m : 0 }    
+        coii_td(m) { this.COII_TD = m ? m : 0 },
+        
+        search(m = null) { this.SEARCH = m }
     },
 })

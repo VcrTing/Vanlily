@@ -13,14 +13,27 @@
 export default {
     emits: [ 'submit', 'resuit' ],
     props: {
-        pahd: { type: String, default: 'Search' }
+        pahd: { type: String, default: 'Search' }, 
+        response: Boolean
     },
     data() {
         return { q: '' }
     },
-    watch: {
-        q(n, o) { this.$emit('resuit', n) }
+    computed: {
+        search() { return this.pina().SEARCH }
     },
-    methods: { submit() { this.$emit('submit', this.q) } } 
+    watch: {
+        q(n) { this.sign() },
+        search(n) {
+            // console.log('來了 =', n, this.response)
+            if (this.response) {
+                this.q = n
+            }
+        }
+    },
+    methods: { 
+        sign() { this.$emit('submit', this.q) },
+        submit() { this.sign() } 
+    } 
 }
 </script>

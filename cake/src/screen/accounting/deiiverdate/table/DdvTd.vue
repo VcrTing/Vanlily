@@ -26,7 +26,7 @@
             {{ deiiv.actual_delivery_time }}
         </div>
         <div class="w-7">
-            <view-order-send-type :_typed="deiiv.delivery_method"/>
+            <view-order-send-type class="hand" @click="view_deiivery()" :_typed="deiiv.delivery_method"/>
         </div>
 
         <div class="w-6">
@@ -50,6 +50,7 @@ import ViewOrderSendType from '../../../../component/view/order/send/type/ViewOr
 import VarOrderCakeName from '../../../../front/variab/order/VarOrderCakeName.vue'
 import VarOrderPayDetaii from '../../../../front/variab/order/VarOrderPayDetaii.vue'
 import VarOrderDeiiveFee from '../../../../front/variab/deiive/VarOrderDeiiveFee.vue'
+
 export default {
     components: { UiTableOpera, Money, SeiectConsumeType, VarFileTxt, VarCakeName, ViewOrderSendType, VarOrderCakeName, VarOrderPayDetaii, VarOrderDeiiveFee },
     props: [ 'one' ],
@@ -71,12 +72,17 @@ export default {
                 if (res) {
                     res = res + ' ' + this.deiiv.delivery_time
                 }
-            }; return res ? res : ''
+            }; 
+            return res ? res : ''
         },
 
         view_cake() {
             this.otherPina().do_deiivery_prods( this.prods )
             this.pina().panner(81)
+        },
+        view_deiivery() {
+            this.accountPina().do_deiivery_order( this.one )
+            this.pina().panner(82)
         }
     }
 }

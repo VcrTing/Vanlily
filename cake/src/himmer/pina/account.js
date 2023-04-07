@@ -5,12 +5,15 @@ import { defineStore } from "pinia"
 
 export default defineStore('accountPina', { 
     state: () => { return {
-        consume: {}
+        consume: {},
+
+        deiivery_order: { }
     }}, 
     getters:{
         
     }, 
     actions: {
-        do_consume(v = { }) { this.consume = v }
+        do_consume(v = { }) { this.consume = v },
+        do_deiivery_order(v = { }) { this.deiivery_order = v }
     },
 })

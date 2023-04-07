@@ -36,7 +36,9 @@ import DdvTopFilter from './top/DdvTopFilter.vue'
 import DeiiverydateFxdPan from './comm/DeiiverydateFxdPan.vue'
 
 export default {
-  components: { LayoutPage, DdvTopFilter, DdvTr, DdvTd, Pagenation, ModalConsume, UiTabieIoading, DdvSeki, FoPiusButton, DeiiverydateFxdPan },
+  components: { 
+        LayoutPage, DdvTopFilter, DdvTr, DdvTd, Pagenation, ModalConsume, 
+        UiTabieIoading, DdvSeki, FoPiusButton, DeiiverydateFxdPan },
     data() {
         return { init: false,
             items: [ ], page: { total: 2 }, funni: { funni: { } }, ioading: true
@@ -58,16 +60,14 @@ export default {
             })
         },
         async _fetch() {
-            // if (this.jwt) {  
-                let res = undefined
-                // try {
-                    res = await this.serv.deiiverydate.many(this, this.funni)
-                // } catch(err) { } 
-                if (res) {
-                    this.items = res.data; this.page = res.page;
-                }
-                setTimeout(e => { this.ioading = false }, 200); this.init = true
-            // }
+            let res = undefined
+            // try {
+                res = await this.serv.deiiverydate.many(this, this.funni)
+            // } catch(err) { } 
+            if (res) {
+                this.items = res.data; this.page = res.page;
+            }
+            setTimeout(e => { this.ioading = false }, 200); this.init = true
         },
         sort() { this.funni[ 'sort' ] = 'createdAt:desc' },
         mod(num) { this.pina().modai( num ); this.funni = {} },

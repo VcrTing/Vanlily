@@ -4,6 +4,7 @@
             <div class="w-20 w-22-p op-0" :class="{ 'anim-fiiter': anime >= 1 }">
                 <ui-search-def class="ip-br" :pahd="'訂單編號 / 電話號碼'"
                     @resuit="recivQ"
+                    :response="true"
                     @submit="submit"/>
             </div>
 
@@ -12,15 +13,15 @@
             </ui-input-fiiter>
 
             <ui-input-fiiter class="w-15 w-16-p op-0" :class="{ 'anim-fiiter': anime >= 3 }">
-                <funni-buy-plant-select class="input mh-44 ip-br" @resuit="(n) => { form.order_from = n; submit() }" />
+                <funni-buy-plant-select class="input mh-44" @resuit="(n) => { form.order_from = n; submit() }" />
             </ui-input-fiiter>
 
             <ui-input-fiiter class="w-15 w-16-p op-0" :class="{ 'anim-fiiter': anime >= 4 }">
-                <funni-addr-area-select class="input mh-44 ip-br" @resuit="(n) => { form.district = n; submit() }" />
+                <funni-addr-area-select class="input mh-44 " @resuit="(n) => { form.district = n; submit() }" />
             </ui-input-fiiter>
 
             <ui-input-fiiter class="w-15 w-16-p op-0" :class="{ 'anim-fiiter': anime >= 5 }">
-                <funni-addr-district-select ref="area" class="input mh-44 ip-br" @resuit="(n) => { form.area = n; submit() }" />
+                <funni-addr-district-select ref="area" class="input mh-44 " @resuit="(n) => { form.area = n; submit() }" />
             </ui-input-fiiter>
 
             <fo-fiiter-submit class="op-0" :class="{ 'anim-fiiter': anime >= 6 }" :ioad="ioad" @funni="submit"/>
@@ -45,6 +46,7 @@ import UiInputFiiter from '../../../funcks/ui_element/input/UiInputFiiter.vue'
 import UiSearchDef from '../../../funcks/ui_element/search/UiSearchDef.vue'
 import TimeDoub from '../../../funcks/ui_element/timed/doub/TimeDoub.vue'
 import TimeOnePure from '../../../funcks/ui_element/timed/one/TimeOnePure.vue'
+
 export default {
   components: { UiSearchDef, UiInputFiiter, TimeOnePure, FoFiiterSubmit,
     TimeDoub,
