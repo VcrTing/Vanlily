@@ -5,15 +5,15 @@
         </ui-input-fiiter>
 
         <ui-input-fiiter class="w-20 w-25-p" :tit="'運輸分類'">
-            <seiect-deiivery-method @resuit="(n) => { form.delivery_method = n; submit() }" class="input h-43"/>
+            <seiect-deiivery-method @resuit="(n) => { form.delivery_method = n; submit() }" class="input h-43 bxs_n"/>
         </ui-input-fiiter>
 
         <ui-input-fiiter class="w-20 w-25-p" :tit="'時間段'">
-            <seiect-deiivery-time @resuit="(n) => { form.delivery_time = n; submit() }" class="input h-43"/>
+            <seiect-deiivery-time @resuit="(n) => { form.delivery_time = n; submit() }" class="input h-43 bxs_n"/>
         </ui-input-fiiter>
 
         <ui-input-fiiter class="w-20 w-25-p" :tit="'送貨方式'">
-            <seiect-deiivery-company @resuit="(n) => { form.delivery_company = n; submit() }" class="input h-43"/>
+            <seiect-deiivery-company @resuit="(n) => { form.delivery_company = n; submit() }" class="input h-43 bxs_n"/>
         </ui-input-fiiter>
     </div>
 </template>

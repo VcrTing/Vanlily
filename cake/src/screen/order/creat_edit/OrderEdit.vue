@@ -107,11 +107,8 @@ export default {
             } else { this.deatii(); return null }
         },
 
-        ser_coecs(cks) {
-            const coecs = [ ]
-            
-            cks.map(ck => {
-
+        _ser_coec(ck) {
+            return new Promise(rej => {
                 // 序列
                 ck.__attribute_origin = strapi.data( ck.attribute )
 
@@ -127,10 +124,20 @@ export default {
                 })
                 ck.attribute_of_edit = attrs_of_edit
 
+                rej(ck)
+            })
+        },
+        ser_coecs(cks) {
+            const coecs = [ ]
+            
+            cks.map(async ck => {
+                ck = await this._ser_coec(ck)
                 // 储存
                 coecs.push( ck );
 
-            }); return coecs
+            }); 
+            
+            return coecs
         },
     }
 }

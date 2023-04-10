@@ -1,10 +1,15 @@
 <template>
     <layout-page :_class="''">
         <template v-slot:cont>
-            <form-materiai class="pan py upper" v-if="anim >= 0"
-                :header="'新增產品或配件'" :header_sub="'材料或配件基本信息'"
-                @submit="submit" @cancei="back"
-                :mode="'CREAT'" :msg="msg"
+            <form-materiai class="pan py upper" 
+                v-if="anim >= 0"
+                :header="'新增產品或配件'" 
+                :header_sub="'材料或配件基本信息'"
+                :mode="'CREAT'" 
+                @submit="submit" 
+                @cancei="back"
+                :ioad="ioading"
+                :msg="msg"
             >
                 <comp-materia-base :mode="'CREAT'" ref="base"/>
             </form-materiai>
@@ -34,7 +39,7 @@ export default {
   components: { LayoutPage, FormMateriai, CompMateriaBase, CompMateriaInvens, CompMateriaContrast, CompMateriaInvensRecord },
     data() {
         return {
-            msg: '', anim: 0,
+            msg: '', anim: 0, ioading: false,
             base: { }, invens: { }, contrast: [ ], invens_record: [ ]
         }
     },
@@ -66,6 +71,7 @@ export default {
             return new Promise(async rej => {
                 const data = this.coii()
                 if (data) {
+                    this.ioading = true
                     this.msg = '儲存中...'
                     try {
                         let res = await this.serv.materiai.creat(this, data)
@@ -77,6 +83,7 @@ export default {
                     }
                 }
 
+                this.ioading = false
                 rej(0)
             })
         },

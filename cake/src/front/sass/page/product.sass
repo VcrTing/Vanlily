@@ -13,6 +13,7 @@
     max-height: 0em
     overflow: hidden
     box-shadow: 0px 2px 8px -3px rgba(0, 0, 0, 0.34)
+    .button,
     & > button
         border-radius: 0px
         text-align: left
@@ -27,6 +28,7 @@
         &:focus-visible
             color: #FFF
             background: $primary_Light
+        @extend .fx-pri-focus
 
     .self-input
         margin-bottom: $ds_s
@@ -42,7 +44,7 @@
 
 
 .fk-cpm-active
-    max-height: 80em
+    max-height: 81.5em
 
 .cake-picker-trig
     // position: absolute
@@ -68,6 +70,7 @@
         right: $ds
         top: $ds
     .ccc-cover
+        @extend .br
         border-top-right-radius: 0px
         border-bottom-right-radius: 0px
         &:hover

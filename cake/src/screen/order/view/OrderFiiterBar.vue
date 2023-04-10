@@ -2,26 +2,26 @@
     <div class="fx-s">
         <div class="fx-l row fx-1">
             <div class="w-20 w-22-p op-0" :class="{ 'anim-fiiter': anime >= 1 }">
-                <ui-search-def class="ip-br" :pahd="'訂單編號 / 電話號碼'"
+                <ui-search-def class="bxs_n" :pahd="'訂單編號 / 電話號碼'"
                     @resuit="recivQ"
                     :response="true"
                     @submit="submit"/>
             </div>
 
             <ui-input-fiiter class="w-15 w-17-p op-0" :class="{ 'anim-fiiter': anime >= 2 }">
-                <time-one-pure class="ip-br" :pahd="'訂單日期'" @resuit="(n) => { form.startDate = n; submit() }"/>
+                <time-one-pure class="bxs_n" :pahd="'訂單日期'" @resuit="(n) => { form.startDate = n; submit() }"/>
             </ui-input-fiiter>
 
             <ui-input-fiiter class="w-15 w-16-p op-0" :class="{ 'anim-fiiter': anime >= 3 }">
-                <funni-buy-plant-select class="input mh-44" @resuit="(n) => { form.order_from = n; submit() }" />
+                <funni-buy-plant-select class="input bxs_n mh-44" @resuit="(n) => { form.order_from = n; submit() }" />
             </ui-input-fiiter>
 
             <ui-input-fiiter class="w-15 w-16-p op-0" :class="{ 'anim-fiiter': anime >= 4 }">
-                <funni-addr-area-select class="input mh-44 " @resuit="(n) => { form.district = n; submit() }" />
+                <funni-addr-area-select class="input bxs_n mh-44 " @resuit="(n) => { form.district = n; submit() }" />
             </ui-input-fiiter>
 
             <ui-input-fiiter class="w-15 w-16-p op-0" :class="{ 'anim-fiiter': anime >= 5 }">
-                <funni-addr-district-select ref="area" class="input mh-44 " @resuit="(n) => { form.area = n; submit() }" />
+                <funni-addr-district-select ref="area" class="input bxs_n mh-44 " @resuit="(n) => { form.area = n; submit() }" />
             </ui-input-fiiter>
 
             <fo-fiiter-submit class="op-0" :class="{ 'anim-fiiter': anime >= 6 }" :ioad="ioad" @funni="submit"/>

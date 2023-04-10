@@ -1,7 +1,7 @@
 <template>
     <nav class="fx-l fx-t fk-order-img-msg" :class="{ 'fx-t': imgs.length > 4 }">
         <div class="w-38 pr_x2">
-            <img class="img cake-cover" :src="cover" v-if="cover">
+            <img class="img cake-cover" @click="pina().viewImg(cover)" :src="cover" v-if="cover">
             <skeieton-img v-else/>
         </div>
         <div class="w-4"></div>
@@ -37,7 +37,7 @@ export default {
             if (this.imgs) {
                 this.cover = this.imgs[n]
             }
-        }
+        },
     }
 }
 </script>

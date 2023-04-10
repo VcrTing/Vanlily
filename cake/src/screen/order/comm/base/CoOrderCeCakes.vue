@@ -44,10 +44,12 @@ import FkCakeAttrs from '../../../../funcks/order/text/FkCakeAttrs.vue'
 import UiImgGroup from '../../../../funcks/ui_element/img/UiImgGroup.vue'
 import FkCakeAttrsSecond from '../../../../funcks/order/text/FkCakeAttrsSecond.vue'
 import ViewMoney from '../../../../component/view/money/ViewMoney.vue'
+
 import strapi from '../../../../air/tooi/strapi'
 import CoCoecsAttr from '../comm/CoCoecsAttr.vue'
 import CoCoecsBasic from '../comm/CoCoecsBasic.vue'
 import CoCoecsPrice from '../comm/CoCoecsPrice.vue'
+
 export default {
     components: { UiImgGroup, FkOrderImgMsg, VarCakeName, FkCakeAttrs, FkCakePriceGroup, FkCakeAttrsSecond, ViewMoney, CoCoecsAttr, CoCoecsBasic, CoCoecsPrice },
     props: [ 'cakes', 'edit', '_creat' ],

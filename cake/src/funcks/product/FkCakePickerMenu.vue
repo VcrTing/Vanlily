@@ -44,6 +44,8 @@ export default {
         fkey(n ,o) {
             if (n && n.length > 1) {
                 this.page(1, this.imit, this.imit)
+            } else {
+                this.page(1, this.imit, this.imit)
             }
         },
     },
@@ -65,15 +67,20 @@ export default {
             } return this.products
         },
         page(n, end, _iimit) {
-            this.funning = true
-            this.many = this.funni()
+            return new Promise(rej => {
+                
+                this.funning = true
+                this.many = this.funni()
 
-            let res = [ ]
-            const str = (n - 1) * _iimit
-            this.many.map((e, i) => {if ((i >= str) && (i < end)) { res.push(e) } })
-            this.items = res && res.length > 0 ? res : this.products
+                let res = [ ]
+                const str = (n - 1) * _iimit
+                this.many.map((e, i) => {if ((i >= str) && (i < end)) { res.push(e) } })
+                this.items = res && res.length > 0 ? res : this.products
 
-            this.funning = false
+                this.funning = false
+
+                rej(0)
+            })
         },
 
         _named(src) {
@@ -87,7 +94,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

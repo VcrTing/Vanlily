@@ -53,16 +53,20 @@ export default {
     deatii(v = '您的表單不完整。') { this.msg = v; setTimeout(e => this.msg = '', 4000) },
 
     async submit() {
-      const form = this.$refs.form.coii()
+      return new Promise(async rej => {
+        const form = this.$refs.form.coii()
       
-      if (form) {
-        this.deatii('儲存中...')
-        const res = await this.serv.order.creat( this, form )
-        if (res) {
-          this.compeieted = true
-          this.productPina().ciear_coecs()
-        }
-      } else { this.deatii() }
+        if (form) {
+          this.deatii('儲存中...')
+          const res = await this.serv.order.creat( this, form )
+          if (res) {
+            this.compeieted = true
+            this.productPina().ciear_coecs()
+          }
+        } else { this.deatii() }
+
+        rej(0)
+      })
     },
     dump() { this.go('/admin/order') }
   }

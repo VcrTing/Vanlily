@@ -1,8 +1,9 @@
 <template>
     <layout-page :_class="''">
-        <template v-slot:cont>
+        <template #cont>
             <form-materiai class="pan py upper" v-if="anim >= 0"
                 :msg="msg"
+                :ioad="ioading"
                 @submit="submit" @cancei="back"
                 :header="'編輯'" :mode="'EDIT'" :header_sub="'材料或配件基本信息'">
                 <div class="py_s"></div>
@@ -38,7 +39,7 @@ export default {
   components: { LayoutPage, FormMateriai, CompMateriaBase, CompMateriaInvens, UiSeiectYear, UiSeiectMonth, CompMateriaInvensRecord, FormMateriaiHeaderSub, CompMateriaContrast },
     data() {
         return {
-            materiai: { }, msg: '', anim: 0,
+            materiai: { }, msg: '', anim: 0, ioading: false,
             base: { }, invens: { }, contrast: [ ], invens_record: [ ]
         }
     },
@@ -85,6 +86,7 @@ export default {
             return new Promise(async rej => {
                 const data = this.coii()
                 if (data) {
+                    this.ioading = true
                     this.msg = '儲存中...'
                     try {
                         let res = await this.serv.materiai.edit(this, data, this._mtr.id)
@@ -95,6 +97,7 @@ export default {
                         this.msg = '網絡錯誤！'
                     }
                 }
+                this.ioading = false
             })
         },
         back() { this.go('/admin/accounting/material/') },

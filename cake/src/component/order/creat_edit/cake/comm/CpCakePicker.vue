@@ -2,7 +2,11 @@
     <ui-input class="w-618" :is_err="false" :header="header">
         <div class="ps-r input input-txt-mode">
             <div class=" fx-l">
-                <button @click="open = !open" class="cake-picker-trig" :class="{ 'btn-pri cake-picker-trig-active': choised }">
+                <button 
+                    @click="open = !open" 
+                    class="cake-picker-trig" 
+                    :class="{ 'btn-pri cake-picker-trig-active': choised }"
+                    >
                     <span class="mdi mdi-filter-variant"></span>
                 </button>
                 <div class="d-ib pl_x2">
@@ -20,6 +24,7 @@
 import FkCakePickerMenu from '../../../../../funcks/product/FkCakePickerMenu.vue'
 import FkCakeAvatarName from '../../../../../funcks/product/view/FkCakeAvatarName.vue'
 import UiInput from '../../../../../funcks/ui_element/input/normal/UiInput.vue'
+
 export default {
   components: { UiInput, FkCakePickerMenu, FkCakeAvatarName },
     props: {
@@ -28,8 +33,8 @@ export default {
     emits: [ 'resuit', 'open' ],
     data() {
         return {
-            named: '', named_choised: '', cake_choise: { },
-            open: false, choised: false
+            named: '', named_choised: '', 
+            open: false, choised: false, cake_choise: { },
         }
     },
     mounted() {
@@ -59,11 +64,15 @@ export default {
             return res ? res.name : ''
         },
         recive(ck) {
-            this.cake_choise = ck
-            this.named_choised = this._named(ck)
-            this.named = this._named(ck)
-            this.choised = true
-            this.open = false
+            return new Promise(rej => {
+                this.cake_choise = ck
+                this.named_choised = this._named(ck)
+                this.named = this._named(ck)
+                this.choised = true
+                this.open = false
+
+                rej(0)
+            })
         }
     }
 }

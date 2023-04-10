@@ -10,11 +10,11 @@
             {{ one.customer_name }}
         </div>
 
-        <div class="w-9">
+        <div class="w-9 t-elip_x2 pr_s">
             {{ one.customer_phone_no_1 }}
         </div>
         <div class="w-16 pr t-elip_x3">
-            <span class="pri_light_son hand" @click="view_cake()">
+            <span class="pri_son hand" @click="view_cake()">
                 <var-order-cake-name :order="one"/>
             </span>
         </div>

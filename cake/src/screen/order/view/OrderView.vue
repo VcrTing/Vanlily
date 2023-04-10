@@ -5,7 +5,7 @@
         <div class="table">
             <ovs-tr/>
             <ui-tabie-ioading :ioad="ioading" :many="items">
-            <order-view-source v-if="!ioading" :items="items" @refresh="refreshOrder"/>
+            <order-view-source ref="body" v-if="!ioading" :items="items" @refresh="refreshOrder"/>
             <ovs-seki v-else/>
             </ui-tabie-ioading>
         </div>
@@ -81,6 +81,7 @@ export default {
       async _fetch() {
         if (this.jwt) {  let res = { }
           try {
+            this.$refs.body ? this.$refs.body.ciose() : undefined;
             res = await this.serv.order.many(this, this.funni) 
           } catch(err) { }
           

@@ -8,6 +8,15 @@
     100%
         opacity: 0.4
 
+.ani_mod_hui_s
+    opacity: 0.18
+    animation: ani_mod_hui 0.082s ease-in
+@keyframes ani_mod_hui
+    0%
+        opacity: 0
+    100%
+        opacity: 0.18
+
 .modal
     &,
     .modal-hui,
@@ -87,3 +96,18 @@
         max-width: 60vw
         & > div 
             width: 100%
+
+
+//   
+.eos-mod-media
+    .modal-hui
+        @extend .ani_mod_hui_s
+
+    .modal-cont
+        & > div
+            width: 100%
+            height: 100%
+            overflow: hidden
+            overflow-y: scroll
+            max-width: calc(8vw + 400px)
+        @extend .fx-c

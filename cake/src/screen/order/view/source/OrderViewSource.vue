@@ -58,6 +58,11 @@ export default {
   methods: {
     checkIist(order) { },
 
+    ciose() {
+      this.pina().coii_td( 0 )
+      this.td = -1
+      this.pan = 0
+    },
     expan(k, index, uuid) {
       return new Promise(async rej => {
         this.$emit('refresh', uuid)

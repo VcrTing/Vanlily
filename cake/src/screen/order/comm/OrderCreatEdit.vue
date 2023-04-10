@@ -78,16 +78,21 @@ export default {
     if (this._edit && this.order.id) { setTimeout(e => this.for_edit(), 10) }
   },
   methods: {
+
     for_edit() {
-      const send = this.order.delivery_info
-      const addr = this.order.delivery_info
-      this.$refs.send.reset( send )
-      this.$refs.addr.reset( addr )
+      /// return new Promise(rej => {
+        const send = this.order.delivery_info
+        const addr = this.order.delivery_info
+        this.$refs.send.reset( send )
+        this.$refs.addr.reset( addr )
 
-      let prods = this.order.ordered_product
+        let prods = this.order.ordered_product
 
-      this.cakes = prods ? prods.map(e => e.__cake) : [ ]
-      this.order.coecs ? this.order.coecs.map(cs => this.productPina().do_coecs( cs )) : undefined;
+        this.cakes = prods ? prods.map(e => e.__cake) : [ ]
+        this.order.coecs ? this.order.coecs.map(cs => this.productPina().do_coecs( cs )) : undefined;
+
+      //   rej(0)
+      // })
     },
 
     coii() {

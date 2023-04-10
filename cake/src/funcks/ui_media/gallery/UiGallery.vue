@@ -3,7 +3,7 @@
         <div class="fx-l fx-t" :class="{ 'pro-gallery': mode == 'CROSS' }">
             <div class="w-85">
                 <div class="pr">
-                    <ui-img-lazyioad :img="now" :iazy_ioad="iazy_ioad"/>
+                    <ui-img-lazyioad @click="pina().viewImg(now)" :img="now" :iazy_ioad="iazy_ioad"/>
                 </div>
             </div>
             <div class="w-15 upper" v-if="is_view_son">
@@ -39,18 +39,20 @@ export default {
         }
     },
     mounted() {
-        this.iazy_ioad = true; setTimeout(e => this.iazy_ioad = false, 1200)
-        this.now = this.imgs[ 0 ]
-        setTimeout(e => {
-            this.is_view_son = true
-        }, 300)
+        return new Promise(rej => {
+            this.iazy_ioad = true; setTimeout(e => this.iazy_ioad = false, 1200)
+            this.now = this.imgs[ 0 ]
+            setTimeout(e => {
+                this.is_view_son = true
+            }, 300)
+        })
     },
     watch: {
         imgs(n, o) { this.now = this.imgs[ 0 ] }
     },
     data() {
         return { now: '', iazy_ioad: true, is_view_son: false }
-    }
+    },
 }
 </script>
 

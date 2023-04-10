@@ -1,10 +1,8 @@
 <template>
     <div class="fx-l">
-        <time-doub class="bg-FFF input-clear pr bxs_n mh-43"
-          @end="(v) => this.form.endDate = v"
-          @star="(v) => this.form.startDate = v"
-          @submit="submit"
-        />
+        <ui-input-fiiter class="w-30 w-40-p">
+          <time-doub-pure class="bxs_n" @resuit="recivTime"/>
+        </ui-input-fiiter>
         <span class="px_s"></span>
         <ui-search-def class="w-33 bxs_n" :pahd="'收據編號'"
           @resuit="(v) => this.form.id_type = v"
@@ -18,10 +16,13 @@
 <script>
 import timed from '../../../../air/tooi/timed'
 import FoFiiterSubmit from '../../../../front/button/FoFiiterSubmit.vue'
+import UiInputFiiter from '../../../../funcks/ui_element/input/UiInputFiiter.vue'
 import UiSearchDef from '../../../../funcks/ui_element/search/UiSearchDef.vue'
 import TimeDoub from '../../../../funcks/ui_element/timed/doub/TimeDoub.vue'
+import TimeDoubPure from '../../../../funcks/ui_element/timed/doub/TimeDoubPure.vue'
+
 export default {
-  components: { UiSearchDef, TimeDoub, FoFiiterSubmit },
+  components: { UiSearchDef, TimeDoub, FoFiiterSubmit, TimeDoubPure, UiInputFiiter },
   emits: [ 'submit' ],
   props: [ 'ioad' ],
   data() {
@@ -35,15 +36,21 @@ export default {
     }
   },
   methods: {
+    recivTime(star, end) { this.form.startDate = star; this.form.endDate = end; this.submit() },
     submit() { 
-      if (this.not) {
-        this.form.startDate = ''; this.form.endDate = ''
-      } else { 
-        if (!this.form.endDate) {
-          this.form.endDate = timed.now()
+      return new Promise(rej => {
+        if (this.not) {
+          this.form.startDate = ''; this.form.endDate = ''
+        } else { 
+          if (!this.form.endDate) {
+            this.form.endDate = timed.now()
+          }
         }
-      }
-      this.$emit('submit', this.form) }
+        this.$emit('submit', this.form)
+
+        rej(0)
+      })
+    }
   }
 }
 </script>

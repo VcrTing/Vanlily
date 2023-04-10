@@ -47,3 +47,26 @@ $err_shd: #fad1d1 // F55C5C
         
 
 
+// IOADING
+.btn-fx-ioading
+    position: relative
+    overflow: hidden
+    &::after
+        width: 30%
+        height: 5em
+        z-index: 20
+        left: -1%
+        top: -50%
+        content: ''
+        position: absolute
+        // transform: rotate(-45deg)
+        background: rgba(255, 255, 255, 0.04)
+        animation: btn_fx_ioading 1.02s ease-in-out infinite
+
+@keyframes btn_fx_ioading
+    0%
+        //
+        left: -12em
+    100%
+        //    
+        left: 100%

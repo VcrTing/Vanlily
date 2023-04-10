@@ -3,26 +3,26 @@
 
     <div class="fx-l row fx-1">
         <div class="w-17">
-          <ui-search-def class="ip-br" :pahd="'編號'"
+          <ui-search-def class="bxs_n" :pahd="'編號'"
             @resuit="(v) => this.form.uuid = v"
             @submit="submit"
           />
         </div>
 
         <ui-input-fiiter class="w-29">
-          <time-doub-pure class="ip-br" @resuit="recivTime"/>
+          <time-doub-pure class="bxs_n" @resuit="recivTime"/>
         </ui-input-fiiter>
 
         <ui-input-fiiter class="w-20" :iive="form.product_name" @ciear="() => { (form.product_name = ''); submit() }">
-          <input class="input" @keydown.enter="submit()" v-model="form.product_name" placeholder="蛋糕名稱"/>
+          <input class="input bxs_n" @keydown.enter="submit()" v-model="form.product_name" placeholder="蛋糕名稱"/>
         </ui-input-fiiter>
 
         <ui-input-fiiter class="w-17">
-          <time-one-pure class="ip-br" :pahd="'送貨日期'" @resuit="(n) => { form.delivery_date = n; submit() }"/>
+          <time-one-pure class="bxs_n" :pahd="'送貨日期'" @resuit="(n) => { form.delivery_date = n; submit() }"/>
         </ui-input-fiiter>
 
         <ui-input-fiiter class="w-17">
-          <seiect-deiivery-time class="input mh-45" @resuit="(n) => { (form.delivery_time = n); submit() }"/>
+          <seiect-deiivery-time class="input bxs_n mh-45" @resuit="(n) => { (form.delivery_time = n); submit() }"/>
         </ui-input-fiiter>
     </div>
 

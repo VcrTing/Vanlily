@@ -1,14 +1,14 @@
 <template>
     <div class="fx-l co-cake-card br upper">
         <div class="w-10">
-            <var-cake-cover class="ccc-cover" :prod="cake"/>
+            <var-cake-cover class="ccc-cover" :prod="cake" :is_div="true"/>
         </div>
-        <div class="fx-1 pl_x3">
+        <div class="fx-1 pl_x3 py_s">
             <h4 class="t-elip_x1 softer">
                 <var-cake-name :prod="cake" v-if="cake"/>
                 <div v-else>&nbsp;</div>
             </h4>
-            <div class="pt_x fx-l upper fx-t">
+            <div class="pt fx-l upper fx-t">
                 <div class="fx-l pr_x2">
                     單號:
                     &nbsp;&nbsp;<span class="hand" @click="viewOrder(num)">{{ num }}</span>

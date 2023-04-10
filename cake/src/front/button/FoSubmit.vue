@@ -1,5 +1,5 @@
 <template>
-    <button class="btn-pri fo-submit">
+    <button class="btn-pri fo-submit" :class="{ 'btn-fx-ioading': ioad }">
         <span v-if="!msg">
             {{ tit }}
         </span>
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-    props: [ 'tit', 'msg', 'auto' ],
+    props: [ 'tit', 'msg', 'auto', 'ioad' ],
     emits: [ 'ciear' ],
     watch: {
         msg(n) {

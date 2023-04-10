@@ -21,6 +21,7 @@
                     :auto="false"
                     class="w-100 py_n" 
                     @click="submit" 
+                    :ioad="ioading"
                     @ciear="msg = ''"/>
             </div>
         </div>
@@ -37,7 +38,7 @@ export default {
     data() {
         return {
             named: '', anime: 0,
-            pass: '', msg: '',
+            pass: '', msg: '', ioading: false,
             pass_err: false, named_err: false,
         }
     },
@@ -76,6 +77,7 @@ export default {
         async submit() {
             const data = this._res()
             if (data) {
+                this.ioading = true
                 this.msg = '登錄中...'
                 let res = await this.serv.user._in(this, data)
                 if (res < 399) { 
@@ -87,6 +89,7 @@ export default {
             } else {
                 this.reset()
             }
+            this.ioading = false
         }
     }
 }

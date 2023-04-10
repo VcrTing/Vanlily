@@ -33,6 +33,7 @@ import FkCakePriceGroup from '../../../funcks/order/text/FkCakePriceGroup.vue';
 import Money from '../../../funcks/ui/money/Money.vue'
 import UiGallery from '../../../funcks/ui_media/gallery/UiGallery.vue'
 import ViewMoney from '../../view/money/ViewMoney.vue';
+
 export default {
   components: { UiGallery, Money, VarCakeName, ViewMoney, FkCakePriceGroup, FkCakeAttrsSecond, FkCakeAttrs },
     props: [ 'cake' ],
