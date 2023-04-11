@@ -2,8 +2,8 @@
     <div class="row fx-l">
         <nav 
             class="mb"
-            :class="{ 'w-25': (imgs.length <= 8), 'w-12': (imgs.length > 8) }" 
-            v-for="(v, i) in imgs" :key="i" 
+            :class="{ 'w-25': (ien <= 8), 'w-20': (ien > 8 && ien < 15), 'w-12': (ien > 15) }" 
+            v-for="(v, i) in res" :key="i" 
             @click="$emit('change', i)"
         >
             <ui-img :src="v" class="ratio_1x1 br_s hand"/>
@@ -17,7 +17,19 @@ import UiImg from '../../ui_static/UiImg.vue'
 export default {
     components: { UiImg, },
     props: [ 'imgs' ],
-    emits: [ 'change' ]
+    emits: [ 'change' ],
+    computed: {
+        res() {
+            let res = [ ]
+            this.imgs ? this.imgs.map((e, i) => {
+                if (i < 32) {
+                    res.push(e)
+                }
+            }) : undefined
+            return res
+        },
+        ien() { return this.imgs ? this.res.length : 0 }
+    }
 }
 </script>
 

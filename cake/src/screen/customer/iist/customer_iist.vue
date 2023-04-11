@@ -14,7 +14,7 @@
                     <customer-seki v-else/>
                 </ui-tabie-ioading>
             </nav>
-            <pagenation class="py_x2 op-0" :class="{ 'anim-page': init }" @page="pagena" :count="page.total" />
+            <pagenation class="py_x2 op-0" :_limit="32" :class="{ 'anim-page': init }" @page="pagena" :count="page.total" />
         </template>
     </layout-page>
 
@@ -34,14 +34,13 @@ import ModalSource from '../../../component/source/ModalSource.vue'
 export default {
     components: { CustomerTopFilter, LayoutPage, CustomerTr, CustomerTd, Pagenation, UiTabieIoading, CustomerSeki, ModalSource },
     data() {
-        return { init: false,
-            items: [ 
-                
-            ], page: { total: 2 }, funni: { funni: { } }, ioading: true, exp: false
+        return { 
+            init: false,
+            items: [ ], 
+            page: { total: 2 }, 
+            funni: { funni: { } }, 
+            ioading: true, exp: false
         }
-    },
-    computed: { 
-        jwt() { return this.token() },
     },
     methods: {
         async pagena(star, end, imit) {
@@ -50,19 +49,21 @@ export default {
             await this.fetch();
         },
         async fetch() {
-            this.ioading = true; this.sort()
-            await this._fetch(); setTimeout(e => { this.ioading = false }, 200)
+            return new Promise(async rej => {
+                this.ioading = true; this.sort()
+                await this._fetch(); setTimeout(e => { this.ioading = false }, 200)
+                rej(0)
+            })
         },
         async _fetch() {
-            if (this.jwt) {  let res = undefined
-                try {
-                    res = await this.serv.customer.many(this, this.funni) 
-                } catch(err) { }
-                if (res && res.data) {
-                    this.items = res.data; this.page = res.page; // this.opened() 
-                }
-                setTimeout(e => { this.ioading = false }, 200); this.init = true
+            let res = undefined
+            try {
+                res = await this.serv.customer.many(this, this.funni) 
+            } catch(err) { }
+            if (res && res.data) {
+                this.items = res.data; this.page = res.page; // this.opened() 
             }
+            setTimeout(e => { this.ioading = false }, 200); this.init = true
         },
         sort() { this.funni[ 'sort' ] = 'createdAt:desc' },
         mod(num) { this.pina().modai( num ); this.funni = {} },

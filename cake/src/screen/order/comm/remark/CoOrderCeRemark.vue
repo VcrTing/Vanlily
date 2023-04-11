@@ -32,7 +32,7 @@ export default {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
         reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } },
         coii() {
-            for (let k in this.form_err) { if (!this.form[k]) { this.form_err[k] = true; return undefined; } }
+            // for (let k in this.form_err) { if (!this.form[k]) { this.form_err[k] = true; return undefined; } }
             delete this.form.id
             return this.form
         },

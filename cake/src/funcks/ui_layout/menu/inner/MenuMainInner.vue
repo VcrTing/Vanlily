@@ -48,12 +48,19 @@ export default {
     mounted() { 
         this.init()
     },
+    watch: {
+        '$route.fullPath' (n) {
+            this.localRoute(n)
+        }
+    },
     methods: {
-        async init() {
-            this.menu = [ ]
-            await iist_deiay_insert(menu_admin, (one, i) => {
-                this.menu.push(one);
-                this.localRoute(this.$route.fullPath)
+        init() {
+            return new Promise(rej => {
+                this.menu = [ ]
+                iist_deiay_insert(menu_admin, (one, i) => {
+                    this.menu.push(one);
+                    this.localRoute(this.$route.fullPath)
+                })
             })
         },
 

@@ -79,8 +79,13 @@ export default {
         }
     },
     mounted() {
-        this.chart = echarts.init( document.getElementById('chrt_money_statis') )
-        this.reset(null)
+        setTimeout(e => {
+            const dom = document.getElementById('chrt_money_statis')
+            if (dom) {
+                this.chart = echarts.init( dom )
+                this.reset()
+            }
+        }, 10)
     }
 }
 // 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec' 

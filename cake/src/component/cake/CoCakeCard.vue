@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="co-cake-card-fixed">
+        <div class="co-cake-card-fixed op-0">
             <view-order-pay-status :_is_pay="paid"/>
         </div>
     </div>

@@ -22,7 +22,7 @@ export default {
     },
     methods: {
         named(many) {
-            let res = [ 'Whatsapp', 'Website', 'Email' ]
+            let res = [ '未知來源' ]
             const data = this.data(many)
             if (data) {
                 res = [ ]
@@ -34,7 +34,7 @@ export default {
         data(many) {
             let src = many
             if (!src || src.length <= 0) { return [
-                { name: 'Whatsapp', value: 0 }, { name: 'Website', value: 0 }, { name: 'Email', value: 0 }
+                { name: '未知來源', value: 0 }
             ] } else {
                 return src
             }
@@ -80,8 +80,13 @@ export default {
         }
     },
     mounted() {
-        this.chart = echarts.init( document.getElementById('chrt_user_form') )
-        this.reset()
+        setTimeout(e => {
+            const dom = document.getElementById('chrt_user_form')
+            if (dom) {
+                this.chart = echarts.init( dom )
+                this.reset()
+            }
+        }, 10)
     }
 }
 </script>

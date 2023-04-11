@@ -12,7 +12,15 @@ import UiChartUserFrom from '../../../../funcks/ui_view/chart/UiChartUserFrom.vu
 export default {
   components: { UiChartUserFrom },
     methods: {
-        resetChart(many) { this.$refs.chart.reset(many) }
+        resetChart(many) { this.$refs.chart.reset( this.ser_data( many ) ) },
+        ser_data(src) {
+            // console.log('SRC =', src)
+            return src.map(e => {
+                if (e.name == 'unknown_source') { e.name = '未知來源' }
+
+                return e
+            })
+        }
     }
 }
 </script>

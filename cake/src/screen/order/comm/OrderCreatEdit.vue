@@ -75,24 +75,23 @@ export default {
     return { cakes: [ ], }
   },
   mounted() {
-    if (this._edit && this.order.id) { setTimeout(e => this.for_edit(), 10) }
+    if (this._edit && this.order.id) { setTimeout(e => this.for_edit(), 2) }
   },
   methods: {
 
     for_edit() {
-      /// return new Promise(rej => {
+      return new Promise(rej => {
         const send = this.order.delivery_info
         const addr = this.order.delivery_info
         this.$refs.send.reset( send )
         this.$refs.addr.reset( addr )
 
         let prods = this.order.ordered_product
-
         this.cakes = prods ? prods.map(e => e.__cake) : [ ]
+        // console.log('ORDER =', this.order)
         this.order.coecs ? this.order.coecs.map(cs => this.productPina().do_coecs( cs )) : undefined;
-
-      //   rej(0)
-      // })
+        rej(0)
+      })
     },
 
     coii() {
@@ -114,9 +113,7 @@ export default {
     trashCake(idx) {
       let res = [ ]
       this.cakes.map((e, i) => {
-        if (i == idx) {
-
-        } else {
+        if (i != idx) {
           res.push( e )
         }
       })

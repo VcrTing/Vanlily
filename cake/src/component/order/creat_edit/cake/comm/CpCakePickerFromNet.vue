@@ -15,8 +15,7 @@
 
         <div class="fk-cake-picker-menu" :class="{ 'fk-cpm-active': open }">
             <div class="py px_x2">
-                <ui-search-def class="ip-br" @submit="(n) => { fkey = n; search(n) }" :pahd="'請輸入蛋糕ID、名稱，按下回車後進行聯網查詢。'"/>
-                
+                <ui-search-def class="ip-br" :_kiii_watch="true" @submit="(n) => { fkey = n; search(n) }" :pahd="'請輸入蛋糕ID、名稱，按下回車後進行聯網查詢。'"/>
             </div>
             <ui-tabie-ioading :ioad="ioading" :many="items">
                 <div class="pb">
@@ -52,15 +51,8 @@ export default {
     },
     methods: {
         async _fetch(prms = { }) {
-            // const res = await this.serv.cake.search(this, prms)
-            // return (res && res.data) ? res.data : [ ]
-            const res = [ ]
-            this.products.map((e, i) => {
-                if (i < 10) {
-                    res.push(e)
-                }
-            })
-            return res
+            const res = await this.serv.cake.search(this, prms)
+            return (res && res.data) ? res.data : [ ]
         },
         async search(n = '') {
             return new Promise(async rej => {

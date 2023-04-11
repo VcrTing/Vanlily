@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <co-cake-msg-fxd-pan/>
+        <co-cake-dash-fxd-pan/>
 </div> 
 </template>
 
@@ -70,10 +70,13 @@ import DashTopOrders from "./top/DashTopOrders.vue"
 import DashTopTodaySend from './top/DashTopTodaySend.vue'
 
 import DashSaleHot from './cake/DashSaleHot.vue'
-import CoCakeMsgFxdPan from '../../../component/cake/CoCakeMsgFxdPan.vue'
+import CoCakeDashFxdPan from '../../../component/cake/CoCakeDashFxdPan.vue'
 
 export default {
-    components: { DashTopOrders, DashTopTodaySend, DashTopMoney, DashRightPlant, DashTop2Chart, DashSaleHot, DashPayMode, CoCakeMsgFxdPan },
+    components: { 
+        DashTopOrders, DashTopTodaySend, DashTopMoney, 
+        DashRightPlant, DashTop2Chart, DashSaleHot, 
+        DashPayMode, CoCakeDashFxdPan },
     data() {
         return {
             now: 'week', 
@@ -110,7 +113,7 @@ export default {
         },
         async fetching() {
             return new Promise(async rej => {
-
+                
                 this.ioading = true
                 const res = await this.serv.dashboard.many(this, this.now)
 

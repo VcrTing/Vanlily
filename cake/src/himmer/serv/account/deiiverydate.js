@@ -13,12 +13,22 @@ const funni = (funni) => {
 }
 
 const many = async function(vue, qs) {
-    let res = await vue.net.get('deiivery_date', vue.token(), funni(qs))
+    let res = null
+    try {
+        res = await vue.net.get('deiivery_date', vue.token(), funni(qs))
+    } catch(err) {
+        res = await vue.net.get('deiivery_date', vue.token(), funni(qs))
+    }
     return res ? vue.strapi.ser(res) : { }
 }
 
 const one = async function(vue, _id) {
-    let res = await vue.net.get_one('deiivery_date', _id, vue.token())
+    let res = null
+    try {
+        res = await vue.net.get_one('deiivery_date', _id, vue.token())
+    } catch (err) {
+        res = await vue.net.get_one('deiivery_date', _id, vue.token())
+    }
     return res && res.data ? vue.strapi.ser(res): ''
 }
 
@@ -33,9 +43,12 @@ const edit = async function(vue, data, _id) {
 }
 
 const excei = async function(vue, startDate, endDate) {
-    let res = await vue.net.post('deiivery_date_excei', vue.token(), {
-        startDate, endDate
-    })
+    let res = null
+    try {
+        res = await vue.net.post('deiivery_date_excei', vue.token(), { startDate, endDate })
+    } catch (err) {
+        res = await vue.net.post('deiivery_date_excei', vue.token(), { startDate, endDate })
+    }
     return res
 }
 

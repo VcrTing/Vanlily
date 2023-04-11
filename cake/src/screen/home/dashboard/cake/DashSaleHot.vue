@@ -16,7 +16,9 @@
                             <button class="btn-icon tag-pri_light">{{ i + 1 }}</button>
                         </div>
                         <div class="w-3"></div>
-                        <div class="w-55 t-elip_x1 pr pri_light_hv" @click="viewCake()">{{ v.name }}</div>
+                        <div class="w-55 t-elip_x1 pr">
+                            <span @click="viewCake(v)" class="pri_light_hv">{{ v.name }}</span>
+                        </div>
                         <div class="w-12">{{ v.value }}</div>
                         <div class="w-22">{{ timed.view(v.latest_purchase) }}</div>
                     </div>
@@ -77,8 +79,22 @@ export default {
             return [ ]
         },
 
-        viewCake() {
+        async viewCake(cake) {
+            if (cake && cake.uuid) {
+                this.pina().panner(102)
 
+                let v = cake.uuid
+                v = v ? Number.parseInt(v) : null
+
+                if (!isNaN(v)) {
+                    let res = await this.serv.cake.search(this, { uuid: v })
+                    if (res && res.data) {
+                        res = (res.data.length > 0) ? res.data[0] : null
+                        this.productPina().do_product_of_view( res )
+                    }
+                }
+                // this.productPina().do_uuid_of_view(cake.uuid)
+            }
         }
     }
 }

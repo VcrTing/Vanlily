@@ -7,7 +7,7 @@ export default {
     data() {
         return {
             imit: 100, items: [ ],
-            star: 1, has: true
+            star: 1, has: true, errNum: 0
         }
     },
     mounted() {
@@ -19,12 +19,14 @@ export default {
             try {
                 res = await this.serv.cake.many(this, this.star)
             } catch(err) {
-                await this._many();
+                this.errNum += 1
+                if (this.errNum < 3) { await this._many(); }
                 return null
             }
             res = (res && res.data) ? res.data : [ ]
             if (res.length >= this.imit) {
                 res.map(e => this.items.push(e)); this.star += 1; this.has = true
+                this.errNum = 0
                 await this._many()
             } else {
                 this.has = false

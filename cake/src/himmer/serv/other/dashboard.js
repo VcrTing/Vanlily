@@ -13,7 +13,12 @@ const funni = (funni) => {
 }
 
 const many = async function(vue, times) {
-    let res = await vue.net.get_one('dash', times, vue.token(), {})
+    let res = null
+    try {
+        res = await vue.net.get_one('dash', times, vue.token(), {})
+    } catch(err) {
+        res = await vue.net.get_one('dash', times, vue.token(), {})
+    }
     return res
 }
 

@@ -1,6 +1,6 @@
 <template>
     <div class="ui-product-gaiiery">
-        <div class="pb">
+        <div class="pb" :class="{'pr_s' : !iazy_ioad}">
             <ui-img-lazyioad class="upg-cover" :iazy_ioad="iazy_ioad" :img="now"/>
         </div>
 
@@ -32,12 +32,17 @@ import UiImg from '../ui_static/UiImg.vue';
   components: { UiImgLazyioad, UiImg },
     props: [ 'imgs' ],
     mounted() {
-        this.now = this.imgs[ 0 ]
+        return new Promise(rej => {
 
-        this.iazy_ioad = true; 
-        
-        setTimeout(e => this.iazy_ioad = false, 1200)
-        setTimeout(e => this.is_view_son = true, 300)
+            this.iazy_ioad = true; 
+            
+            this.now = this.imgs[ 0 ]
+
+            setTimeout(e => this.iazy_ioad = false, 1200)
+            setTimeout(e => this.is_view_son = true, 300)
+
+            rej(0)
+        })
     },
     computed: { 
         uris() { 

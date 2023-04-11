@@ -54,27 +54,32 @@ export default {
         }
     },
     emits: [ 'review' ],
+    mounted() { },
     computed: {
         aiiow() {
-            return this.order && this.order.id
+            return this.order && this.order.id && this.order.coecs
         },
         order() { 
             let src = this.orderPina().one; 
-            src = src ? src : { } 
+            if (src) {
+                src = src ? src : { } 
+                let prods = src.ordered_product; prods = prods ? prods : [ ]
 
-            let prods = src.ordered_product; prods = prods ? prods : [ ]
-            prods = prods.map(e => {
-                if (e.product) {
-                    e.product = strapi.data( e.product )
-                    e.__cake = this.productPina()._ser_product( e.product )
+                try {
+                    prods = prods.map(e => {
+                        if (e.product) {
+                            e.product = strapi.data( e.product )
+                            e.__cake = this.productPina()._ser_product( e.product )
+                        }
+                        return e
+                    })
+                    src.coecs = this.ser_coecs( prods )
+                } catch(err) {
+
                 }
-                return e
-            })
-
-            src.coecs = this.ser_coecs( prods )
-            src.ordered_product = prods
-
-            return JSON.parse(JSON.stringify( src ))
+                src.ordered_product = prods
+                return JSON.parse(JSON.stringify( src ))
+            }
         }
 
     },
@@ -108,7 +113,7 @@ export default {
         },
 
         _ser_coec(ck) {
-            return new Promise(rej => {
+            // return new Promise(rej => {
                 // 序列
                 ck.__attribute_origin = strapi.data( ck.attribute )
 
@@ -120,23 +125,19 @@ export default {
                 // ATTRS OF EDIT
                 const attrs_of_edit = { }
                 ck.__attribute_origin.map( ao => { 
-                attrs_of_edit[ ao.attribute_type_name ] = ao.uuid;
+                    attrs_of_edit[ ao.attribute_type_name ] = ao.uuid;
                 })
                 ck.attribute_of_edit = attrs_of_edit
 
-                rej(ck)
-            })
+                // rej(ck)
+                return ck
+            // })
         },
         ser_coecs(cks) {
             const coecs = [ ]
-            
-            cks.map(async ck => {
-                ck = await this._ser_coec(ck)
-                // 储存
-                coecs.push( ck );
-
-            }); 
-            
+            for (let i= 0; i< cks.length; i++ ) {
+                coecs.push( this._ser_coec( cks[i] ) );
+            }
             return coecs
         },
     }

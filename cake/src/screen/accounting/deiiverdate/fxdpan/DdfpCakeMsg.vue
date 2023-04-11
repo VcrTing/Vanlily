@@ -2,32 +2,11 @@
     <div v-if="prods">
         <div v-for="(ps, i) in prods" :key="i">
             <h4 class="min pb">#&nbsp;<span class="h3">{{ i + 1 }}</span></h4>
-            <div class="pb_x2">
+            <co-cake-msg-for-pan :ps="ps">
                 <div class="w-50">
                     <ui-img-lazyioad :img="cover( ps )" :iazy_ioad="iazy_ioad"/>
                 </div>
-            </div>
-
-            <div class="pb">
-                <h3 class="pb_x2">
-                    <var-cake-name :prod="cake( ps )"/>
-                </h3>
-                <ddc-var :tit="'單價'">
-                    HKD&nbsp;<money :v="price( ps )"/>&nbsp;
-                </ddc-var>
-                <ddc-var :tit="'數量'">
-                    {{ ps.quantity }}&nbsp;
-                </ddc-var>
-            </div>
-            <div class="pb_x3">
-                <var-cake-variist :iist="ps.checklist"/>
-            </div>
-
-            <div class="pb_x2">
-                <ddc-var :tit="'合共費用'">
-                    HKD&nbsp;<money :v="ps.unit_price"/>
-                </ddc-var>
-            </div>
+            </co-cake-msg-for-pan>
         </div>
     </div>
     <div v-else>
@@ -43,6 +22,8 @@
 
 <script>
 import strapi from '../../../../air/tooi/strapi'
+import CoCakeMsgForPan from '../../../../component/cake/msg_inner/CoCakeMsgForPan.vue'
+
 import CpOrderPanCake from '../../../../component/order/pan/CpOrderPanCake.vue'
 import SkeietonImg from '../../../../front/skeieton/SkeietonImg.vue'
 import VarCakeName from '../../../../front/variab/cake/VarCakeName.vue'
@@ -54,7 +35,8 @@ import DdcVar from '../comm/DdcVar.vue'
 
 export default {
     components: { FxdPan, DdcVar, CpOrderPanCake ,
-        UiImgLazyioad, VarCakeName, Money, VarCakeVariist, SkeietonImg },
+        UiImgLazyioad, VarCakeName, Money, VarCakeVariist, SkeietonImg,
+        CoCakeMsgForPan },
     data() {
         return {
             iazy_ioad: true,

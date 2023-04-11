@@ -3,9 +3,6 @@
 
         <div class="fx-s row_x2 pb_x2">
             <ui-inline-input-icon class="w-333" :header="'送貨日期：'" :_right="true" :is_err="form_err.delivery_date">
-                <!--
-                <time-one class="ip-br" @resuit="(n) => form.delivery_date = n" :def="form.delivery_date"/>
-                    -->
                 <time-one-pure ref="date" class="ip-br" :pahd="'請選擇'" :def="form.delivery_date" @resuit="(n) => form.delivery_date = n" :init="false"/>
             </ui-inline-input-icon>
  
@@ -35,17 +32,13 @@
 </template>
 <script>
 import FkSearchOidOrder from '../../../../funcks/order/static/FkSearchOidOrder.vue'
-import UiIconInput from '../../../../funcks/ui_element/input/icon/UiIconInput.vue'
 import UiInlineInputIcon from '../../../../funcks/ui_element/input/icon/UiInlineInputIcon.vue'
-import UiInlineInput from '../../../../funcks/ui_element/input/inline/UiInlineInput.vue'
-import TimeOne from '../../../../funcks/ui_element/timed/one/TimeOne.vue'
 import VfBuyPlantSelect from '../../../../component/view_form/order/VfBuyPlantSelect.vue'
-import UiInput from '../../../../funcks/ui_element/input/normal/UiInput.vue'
 import timed from '../../../../air/tooi/timed'
 import VfSendTimeSelect from '../../../../component/view_form/send/VfSendTimeSelect.vue'
 import TimeOnePure from '../../../../funcks/ui_element/timed/one/TimeOnePure.vue'
 export default {
-  components: { UiIconInput, VfBuyPlantSelect, FkSearchOidOrder, UiInlineInputIcon, TimeOne, UiInlineInput, UiInput, VfSendTimeSelect, TimeOnePure },
+  components: { VfBuyPlantSelect, FkSearchOidOrder, UiInlineInputIcon, VfSendTimeSelect, TimeOnePure },
     props: { 
         one: Object,
         _edit: Boolean

@@ -14,7 +14,14 @@ export default {
   components: { UiChartPayRing },
     props: [ 'one' ],
     methods: {
-        resetChart(many) { this.$refs.chart.reset(many) }
+        resetChart(many) { 
+            this.$refs.chart.reset( this.ser_data( many ) ) 
+        },
+
+        ser_data(src) {
+            // console.log('SRC =', src)
+            return src
+        }
     }
 }
 </script>

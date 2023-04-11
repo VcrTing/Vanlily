@@ -13,12 +13,22 @@ const funni = (funni) => {
 }
 
 const many = async function(vue, qs) {
-    let res = await vue.net.get('materiai_access', vue.token(), funni(qs))
+    let res = null 
+    try {
+        res = await vue.net.get('materiai_access', vue.token(), funni(qs))
+    } catch(err) {
+        res = await vue.net.get('materiai_access', vue.token(), funni(qs))
+    }
     return res ? vue.strapi.ser(res) : { }
 }
 
 const one = async function(vue, _id) {
-    let res = await vue.net.get_one('materiai_access', _id, vue.token())
+    let res = null
+    try {
+        res = await vue.net.get_one('materiai_access', _id, vue.token())
+    } catch (err) {
+        res = await vue.net.get_one('materiai_access', _id, vue.token())
+    }
     return res && res.data ? vue.strapi.ser(res): ''
 }
 
@@ -33,7 +43,12 @@ const edit = async function(vue, data, _id) {
 }
 
 const trash = async (vue, _id) => {
-    let res = await vue.net.trash('materiai_trash', vue.token(), _id)
+    let res = null
+    try {
+        res = await vue.net.trash('materiai_trash', vue.token(), _id)
+    } catch(err) {
+        res = await vue.net.trash('materiai_trash', vue.token(), _id)
+    }
     return res && res.data
 }
 

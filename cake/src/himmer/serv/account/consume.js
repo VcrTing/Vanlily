@@ -13,22 +13,42 @@ const funni = (funni) => {
 }
 
 const many = async function(vue, qs) {
-    let res = await vue.net.get('consume', vue.token(), funni(qs))
+    let res = null
+    try {
+        res = await vue.net.get('consume', vue.token(), funni(qs))
+    } catch(err) {
+        res = await vue.net.get('consume', vue.token(), funni(qs))
+    }
     return res ? vue.strapi.ser(res) : { }
 }
 
 const one = async function(vue, _id) {
-    let res = await vue.net.get_one('consume', _id, vue.token())
+    let res = null
+    try {
+        res = await vue.net.get_one('consume', _id, vue.token())
+    } catch(err) {
+        res = await vue.net.get_one('consume', _id, vue.token())
+    }
     return res && res.data ? vue.strapi.ser(res): ''
 }
 
 const creat = async function(vue, data) {
-    let res = await vue.net.post('consume', vue.token(), data)
+    let res = null
+    try {
+        res = await vue.net.post('consume', vue.token(), data)
+    } catch(err) {
+        res = await vue.net.post('consume', vue.token(), data)
+    }
     return (res && res.status) ? true : false
 }
 
 const edit = async function(vue, data, _id) {
-    let res = await vue.net.patch('consume', vue.token(), _id, data)
+    let res = null
+    try {
+        res = await vue.net.patch('consume', vue.token(), _id, data)
+    } catch(err) {
+        res = await vue.net.patch('consume', vue.token(), _id, data)
+    }
     return res
 }
 

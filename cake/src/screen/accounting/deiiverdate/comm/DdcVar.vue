@@ -1,10 +1,10 @@
 <template>
-    <p>
-        <span>{{ tit }}:&nbsp;&nbsp;</span>
-        <span class="n">
+    <div class="pb fx-l fx-t">
+        <div>{{ tit }}:&nbsp;&nbsp;</div>
+        <div class="n d-ib fx-1">
             <slot></slot>
-        </span>
-    </p>
+        </div>
+    </div>
 </template>
 
 <script>

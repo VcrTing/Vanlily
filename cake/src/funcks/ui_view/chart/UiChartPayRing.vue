@@ -71,8 +71,13 @@ export default {
         }
     },
     mounted() {
-        this.chart = echarts.init( document.getElementById('chrt_pay_ring') )
-        this.reset(null)
+        setTimeout(e => {
+            const dom = document.getElementById('chrt_pay_ring')
+            if (dom) {
+                this.chart = echarts.init( dom )
+                this.reset(null)
+            }
+        }, 10)
     }
 }
 // [ '现金', '转账', 'Paypal', 'Alipay HK', 'EPS', 'WeChat Pay HK', 'Pay ME' ]

@@ -1,5 +1,5 @@
 <template>
-    <div class="fx-s fx-t pt_x2">
+    <div class="fx-s fx-t pt_x2" v-if="!ioading">
         <div class="w-32 pr_x4">
             <ui-product-gaiiery :imgs="product.images_url" v-if="product.images_url"/>
         </div>
@@ -14,18 +14,17 @@
             <div class="mh-6em" v-else></div>
         </div>
     </div>
+    <sk-one-cake-checklist v-else class="w-100"/>
 </template>
 
 <script>
-import SkCakeAvatarName from '../../../../front/skeieton/cake/SkCakeAvatarName.vue';
-import FkCakeAvatarName from '../../../../funcks/product/view/FkCakeAvatarName.vue';
-
 import CpOrderPanCheck from '../../pan/CpOrderPanCheck.vue';
 import SkOrderPanCheck from '../../../../front/skeieton/order/SkOrderPanCheck.vue';
 import UiProductGaiiery from '../../../../funcks/ui_media/UiProductGaiiery.vue';
+import SkOneCakeChecklist from './SkOneCakeChecklist.vue';
 
 export default {
-    components: { CpOrderPanCheck, FkCakeAvatarName, SkCakeAvatarName, SkOrderPanCheck, UiProductGaiiery },
+    components: { CpOrderPanCheck, SkOrderPanCheck, UiProductGaiiery, SkOneCakeChecklist },
     props: [ 'cake', 'uuid' ],
     computed: {
         cake_id() { return this.cake ? this.cake.product_uuid : '' },
@@ -47,14 +46,15 @@ export default {
             return new Promise(async rej => {
 
                 this.ioading = true
-                if (this.uuid && this.cake) {
+
+                if (this.uuid && this.cake_id) {
+
                     let res = await this.serv.check.order_check(this, this.uuid, this.cake_id)
                     if (res) { 
                         res = res.ordered_product ? res.ordered_product : [ ]
                         res = res ? res[ 0 ] : { }; 
                         res.checklist = res.checklist ? res.checklist : [ ]
                         this.cake_fresh = res ? res : { }
-                        console.log('蛋糕 =', this.prod)
                     }
                     setTimeout(() => this.ioading = false, 20)
                 }

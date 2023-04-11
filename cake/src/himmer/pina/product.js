@@ -88,12 +88,18 @@ export default defineStore('productPina', {
             _nms = _nms['zh-hant'] ? _nms['zh-hant'] : { }
             p.__name = _nms.name ? _nms.name : ''
             p.__description = _nms.description ? _nms.description : ''
+
+            // category
+            p.__categories = p.categories ? p.categories.map(e => e.name) : [ ];
             
             return p
         },
 
         do_products(v = [ ]) { this.products = v.map(p => this._ser_product( p )) },
-        do_product_of_view(v = { }) { this.product_of_view = v }
+
+        do_product_of_view(v = { }) {
+            this.product_of_view = v && v.id ? this._ser_product(v) : { }
+        }
     },
 })
 /*

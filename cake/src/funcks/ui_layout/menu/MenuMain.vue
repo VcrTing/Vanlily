@@ -1,16 +1,15 @@
 <template>
     <div>
 
-        <div class="version pl_x2">
-            版本&nbsp;&nbsp;<span>{{ conf.VERSION }}</span>
-        </div>
-
         <div class="logo">
             <logo></logo>
         </div>
         
         <menu-main-inner class="py_x2"></menu-main-inner>
 
+        <div class="version pl_x2">
+            版本&nbsp;&nbsp;<span>{{ conf.VERSION }}</span>
+        </div>
     </div>
 </template>
 <script>
@@ -18,11 +17,6 @@ import Logo from '../../ui_static/logo/Logo.vue'
 import MenuMainInner from './inner/MenuMainInner.vue'
 export default {
   components: { Logo, MenuMainInner },
-  data() {
-      return {
-        
-      }
-  }
 }
 </script>
 

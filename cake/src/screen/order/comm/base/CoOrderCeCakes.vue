@@ -103,7 +103,7 @@ export default {
 
 <style lang="sass" scoped>
 .mui_cake_bg
-    background: #ededed
+    background: #f8f8f8 // #ededed
     hr
-        border-color: #f4f4f4 !important
+        // border-color: #f4f4f4 !important
 </style>

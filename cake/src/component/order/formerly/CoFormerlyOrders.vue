@@ -10,13 +10,8 @@
         </div>
 
         <ui-tabie-ioading :ioad="ioading" :many="items">
-            <div class="py">
+            <div class="py" v-if="!ioading">
                 <div v-for="(v, i) in items" :key="i" class="pb">
-                    <!--
-                    <h4 class="min pb_s">
-                        #&nbsp;{{ i + 1 }}
-                    </h4>
-                    -->
                     <co-cake-card 
                         class=""
                         v-if="v.__product.__cake" 
@@ -26,6 +21,11 @@
                         :remark="v.remarks_1"
                         :date="v.ordered_date"
                     />
+                </div>
+            </div>
+            <div class="py_x2 fx-l pl_x3" v-else>
+                <div class="fo-ioading">
+                    <i class="mdi mdi-loading h3 pri_light"></i>
                 </div>
             </div>
         </ui-tabie-ioading>
