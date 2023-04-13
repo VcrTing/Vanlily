@@ -1,17 +1,19 @@
 <template>
     <div class="fx-s mh-47">
         <div class="row_x2 fx-s fx-1" >
-            <div class="w-28">
+            <div class="w-20">
                 <span>日期:&nbsp;&nbsp;</span>
                 <span v-if="form.payment_date">{{ form.payment_date }}</span>
                 <span v-else class="err">(未紀錄)</span>
             </div>
-            <div class="w-24 fx-l">
-                <div>方式:&nbsp;&nbsp;</div>
-                <vf-payway-select v-if="form.payment_method_title" class="d-ib" :def="form.payment_method_title" :_txt_mode="true"/>
-                <span v-else class="cold">(未紀錄)</span>
+            <div class="w-42 fx-l pr_x2">
+                <div class="d-ib">方式:&nbsp;&nbsp;&nbsp;</div>
+                <div class="fx-1">
+                    <vf-payway-select v-if="form.payment_method_title" class="t-elip_x3" :def="form.payment_method_title" :_txt_mode="true"/>
+                    <span v-else class="cold">(未紀錄)</span>
+                </div>
             </div>
-            <div class="w-30">
+            <div class="w-20 pl">
                 <span>費用:&nbsp;&nbsp;</span>
                 <view-money :money="form.payment_fee"/>
             </div>

@@ -20,10 +20,8 @@ export default {
             tr: [
                 { txt: '郵箱', ciass: 'w-26' },
                 { txt: '用戶名稱', ciass: 'w-15' },
-                { txt: '電話號碼', ciass: 'w-14' },
-                { txt: '權限', ciass: 'w-27' },
-                { txt: '註冊日期', ciass: 'w-12' },
-                { txt: '', ciass: 'w-6 t-c' },
+                { txt: '權限', ciass: 'w-50' },
+                { txt: '動作', ciass: 'w-9 t-c' },
             ]
         }
     }

@@ -1,7 +1,7 @@
 <template>
     <div class="fx-s">
         <div class="w-50 fx-l">
-            <div class="d-ib tid" v-html="header"></div>
+            <div class="d-ib tid us-n" v-html="header"></div>
             <slot name="tit"></slot>
         </div>
         <div class="w-50 fx-r">

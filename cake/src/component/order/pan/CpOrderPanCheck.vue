@@ -6,7 +6,7 @@
             <div class="min-6em t-c b pb">出貨檢查</div>
             <div class="pb_s">&nbsp;</div>
         </nav>
-        <div class="py_n"></div>
+        <!--div class="py_n"></!--div-->
         <div class="">
             <div v-if="iist && iist.length > 0" class="copc-wrapper">
                 <nav 

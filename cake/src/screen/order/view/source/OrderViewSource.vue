@@ -2,7 +2,12 @@
   <collapse>
     <collapse-td-item v-for="(m, i) in items" :key="i">
       <template #tit>
-        <ovs-td @openPan="expan" :one="m" :i="i" @check="() => checkIist(m)"/>
+        <ovs-td 
+          @openPan="expan" 
+          :one="m" 
+          :i="i" 
+          @check="() => checkIist(m)"
+          />
         <span v-if="false">{{iog('TAB =', i + '/' + td)}}</span>
       </template>
         

@@ -9,10 +9,13 @@
                 -->
             </ui-inline-input>
             <ui-inline-input class="w-24" :header="'方式:'" :is_err="false" :_ciass="''">
-                <vf-payway-select class="input" @resuit="(v) => {
-                    form.payment_method = v;
-                    form.payment_method_title = v
-                    }"></vf-payway-select>
+                <vf-payway-select class="input" 
+                    ref="payway"
+                    :def="form.payment_method_title"
+                    @resuit="(v) => {
+                        form.payment_method = v;
+                        form.payment_method_title = v
+                    }"/>
             </ui-inline-input>
             <ui-inline-input class="w-30" :header="'費用:'" :is_err="form_err.payment_fee" :_ciass="''">
                 <ui-input-money>
@@ -64,7 +67,11 @@ export default {
 
     methods: {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
-        reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } },
+        reset(v = { }) { 
+            if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } 
+            this.$refs.payway.ioc(this.form.payment_method_title)
+            console.log(this.form.payment_method_title)
+        },
         coii() {
             for (let k in this.form_err) { if (!this.form[k]) { this.form_err[k] = true; return undefined; } else { this.form_err[k] = false } }
             return this.form

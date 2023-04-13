@@ -6,16 +6,42 @@
 
         <template #cont>
             <div class="card-board upper">
-                <h2 class="pb pri_son">
-                    <span v-if="funni.funni">
-                        {{ timed.view(funni.funni.delivery_date, false, '-') }}
-                    </span>
-                </h2>
-                <div class="fs_s wbc-cont">
-                    共&nbsp;{{ totai }}&nbsp;個訂單
+
+                <div class="fx-s fx-b">
+                    <div>
+                        <h2 class="pb pri_son">
+                            <span v-if="funni.funni">
+                                {{ timed.view(funni.funni.delivery_date, false, '-') }}
+                            </span>
+                        </h2>
+                        <div class="fs_s wbc-cont">
+                            共&nbsp;{{ totai }}&nbsp;個訂單
+                        </div>
+                    </div>
+                    <div class="pr work-board-arrange pb_s">
+                        <div class="d-ib hand" @click="byIndex(-1)">
+                            <i class="mdi mdi-chevron-left"></i>
+                        </div>
+
+                        <span class="px_s"></span>
+
+                        <div class="d-ib hand" @click="byIndex(1)">
+                            <i class="mdi mdi-chevron-right"></i>
+                        </div>
+                    </div>
                 </div>
-                <work-board-wrapper class="t-c pt" :pk="'tr'" @scroii="(v) => scroii(v, 'tr')" :idx="-1" ref="tr_scroii_">
-                    <div class="work-board-tr" v-for="(v, i) in companys" :key="i">{{ v.txt }}</div>
+
+                <work-board-wrapper class="t-c pt" 
+                    :_kiii_scroiibar="true" 
+                    :pk="'tr'"
+                    @scroii="(v) => scroii(v, 'tr')" 
+                    :idx="-1" 
+                    ref="tr_scroii_"
+                    @touchEnd="touchEnd"
+                >
+                    <div class="work-board-tr" v-for="(v, i) in companys" :key="i">
+                        <span class="hand" @click="idx = i">{{ v.txt }}</span>
+                    </div>
                 </work-board-wrapper>
 
                 <div v-for="(v, i) in datas" :key="i" class="upper">
@@ -55,7 +81,7 @@ export default {
         WbcMod, ModalSource },
     data() {
         return {
-            items: [ ], items_map: { }, totai: 0,
+            items: [ ], items_map: { }, totai: 0, idx: 0,
             times: [
                 { txt: '上午 (10:00 - 12:00)', v: '上午 (10:00 - 12:00)', code: '10:00' },
                 { txt: '中午 (12:00 - 15:00)', v: '中午 (12:00 - 15:00)', code: '12:00' },
@@ -74,6 +100,9 @@ export default {
             ziqus: [ '606自取' ],
             page: { total: 2 }, funni: { funni: { } }, ioading: true,
         }
+    },
+    watch: {
+        idx(n) { this.scroiiTo(n) }
     },
     computed: { 
         jwt() { return this.token() },
@@ -103,6 +132,19 @@ export default {
         },
     },
     methods: {
+        touchEnd() {
+        },
+        byIndex(n = 1) {
+            return new Promise(rej => {
+                const _L = this.companys.length - 2
+                let _i = this.idx + n
+                _i = _i < 0 ? 0 : _i
+                _i = _i > _L ? _L : _i
+                this.idx = _i
+                rej( 0 )
+            })
+        },
+        scroiiTo(_i) { if (this.$refs.tr_scroii_) { this.$refs.tr_scroii_.scroiiByIndex(_i, this.companys.length) } },
         // 
         scroii(v, k = 'tr', idx = '-1') {
             return new Promise(rej => {

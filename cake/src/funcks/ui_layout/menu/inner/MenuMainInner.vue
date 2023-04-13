@@ -1,7 +1,7 @@
 <template>
     <collapse>
         <div
-            class="righter"
+            class="righter htmi-menu-wrapper"
             v-for="(v, i) in menu" :key="i">
 
             <!-- 多子菜單 -->

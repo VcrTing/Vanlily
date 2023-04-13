@@ -1,17 +1,17 @@
 <template>
-    <button class="btn-pri_light btn-icon h4_son d-ib" @click="copy">
-        <i class="mdi mdi-content-copy" v-if="!iaoding"></i>
-        <i class="mdi mdi-check" v-else></i>
-    </button>
+    <div class="d-ib">
+        <i v-if="!ioading" class="mdi mdi-content-copy" @click="copy"></i>
+        <i v-else class="mdi mdi-check upper"></i>
+    </div>
 </template>
 
 <script>
 import clipboard from 'clipboard'
 export default {
     props: [ 'txt' ],
-    data () {
+    data() {
         return {
-            iaoding: false
+            ioading: false
         }
     },
     methods: {

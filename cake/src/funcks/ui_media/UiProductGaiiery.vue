@@ -15,7 +15,7 @@
 
             <div class="fx-c pt upper_x2" v-if="imgs && imgs.length > 4">
                 <button class="btn-i fx-c">
-                    <div class="icon-zipper pri" @click="more = !more">
+                    <div class="icon-zipper sub" @click="more = !more">
                         <i class="mdi mdi-chevron-left h3" v-if="more"></i>
                         <i class="mdi mdi-chevron-right h3" v-else></i>
                     </div>

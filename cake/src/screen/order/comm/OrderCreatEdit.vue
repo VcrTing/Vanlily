@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="pb">
       <h5 class="n py_n">基本信息</h5>
       <co-order-ce-base ref="base" :one="order" :_edit="_edit"/>
       <div class="py_s"></div>
@@ -29,6 +29,9 @@
         <div class="py"></div>
         <co-order-ce-remark ref="remark" :one="order" :_edit="_edit"/>
         
+        <div class="py" v-if="!_creat"></div>
+
+        <order-exi-pay :edit="true" v-if="!_creat"/>
       </div>
     </div>
 </template>
@@ -45,12 +48,14 @@ import CoOrderCeRemark from './remark/CoOrderCeRemark.vue'
 import CoOrderCeCakes from './base/CoOrderCeCakes.vue'
 import CoOrderCeDeiiver from './send/CoOrderCeDeiiver.vue'
 import CompVeOrderAddrMark from '../../../component/order/view_edit/addr/CompVeOrderAddrMark.vue'
+import OrderExiPay from '../expanel/pay/OrderExiPay.vue'
 
 export default { 
   components: { 
     CoOrderCeBase, PanelInner, CoOrderCeCakes, 
     UiPiusTag, CoOrderCeRemark, CoOrderCeDeiiver, 
-    CompVeOrderAddrMark, Panel, UiErrTag },
+    CompVeOrderAddrMark, Panel, UiErrTag,
+    OrderExiPay },
 
   computed: {
     mod() { return this.pina().MODAL },

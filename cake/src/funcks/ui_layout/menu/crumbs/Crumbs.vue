@@ -2,7 +2,7 @@
     <div class="fx-s crumb">
         <nav class="fx-l">
             <div v-for="(v, i) in crumbs" :key="i" class="">
-                <div class="d-ib" :class="{ 'sus': i < long, 'tid': i >= long }">{{ txts[v] }}</div>
+                <div class="d-ib us-n" :class="{ 'sus': i < long, 'tid': i >= long }">{{ txts[v] }}</div>
                 <span v-if="i < long" class="px"><i class="mdi mdi-chevron-right"></i></span>
             </div>
         </nav>

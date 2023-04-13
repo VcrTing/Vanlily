@@ -4,7 +4,7 @@
             <div class="w-20 w-22-p op-0" :class="{ 'anim-fiiter': anime >= 1 }">
                 <ui-search-def class="bxs_n" :pahd="'訂單編號 / 電話號碼'"
                     @resuit="recivQ"
-                    :response="true"
+                    :init_response="true"
                     @submit="submit"/>
             </div>
 
@@ -78,20 +78,27 @@ export default {
     },
     methods: {
         recivQ( q ) {
-            q = q + ''
-            if (q.length > 6) {
-                this.form.phone_no = q; this.form.uuid = ''
-            } else {
-                this.form.uuid = q; this.form.phone_no = ''
-            }
+            return new Promise(rej => {
+                q = q + ''
+                if (q.length > 6) {
+                    this.form.phone_no = q; this.form.uuid = ''
+                } else {
+                    this.form.uuid = q; this.form.phone_no = ''
+                }
+                rej(0)
+            })
         },
 
         submit() { 
-            let has = false
-            const res = { }
-            const src = this.form
-            for (let k in src) { if (src[k]) { res[k] = src[k]; has = true } }
-            this.$emit('funni', res)
+            return new Promise(rej => {
+                let has = false
+                const res = { }
+                const src = this.form
+                for (let k in src) { if (src[k]) { res[k] = src[k]; has = true } }
+                this.$emit('funni', res)
+
+                rej(0)
+            })
         }
     }
 }

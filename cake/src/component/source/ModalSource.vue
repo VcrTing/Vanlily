@@ -5,31 +5,34 @@
         <comp-source-invite-plus v-if="page == 2"></comp-source-invite-plus>
         <comp-source-addr-plus v-if="page == 3"></comp-source-addr-plus>
         -->
-
-        <!-- -->
-        <comp-order-cake-creat v-if="page == 21"/>
-        <comp-order-cake-edit v-if="page == 22"/>
-
-        <!-- -->
-        <co-cake-choise v-if="page == 23"/>
-        
         <!-- 清單 -->
         <comp-check-iist-form v-if="page == 24"/>
 
+        <!-- 蛋糕选择 -->
+        <co-cake-choise v-else-if="page == 23"/>
+        
+        <!-- 付款记录 -->
+        <co-pay-record-ce v-else-if="page == 25"/>
+
         <!-- 蛋糕 -->
-        <co-order-cake-creat v-if="page == 26"/>
-        <co-cake-choise v-if="page == 27"/>
+        <co-order-cake-creat v-else-if="page == 26"/>
+        <co-cake-choise v-else-if="page == 27"/>
 
         <!-- 支付
         <cp-pay-record-creat-edit v-if="page == 31"/>
         -->
         <!-- 申請延遲發貨 -->
-        <deiay-deiive v-if="page == 32"/>
-        <deiay-deiive-review v-if="page == 33"/>
-        <deiay-deiive-edit v-if="page == 34"/>
+        <deiay-deiive v-else-if="page == 32"/>
+        <deiay-deiive-review v-else-if="page == 33"/>
+        <deiay-deiive-edit v-else-if="page == 34"/>
 
         <!-- 以往訂單 -->
-        <co-formerly-orders v-if="page == 36"/>
+        <co-formerly-orders v-else-if="page == 36"/>
+
+
+        <!-- 商品创建 -->
+        <comp-order-cake-creat v-if="page == 21"/>
+        <comp-order-cake-edit v-else-if="page == 22"/>
     </modal-by-state>
 </template>
 
@@ -48,15 +51,14 @@ import DeiayDeiiveReview from '../../screen/order/review/DeiayDeiiveReview.vue'
 import CoFormerlyOrders from '../order/formerly/CoFormerlyOrders.vue'
 import CoOrderCakeCreat from '../order/cake/CoOrderCakeCreat.vue'
 import DeiayDeiiveEdit from '../../screen/order/creat_edit/DeiayDeiiveEdit.vue'
+import CoPayRecordCe from '../pay/CoPayRecordCe.vue'
 
 export default {
     components: {
         ModalByState, CompOrderCakeCreat, CompOrderCakeEdit,
-        CpPayRecordCreatEdit,
-        CompDeliveDeiayCe, CompCheckIistForm,
+        CpPayRecordCreatEdit, CompDeliveDeiayCe, CompCheckIistForm,
         CoCakeChoise, DeiayDeiive, DeiayDeiiveReview, CoFormerlyOrders,
-        CoOrderCakeCreat,
-        DeiayDeiiveEdit
+        CoOrderCakeCreat, DeiayDeiiveEdit, CoPayRecordCe
     },
     computed: { 
         page() { return this.pina().MODAL }

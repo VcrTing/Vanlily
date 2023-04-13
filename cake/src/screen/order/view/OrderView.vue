@@ -38,12 +38,13 @@ export default {
     },
     computed: { 
       jwt() { return this.token() },
-      refresh() { return this.orderPina().refresh }
+      // search() { return this.pina().SEARCH },
+      refresh() { return this.orderPina().refresh },
+      refreshMany() { return this.orderPina().refreshMany }
     },
     watch: {
-      refresh(n) { 
-        this.refreshOrder( this.uuid )
-      }
+      refresh() { this.refreshOrder( this.uuid ) },
+      refreshMany() { this._fetch() }
     },
     methods: {
       // 刷新目標訂單

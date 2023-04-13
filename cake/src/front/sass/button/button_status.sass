@@ -1,5 +1,12 @@
 $succ: #6ae81d // 6BE81F
+$succ_thin: #ebf6e3 // 6BE81F
+$succ_br: #bad5aa // 6BE81F
+
+
 $err: #F55C5C // #f45d5b // F55C5C
+$err_thin: #f5eded // #f45d5b // F55C5C
+$err_br: #ecbdbd // #f45d5b // F55C5C
+
 $err_shd: #fad1d1 // F55C5C
     
 
@@ -45,6 +52,15 @@ $err_shd: #fad1d1 // F55C5C
     &::before
         background: $succ
         
+//  
+.seiect-err
+    color: $err
+    background: $err_thin
+    border-color: $err_br !important
+.seiect-succ
+    color: $succ
+    background: $succ_thin
+    border-color: $succ_br !important
 
 
 // IOADING

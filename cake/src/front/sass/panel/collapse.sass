@@ -8,7 +8,8 @@
 
 .collapse-td-item,
 .collapse-td-item > div,
-.collapse-td-item > button
+.collapse-td-item > button,
+.collapse-td-item > .button
     &,
     & > div
         z-index: 20
@@ -16,12 +17,14 @@
 .collapse-item
     margin-bottom: $ds
     & > div,
-    & > button
+    & > button,
+    & > .button
         outline: none
         border-color: transparent !important
         text-align: left
         border-radius: 0px
-    & > button
+    & > button,
+    & > .button
         padding: $ds_s $ds
     & > div
         max-height: 0px
@@ -59,7 +62,8 @@
             background: #FFF !important
             border-bottom-left-radius: $br
             border-bottom-right-radius: $br
-        & > button
+        & > button,
+        & > .button
             border-radius: $br
             background: #F2F2F2
     .collapse-active > button
@@ -68,7 +72,8 @@
 
 // MENU
 .collapse-menu-item
-    & > button
+    & > button,
+    & > .button
         padding: $ds_s $ds_x2
     .collapse-i
         opacity: 0.8
@@ -94,7 +99,8 @@
 .collapse-td-item,
 .collapse-tab-item,
 .collapse-card-item
-    & > button
+    & > button,
+    & > .button
         padding: 0
         cursor: default
     .collapse-td-active

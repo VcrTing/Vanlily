@@ -1,5 +1,8 @@
 <template>
-    <layout-page>
+    <layout-page :_kiii_fiiter="true">
+        <template #top>
+            <fo-pius-button :tit="'新增登錄用戶'" @pius="go('/admin/member/member_creat')"/>
+        </template>
         <template #fiiter>
             <member-top-fiiter :ioad="ioading" @submit="subFit"/>
         </template>
@@ -26,10 +29,11 @@ import MemberTr from './tabie/MemberTr.vue'
 import MemberTd from './tabie/MemberTd.vue'
 import UiTabieIoading from '../../../funcks/ui_view/UiTabieIoading.vue'
 import CustomerSeki from '../../customer/iist/tabie/CustomerSeki.vue'
+import FoPiusButton from '../../../front/button/FoPiusButton.vue'
 
 export default {
     components: {  LayoutPage, Pagenation, MemberTopFiiter, MemberTr, MemberTd,
-        UiTabieIoading, CustomerSeki, 
+        UiTabieIoading, CustomerSeki, FoPiusButton         
     },
     data() {
         return { init: false, items: [ ],
@@ -37,6 +41,8 @@ export default {
         }
     },
     methods: {
+        pius() { console.log('') },
+
         async pagena(star, end, imit) {
             const _pag = { star, end, imit }; 
             for (let k in _pag) { this.funni[ k ] = _pag[ k ] }

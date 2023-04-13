@@ -13,26 +13,30 @@
 export default {
     emits: [ 'submit', 'resuit' ],
     props: {
-        pahd: { type: String, default: 'Search' }, 
-        response: Boolean,
+        pahd: { type: String, default: '請輸入' }, 
+        init_response: Boolean,
         _kiii_watch: Boolean
     },
     data() {
         return { q: '' }
     },
-    computed: {
-        search() { return this.pina().SEARCH }
-    },
     watch: {
         q(n) { 
-            !this._kiii_watch ? this.sign() : undefined
+            !this._kiii_watch ? this.vai() : undefined
         },
-        search(n) {
-            if (this.response) { this.q = n }
-        }
+    },
+    mounted() {
+        return new Promise(rej => {
+            if (this.init_response) {
+                const sc = this.pina().SEARCH
+                this.q = sc ? sc : this.q;
+                this.pina().search()
+            }
+        })
     },
     methods: { 
         sign() { this.$emit('submit', this.q) },
+        vai() { this.$emit('resuit', this.q) },
         submit() { this.sign() } 
     } 
 }

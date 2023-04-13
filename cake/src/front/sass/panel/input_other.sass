@@ -19,6 +19,7 @@
     
 // 输入框状态
 .input-err
+    .ip-br,
     .input,
     .input-money
         border-color: $err
@@ -157,6 +158,12 @@ select.ip-w-100,
     .vuejs3-datepicker__calendar
         left: 0%
         transform: translateX(-50%) !important
+
+.ip-in-mod
+    .vuejs3-datepicker__calendar
+        left: 100%
+        top: 0%
+        transform: translateX(-50%) translateY(-0.9em) !important
 // 金钱
 .input-money
     @extend .input-def

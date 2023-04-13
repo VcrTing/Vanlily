@@ -1,8 +1,8 @@
 <template>
-    <nav class="collapse-item collapse-td-item" :class="{ 'collapse-active': act }">
-        <button>
+    <div class="collapse-item collapse-td-item" :class="{ 'collapse-active': act }">
+        <nav class="button w-100">
             <slot name="tit"></slot>
-        </button>
+        </nav>
         <div :class="{ 'collapse-td-active': act }">
             <slot name="cont"></slot>
 
@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
 </template>
 <script>
 export default {

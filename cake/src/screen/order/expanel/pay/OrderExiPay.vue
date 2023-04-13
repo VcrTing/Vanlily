@@ -2,7 +2,7 @@
     <panel-inner :header="'付款記錄'">
         <template #cont>
           <div v-if="order" class="px_x4 py" >
-            <comp-logistics-pay :order="order"/>
+            <comp-logistics-pay :order="order" :_edit="edit"/>
           </div>
           <div v-else class="py_x2"></div>
         </template>
@@ -15,15 +15,11 @@ import CompPayRecordLine from '../../../../component/pay/record/CompPayRecordLin
 import PanelInner from '../../../../funcks/ui/panel/PanelInner.vue'
 export default {
     components: { PanelInner, CompPayRecordLine, CompLogisticsPay },
+    props: [ 'edit' ],
     computed: {
       order() { 
         let src = this.orderPina().one; 
         return src && src.id ? src : null },
     },
-    data() {
-      return {
-        edit: false
-      }
-    }
 }
 </script>

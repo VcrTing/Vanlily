@@ -25,7 +25,9 @@
             <div>備註一：<span v-if="order.remarks_1">{{ order.remarks_1 }}&nbsp;&nbsp;💗💗💗</span></div>
             <div>備註二：<span v-if="order.remarks_2">{{ order.remarks_2 }}&nbsp;&nbsp;💗💗💗</span></div>
             <nav class="py_n">
-                <p>聯絡電話：<span>{{ order.customer_phone_no_1 ? order.customer_phone_no_1 : order.customer_phone_no_2 }}</span></p>
+                <p>聯絡電話：<span class="pr_s">{{ phone }}</span>
+                    <ui-copy-icon class="pri" :txt="phone"/>
+                </p>
                 <div>送貨/取貨日期：&nbsp;<var-order-deiive-date :order="order"/>
                 </div>
                 <p>送貨/取貨地點：&nbsp;<var-order-deiive-addr :order="order"/>
@@ -61,38 +63,43 @@ import VarOrderDeiiveType from '../../../front/variab/deiive/VarOrderDeiiveType.
 import VarOrderDeiiveDate from '../../../front/variab/deiive/VarOrderDeiiveDate.vue'
 import ViewMoney from '../../view/money/ViewMoney.vue'
 import { iist_deiay_insert } from '../../../air/tooi/anim'
+import UiCopyIcon from '../../../funcks/ui_element/table/UiCopyIcon.vue'
+
 export default {
 components: { VarOrderUserName, VarOrderCakeName, AreaOrderCakeAttrs, VarOrderDeiiveAddr, VarOrderDeiiveType,
-VarOrderDeiiveDate,
-ViewMoney  },
+VarOrderDeiiveDate, ViewMoney,
+UiCopyIcon  },
 props: [ 'order' ],
 data() { return { pan: 0, } },
-mounted() { this.init() },
-methods: {
-    init() { 
+mounted() {
+    return new Promise(rej => {
         const _this = this;
-        iist_deiay_insert([ '', '', '' ], (one, i) => (_this.pan += 1)) }
+        iist_deiay_insert([ '', '', '' ], (one, i) => (_this.pan += 1)) 
+        rej(0)
+    })
 },
 computed: {
     pros() {
-        let src = this.order
-        return src ? src.ordered_product : [ ]
+        let src = this.order ? this.order : { }
+        return (src.ordered_product instanceof Array) ? src.ordered_product : [ ]
     },
     attrs() {
-        let res = [ ]
-        this.pros ? this.pros.map(e => { res.push(this.strapi.data(e.attribute)) }) : undefined; return res
+        return this.pros.map(e => this.strapi.data(e.attribute))
     },
     cake_special_needs() {
-        let res = [ ]
-        this.pros ? this.pros.map(e => { res.push(e.cake_special_needs) }) : undefined; return res.join('; ')
+        return this.pros.map(e => e.cake_special_needs).join('; ')
     },
     quantity() {
-        let res = [ ]
-        this.pros ? this.pros.map(e => { res.push(e.quantity) }) : undefined; return res.join(', ')
+        return this.pros.map(e => e.quantity).join(', ')
     },
     pro_price() {
         let res = 0
-        this.pros ? this.pros.map(e => { res += (e.discounted_price * e.quantity) }) : undefined; return res
+        this.pros.map(e => { res += (e.discounted_price * e.quantity) }); return res
+    },
+
+    phone() {
+        const src = this.order.customer_phone_no_1 ? this.order.customer_phone_no_1 : this.order.customer_phone_no_2
+        return src ? src : ''
     }
 }
 }

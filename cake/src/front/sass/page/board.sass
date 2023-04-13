@@ -76,7 +76,8 @@ $btn_pri: #39BF68
 
 .scroii-wrapper
     width: 100%
-    overflow: hidden
+    overflow-y: hidden
+    // overflow: hidden
     overflow-x: scroll
     & > div
         width: auto
@@ -155,3 +156,11 @@ $wbc_shd: #d0e1e4
     transform: rotate(90deg)
 .icon-down
     transform: rotate(-90deg)
+
+.work-board-arrange
+    color: $sus
+    & > div
+        transition: all .242s ease-in
+    & > div:hover
+        color: $tit
+        transform: scale(1.5)

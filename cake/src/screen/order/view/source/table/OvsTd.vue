@@ -3,7 +3,10 @@
         <div class="w-6  w-7-s">
             <view-order-isnew ref="is_new" :order="one" @tap="kiiiNew"/>
         </div>
-        <div class="w-5  w-6-s hand" @click="tap('NUM')">{{ one.uuid }}</div>
+        <div class="w-5  w-7-s hand ps-r pri">
+            <ui-copy-icon :txt="one.uuid" class="ovs-td-copy-icon"/>&nbsp;
+            <span @click="tap('NUM')">{{ one.uuid }}</span>
+        </div>
         <div class="w-8  w-9-s" @click="tap('NUM')">{{ timed.view(one.ordered_date) }}</div>
         <div class="w-11  w-11-s">
             <var-order-user-name :order="one" :def="'未知'"/>    
@@ -14,12 +17,12 @@
         <div class="w-12 w-10-s pr" @click="tap('SEND')">
             <view-order-time-send v-if="deiive" :date="deiive.delivery_date" :time="deiive.delivery_time"/>
         </div>
-        <div class="w-6 w-8-s" @click="tap('SEND')">
+        <div class="w-6 w-7-s" @click="tap('SEND')">
             <view-order-send-type class="hand" :_typed="deiive_way"></view-order-send-type>
         </div>
         <div class="w-6  w-0-s">{{ over_time }}</div>
         
-        <div class="w-5">
+        <div class="w-5" @click="payMod()">
             <view-order-pay-status :_is_pay="one.is_paid"/>
         </div>
         <div class="w-7 w-8-s">
@@ -44,10 +47,11 @@ import VarOrderCakeName from '../../../../../front/variab/order/VarOrderCakeName
 import UiTableOpera from '../../../../../funcks/ui_element/table/opera/UiTableOpera.vue'
 import ViewOrderSendAddr from '../../../../../component/view/order/addr/ViewOrderSendAddr.vue'
 import ViewOrderIsnew from '../../../../../component/view/order/ViewOrderIsnew.vue'
+import UiCopyIcon from '../../../../../funcks/ui_element/table/UiCopyIcon.vue'
 
 export default {
 components: { UiTableOpera, VarOrderCakeName, ViewOrderTimeSend, ViewOrderCheckBulb, ViewOrderSendType, ViewOrderPayStatus, OperaStatus, VarOrderUserName,
-    ViewOrderSendAddr, ViewOrderIsnew,   },
+    ViewOrderSendAddr, ViewOrderIsnew, UiCopyIcon,   },
 
 props: [ 'one', 'i' ],
 emits: [ 'check', 'openPan' ],
@@ -103,6 +107,17 @@ methods: {
         return new Promise(async rej => {
             this.$refs.is_new.kiii()
             await this.serv.order.change_new(this, this.one.uuid)
+            rej(0)
+        })
+    },
+
+    // 支付 MOD
+    payMod() {
+        return new Promise(rej => {
+            if (!this.one.is_paid) {
+                this.pina().mod( 25 )
+                this.orderPina().do_one( this.one )
+            }
             rej(0)
         })
     }

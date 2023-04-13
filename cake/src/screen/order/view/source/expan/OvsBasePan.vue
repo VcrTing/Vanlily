@@ -7,7 +7,7 @@
                 <div v-if="order" class="">
                     <span>{{ order.uuid }}</span>
                     &nbsp;&nbsp;
-                    <fk-copy-tookit/>
+                    <fk-copy-tookit :txt="order.uuid"/>
                 </div>
                 <div v-else class="w-10">
                     <skeieton-h :fs="'h6'"/>

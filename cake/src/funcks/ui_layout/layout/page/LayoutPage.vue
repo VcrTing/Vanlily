@@ -4,7 +4,7 @@
             <slot name="top"></slot>
         </crumbs>
 
-        <div class="pt_x">
+        <div class="pt_x2" v-if="!_kiii_fiiter">
             <slot name="fiiter"></slot>
         </div>
         
@@ -22,13 +22,10 @@ export default {
         _class: {
             type: String,
             default: 'sus pl_x6'
-        }
+        },
+        _kiii_fiiter: Boolean
     },
   components: { Crumbs },
 
 }
 </script>
-
-<style>
-
-</style>

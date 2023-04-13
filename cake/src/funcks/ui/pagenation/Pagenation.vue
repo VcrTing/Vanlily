@@ -1,5 +1,5 @@
 <template>
-    <div class="pt">
+    <div class="pt us-n">
         <nav class="pagenation t-c fx-c upper_x2 ani_dy_x2">
             <div class="d-ib">
                 <ul class="ul-def ul-pagenation">
@@ -72,18 +72,15 @@ export default {
         limit(n, o) { this.now = 1 },
         now(n, o) {
             return new Promise(rej => {
-                // n = Number(n)
-                // if (!isNaN(n)) {
-                    // 大於 center
-                    n = n > this.total ? this.total : n
-                    if (n > 0) {
-                        // 開始變動，改動 start
-                        this.start = this.num_start( n )
-                        this.sign()
-                    } else {
-                        if (n == '') { } else { if (isNaN(Number.parseInt(n))) { this.now = 1 } }
-                    }
-                // }
+                // 大於 center
+                n = n > this.total ? this.total : n
+                if (n > 0) {
+                    // 開始變動，改動 start
+                    this.start = this.num_start( n )
+                    this.sign()
+                } else {
+                    if (n == '') { } else { if (isNaN(Number.parseInt(n))) { this.now = 1 } }
+                }
                 this.q = this.now + ''
                 rej(0)
             })

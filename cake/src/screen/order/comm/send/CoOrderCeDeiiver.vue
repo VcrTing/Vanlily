@@ -48,7 +48,7 @@ export default {
         return {
             form: { delivery_date: '', delivery_time: '', delivery_man_name: '', delivery_man_phone_no: '', delivery_man_pickup_time: '', actual_delivery_time: '' },
             form_origin: { delivery_date: '', delivery_time: '', delivery_man_name: '', delivery_man_phone_no: '', delivery_man_pickup_time: '', actual_delivery_time: '' },
-            form_err: { delivery_man_name: false, delivery_man_phone_no: false }
+            form_err: { delivery_date: false, delivery_man_name: false, delivery_man_phone_no: false }
         }
     },
     methods: {
