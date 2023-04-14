@@ -7,7 +7,7 @@
             <ui-copy-icon :txt="one.uuid" class="ovs-td-copy-icon"/>&nbsp;
             <span @click="tap('NUM')">{{ one.uuid }}</span>
         </div>
-        <div class="w-8  w-9-s" @click="tap('NUM')">{{ timed.view(one.ordered_date) }}</div>
+        <div class="w-8  w-10-s" @click="tap('NUM')">{{ timed.view(one.ordered_date) }}</div>
         <div class="w-11  w-11-s">
             <var-order-user-name :order="one" :def="'未知'"/>    
         </div>

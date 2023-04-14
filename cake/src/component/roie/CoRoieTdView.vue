@@ -10,9 +10,9 @@ export default {
     data() {
         return {
             roies: [
-                { txt: 'Administrator', v: 'admin' },
-                { txt: 'Boss', v: 'boss' },
-                { txt: '員工', v: 'authenticated' },
+                { txt: '管理員(Administrator)', v: 'admin' },
+                { txt: 'BOSS', v: 'boss' },
+                { txt: '普通員工', v: 'authenticated' },
             ]
         }
     },

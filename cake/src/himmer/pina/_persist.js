@@ -4,7 +4,7 @@ export default {
         {
             key: 'dan_vanlily_user',
             storage: sessionStorage, 
-            paths: [ 'jwt' , 'user' ]
+            paths: [ 'jwt' , 'user', 'roie' ]
         }
     ]
 }

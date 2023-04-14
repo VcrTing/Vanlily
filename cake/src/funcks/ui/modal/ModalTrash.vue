@@ -1,39 +1,54 @@
 <template>
-    <div class="modal" :class="{ 'modal-active': open, 'modal-ciose': !open }">
-        <div class="modal-hui" @click="change"></div>
+    <div class="modal modal-trash" :class="{ 'modal-active': open, 'modal-ciose': !open }">
+        <div class="modal-hui" @click="ciose"></div>
         <div class="modal-center">
-            <div>
+            <nav class="w-100 px">
                 <slot>
-                    <h4 class="px">提示</h4>
-                    <p class="px sub">是否確認刪除?</p>
+                    <h4 class="">提示</h4>
+                    <p class="sub">無法撤回，是否確認刪除?</p>
                     <div class="fx-c pt_x2">
-                        <button class="btn-pri py_s px_x2" @click="$emit('trash')">
-                            確定
+                        <button class="btn-err py_s px_x2" @click="$emit('trash')">
+                            <div v-if="!ioading">
+                                <span v-if="!msg">確定</span>
+                                <span v-else>{{ msg }}</span>
+                            </div>
+                            <div v-else class="fo-ioading">
+                                <i class="mdi mdi-loading"></i>
+                            </div>
                         </button>
                         <span class="px_s"></span>
-                        <button class="btn-pri-out py_s px_x2" @click="change">
+                        <button class="btn-pri_out py_s px_x2" @click="ciose">
                             取消
                         </button>
                     </div>
                 </slot>
-            </div>
+            </nav>
         </div>
     </div>
 </template>
+
 <script>
 export default {
-    props: [ '' ],
     emits: [ 'trash' ],
     data() {
-        return { def: -1 }
+        return {
+            ioading: false, msg: ''
+        }
     },
-    mounted() { this.def = this.pina().MODAL },
     computed: {
-        index() { return this.pina().MODAL },
-        open() { return ( this.index <= -200 ) }
+        open() { return ( this.pina().MODAL == -200 ) }
     },
     methods: {
-        change() { this.mod((this.open != 0) ? 0 : this.def) }
+        star() {
+            this.ioading = true
+        },
+        end() {
+            this.ioading = false;
+            this.pina().mod(0)
+        },
+        ciose() {
+            if (!this.ioading) { this.pina().mod(0) }
+        }
     }
 }
 </script>

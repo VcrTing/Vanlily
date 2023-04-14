@@ -30,8 +30,32 @@ const many = async function(vue, qs) {
     return res ? vue.strapi.ser_pure(res) : { }
 }
 
+const creat = async function(vue, data) {
+    let res = null
+    try {
+        res = await vue.net.post('user_creat', vue.token(), data)
+    } catch(err) {
+        const msg = err.response ? err.response.data.message : ''
+        if (msg) { return msg } else { return 500 }
+    }
+    return (res && res.status <= 399) ? 200 : 404
+}
+const edit = async function(vue, id, data) {
+    let res = null
+    try {
+        res = await vue.net.patch('user_edit', vue.token(), id, data)
+    } catch(err) {
+        const msg = err.response ? err.response.data.message : ''
+        if (msg) { return msg } else { return 500 }
+    }
+    return (res && res.status <= 399) ? 200 : 404
+}
+
 export default {
     _in,
     
-    many
+    many,
+
+    edit,
+    creat
 }

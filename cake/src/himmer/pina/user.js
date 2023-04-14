@@ -3,16 +3,20 @@ import { defineStore } from "pinia"
 
 import persist from "./_persist"
 
+import AVATAR from '../../assets/img/AVATAR.webp'
+
 const DEF = {
     part: '管理員', 
-    avatar: 'https://img2.baidu.com/it/u=3474614069,3903854886&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'
+    avatar: AVATAR
 }
 
 export default defineStore('userPina', { 
     state: () => {
         return {
             user: { },
-            jwt: ''
+            jwt: '',
+            roie: 'boss',
+            member_of_edit: { }
         }
     }, 
     getters:{
@@ -21,6 +25,13 @@ export default defineStore('userPina', {
         username() { return this.user ? this.user.username : '' }
     }, 
     actions: {
-        iogin(jwt, user) { this.jwt = jwt; this.user = Object.assign(DEF, user) }
+        do_roie(v = '') { this.roie = v },
+        iogin(jwt, user) { 
+            this.jwt = jwt; 
+            this.user = Object.assign(DEF, user) 
+            console.log('登錄用戶 =', user)
+            this.roie = 'boss'
+        },
+        do_member_of_edit(v = { }) { this.member_of_edit = v }
     },
     persist })

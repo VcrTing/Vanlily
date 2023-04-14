@@ -7,7 +7,14 @@
         <slot name="opera"></slot>
 
         <div class="panel-form mt px_x2 py upper">
-            <h3>{{ header }}</h3>
+            <div class="fx-s">
+                <h3>{{ header }}</h3>
+                <div class="fx-1 fx-r">
+                    <div>
+                        <slot name="second"></slot>
+                    </div>
+                </div>
+            </div>
             <slot name="cont"></slot>
         </div>
     </div>

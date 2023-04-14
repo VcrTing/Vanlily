@@ -1,5 +1,7 @@
 export default {
     user: '/users',
+    user_edit: '/users-permissions/users/patchUser',
+    user_creat: '/users-permissions/users/createUser',
     user_roie: '/users-permissions/users/changeRole',
 
     orders: '/orders/order',

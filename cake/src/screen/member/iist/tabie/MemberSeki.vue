@@ -18,9 +18,9 @@ export default {
             count: [ 'mb', 'mb', '' ],
            
             tr: [
-                { txt: '郵箱', ciass: 'w-26' },
-                { txt: '用戶名稱', ciass: 'w-15' },
-                { txt: '權限', ciass: 'w-50' },
+                { txt: '用戶名稱', ciass: 'w-22' },
+                { txt: '郵箱', ciass: 'w-29' },
+                { txt: '權限', ciass: 'w-40' },
                 { txt: '動作', ciass: 'w-9 t-c' },
             ]
         }

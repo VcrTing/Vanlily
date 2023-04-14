@@ -75,21 +75,26 @@ export default {
         },
         finish() { this.$router.push('/admin/order') },
         async submit() {
-            const data = this._res()
-            if (data) {
-                this.ioading = true
-                this.msg = '登錄中...'
-                let res = await this.serv.user._in(this, data)
-                if (res < 399) { 
-                    this.finish() 
-                } else if (res >= 500) {
-                    this.msg = '網絡錯誤'
-                }
-                setTimeout(e => this.msg = '', 4200)
-            } else {
-                this.reset()
-            }
-            this.ioading = false
+            return new Promise(async rej => {
+                const data = this._res()
+
+                if (data) {
+                    this.ioading = true
+                    this.msg = '登錄中...'
+                    let res = await this.serv.user._in(this, data)
+                    if (res < 399) { 
+                        this.finish() 
+                    } else if (res >= 500) {
+                        this.msg = '網絡錯誤'
+                    }
+                    setTimeout(e => this.msg = '', 4200)
+                } 
+                else { this.reset() }
+
+                this.ioading = false
+
+                rej(0)
+            })
         }
     }
 }

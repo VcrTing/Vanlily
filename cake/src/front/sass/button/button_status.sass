@@ -4,7 +4,7 @@ $succ_br: #bad5aa // 6BE81F
 
 
 $err: #F55C5C // #f45d5b // F55C5C
-$err_thin: #f5eded // #f45d5b // F55C5C
+$err_thin: #fdf4f4 // #f45d5b // F55C5C
 $err_br: #ecbdbd // #f45d5b // F55C5C
 
 $err_shd: #fad1d1 // F55C5C
@@ -86,3 +86,11 @@ $err_shd: #fad1d1 // F55C5C
     100%
         //    
         left: 100%
+
+///import css-variables from 
+.info-err
+    @extend .br
+    padding: $ds_s $ds_x2
+    padding-right: $ds
+    color: $err
+    background: $err_thin
