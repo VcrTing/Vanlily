@@ -1,30 +1,30 @@
 <template>
     <div>
-        <div class="fx-s pb_s">
-            <p class="w-333">
+        <div class="fx-s row_x2">
+            <div class="w-333">
                 送貨日期：
                 <span>{{ deiiv.delivery_date }}</span>
-            </p>
-            <p class="w-333"> 
+            </div>
+            <div class="w-333"> 
                 送貨時間：
                 <vf-send-time-select v-if="deiiv.delivery_time" :def="deiiv.delivery_time" :_txt_mode="true"/>
                 <span v-else></span>
-            </p>
-            <p class="w-333">
+            </div>
+            <div class="w-333">
                 運費：
                 <view-money v-if="deiiv.id" :money="deiiv.delivery_fee"/>
-            </p>
+            </div>
         </div>
-        <div class="fx-s pb">
-            <p class="w-333">
+        <div class="fx-s py_x2">
+            <div class="w-333">
                 取貨：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <vf-send-company-select v-if="deiiv.id" :def="deiiv.delivery_company" :_txt_mode="true"/>
-            </p>
+            </div>
             <!--
-            <p class="w-333"> 
+            <div class="w-333"> 
                 電話：
                 <span>{{ deiiv.delivery_man_phone_no }}</span>
-            </p>
+            </div>
             -->
         </div>
 

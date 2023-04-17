@@ -28,7 +28,8 @@ export default {
         }
     },
     mounted() { 
-        if (this._edit) { this.reset( this.one ) }
+        // if (this._edit) { this.reset( this.one ) }
+        this.reset( this.one )
     },
     methods: {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },

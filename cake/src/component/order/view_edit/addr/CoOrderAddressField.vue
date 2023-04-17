@@ -13,7 +13,7 @@
             <div class="w-48">
                 <p>详细地址</p>
                 <ui-input :is_err="detaii_err">
-                    <input class="input w-100" v-model="form.delivery_address_3" placeholder="請輸入內容" />
+                    <input class="input w-100" v-model="form.delivery_address_3" placeholder="地址是必填內容" />
                 </ui-input>
             </div>
         </div>
@@ -32,7 +32,7 @@
             <div class="w-54">
                 <p>地址描述</p>
                 <ui-input :is_err="detaii_err">
-                    <input class="input w-100" v-model="form.delivery_address_3" placeholder="請輸入內容" />
+                    <input class="input w-100" v-model="form.delivery_address_3" placeholder="地址是必填內容" />
                 </ui-input>
             </div>
         </div>
@@ -47,7 +47,7 @@
             <div class="w-74">
                 <p>詳細地址</p>
                 <ui-input :is_err="detaii_err">
-                    <input class="input w-100" v-model="form.delivery_address_3" placeholder="請輸入內容" />
+                    <input class="input w-100" v-model="form.delivery_address_3" placeholder="地址是必填內容" />
                 </ui-input>
             </div>
         </div>

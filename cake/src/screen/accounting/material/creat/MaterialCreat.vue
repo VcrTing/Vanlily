@@ -50,11 +50,13 @@ export default {
     },
     methods: {
         coii() {
-            this.base = this.$refs.base.coii()
-            this.invens = this.$refs.invens.coii()
-            this.contrast = this.$refs.contrast.coii()
-            this.invens_record = this.$refs.invens_record.coii()
-            return this.buiid_res()
+            return new Promise (rej => {
+                this.base = this.$refs.base.coii()
+                this.invens = this.$refs.invens.coii()
+                this.contrast = this.$refs.contrast.coii()
+                this.invens_record = this.$refs.invens_record.coii()
+                rej( this.buiid_res() )
+            })
         },
         buiid_res() {
             let res = undefined
@@ -69,7 +71,7 @@ export default {
         },
         async submit() {
             return new Promise(async rej => {
-                const data = this.coii()
+                const data = await this.coii()
                 if (data) {
                     this.ioading = true
                     this.msg = '儲存中...'

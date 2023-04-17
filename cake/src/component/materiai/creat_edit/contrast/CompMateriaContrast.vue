@@ -18,7 +18,7 @@
             </ui-tabie-empty>
             -->
             <div v-for="(v, i) in items" :key="i">
-                <nav class="td px_x2_ipt" v-if="!v.is_edit">
+                <nav class="td px_x2_ipt py_s" v-if="!v.is_edit">
                     <div class="w-8 ps-r">
                         {{ v.import_price }}
                         <span class="px pri h5 td-i-edit" @click="v.is_edit = true">
@@ -74,7 +74,12 @@ export default {
         insert(f, idx) { this.items.push(f); this.reset_f() },
         reset() { this.items = this.materiai.price_comparison.map(e => { e.is_edit = false; return e }) },
 
-        coii() { return this.items },
+        coii() { 
+            return this.items.map(e => {
+                if (!e.moq) { e.moq = null }
+                return e
+            }) 
+        },
         trash(idx) { this.items.splice(idx, 1) },
 
         reset_f() {

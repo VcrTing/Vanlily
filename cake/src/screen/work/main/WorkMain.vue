@@ -20,13 +20,13 @@
                     </div>
                     <div class="pr work-board-arrange pb_s">
                         <div class="d-ib hand" @click="byIndex(-1)">
-                            <i class="mdi mdi-chevron-left"></i>
+                            <i class="mdi mdi-chevron-left h4"></i>
                         </div>
 
                         <span class="px_s"></span>
 
                         <div class="d-ib hand" @click="byIndex(1)">
-                            <i class="mdi mdi-chevron-right"></i>
+                            <i class="mdi mdi-chevron-right h4"></i>
                         </div>
                     </div>
                 </div>

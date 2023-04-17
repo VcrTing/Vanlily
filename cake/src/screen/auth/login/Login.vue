@@ -5,7 +5,7 @@
             <ui-input :class="{ 'auth-ip-1': anime >= 1 }" :is_err="named_err" class="pb_x2 auth-ip">
                 <div class="input-icon input-icon-l input-auth">
                     <i class="mdi mdi-shield-account-outline h5 sus"></i>
-                    <input v-model="named" @keydown.enter="submit" class="input input-sus" placeholder="用戶名 / 郵箱">
+                    <input v-model="named" @keydown.enter="submit" class="input input-sus" placeholder="郵箱地址">
                 </div>
             </ui-input>
             <ui-input :class="{ 'auth-ip-2': anime >= 2 }" :is_err="pass_err" class="pb_x auth-ip">
@@ -49,6 +49,11 @@ export default {
         if (this.conf.TEST_ENV) {
             this.named = this.conf.STRAPI.named
             this.pass = this.conf.STRAPI.pass
+        } else {
+            const _n = localStorage.getItem('vaniiycake_auth_name')
+            if (_n) {
+                this.named = _n
+            }
         }
     },
     watch: {
@@ -73,7 +78,10 @@ export default {
                 this.named_err = false; this.pass_err = false;
             }, 2400)
         },
-        finish() { this.$router.push('/admin/order') },
+        finish() { 
+            localStorage.setItem('vaniiycake_auth_name', this.named)
+            this.$router.push('/admin/order') },
+            
         async submit() {
             return new Promise(async rej => {
                 const data = this._res()

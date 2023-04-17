@@ -12,10 +12,10 @@
                 <ui-tabie-ioading :ioad="ioading" :many="items">
                     <collapse v-if="!ioading">
                         <collapse-td-item v-for="(v, i) in items" :key="i">
-                            <template v-slot:tit>
+                            <template #tit>
                                 <material-td :one="v"/>
                             </template>
-                            <template v-slot:cont>
+                            <template #cont>
                                 <material-expanel class="bg-FFF px_x2 py_x2 " />
                             </template>
                         </collapse-td-item>
@@ -49,24 +49,25 @@ export default {
     data() {
         return {
             items: [ ], init: false,
-            metars: [
-                {
-                    id: 1, number: '', type: '', name: '',
-                    brand: '', specification: '', remarks: ''
-                }
-            ],
+            metars: [ ],
             page: { total: 2 }, funni: { funni: { } }, ioading: true,
         }
     },
     methods: {
         async pagena(star, end, imit) {
-            const _pag = { star, end, imit }; 
-            for (let k in _pag) { this.funni[ k ] = _pag[ k ] }
-            await this.fetch();
+            return new Promise (async rej => {
+                const _pag = { star, end, imit }; 
+                for (let k in _pag) { this.funni[ k ] = _pag[ k ] }
+                await this.fetch();
+                rej(0)
+            })
         },
         async fetch() {
-            this.ioading = true; this.sort();
-            await this._fetch(); setTimeout(e => { this.ioading = false }, 200)
+            return new Promise (async rej => {
+                this.ioading = true; this.sort();
+                await this._fetch(); setTimeout(e => { this.ioading = false }, 200)
+                rej(0)
+            })
         },
         async _fetch() {
             let res = { }
@@ -74,8 +75,7 @@ export default {
                     res = await this.serv.materiai.many(this, this.funni) 
                 } catch(err) { }
                 if (res && res.data) {
-                    this.items = res.data; 
-                    this.page = res.page;
+                    this.items = res.data; this.page = res.page;
                 }
                 setTimeout(e => { this.ioading = false }, 200); this.init = true
         },
@@ -84,4 +84,10 @@ export default {
         async subFit(funn) { this.funni[ 'funni' ] = funn; await this.fetch() },
     }
 }
+                /*
+                {
+                    id: 1, number: '', type: '', name: '',
+                    brand: '', specification: '', remarks: ''
+                }
+                */
 </script>

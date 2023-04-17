@@ -23,7 +23,7 @@
             <input class="input input-td" v-model="form.delivery_address" placeholder="送貨地址"/>
         </ui-inline-input-td>
         <ui-inline-input-td class="w-7" :ciass="'pr_s'" :is_err="form_err.moq">
-            <input class="input input-td" v-model="form.moq" placeholder="MOQ"/>
+            <input type="number" class="input input-td" v-model="form.moq" placeholder="MOQ"/>
         </ui-inline-input-td>
         <ui-inline-input-td class="w-10" :ciass="'pr_s'" :is_err="form_err.phone_no">
             <input type="number" class="input input-td" v-model="form.phone_no" placeholder="電話號碼"/>
@@ -71,11 +71,15 @@ export default {
             for (let k in this.form_err) { this.form_err[k] = false }
         },
         creat() {
-            if (this.can()) {
-                this.form.phone_no = this.form.phone_no + ''
-                this.$emit('insert', this.form)
-                this.reset_err()
-            }
+            return new Promise(rej => {
+                if (this.can()) {
+                    this.form.phone_no = this.form.phone_no + ''
+                    this.$emit('insert', this.form)
+                    this.reset_err()
+                }
+
+                rej(0)
+            })
         }
     },
     data() {
@@ -97,12 +101,17 @@ export default {
         }
     },
     mounted() {
-        this.reset_err()
-        this.form.update_date = this.timed.now()
+        return new Promise(rej => {
 
-        setTimeout(e => {
-            if (this.def && this.def.id) { this.form = this.def }
-        }, 10)
+            this.reset_err()
+            this.form.update_date = this.timed.now()
+
+            setTimeout(e => {
+                if (this.def && this.def.id) { this.form = this.def }
+            }, 10)
+
+            rej(0)
+        })
     },
 
     watch: {

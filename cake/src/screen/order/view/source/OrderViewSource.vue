@@ -13,7 +13,10 @@
         
       <template #cont>
         <div v-if="td == i">
-          <ovs-base-pan v-if="pan == 1"/>
+          <ovs-base-pan v-if="pan == 1"
+            @edit="expan('EDIT', i, m.uuid)"
+            @review="expan('CHECK_AII', i, m.uuid)"
+          />
           <ovs-cake-pan v-else-if="pan == 2"/>
           <ovs-send-pan v-else-if="pan == 3"
             @edit="expan('EDIT', i, m.uuid)"
@@ -28,6 +31,7 @@
           </nav>
           <nav class="px-row bg-FFF" v-else-if="pan == 101">
             <order-edit
+              @edit="expan('EDIT', i, m.uuid)"
               @review="expan('CHECK_AII', i, m.uuid)"
             />
           </nav>

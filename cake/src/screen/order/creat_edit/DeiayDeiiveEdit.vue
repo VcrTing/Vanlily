@@ -80,6 +80,7 @@ export default {
 
                 if (data) {
                     this.deatii('儲存中...', 4)
+                    console.log('修改延遲發貨 =', data)
                     const res = await this.serv.order.deiay_deiiv(this, this.order.uuid, data)
                     if (res) {
                         this.compeieted = true

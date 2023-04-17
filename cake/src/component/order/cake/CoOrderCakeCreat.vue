@@ -57,6 +57,7 @@ import FkCakeAvatarName from '../../../funcks/product/view/FkCakeAvatarName.vue'
 import UiIconInput from '../../../funcks/ui_element/input/icon/UiIconInput.vue'
 import UiInput from '../../../funcks/ui_element/input/normal/UiInput.vue'
 import FormDef from '../../../funcks/ui_layout/form/def/FormDef.vue'
+
 export default {
     components: { FormDef, UiInput, FkCakeAvatarName, UiIconInput },
     data() {    
@@ -71,7 +72,7 @@ export default {
     watch: {
         'form.unit_price'(n) { 
             if (n !== 0) {
-                n = Number(n)
+                n = Number.parseInt(n)
                 n = (n != null && n != '') ? Math.abs(n) : ''
                 this.form.unit_price = n 
             }
@@ -79,7 +80,7 @@ export default {
 
         'form.original_price'(n) { 
             if (n !== 0) {
-                n = Number(n)
+                n = Number.parseInt(n)
                 n = (n != null && n != '') ? Math.abs(n) : ''
                 this.form.original_price = n 
             }
@@ -87,7 +88,7 @@ export default {
 
         'form.discounted_price'(n) { 
             if (n !== 0) {
-                n = Number(n)
+                n = Number.parseInt(n)
                 n = (n != null && n != '') ? Math.abs(n) : ''
                 this.form.discounted_price = n 
             }
@@ -95,7 +96,7 @@ export default {
     },
     computed: {
         cake() { 
-            const src = this.productPina().cake_of_edit
+            const src = this._proP.cake_of_edit
             // 構建參數
             if (src) {
                 const attrs = src.__attributes_relations
@@ -127,8 +128,10 @@ export default {
             return new Promise(async rej => {
                 const data = this.coii()
                 if (data && this.attribute) {
+                    this.msg = '儲存中...'
+                    this.pina().mod( 0 );
 
-                    let _atrs = [ ]; this.msg = ''; 
+                    let _atrs = [ ]; 
                     for (let k in this.attribute) { _atrs.push( this.attribute[ k ] ) }
 
                     const res = { 'uuid': '', 'product_uuid': '', ...data, 'attribute': _atrs, 'attribute_of_edit': this.attribute }
@@ -136,7 +139,7 @@ export default {
                     res['product_uuid'] = this.cake.uuid
 
                     this._proP.do_coecs( res ); 
-                    this.pina().mod( 0 );
+                    setTimeout(e => this.msg = '', 2000)
                 } 
                 else { this.msg = '輸入不完整。' }
 
@@ -163,7 +166,17 @@ export default {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
         reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } },
         coii() {
-            for (let k in this.form_err) { if (!this.form[k]) { this.form_err[k] = true; return undefined; } else { this.form_err[k] = false } }
+            if (!this.form.quantity) {
+                this.form_err.quantity = true; return undefined;
+            } else {
+                this.form_err.quantity = false;
+            }
+            if (!this.form.unit_price && this.form.unit_price != 0) {
+                this.form_err.unit_price = true; return undefined;
+            } else {
+                this.form_err.unit_price = false;
+            }
+            
             delete this.form.id; return this.form
         },
 

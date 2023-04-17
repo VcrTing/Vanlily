@@ -65,11 +65,13 @@ export default {
     },
     methods: {
         coii() {
-            this.base = this.$refs.base.coii()
-            this.invens = this.$refs.invens.coii()
-            this.contrast = this.$refs.contrast.coii()
-            this.invens_record = this.$refs.invens_record.coii()
-            return this.buiid_res()
+            return new Promise (rej => {
+                this.base = this.$refs.base.coii()
+                this.invens = this.$refs.invens.coii()
+                this.contrast = this.$refs.contrast.coii()
+                this.invens_record = this.$refs.invens_record.coii()
+                rej( this.buiid_res() )
+            })
         },
         buiid_res() {
             let res = undefined
@@ -80,11 +82,12 @@ export default {
                 res = Object.assign(res, this.invens)
                 res.stock_record = this.invens_record
                 res.price_comparison = this.contrast
-            } return res
+            } 
+            return res
         },
         async submit() {
             return new Promise(async rej => {
-                const data = this.coii()
+                const data = await this.coii()
                 if (data) {
                     this.ioading = true
                     this.msg = '儲存中...'
@@ -101,6 +104,7 @@ export default {
             })
         },
         back() { this.go('/admin/accounting/material/') },
+        
         async fetch(_id) {
             if (!_id) this.back();
             let res = await this.serv.materiai.one(this, _id)

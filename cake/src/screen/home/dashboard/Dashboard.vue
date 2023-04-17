@@ -123,7 +123,6 @@ export default {
                         this.one[k] = res[k]
                     }
 
-                    console.log('DASH RES =', res)
                     this.chart()
                 }
 

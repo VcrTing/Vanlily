@@ -47,9 +47,8 @@ export default {
       order: { }, msg: '', compeieted: false
     }
   },
-  mounted() {
-    this.compeieted = false
-  },
+  mounted() { this.compeieted = false },
+  
   methods: {
     deatii(v = '您的表單不完整。') { this.msg = v; setTimeout(e => this.msg = '', 4000) },
 
@@ -59,6 +58,7 @@ export default {
       
         if (form) {
           this.deatii('儲存中...')
+
           const res = await this.serv.order.creat( this, form )
           if (res) {
             this.compeieted = true

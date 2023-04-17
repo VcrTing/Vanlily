@@ -1,19 +1,19 @@
 <template>
     <div class="fx-s mh-47">
         <div class="row_x2 fx-s fx-1" >
-            <div class="w-20">
+            <div :class="{ 'w-25': !iongPayway, 'w-20': iongPayway }">
                 <span>日期:&nbsp;&nbsp;</span>
                 <span v-if="form.payment_date">{{ form.payment_date }}</span>
                 <span v-else class="err">(未紀錄)</span>
             </div>
-            <div class="w-42 fx-l pr_x2">
+            <div class="fx-l pr" :class="{ 'w-30': !iongPayway, 'w-42': iongPayway }">
                 <div class="d-ib">方式:&nbsp;&nbsp;&nbsp;</div>
                 <div class="fx-1">
                     <vf-payway-select v-if="form.payment_method_title" class="t-elip_x3" :def="form.payment_method_title" :_txt_mode="true"/>
                     <span v-else class="cold">(未紀錄)</span>
                 </div>
             </div>
-            <div class="w-20 pl">
+            <div class="w-20 pl" :class="{ 'w-27': !iongPayway, 'w-20': iongPayway }">
                 <span>費用:&nbsp;&nbsp;</span>
                 <view-money :money="form.payment_fee"/>
             </div>
@@ -37,7 +37,13 @@ import ViewMoney from '../../../view/money/ViewMoney.vue'
 import VfPaywaySelect from '../../../view_form/order/VfPaywaySelect.vue'
 export default {
     props: [ 'form' ],
-    components: { ViewMoney, VfPaywaySelect, DataStatus }
+    components: { ViewMoney, VfPaywaySelect, DataStatus },
+    computed: {
+        iongPayway() {
+            const src = this.form.payment_method_title + ''
+            return src.length > 10
+        }
+    }
 }
 </script>
         

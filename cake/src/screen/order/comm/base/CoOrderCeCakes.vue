@@ -36,6 +36,7 @@
     </div>
     <div v-else class="py_x2"></div>
 </template>
+
 <script>
 import VarCakeName from '../../../../front/variab/cake/VarCakeName.vue'
 import FkOrderImgMsg from '../../../../funcks/order/img/FkOrderImgMsg.vue'
@@ -53,11 +54,7 @@ import CoCoecsPrice from '../comm/CoCoecsPrice.vue'
 export default {
     components: { UiImgGroup, FkOrderImgMsg, VarCakeName, FkCakeAttrs, FkCakePriceGroup, FkCakeAttrsSecond, ViewMoney, CoCoecsAttr, CoCoecsBasic, CoCoecsPrice },
     props: [ 'cakes', 'edit', '_creat' ],
-    data() {
-        return {
-            
-        }
-    },
+    data() { return { } },
     emits: [ 'trash' ],
     computed: {
         coecs() { let src = this.productPina().coecs; return src ? src : [ ]; },
@@ -68,7 +65,7 @@ export default {
                 if (e.product_uuid == cake.uuid) { res = e }
             }); return res ? true : false
         },
-
+        /*
         _attrs(v) { 
             let res = { }
             let src = v.attributes_relations
@@ -78,6 +75,7 @@ export default {
                 }) : undefined;
             return res
         },
+        */
         _imgs(v) { return (v && v.images_url) ? v.images_url : [ ] },
         //  編輯 
         cakeEdit(cake) { this.productPina().do_cake_of_edit(cake); this.mod(26) },
@@ -90,14 +88,13 @@ export default {
                 res = [ ]
                 this.cakes.map(ck => {
                     this.coecs.map( cs => {
-                        if (ck.uuid == cs.product_uuid) res.push( cs );
+                        if (ck.uuid == cs.product_uuid) { res.push( cs ) };
                     })
                 })
             } 
             return res
         }
     },
-    mounted() { }
 }
 </script>
 

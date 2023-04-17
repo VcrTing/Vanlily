@@ -30,9 +30,12 @@ export default {
     },
     methods: {
         checkIist() {
-            this.orderPina().do_one( this.order )
-            this.productPina().do_cakes( this.prods )
-            this.mod(24)
+            return new Promise(rej => {
+                this.orderPina().do_one( this.order )
+                this.productPina().do_cakes( this.prods )
+                this.mod(24)
+                rej(0)
+            })
         },
         _pords(res) { return res && res.ordered_product ? res.ordered_product : [ ] },
     }

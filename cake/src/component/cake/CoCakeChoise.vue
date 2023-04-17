@@ -29,12 +29,15 @@
                 </div>
                 <div class="w-666">
                     <p class="sus pb">蛋糕參數</p>
-                    <p v-for="(v, i) in attrs" :key="i">
-                        <span class="sub_son">{{ v.name }}:&nbsp;&nbsp;</span>
-                        <span class="">
-                            <span v-for="(m, n) in v.options" :key="n">{{ m }}，</span>
-                        </span>
-                    </p>
+                    <div v-if="attrs && attrs.length > 0">
+                        <p v-for="(v, i) in attrs" :key="i">
+                            <span class="sub_son">{{ v.name }}:&nbsp;&nbsp;</span>
+                            <span class="">
+                                <span v-for="(m, n) in v.options" :key="n">{{ m }}，</span>
+                            </span>
+                        </p>
+                    </div>
+                    <p v-else>(該蛋糕無參數)</p>
                 </div>
             </div>
         </div>
@@ -72,8 +75,7 @@ export default {
         price() { return this.vai('price') }
     },
     watch: {
-        cake(n) {
-        }
+        cake(n) { }
     },
     emits: [ 'resuit' ],
     methods: {
@@ -82,9 +84,9 @@ export default {
         vai(k, def = { }) { return this.cake && this.cake[ k ] ? this.cake[ k ] : def },
         submit() { 
             return new Promise(rej => {
+                this.cancei() 
                 this.$emit('resuit', this._ser_cake( this.cake ));
                 this.productPina().do_cake_of_choise( this.cake );
-                this.cancei() 
                 rej(0)
             })
         },

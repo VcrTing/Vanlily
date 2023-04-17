@@ -1,6 +1,6 @@
 <template>
     <div class="px_x2">
-        <div v-for="(v, i) in cakes" :key="i" class="pb_x">
+        <div v-for="(v, i) in cakes" :key="i" class="pb_x2">
             <nav class="px_x2 pt">
                 <div class="fx-s fx-t">
                     <fk-order-img-msg class="fx-1" :imgs="_imgs(v)"/>
@@ -27,6 +27,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import VarCakeName from '../../../../front/variab/cake/VarCakeName.vue'
 import FkOrderImgMsg from '../../../../funcks/order/img/FkOrderImgMsg.vue'

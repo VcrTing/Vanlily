@@ -116,13 +116,12 @@ export default {
 
     // 刪除
     trashCake(idx) {
-      let res = [ ]
-      this.cakes.map((e, i) => {
-        if (i != idx) {
-          res.push( e )
-        }
+      return new Promise(rej => {
+        let res = [ ]
+        this.cakes.map((e, i) => { if (i != idx) { res.push( e ) } })
+        this.cakes = res
+        rej( 0 )
       })
-      this.cakes = res
     },
 
     // 打開 新增

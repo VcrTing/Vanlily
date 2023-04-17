@@ -16,11 +16,11 @@
         </div>
 
         <div class="fx-s row_x2 pb_x2">
-            <ui-inline-input-icon class="w-333" :header="'送貨人員：'" :icon="'mdi-moped'" :_right="true" :is_err="form_err.delivery_man_name">
+            <ui-inline-input-icon class="w-333" :header="'送貨人員：'" :icon="'mdi-moped'" :_right="true" :is_err="false">
                 <input class="input" placeholder="請輸入" v-model="form.delivery_man_name"/>
             </ui-inline-input-icon>
 
-            <ui-inline-input-icon class="w-333" :header="'電話：'" :icon="'mdi-card-account-phone-outline'" :_right="true" :is_err="form_err.delivery_man_phone_no">
+            <ui-inline-input-icon class="w-333" :header="'電話：'" :icon="'mdi-card-account-phone-outline'" :_right="true" :is_err="false">
                 <input class="input" placeholder="請輸入" v-model="form.delivery_man_phone_no" type="number"/>
             </ui-inline-input-icon>
 
@@ -37,6 +37,7 @@ import VfBuyPlantSelect from '../../../../component/view_form/order/VfBuyPlantSe
 import timed from '../../../../air/tooi/timed'
 import VfSendTimeSelect from '../../../../component/view_form/send/VfSendTimeSelect.vue'
 import TimeOnePure from '../../../../funcks/ui_element/timed/one/TimeOnePure.vue'
+
 export default {
   components: { VfBuyPlantSelect, FkSearchOidOrder, UiInlineInputIcon, VfSendTimeSelect, TimeOnePure },
     props: { 
@@ -48,7 +49,7 @@ export default {
         return {
             form: { delivery_date: '', delivery_time: '', delivery_man_name: '', delivery_man_phone_no: '', delivery_man_pickup_time: '', actual_delivery_time: '' },
             form_origin: { delivery_date: '', delivery_time: '', delivery_man_name: '', delivery_man_phone_no: '', delivery_man_pickup_time: '', actual_delivery_time: '' },
-            form_err: { delivery_date: false, delivery_man_name: false, delivery_man_phone_no: false }
+            form_err: { delivery_date: false }
         }
     },
     methods: {

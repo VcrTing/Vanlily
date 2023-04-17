@@ -1,5 +1,5 @@
 <template>
-    <div class="py pr">
+    <div class="py">
         <div class="fx-l pb">
             <button 
                 @click="open = !open" 
@@ -18,10 +18,13 @@
                 <ui-search-def class="ip-br" :_kiii_watch="true" @submit="(n) => { fkey = n; search(n) }" :pahd="'請輸入蛋糕ID、名稱，按下回車後進行聯網查詢。'"/>
             </div>
             <ui-tabie-ioading :ioad="ioading" :many="items">
-                <div class="pb">
+                <div class="pb" v-if="!ioading">
                     <button @click="choise(v)" class="w-100 button" v-for="(v, i) in items" :key="i">
                         <fk-cake-avatar-name :cake="v"  :_uuid="true"/>
                     </button>
+                </div>
+                <div v-else class="fx-c empty">
+                    <span>搜索中...</span>
                 </div>
             </ui-tabie-ioading>
         </div>
@@ -70,3 +73,8 @@ export default {
     }
 }
 </script>
+
+<style lang="sass" scoped>
+.fk-cake-picker-menu
+    box-shadow: none
+</style>

@@ -25,7 +25,7 @@
                 </button>
                 -->
                 <fo-submit @click="$emit('submit')" v-if="!is_view" class="btn-pri px_x3 py_s" 
-                    :ioad="ioading"
+                    :ioad="ioad"
                     :tit="'儲存'" :msg="msg"/>
             </div>
         </div>

@@ -1,5 +1,5 @@
 <template>
-    <div class="upper">
+    <div class="upper_x2">
         <div class="fx-c py_x2 order-creat-success">
             <div class="fx-c pt_x4">
                 <span class="pri">
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="fx-c py_x2 upper_x2">
-            <fo-button :pri="true" @click="$emit('back')" :tit="edit ? '確定' : '確定'" :icon="'mdi-check-underline'"/>
+            <fo-button :pri="true" @click="$emit('back')" :tit="edit ? ' 確定' : ' 確定'" :icon="'mdi-check'"/>
         </div>
     </div>
 </template>

@@ -6,7 +6,7 @@
             <div class="pri_hv hand" @click="viewFormerly(one.phone_no)">{{ one.phone_no }}</div>
         </div>
         <div class="w-26 w-30-p">
-            <ui-copy-icon :txt="one.email"/>&nbsp;
+            <ui-copy-icon :txt="one.email" v-if="one.email"/>&nbsp;
             {{ one.email }}
         </div>
         <div class="w-16 w-10-p">
@@ -14,8 +14,8 @@
         </div>
         <div class="w-11 t-c">
             <ui-table-opera :_mode="-1" @edit="() => {
-                memberPina().do_customer(one);
-                go('customer/edit');
+                    memberPina().do_customer(one);
+                    go('customer/edit');
                 }"></ui-table-opera>
         </div>
     </div>

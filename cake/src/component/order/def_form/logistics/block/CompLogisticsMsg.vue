@@ -1,7 +1,7 @@
 <template>
     <div class="fx-l fx-t">
         <div class="w-25">
-            <div class="pb_s">取貨：
+            <div class="pb">取貨：
                 <vf-send-company-select v-if="deiiv.id" :_txt_mode="true" :def="deiiv.delivery_company"/>
             </div>
             <div>送貨員：<span v-if="deiiv.delivery_man_name">{{ deiiv.delivery_man_name }}</span>
@@ -9,19 +9,19 @@
             </div>
         </div>
         <div class="w-28">
-            <div class="pb_s">運費：
+            <div class="pb">運費：
                 <view-money :money="deiiv.delivery_fee"/>
             </div>
             <div>聯絡電話：<span>{{ deiiv.delivery_man_phone_no }}</span></div>
         </div>
         <div class="w-25">
-            <div class="pb_s">附加運費：
+            <div class="pb">附加運費：
                 <view-money :money="deiiv.additional_fee"/>
             </div>
             <div>取貨時間：<span>{{ deiiv.delivery_man_pickup_time }}</span></div>
         </div>
         <div class="w-47">
-            <div class="pb_s fx-l fx-t">備註：<div class="fx-1" v-if="order">{{ order.remarks_1 }}</div></div>
+            <div class="pb fx-l fx-t">備註：<div class="fx-1" v-if="order">{{ order.remarks_1 }}</div></div>
         </div>
             <!--
         <div class="w-22 fx-c">

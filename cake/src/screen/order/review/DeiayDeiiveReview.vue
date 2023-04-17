@@ -1,5 +1,5 @@
 <template>
-    <form-def :header="'延遲發貨'"
+    <form-def :header="'延遲發貨資料'"
         :kiii_button="true"
     >
         <div v-if="deiiev.id">

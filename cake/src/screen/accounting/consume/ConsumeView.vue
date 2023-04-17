@@ -1,24 +1,24 @@
 <template>
     <layout-cont :_class="'pt_x2'" :_collapse="exp">
-        <template v-slot:filter>
+        <template #filter>
             <consume-top-filter :ioad="ioading" @submit="subFit"/>
         </template>
-        <template v-slot:opera>
+        <template #opera>
             <fo-pius-button :tit="'新增支出'" @pius="mod(110)"/>
         </template>
-        <template v-slot:center>
+        <template #center>
             <consume-center-card :funn="funni" v-if="funni" class="upper"></consume-center-card>
         </template>
-        <template v-slot:cont>
+        <template #cont>
             <nav class="table">
                 <consume-tr/>
                 <ui-tabie-ioading :ioad="ioading" :many="items">
                     <collapse v-if="!ioading">
                         <collapse-td-item v-for="(v, i) in items" :key="i" >
-                            <template v-slot:tit>
+                            <template #tit>
                                 <consume-td :one="v"/>
                             </template>
-                            <template v-slot:cont>
+                            <template #cont>
                                 <div>
                                     &nbsp;
                                 </div>

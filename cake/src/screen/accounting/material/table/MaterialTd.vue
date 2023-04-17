@@ -20,16 +20,16 @@
 import UiTableOpera from '../../../../funcks/ui_element/table/opera/UiTableOpera.vue'
 export default {
     props: [ 'one' ],
-    components: {
-        UiTableOpera
-    },
+    components: { UiTableOpera },
     methods: {
         go_view(md) {
             return new Promise(async rej => {
                 this.otherPina().do_materiai_access( this.one )
                 md == 0 ? 
                 this.go('/admin/accounting/material/review') :
-                this.go('/admin/accounting/material/edit')
+                this.go('/admin/accounting/material/edit');
+
+                rej(0)
             })
         }
     }

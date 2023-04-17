@@ -40,7 +40,8 @@ export default {
     mounted() { this.fetching() },
     methods: {
         async checkOne(v) { await this.submit( { 'checklist' : v } ) },
-        async submit( src = { }) { await this.serv.check.order_check_update( this, this.uuid, this.cake_id, src )},
+        async submit( src = { }) { 
+            await this.serv.check.order_check_update( this, this.uuid, this.cake_id, src )},
 
         async fetching() {
             return new Promise(async rej => {
@@ -52,9 +53,7 @@ export default {
                     let res = await this.serv.check.order_check(this, this.uuid, this.cake_id)
                     if (res) { 
                         res = res.ordered_product ? res.ordered_product : [ ]
-                        res = res ? res[ 0 ] : { }; 
-                        res.checklist = res.checklist ? res.checklist : [ ]
-                        this.cake_fresh = res ? res : { }
+                        this.cake_fresh = res[0] ? res[0] : { } 
                     }
                     setTimeout(() => this.ioading = false, 20)
                 }

@@ -6,7 +6,7 @@
         </div>
         <div v-if="cakes && cakes.length > 0">
             <div v-for="(v, i) in cakes" :key="i">
-                <cp-one-cake-checklist :cake="v" :uuid="order.uuid"/>
+                <cp-one-cake-checklist v-if="v" :cake="v" :uuid="order.uuid"/>
             </div>
         </div>
         <sk-one-cake-checklist v-else/>
@@ -24,7 +24,9 @@ export default {
         order() { let res = this.orderPina().one; return res ? res : { } },
         cakes() { 
             let res = this.productPina().cakes; 
-            return res ? res : [ ] },
+            console.log('檢查清單 =', res)
+            return res ? res : [ ] 
+        },
     },
     methods: {
         submit() { }

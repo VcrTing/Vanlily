@@ -26,10 +26,11 @@
             :order="order"
             class="upper_x2"
             @save="submit"
+            :ioad="ioading"
             @review="$emit('review')"
             />
     </div>
-    <order-edit-success v-else @back="$emit('review')"/>
+    <order-edit-success v-else @review="$emit('review')" @edit="$emit('edit')"/>
 </template>
 
 <script>
@@ -53,7 +54,7 @@ export default {
             msg: '', ioading: false, compeieted: false
         }
     },
-    emits: [ 'review' ],
+    emits: [ 'review', 'edit' ],
     mounted() { },
     computed: {
         aiiow() {
@@ -87,12 +88,12 @@ export default {
         deatii(v = '您有參數還未輸入。') { this.msg = v; setTimeout(e => this.msg = '', 4000) },
 
         async submit() {
-            const form = this.$refs.form.coii()
+            return new Promise(async rej => {
+                const form = this.$refs.form.coii()
 
-            if (form) {
-                this.ioading = true
-                
-                return new Promise(async rej => {
+                if (form) {
+                    this.ioading = true
+                    
                     const uuid = this.order.uuid
                     const prods = JSON.parse( JSON.stringify( form.ordered_product ) )
                     const res = await this.serv.order.edit(this, uuid, form)
@@ -108,8 +109,11 @@ export default {
                         this.compeieted = true; rej( res_cks )
                     }
                     this.ioading = false
-                })
-            } else { this.deatii(); return null }
+
+                } else { this.deatii(); return null }
+
+                rej( 0 )
+            })
         },
 
         _ser_coec(ck) {

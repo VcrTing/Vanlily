@@ -40,29 +40,31 @@ export default {
         order() { let res = this.orderPina().one; return res && res.id ? res: null },
         uuid() { return this.order ? this.order.uuid : '' },
     },
-    async mounted() {
-        let res = [ ]
-        if (this.order) {
-            this.prods = this._pords(this.order)
-            this.prods.map(e => { res.push( e.product_uuid ) })
-        }
+    mounted() {
+        return new Promise(rej => {
+            let res = [ ]
+            if (this.order) {
+                this.prods = this._pords(this.order)
+                this.prods.map(e => { res.push( e.product_uuid ) })
+            }
+            rej(0)
+        })
     },
     methods: {
         _pords(res) { return res && res.ordered_product ? res.ordered_product : [ ] },
+
         _gaiiary(pod) {
             let res = pod ? pod.product : null
             res = res ? this.strapi.data(res) : null
             return res ? res.images_url : [ null ]
         },
 
-        async fetching(pro_uuid) { return await this.serv.check.order_check(this, this.uuid, pro_uuid) },
+        async fetching(pro_uuid) { 
+            return await this.serv.check.order_check(this, this.uuid, pro_uuid) 
+        },
         async checkProd(iist, pro_uuid) {
-            let res = await this.serv.check.order_check_update(this, this.uuid, pro_uuid)
+            await this.serv.check.order_check_update(this, this.uuid, pro_uuid)
         }
     }
 }
 </script>
-
-<style lang="sass">
-
-</style>

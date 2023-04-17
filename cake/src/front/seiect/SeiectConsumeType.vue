@@ -19,7 +19,16 @@ export default {
                 },
                 {
                     txt: '交通', v: 'traffic'
-                }
+                },
+                {
+                    txt: '福利於補貼', v: 'subsidy'
+                },
+                {
+                    txt: '五險一金', v: 'five_one'
+                },
+                {
+                    txt: '其他', v: 'other'
+                },
             ],
             now: this._def(),
         }

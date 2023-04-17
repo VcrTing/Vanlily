@@ -30,6 +30,7 @@ import OrderExiSendOpera from '../../../expanel/opera/OrderExiSendOpera.vue'
 import CoLogisticPaySkei from '../../../../../component/order/pan/Iogistics_form/CoLogisticPaySkei.vue'
 import CompLogisticsTime from '../../../../../component/order/def_form/logistics/block/CompLogisticsTime.vue'
 import CompLogisticsMsg from '../../../../../component/order/def_form/logistics/block/CompLogisticsMsg.vue'
+
 export default {
     components: { OrderExiOperaForSend, OrderExiSendOpera, CompLogisticsPay, CoLogisticPaySkei, CompLogisticsTime, CompLogisticsMsg   },
     data() { return { send: { } } },

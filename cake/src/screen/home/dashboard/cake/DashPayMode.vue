@@ -14,12 +14,19 @@ export default {
   components: { UiChartPayRing },
     props: [ 'one' ],
     methods: {
-        resetChart(many) { 
-            this.$refs.chart.reset( this.ser_data( many ) ) 
+        resetChart(src) { 
+            this.$refs.chart.reset( this.ser_data( src ) ) 
         },
 
         ser_data(src) {
-            // console.log('SRC =', src)
+            if (src.paidType) {
+                src.paidType = src.paidType.map(e => {
+                    if (e.name == 'unknown_payment_method') {
+                        e.name = '未知支付方式'
+                    }
+                    return e
+                })
+            }
             return src
         }
     }

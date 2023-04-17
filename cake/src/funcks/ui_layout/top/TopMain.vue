@@ -1,9 +1,9 @@
 <template>
     <nav class="fx-s px_x2">
         <div class="w-50">
-            <span class="hand anim_htmi_top_menu" @click="menu(1)">
+            <div class="hand d-ib anim_htmi_top_menu" @click="menu(1)">
                 <i class="mdi mdi-menu h4"></i>
-            </span>
+            </div>
         </div>
         <div class="fx-1">
             <div class="fx-r softer" @click="auth">
@@ -39,7 +39,10 @@ export default {
 
 <style lang="sass" scoped>
 .anim_htmi_top_menu
-    animation: anim_htmi_top_menu .12s ease-in-out
+    transition: all .122s ease-in
+    animation: anim_htmi_top_menu .122s ease-in-out
+    &:hover
+        transform: scale(1.05)
 
 @keyframes anim_htmi_top_menu
     0% 

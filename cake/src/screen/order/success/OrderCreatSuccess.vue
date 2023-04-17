@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="fx-c py_x2 order-creat-success">
-            <div class="fx-c pt_x4">
+            <div class="fx-c pt_x4 upper_x2">
                 <span class="pri">
                     <i class="mdi mdi-check-decagram h2"></i>
                 </span>

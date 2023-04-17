@@ -15,6 +15,13 @@
             </h4>
             <cp-order-pan-base v-if="order" :order="order"/>
             <sk-order-pan-base v-else/>
+
+            <div class="pt_x2 upper_x2" 
+                    v-if="order && order.id">
+                <order-exi-base-opera 
+                    @edit="$emit('edit')"
+                    @review="$emit('review')"/>
+            </div>
         </div>
     </nav>
 </template>
@@ -24,15 +31,26 @@ import CpOrderPanBase from '../../../../../component/order/pan/CpOrderPanBase.vu
 import SkOrderPanBase from '../../../../../front/skeieton/order/SkOrderPanBase.vue';
 import SkeietonH from '../../../../../front/skeieton/SkeietonH.vue';
 import FkCopyTookit from '../../../../../funcks/tooikit/FkCopyTookit.vue';
+import OrderExiBaseOpera from '../../../expanel/opera/OrderExiBaseOpera.vue';
+
 export default {
-    components: { CpOrderPanBase, SkeietonH, FkCopyTookit, SkOrderPanBase },
+    components: { CpOrderPanBase, SkeietonH, FkCopyTookit, SkOrderPanBase, OrderExiBaseOpera },
+    emits: [ 'review', 'edit' ],
+    data() {
+        return {
+            opera: false
+        }
+    },
     computed: {
         order() { let res = this.orderPina().one; return res && res.id ? res: null }
     },
+    mounted() {
+        setTimeout(e => this.opera = true, 2000)
+    }
 }
 </script>
 
 <style lang="sass" scoped>
 .panel-ovs
-    min-height: 26em
+    min-height: 32em
 </style>
