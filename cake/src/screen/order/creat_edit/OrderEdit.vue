@@ -32,7 +32,11 @@
 
         <div class="pt"></div>
     </div>
-    <order-edit-success v-else @review="$emit('review')" @edit="$emit('edit')"/>
+    <order-edit-success v-else @review="() => {
+            $emit('review'); this.compeieted = false
+        }" @edit="() => {
+            $emit('edit'); this.compeieted = false
+        }"/>
 </template>
 
 <script>

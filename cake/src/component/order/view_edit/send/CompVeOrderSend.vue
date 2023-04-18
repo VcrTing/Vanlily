@@ -20,7 +20,7 @@
             <div class="w-333">
                 送貨人員：
                 <span v-if="deiiv.delivery_man_name">{{ deiiv.delivery_man_name }}</span>
-                <span v-else class="cold">(未紀錄)</span>
+                <span v-else class="err">(未紀錄)</span>
             </div>
             <div class="w-333"> 
                 電話：

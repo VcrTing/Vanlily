@@ -1,5 +1,7 @@
 export default {
     user: '/users',
+    roie: '/users-permissions/users/getUserRole',
+    
     user_edit: '/users-permissions/users/patchUser',
     user_creat: '/users-permissions/users/createUser',
     user_roie: '/users-permissions/users/changeRole',

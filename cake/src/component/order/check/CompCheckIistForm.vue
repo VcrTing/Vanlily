@@ -24,7 +24,6 @@ export default {
         order() { let res = this.orderPina().one; return res ? res : { } },
         cakes() { 
             let res = this.productPina().cakes; 
-            console.log('檢查清單 =', res)
             return res ? res : [ ] 
         },
     },

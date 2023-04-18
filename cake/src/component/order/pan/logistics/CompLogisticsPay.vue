@@ -12,6 +12,7 @@
 import CoLogisticPayBody from '../Iogistics_form/CoLogisticPayBody.vue'
 import CoLogisticPayForm from '../Iogistics_form/CoLogisticPayForm.vue'
 import CoLogisticPaySkei from '../Iogistics_form/CoLogisticPaySkei.vue'
+
 export default {
     components: { CoLogisticPayForm, CoLogisticPayBody, CoLogisticPaySkei },
     props: [ 'order', '_edit', 'timed_ciass' ],

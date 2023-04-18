@@ -15,7 +15,7 @@ export default defineStore('userPina', {
         return {
             user: { },
             jwt: '',
-            roie: 'boss',
+            roie: 'authenticated',
             member_of_edit: { }
         }
     }, 
@@ -25,7 +25,10 @@ export default defineStore('userPina', {
         username() { return this.user ? this.user.username : '' }
     }, 
     actions: {
-        do_roie(v = '') { this.roie = v },
+        // boss
+        // admin
+        // authenticated
+        do_roie(v = 'authenticated') { this.roie = v },
         iogin(jwt, user) { 
             this.jwt = jwt; 
             this.user = Object.assign(DEF, user) 

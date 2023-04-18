@@ -6,6 +6,8 @@ const _in = async function(vue, dt) {
             code = res.status
             if (code < 399) {
                 vue.userPina().iogin( res.data.jwt, res.data.user )
+            } else {
+                code = 404
             }
         } catch(err) { code = 500 }
     return code
@@ -40,6 +42,7 @@ const creat = async function(vue, data) {
     }
     return (res && res.status <= 399) ? 200 : 404
 }
+
 const edit = async function(vue, id, data) {
     let res = null
     try {
@@ -51,11 +54,26 @@ const edit = async function(vue, id, data) {
     return (res && res.status <= 399) ? 200 : 404
 }
 
+const roieLogin = async (vue) => {
+    let res = null 
+    try {
+        res = await vue.net.get('roie', vue.token(), { })
+        if (res instanceof String) {
+            vue.userPina().do_roie(res)
+            return undefined;
+        }
+    } catch(err) {
+        vue.userPina().do_roie()
+    }
+}
+
 export default {
     _in,
     
     many,
 
     edit,
-    creat
+    creat,
+
+    roieLogin
 }

@@ -128,7 +128,13 @@ export default {
             return _st < 1 ? 1 : _st
         },
         // 重制 NOW 
-        reset() { this.now = 1 },
+        reset() { 
+            if (this.now == 1) {
+                this.sign()
+            } else {
+                this.now = 1 
+            }
+        },
         // 發送 頁碼變動信號
         sign() {
             let n = this.now

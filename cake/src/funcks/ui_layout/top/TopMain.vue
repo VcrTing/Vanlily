@@ -8,9 +8,10 @@
         <div class="fx-1">
             <div class="fx-r softer" @click="auth">
                 <div class="user-name pr ttd hand">
-                    {{ up.named }}
+                    {{ iog('權限 = ' + user.roie) }}
+                    {{ user.named }}
                 </div>
-                <img class="user-face hand" :src="up.avatar">
+                <img class="user-face hand" :src="user.avatar">
             </div>
         </div>
     </nav>
@@ -18,13 +19,8 @@
 <script>
 
 export default {
-    data() {
-        return {
-            up: { }
-        }
-    },
-    mounted() {
-        this.up = this.userPina()
+    computed: {
+        user() { return this.userPina() }
     },
     methods: {
         auth() { 

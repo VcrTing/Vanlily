@@ -9,8 +9,9 @@
             <div class="fx-l pr" :class="{ 'w-30': !iongPayway, 'w-42': iongPayway }">
                 <div class="d-ib">方式:&nbsp;&nbsp;&nbsp;</div>
                 <div class="fx-1">
-                    <vf-payway-select v-if="form.payment_method_title" class="t-elip_x3" :def="form.payment_method_title" :_txt_mode="true"/>
-                    <span v-else class="cold">(未紀錄)</span>
+                    <span v-if="paywayMod == -1" class="cold">(未紀錄)</span>
+                    <span v-else-if="paywayMod == 0">未知</span>
+                    <vf-payway-select v-else class="t-elip_x3" :def="form.payment_method_title" :_txt_mode="true"/>
                 </div>
             </div>
             <div class="w-20 pl" :class="{ 'w-27': !iongPayway, 'w-20': iongPayway }">
@@ -42,6 +43,18 @@ export default {
         iongPayway() {
             const src = this.form.payment_method_title + ''
             return src.length > 10
+        },
+        paywayMod() {
+            const src = this.form.payment_method_title
+            if (src == null || src == undefined) {
+                return -1
+            }
+            else if (src == '') {
+                return 0
+            }
+            else {
+                return 1
+            }
         }
     }
 }

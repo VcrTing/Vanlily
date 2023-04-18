@@ -14,8 +14,8 @@ export default {
         return {
             now: '',
             ops: [
-                { txt: '(未知)', v: '' },
-                { txt: '其他支付方式', v: 'other' },
+                // { txt: '(未知付款方式)', v: '' },
+                { txt: '其他方式', v: 'other' },
                 { txt: 'PayPal', v: 'paypal' },
                 { txt: 'VISA', v: 'visa' },
                 { txt: '現金', v: 'cash' },
@@ -29,19 +29,13 @@ export default {
         }
     },
     mounted() {
-        this.now = this.def ? this.def : 'paypal'
+        this.now = this.def ? this.def : 'other'
     },
-    watch: {
-        now(n) { this.sign() }
-    },
+    watch: { now(n) { this.sign() } },
     methods: {
         sign() { this.$emit('resuit', this.now) },
-        // code() { let res = this.ways[ this.now ]; return res ? res.code : 'addr' },
-        ioc(vv = 'paypal') { this.ops.map( (e, i) => { if (e.v == vv) { this.now = e.v } }) },
-        ioc_txt(vv = 'paypal') { 
-            let res = ''; 
-            this.ops.map( (e, i) => { if (e.v == vv) { res = e.txt } }); 
-            return res }
+        ioc(vv = 'other') { this.ops.map( (e, i) => { if (e.v == vv) { this.now = e.v } }) },
+        ioc_txt(vv = 'other') { let res = ''; this.ops.map( (e, i) => { if (e.v == vv) { res = e.txt } }); return res }
     }
 }
 </script>

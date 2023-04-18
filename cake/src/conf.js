@@ -1,5 +1,5 @@
 const TEST = true
-const TEST_ENV = false
+const TEST_ENV = true
 
 const URI = 'https://strapi04.svr.up5d.com'
 
@@ -18,5 +18,5 @@ export default {
 
     ENDPOINT,
 
-    VERSION: 'APR 18A'
+    VERSION: 'APR 18'
 }

@@ -41,6 +41,7 @@ export default {
     methods: {
         async checkOne(v) { await this.submit( { 'checklist' : v } ) },
         async submit( src = { }) { 
+            console.log('檢查清單 =', src, this.cake_id)
             await this.serv.check.order_check_update( this, this.uuid, this.cake_id, src )},
 
         async fetching() {
@@ -54,6 +55,7 @@ export default {
                     if (res) { 
                         res = res.ordered_product ? res.ordered_product : [ ]
                         this.cake_fresh = res[0] ? res[0] : { } 
+                        console.log('CHECK =', this.cake_fresh)
                     }
                     setTimeout(() => this.ioading = false, 20)
                 }

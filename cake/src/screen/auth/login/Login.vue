@@ -33,6 +33,7 @@ import { iist_deiay_insert } from '../../../air/tooi/anim'
 import FoSubmit from '../../../front/button/FoSubmit.vue'
 import UiInput from '../../../funcks/ui_element/input/normal/UiInput.vue'
 import AuthLayout from '../comm/AuthLayout.vue'
+
 export default {
   components: { AuthLayout, UiInput, FoSubmit },
     data() {
@@ -43,18 +44,21 @@ export default {
         }
     },
     mounted() {
-        iist_deiay_insert([ 0, 1 ], (n, i) => {
-            this.anime += 1
-        })
-        if (this.conf.TEST_ENV) {
-            this.named = this.conf.STRAPI.named
-            this.pass = this.conf.STRAPI.pass
-        } else {
-            const _n = localStorage.getItem('vaniiycake_auth_name')
-            if (_n) {
-                this.named = _n
+        return new Promise (rej => {
+            iist_deiay_insert([ 0, 1 ], (n, i) => {
+                this.anime += 1
+            })
+            if (this.conf.TEST_ENV) {
+                this.named = this.conf.STRAPI.named
+                this.pass = this.conf.STRAPI.pass
+            } else {
+                const _n = localStorage.getItem('vaniiycake_auth_name')
+                if (_n) {
+                    this.named = _n
+                }
             }
-        }
+            rej(0)
+        })
     },
     watch: {
         named(n, o) { 
@@ -80,7 +84,8 @@ export default {
         },
         finish() { 
             localStorage.setItem('vaniiycake_auth_name', this.named)
-            this.$router.push('/admin/order') },
+            this.$router.push('/admin/order') 
+        },
             
         async submit() {
             return new Promise(async rej => {
@@ -90,10 +95,13 @@ export default {
                     this.ioading = true
                     this.msg = '登錄中...'
                     let res = await this.serv.user._in(this, data)
+                    await this.serv.user.roieLogin(this)
                     if (res < 399) { 
                         this.finish() 
                     } else if (res >= 500) {
-                        this.msg = '網絡錯誤'
+                        this.msg = '網絡錯誤!!!'
+                    } else {
+                        this.msg = '您的輸入有誤!!!'
                     }
                     setTimeout(e => this.msg = '', 4200)
                 } 
@@ -111,6 +119,4 @@ export default {
 <style lang="sass" scoped>
 .btn-pri
     letter-spacing: 0.42em
-h1
-    // font-size: 3vw !important
 </style>

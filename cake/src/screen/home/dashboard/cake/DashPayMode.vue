@@ -19,15 +19,12 @@ export default {
         },
 
         ser_data(src) {
-            if (src.paidType) {
-                src.paidType = src.paidType.map(e => {
-                    if (e.name == 'unknown_payment_method') {
-                        e.name = '未知支付方式'
-                    }
-                    return e
-                })
-            }
-            return src
+            return src.map(e => {
+                if (e.name == 'unknown_payment_method') {
+                    e.name = '未知方式'
+                }
+                return e
+            })
         }
     }
 }

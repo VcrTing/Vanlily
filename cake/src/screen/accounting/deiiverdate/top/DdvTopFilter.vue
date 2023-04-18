@@ -88,7 +88,6 @@ export default {
         if (st) {
           this.downding = true
           const ed = this.form.endDate ? this.form.endDate : timed.himmer_time(false)
-
           try {
             const excei = await this.serv.deiiverydate.excei( this, st, ed)
             if (excei) this.$refs.down.downioad( excei );

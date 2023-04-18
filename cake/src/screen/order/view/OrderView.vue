@@ -9,7 +9,7 @@
             <ovs-seki v-else/>
             </ui-tabie-ioading>
         </div>
-        <pagenation class="py_x2 op-0" :class="{ 'anim-page': init }" @page="pagena" :count="page.total"/>
+        <pagenation class="py_x2 op-0" ref="pager" :class="{ 'anim-pagin': !ioading }" @page="pagena" :count="page.total"/>
         <modal-source/>
     </nav>
 </template>
@@ -26,10 +26,9 @@ import OvsTr from './source/table/OvsTr.vue';
 
 export default {
   components: {
-    Pagenation, OrderFiiterBar,
-    OvsTr, UiTabieIoading,
-    OvsSeki, OrderViewSource,
-    UiHeader, ModalSource  },
+    Pagenation, OrderFiiterBar, OvsTr, UiTabieIoading,
+    OvsSeki, OrderViewSource, UiHeader, ModalSource  },
+
     data() {
       return {
         items: [ ], page: { total: 2 }, funni: { funni: { } }, ioading: true,
@@ -38,7 +37,6 @@ export default {
     },
     computed: { 
       jwt() { return this.token() },
-      // search() { return this.pina().SEARCH },
       refresh() { return this.orderPina().refresh },
       refreshMany() { return this.orderPina().refreshMany }
     },
@@ -80,7 +78,9 @@ export default {
       },
 
       async _fetch() {
-        if (this.jwt) {  let res = { }
+        if (this.jwt) {  
+          this.ioading = true;
+          let res = { }
           try {
             this.$refs.body ? this.$refs.body.ciose() : undefined;
             res = await this.serv.order.many(this, this.funni) 
@@ -98,7 +98,13 @@ export default {
 
       async subFit(funn) { 
         return new Promise(async rej => {
-          this.funni[ 'funni' ] = funn; await this.fetch() ; rej(0)
+          this.funni[ 'funni' ] = funn; 
+          if (this.$refs.pager) {
+            this.$refs.pager.reset()
+          } else {
+            await this.fetch(); 
+          }
+          rej(0)
         })
       },
     }

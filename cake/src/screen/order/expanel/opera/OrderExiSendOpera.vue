@@ -10,44 +10,33 @@
 </template>
 <script>
 export default {
-    props: [ 'one' ],
+    props: [ 'order' ],
     emits: [ 'review', 'edit' ],
-    data() { return { opera: [ ] } },
-    mounted() {
-        this.opera = [
-            {
-                txt: '申請延遲發貨', icon: 'mdi mdi-send-clock-outline',
-                func: () => {
-                    this.pina().mod(32)
-                }
-            },
-            {
-                txt: '檢視訂單', icon: 'mdi mdi-lightbulb-outline',
-                func: () => {
-                    this.$emit('review')
-                }
-            },
-            {
-                txt: '修改訂單', icon: 'mdi mdi-keyboard',
-                func: () => {
-                    this.$emit('edit')
-                }
-            },
-            /*
-            {
-                txt: '返回', icon: 'mdi mdi-skip-backward-outline',
-                func: () => {
+    computed: {
+        has_deiay() { const src = this.order ? this.order.delay_delivery : null; return ( src && src.id ) },
 
-                }
-            },
-            {
-                txt: '新增付款記錄', icon: 'mdi mdi-credit-card-settings-outline',
-                func: () => {
-                    this.pina().modai(31)
-                }
-            },
-            */
-        ]
-    }
+        opera() {
+            return [
+                {
+                    txt: this.has_deiay ? '檢視延遲發貨' : '申請延遲發貨', icon: this.has_deiay ? 'mdi mdi-send-clock' : 'mdi mdi-send-clock-outline',
+                    func: () => {
+                        this.pina().mod( this.has_deiay ? 33 : 32)
+                    }
+                },
+                {
+                    txt: '檢視訂單', icon: 'mdi mdi-lightbulb-outline',
+                    func: () => {
+                        this.$emit('review')
+                    }
+                },
+                {
+                    txt: '修改訂單', icon: 'mdi mdi-keyboard',
+                    func: () => {
+                        this.$emit('edit')
+                    }
+                },
+            ]
+        }
+    },
 }
 </script>

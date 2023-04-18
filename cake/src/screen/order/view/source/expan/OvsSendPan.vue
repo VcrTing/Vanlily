@@ -17,7 +17,10 @@
                 <co-logistic-pay-skei v-else/>
             </div>
             <div class="pt_x3 fx-c pb">
-                <order-exi-send-opera @edit="$emit('edit')" @review="$emit('review')"/>
+                <order-exi-send-opera 
+                    :order="order"
+                    @edit="$emit('edit')" 
+                    @review="$emit('review')"/>
             </div>
         </div>
     </nav>

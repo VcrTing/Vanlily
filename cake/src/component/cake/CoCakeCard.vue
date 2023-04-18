@@ -45,9 +45,12 @@ export default {
     props: [ 'cake', 'date', 'num', 'remark', 'paid' ],
     methods: {
         viewOrder() {
-            this.pina().search( this.num )
-            this.$router.push('/admin/order/')
-            this.pina().mod(0)
+            return new Promise(rej => {
+                this.pina().search( this.num )
+                this.$router.push('/admin/order/')
+                this.pina().mod(0)
+                rej(0)
+            })
         }
     }
 }

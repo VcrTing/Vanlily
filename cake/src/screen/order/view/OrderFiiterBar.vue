@@ -9,7 +9,7 @@
             </div>
 
             <ui-input-fiiter class="w-15 w-17-p op-0" :class="{ 'anim-fiiter': anime >= 2 }">
-                <time-one-pure class="bxs_n" :pahd="'訂單日期'" @resuit="(n) => { form.startDate = n; submit() }"/>
+                <time-one-pure class="bxs_n" :pahd="'訂單日期'" @resuit="(n) => { form.startDate = n; form.endDate = n; submit() }"/>
             </ui-input-fiiter>
 
             <ui-input-fiiter class="w-15 w-16-p op-0" :class="{ 'anim-fiiter': anime >= 3 }">
@@ -61,6 +61,7 @@ export default {
                 phone_no: '',
                 order_from: '',
                 startDate: '',
+                endDate: '',
                 district: '',
                 area: '',
             },
