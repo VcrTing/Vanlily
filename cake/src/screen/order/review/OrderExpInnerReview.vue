@@ -56,6 +56,7 @@
                 @edit="$emit('edit')"
                 v-if="order && order.id"/>
         </nav>
+        <div class="pt"></div>
     </div>
 </template>
 

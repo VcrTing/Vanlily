@@ -28,8 +28,20 @@ export default {
         }
     },
     mounted() { 
-        // if (this._edit) { this.reset( this.one ) }
-        this.reset( this.one )
+        return new Promise( rej => {
+            const src = this.one.delay_delivery;
+            if (src) {
+                this.reset( {
+                    remarks_1: src.remarks
+                } )
+            } else {
+                this.reset( {
+                    remarks_1: this.one.remarks_1
+                } )
+            }
+
+            rej(0)
+        })
     },
     methods: {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },

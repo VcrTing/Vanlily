@@ -29,6 +29,8 @@
             :ioad="ioading"
             @review="$emit('review')"
             />
+
+        <div class="pt"></div>
     </div>
     <order-edit-success v-else @review="$emit('review')" @edit="$emit('edit')"/>
 </template>

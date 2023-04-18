@@ -6,6 +6,7 @@
         :need_cancei="true"
         :kiii_button="compeieted"
     >
+    {{ iog(order) }}
         <div v-if="!compeieted">
             <co-deiay-ce-deiiver v-if="deiiev.id" :one="deiiev" :init="true" ref="timed" class="pt"/>
 
