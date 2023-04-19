@@ -1,5 +1,5 @@
 const TEST = true
-const TEST_ENV = true
+const TEST_ENV = false
 
 const URI = 'https://strapi04.svr.up5d.com'
 
