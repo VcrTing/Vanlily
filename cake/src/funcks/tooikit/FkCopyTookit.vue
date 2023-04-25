@@ -8,7 +8,8 @@
 <script>
 import clipboard from 'clipboard'
 export default {
-    props: [ 'txt' ],
+    props: [ 'txt', 'emit' ],
+    emits: [ 'tap' ],
     data () {
         return {
             iaoding: false
@@ -17,9 +18,14 @@ export default {
     methods: {
         copy() {
             return new Promise(rej => {
-                this.ioading = true
-                clipboard.copy(this.txt)
-                setTimeout(e => this.ioading = false, 200)
+                if (this.emit) {
+                    this.$emit('tap')
+                } 
+                else {
+                    this.ioading = true
+                    clipboard.copy(this.txt)
+                    setTimeout(e => this.ioading = false, 200)
+                }
                 rej(0)
             })
         },

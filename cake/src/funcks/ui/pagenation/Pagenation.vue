@@ -6,12 +6,22 @@
                     <li @click="reset()"><span>
                         <i class="mdi mdi-page-first h5"></i>
                     </span></li>
+
+                    <li @click="num(-1)"><span>
+                        <i class="mdi mdi-chevron-left h5"></i>
+                    </span></li>
+
                     <li v-for="(v, i) in pages" :key="i"
                         :class="{ 'active': v == now }"
                         @click="now = v"
                     >
                         <span>{{ v }}</span>
                     </li>
+
+                    <li @click="num(1)"><span>
+                        <i class="mdi mdi-chevron-right h5"></i>
+                    </span></li>
+
                     <li @click="num( total - 1 )"><span>
                         <i class="mdi mdi-page-last h5"></i>
                     </span></li>
@@ -51,7 +61,7 @@ export default {
         },
         _long: {
             type: Number,
-            default: 7
+            default: 6
         },
         _big: {
             type: Boolean,

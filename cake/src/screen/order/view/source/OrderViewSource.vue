@@ -6,7 +6,7 @@
           @openPan="expan" 
           :one="m" 
           :i="i" 
-          @check="() => checkIist(m)"
+          @checkIist="() => checkIist(m)"
           />
         <span v-if="false">{{iog('TAB =', i + '/' + td)}}</span>
       </template>
@@ -65,7 +65,15 @@ export default {
   },
   emits: [ 'refresh' ],
   methods: {
-    checkIist(order) { },
+    checkIist(res) {
+      return new Promise(rej => {
+        this.orderPina().do_one( res )
+        const prods = res && res.ordered_product ? res.ordered_product : [ ]
+        this.productPina().do_cakes( prods )
+        this.mod(24)
+        rej(0)
+      })
+    },
 
     ciose() {
       this.pina().coii_td( 0 )

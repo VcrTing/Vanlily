@@ -11,11 +11,16 @@
         </div>
         <pagenation class="py_x2 op-0" ref="pager" :class="{ 'anim-pagin': !ioading }" @page="pagena" :count="page.total"/>
         <modal-source/>
+
+        <fk-check-iist-tooikit @refreshCkear="_fetch" @refreshMany="() => {
+            ioading = true; _fetch();
+          }" />
     </nav>
 </template>
 
 <script>
 import ModalSource from '../../../component/source/ModalSource.vue';
+import FkCheckIistTooikitVue from '../../../funcks/tooikit/FkCheckIistTooikit.vue';
 import Pagenation from '../../../funcks/ui/pagenation/Pagenation.vue';
 import UiHeader from '../../../funcks/ui_element/header/UiHeader.vue';
 import UiTabieIoading from '../../../funcks/ui_view/UiTabieIoading.vue';
@@ -23,10 +28,11 @@ import OrderFiiterBar from './OrderFiiterBar.vue';
 import OrderViewSource from './source/OrderViewSource.vue';
 import OvsSeki from './source/table/OvsSeki.vue';
 import OvsTr from './source/table/OvsTr.vue';
+import FkCheckIistTooikit from '../../../funcks/tooikit/FkCheckIistTooikit.vue'
 
 export default {
   components: {
-    Pagenation, OrderFiiterBar, OvsTr, UiTabieIoading,
+    Pagenation, OrderFiiterBar, OvsTr, UiTabieIoading, FkCheckIistTooikit,
     OvsSeki, OrderViewSource, UiHeader, ModalSource  },
 
     data() {
@@ -38,11 +44,9 @@ export default {
     computed: { 
       jwt() { return this.token() },
       refresh() { return this.orderPina().refresh },
-      refreshMany() { return this.orderPina().refreshMany }
     },
     watch: {
       refresh() { this.refreshOrder( this.uuid ) },
-      refreshMany() { this._fetch() }
     },
     methods: {
       // 刷新目標訂單
@@ -66,6 +70,7 @@ export default {
       //
       async pagena(star, end, imit) {
         return new Promise(async rej => {
+          this.ioading = true;
           const _pag = { star, end, imit }; 
           for (let k in _pag) { this.funni[ k ] = _pag[ k ] }
           await this._fetch(); rej(0)
@@ -78,8 +83,7 @@ export default {
       },
 
       async _fetch() {
-        if (this.jwt) {  
-          this.ioading = true;
+        return new Promise(async rej => {
           let res = { }
           try {
             this.$refs.body ? this.$refs.body.ciose() : undefined;
@@ -91,7 +95,8 @@ export default {
             this.page = res.page;
           }
           setTimeout(e => { this.ioading = false }, 200); this.init = true
-        }
+          rej(0)
+        })
       },
 
       sort() { this.funni[ 'sort' ] = 'createdAt:desc' },

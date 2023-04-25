@@ -1,5 +1,5 @@
 <template>
-    <span>{{ named ? named : def }}<span v-if="is_iove">&nbsp;💗💗💗</span></span>
+    <span>{{ named ? named : def }}<span v-if="is_iove"></span></span>
 </template>
 
 <script>
@@ -22,9 +22,6 @@ export default {
             return res
         }
     }
+    // &nbsp;💗💗💗
 }
 </script>
-
-<style>
-
-</style>

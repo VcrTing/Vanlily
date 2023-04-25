@@ -1,13 +1,13 @@
 <template>
-    <div class="fx-l">
-        <div class="fx-l cus-def" v-if="item">
+    <span class="fx-l">
+        <span class="fx-l cus-def" v-if="item">
             <span class="pr_t">{{ item.txt }}</span>
             <i :class="item.icon" class="h5 pri"></i>
-        </div>
-        <div v-if="company">
+        </span>
+        <span v-if="company">
             ,&nbsp;&nbsp;&nbsp;{{ company ? company : '' }}
-        </div>
-    </div>
+        </span>
+    </span>
 </template>
 <script>
 export default {
@@ -39,8 +39,14 @@ export default {
                 if (this.method.indexOf(e.char) >= 0) { res = e }
             }); return res
         }
+    },
+    methods: {
+        buiid_txt() {
+            return this.item.txt
+        }
     }
 }
+
 </script>
 <style lang="sass" scoped>
 .pr_t

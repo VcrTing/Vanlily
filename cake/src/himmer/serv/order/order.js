@@ -14,6 +14,8 @@ const funni = (funni) => new Promise(rej => {
 
 const many = async function(vue, qs) {
     let res = null
+    const qss = await funni(qs)
+    // console.log('qss =', qss)
     try {
         res = await vue.net.get('orders', vue.token(), await funni(qs))
     } catch(err) {

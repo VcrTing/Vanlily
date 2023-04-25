@@ -9,6 +9,8 @@
                 :format="'yyyy / MM / dd'"
                 :placeholder="pahd"
                 @select="result"
+
+				class="input-timed-1"
                 :id="'timed_dom_' + _.uid"
 
                 v-model="t"
@@ -27,6 +29,8 @@
                 :format="'yyyy / MM / dd'"
                 :placeholder="pahd_2"
                 @select="result_2"
+
+				class="input-timed-2"
                 :id="'timed_dom_' + (_.uid + 1)"
 
                 v-model="t_2"
@@ -44,7 +48,7 @@ import moment from 'moment'
 import VuejsDatepicker from 'vuejs3-datepicker'
 import timed from '../../../../air/tooi/timed'
 	export default {
-		emits: [ 'resuit' ],
+		emits: [ 'resuit', 'ciose' ],
 		name: 'app',
 		data() {
 			return {
@@ -105,7 +109,7 @@ import timed from '../../../../air/tooi/timed'
 
 			result(v) { this.t = v; this.work = true; this._res() },
 			result_2(v) { this.t_2 = v; this.work = true; this._res() },
-			reset() { this.t = ''; this.t_2 = ''; this.work = false }
+			reset() { this.t = ''; this.t_2 = ''; this.work = false; this._res(); this.$emit('ciose') }
 		}
 	}
 </script>

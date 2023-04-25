@@ -25,7 +25,7 @@
                             <ui-checkbox-for-one :def="v.isShippingChecking" @change="(n) => updCheck(v, 'isShippingChecking', n)"/>
                         </div>
                     </div>
-                    <div class="pl_x2 fx-1 pr_s">{{ser(v.attribute_type_name)}}:&nbsp;&nbsp;<span>{{v.name}}</span></div>
+                    <div class="pl_x2 fx-1 pr_s">{{ser(v.attribute_type_name)}}:&nbsp;&nbsp;<span class="b">{{v.name}}</span></div>
                 </nav>
             </div>
             <nav v-else class="copc-empty fx-l">

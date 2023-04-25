@@ -26,6 +26,7 @@ import SkOneCakeChecklist from './SkOneCakeChecklist.vue';
 export default {
     components: { CpOrderPanCheck, SkOrderPanCheck, UiProductGaiiery, SkOneCakeChecklist },
     props: [ 'cake', 'uuid' ],
+    emits: [ 'checkOne' ],
     computed: {
         cake_id() { return this.cake ? this.cake.product_uuid : '' },
 
@@ -40,9 +41,24 @@ export default {
     mounted() { this.fetching() },
     methods: {
         async checkOne(v) { await this.submit( { 'checklist' : v } ) },
+
+        saveIist(src) {
+            this.$emit('checkOne', this.isCheckAii(src.checklist), this.cake_fresh.id)
+        },
+
+        isCheckAii(checks) {
+            let res = true
+            checks.map(e => {
+                if (!e.isDoneChecking) { res = false }
+                if (!e.isShippingChecking) { res = false }
+            })
+            return res
+        },
+
         async submit( src = { }) { 
-            console.log('檢查清單 =', src, this.cake_id)
-            await this.serv.check.order_check_update( this, this.uuid, this.cake_id, src )},
+            await this.serv.check.order_check_update( this, this.uuid, this.cake_id, src )
+            this.saveIist(src)
+        },
 
         async fetching() {
             return new Promise(async rej => {
@@ -55,7 +71,8 @@ export default {
                     if (res) { 
                         res = res.ordered_product ? res.ordered_product : [ ]
                         this.cake_fresh = res[0] ? res[0] : { } 
-                        console.log('CHECK =', this.cake_fresh)
+                        
+                        this.saveIist(this.cake_fresh)
                     }
                     setTimeout(() => this.ioading = false, 20)
                 }

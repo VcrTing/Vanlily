@@ -42,6 +42,12 @@
             <wbc-var :tit="'取貨方式'">
                 {{ deiiv.delivery_method }}
             </wbc-var>
+            <!--
+            <wbc-var :tit="'送貨方式'">
+                {{ iog(deiiv) }}
+                {{ deiiv.delivery_type }}
+            </wbc-var>
+            -->
             <wbc-var :tit="'送費支付'" class="pb_s" :class="{ 'expan-iive': expan, 'expan-die': !expan }">
                 <span v-if="is_ziqu">
                     (自取)
@@ -62,7 +68,9 @@
             </wbc-var-two>
         </nav>
         <nav class="fx-s fx-b px pb pt_x2">
-            <button class="btn-thin px py_t" @click="checkIist()">檢查清單</button>
+            <button class="btn-thin px py_t" @click="checkIist()">
+                <i class="mdi mdi-check" v-if="one.is_check_all"></i>
+                檢查清單</button>
             <button class="btn-dark py_s px_x2" @click="reviewOrder()">檢視</button>
         </nav>
     </div>

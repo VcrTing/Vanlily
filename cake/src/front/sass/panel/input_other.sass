@@ -116,7 +116,7 @@ select.ip-w-100,
         overflow: hidden
         border-radius: 6px
         padding-bottom: 2px
-        box-shadow: 0px 5px 8px -1.5px rgba(0, 0, 0, 0.23)
+        box-shadow: 0px 5px 8px -1px rgba(0, 0, 0, 0.26)
         
         span.day
             border-radius: 100% !important
@@ -213,6 +213,26 @@ select.ip-w-100,
         .vuejs3-datepicker__content
             margin: 0px
 
+.time-doub-s
+    .input-timed-1
+        .vuejs3-datepicker__value
+            padding-left: $ds !important
+            padding-right: 0px !important
+    .input-timed-2
+        .vuejs3-datepicker__value
+            padding-left: $ds_s !important
+            padding-right: 2px !important
+
+@media screen and ( max-width: 1444px )
+    .time-doub-s-p
+        .input-timed-1
+            .vuejs3-datepicker__value
+                padding-left: $ds !important
+                padding-right: 0px !important
+        .input-timed-2
+            .vuejs3-datepicker__value
+                padding-left: $ds_s !important
+                padding-right: 2px !important
 // CHECKBOX
 ._checkbox
     @extend .br_s

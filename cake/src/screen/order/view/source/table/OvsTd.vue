@@ -29,7 +29,7 @@
             <opera-status :_item="one.is_open" @change="changeStatus"/>
         </div>
         <div class="w-6 w-7-s t-c hand" >
-            <view-order-check-bulb :is_check="one.is_check_all" @click="$emit('check')"/>
+            <view-order-check-bulb :is_check="one.is_check_all" @click="$emit('checkIist')"/>
         </div>
         <div class="w-8">
             <ui-table-opera @view="tap('CHECK_AII')" @edit="tap('EDIT')"></ui-table-opera>
@@ -54,7 +54,7 @@ components: { UiTableOpera, VarOrderCakeName, ViewOrderTimeSend, ViewOrderCheckB
     ViewOrderSendAddr, ViewOrderIsnew, UiCopyIcon,   },
 
 props: [ 'one', 'i' ],
-emits: [ 'check', 'openPan' ],
+emits: [ 'checkIist', 'openPan' ],
 data() {
     return {
         now: ''
