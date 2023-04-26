@@ -12,7 +12,7 @@
             </div>
             <div class="w-333">
                 實際送貨時間：
-                <span>{{ deiiv.actual_delivery_time }}</span>
+                <span v-if="deiiv.actual_delivery_time">{{ deiiv.actual_delivery_time }}</span>
             </div>
         </div>
         <div class="py"></div>
@@ -25,7 +25,7 @@
             <div class="w-333"> 
                 電話：
                 <span v-if="deiiv.delivery_man_phone_no">{{ deiiv.delivery_man_phone_no }}</span>
-                <span v-else class="cold">(未紀錄)</span>
+                <span v-else class="sus">(未紀錄)</span>
             </div>
             <div class="w-333">
                 取貨時間：

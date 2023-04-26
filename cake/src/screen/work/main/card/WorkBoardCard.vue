@@ -42,12 +42,10 @@
             <wbc-var :tit="'取貨方式'">
                 {{ deiiv.delivery_method }}
             </wbc-var>
-            <!--
             <wbc-var :tit="'送貨方式'">
-                {{ iog(deiiv) }}
-                {{ deiiv.delivery_type }}
+                {{ iog(one) }}
+                {{ deiiv._deiiv_company ? deiiv._deiiv_company : '其他' }}
             </wbc-var>
-            -->
             <wbc-var :tit="'送費支付'" class="pb_s" :class="{ 'expan-iive': expan, 'expan-die': !expan }">
                 <span v-if="is_ziqu">
                     (自取)
@@ -120,9 +118,12 @@ export default {
             this.pina().mod(1002)
         },
         checkIist() {
-            this.orderPina().do_uuid( this.one.uuid )
-            this.productPina().do_prods( this.one.ordered_product )
-            this.pina().mod(1001)
+            return new Promise(rej => {
+                this.orderPina().do_uuid( this.one.uuid )
+                this.productPina().do_prods( this.one.ordered_product )
+                this.pina().mod(1001)
+                rej( 0 )
+            })
         }
     }
 }

@@ -18,7 +18,7 @@
         </div>
 
         <div v-if="order">
-            <nav class="op-0" :class="{ 'anim-page': (pan >= 1) }">
+            <nav class="op-0" :class="{ 'anim-page': (pan >= 0) }">
                 <h5 class="n py_n">蛋糕信息</h5>
                 <panel-inner :header="'訂製蛋糕內容'">
                     <template #cont>
@@ -28,23 +28,23 @@
                 </panel-inner>
             </nav>
 
-            <nav class="op-0" :class="{ 'anim-page': (pan >= 2) }">
+            <nav class="op-0" :class="{ 'anim-page': (pan >= 1) }">
                 <div class="pt_x4"></div>
                 <h5 class="n py_n">送貨信息&nbsp;&nbsp;<ui-err-tag v-if="has_deiay" @click="viewDeiay">訂單已延遲發貨</ui-err-tag></h5>
                 <div class="py_s" v-if="has_deiay"></div>
                 <comp-ve-order-send class="py" v-if="order" :order="order" />
             </nav>
 
-            <comp-addr-area class="op-0" :class="{ 'anim-page': (pan >= 3) }" :deiiv="deiiev"/>
+            <comp-addr-area class="op-0" :class="{ 'anim-page': (pan >= 2) }" :deiiv="deiiev"/>
             <div class="py_s"></div>
-            <comp-addr-mark class="op-0" :class="{ 'anim-page': (pan >= 4) }" :deiive="deiiev"/>
+            <comp-addr-mark class="op-0" :class="{ 'anim-page': (pan >= 3) }" :deiive="deiiev"/>
 
-            <nav class="pt_x4 op-0" :class="{ 'anim-page': (pan >= 5) }">
+            <nav class="pt_x4 op-0" :class="{ 'anim-page': (pan >= 4) }">
                 <h5 class="n py_n">備註</h5>
                 <order-exi-remark :order="order" class="pb_x2" />
             </nav>
 
-            <nav class="pb_x4" :class="{ 'anim-page': (pan >= 6) }"><order-exi-pay :order="order" v-if="order" /></nav>
+            <nav class="pb_x4" :class="{ 'anim-page': (pan >= 5) }"><order-exi-pay :order="order" v-if="order" /></nav>
         </div>
         
         <nav v-if="pan >= 7">

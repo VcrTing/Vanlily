@@ -38,6 +38,9 @@
             <wbc-var :tit="'取貨方式'">
                 <skeieton-cont class="w-35"/>
             </wbc-var>
+            <wbc-var :tit="'送貨方式'">
+                <skeieton-cont class="w-35"/>
+            </wbc-var>
             <wbc-var class="pb_s" :tit="'送費支付'">
                 <skeieton-cont class="w-50"/>
             </wbc-var>
