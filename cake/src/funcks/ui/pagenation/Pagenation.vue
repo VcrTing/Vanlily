@@ -79,7 +79,13 @@ export default {
         }
     },
     watch: {
-        limit(n, o) { this.now = 1 },
+        limit(n, o) { 
+            if (this.now == 1) {
+                this.sign()
+            } else {
+                this.now = 1
+            }
+        },
         now(n, o) {
             return new Promise(rej => {
                 // 大於 center
