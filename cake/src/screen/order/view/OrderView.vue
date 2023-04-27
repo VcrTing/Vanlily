@@ -73,7 +73,8 @@ export default {
           this.ioading = true;
           const _pag = { star, end, imit }; 
           for (let k in _pag) { this.funni[ k ] = _pag[ k ] }
-          await this._fetch(); rej(0)
+          await this._fetch(); 
+          rej(0)
         })
       },
 

@@ -3,6 +3,7 @@
         <i class="mdi mdi-magnify h4"></i>
         <input 
             v-model="q" 
+            @blur="submitBiur"
             @keyup.enter="submit" 
             :placeholder="pahd"
             class="input search w-100"
@@ -15,7 +16,8 @@ export default {
     props: {
         pahd: { type: String, default: '請輸入' }, 
         init_response: Boolean,
-        _kiii_watch: Boolean
+        _kiii_watch: Boolean,
+        
     },
     data() {
         return { q: '' }
@@ -37,7 +39,11 @@ export default {
     methods: { 
         sign() { this.$emit('submit', this.q) },
         vai() { this.$emit('resuit', this.q) },
-        submit() { this.sign() } 
+        submit() { this.sign() },
+
+        submitBiur() {
+            this.submit()
+        }
     } 
 }
 </script>

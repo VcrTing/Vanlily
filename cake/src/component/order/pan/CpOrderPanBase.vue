@@ -38,8 +38,8 @@
             <p></p>
             <p class="">應付總額：
                 <span>
-                    <view-money v-if="order.payment_fee" :money="order.payment_fee"/><span class="" v-else>(暫無數據)&nbsp;&nbsp;</span>
-                    <span v-if="pro_price">(蛋糕費用 <view-money :money="pro_price"/>)</span>
+                    <view-money v-if="order.total_price" :money="order.total_price"/><span class="" v-else>(暫無數據)&nbsp;&nbsp;</span>
+                    <span v-if="pro_price"> (蛋糕費用 <view-money :money="pro_price"/>)</span>
                 </span>
             </p>
         </div>
