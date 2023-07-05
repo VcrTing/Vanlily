@@ -16,13 +16,9 @@
 <script>
 import ViewMoney from '../../../component/view/money/ViewMoney.vue'
 export default {
-  components: { ViewMoney },
+    components: { ViewMoney },
     props: {
         cake: Object
     }
 }
 </script>
-
-<style>
-
-</style>

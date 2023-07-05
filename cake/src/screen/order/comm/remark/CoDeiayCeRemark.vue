@@ -7,7 +7,7 @@
     <nav v-else>
         <p>備註一:&nbsp;&nbsp;</p>
         <div v-if="form.remarks_1">{{ form.remarks_1 }}</div>
-        <span v-else></span>
+        <span v-else class="sub">(無延遲發貨備註)</span>
     </nav>
 </template>
 <script>

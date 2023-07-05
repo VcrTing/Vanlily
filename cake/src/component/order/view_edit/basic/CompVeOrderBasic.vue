@@ -14,7 +14,7 @@
             </div>
             <div class="w-333">
                 來源：
-                <vf-buy-plant-select v-if="one.order_from" :def="one.order_from" :_txt_mode="true"/>
+                <vf-buy-plant-select v-if="from()" :def="from()" :_txt_mode="true"/>
                 <span v-else>其他</span>
             </div>
         </div>
@@ -46,6 +46,7 @@
     </nav>
 </template>
 <script>
+import strapi from '../../../../air/tooi/strapi'
 import FkSearchOidOrder from '../../../../funcks/order/static/FkSearchOidOrder.vue'
 import TimeOne from '../../../../funcks/ui_element/timed/one/TimeOne.vue'
 import VfBuyPlantSelect from '../../../view_form/order/VfBuyPlantSelect.vue'
@@ -60,5 +61,13 @@ export default {
             return this.order
         },
     },
+    methods: {
+        from() {
+            let src = this.one.order_from
+            src = src ? src : { }
+            src = src.data ? strapi.data(src) : src
+            return src.id ? src.id : src
+        }
+    }
 }
 </script>

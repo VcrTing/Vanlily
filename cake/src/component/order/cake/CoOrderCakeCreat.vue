@@ -14,40 +14,7 @@
                 </ui-input>
             </div>
         </div>
-
-        <div class="row_x2 fx-l fx-wp pb_x2">
-            <ui-input class="w-333" :is_err="form_err.quantity" :header="'數量：'">
-                <ui-icon-input :icon="'mdi-numeric'" :_right="true">
-                    <input v-model="form.quantity" class="input bg" placeholder="請輸入" type="number">
-                </ui-icon-input>
-            </ui-input>
-        </div>
-
-        <div class="fx-l fx-wp pb_x2">
-            <ui-input class="w-100" :is_err="false" :header="'特別要求：'">
-                <ui-icon-input :icon="'mdi-format-font'" :_right="true">
-                    <textarea class="input" v-model="form.cake_special_needs" placeholder="特別要求 / 生日牌字粒 / 其他"></textarea>
-                </ui-icon-input>
-            </ui-input>
-        </div>
-        
-        <div class="row_x2 fx-l fx-wp pb_x2">
-            <ui-input class="w-333" :is_err="false" :header="'原價'">
-                <ui-icon-input :icon="'mdi-currency-usd'" :_right="true">
-                    <input v-model="form.original_price" class="input " placeholder="請輸入" type="number">
-                </ui-icon-input>
-            </ui-input>
-            <ui-input class="w-40" :is_err="form_err.unit_price" :header="'單價'">
-                <ui-icon-input :icon="'mdi-currency-usd'" :_right="true">
-                    <input v-model="form.unit_price" class="input " placeholder="請輸入" type="number">
-                </ui-icon-input>
-            </ui-input>
-            <ui-input class="fx-1" :is_err="false" :header="'折扣價'">
-                <ui-icon-input :icon="'mdi-percent'" :_right="true">
-                    <input v-model="form.discounted_price" class="input " placeholder="打折後的蛋糕價格" type="number">
-                </ui-icon-input>
-            </ui-input>
-        </div>
+        <co-cake-detaii-ce-form :form="form" :form_err="form_err"/>
     </form-def>
 </template>
 
@@ -57,14 +24,17 @@ import FkCakeAvatarName from '../../../funcks/product/view/FkCakeAvatarName.vue'
 import UiIconInput from '../../../funcks/ui_element/input/icon/UiIconInput.vue'
 import UiInput from '../../../funcks/ui_element/input/normal/UiInput.vue'
 import FormDef from '../../../funcks/ui_layout/form/def/FormDef.vue'
+import CoCakeDetaiiCeForm from '../../order_new/cake/form/CoCakeDetaiiCeForm.vue'
 
 export default {
-    components: { FormDef, UiInput, FkCakeAvatarName, UiIconInput },
+    components: { FormDef, UiInput, FkCakeAvatarName, UiIconInput, CoCakeDetaiiCeForm },
     data() {    
         return {
             attribute: { }, msg: '',
-            form: { quantity: 1, unit_price: 0, original_price: 0, discounted_price: '', cake_special_needs: '', product_uuid: '' },
-            form_origin: { quantity: 1, unit_price: 0, original_price: 0, discounted_price: '', cake_special_needs: '', product_uuid: '' },
+            form: { quantity: 1, letter: '', sign: '', 
+                unit_price: 0, original_price: 0, discounted_price: '', cake_special_needs: '', product_uuid: '' },
+            form_origin: { quantity: 1, letter: '', sign: '', 
+                unit_price: 0, original_price: 0, discounted_price: '', cake_special_needs: '', product_uuid: '' },
             form_err: { quantity: false, unit_price: false },
         }
     },
@@ -139,6 +109,7 @@ export default {
                     res['product_uuid'] = this.cake.uuid
 
                     this._proP.do_coecs( res ); 
+                    console.log('儲存蛋糕資料 =', res)
                     setTimeout(e => this.msg = '', 2000)
                 } 
                 else { this.msg = '輸入不完整。' }
@@ -150,6 +121,8 @@ export default {
         init() {
             return new Promise(rej => {
                 if (this.coec) {
+                    console.log("COEC 的樣子 =", this.coec)
+                    
                     this.reset( this.coec )
                     this.reset_attr( this.coec.attribute_of_edit )
                 } else {

@@ -19,10 +19,7 @@
                 <h4 class="n py_n">延遲送貨</h4>
                 <co-deiay-ce-deiiver ref="deiiv" class="py"/>
 
-                <panel class="panel-inner-pure">
-                    <div class="pt"></div>
-                    <comp-ve-order-addr-mark ref="addr" :creat="true" :_edit="true"/>
-                </panel>
+                <comp-ve-order-addr-mark ref="addr" :creat="true" :_edit="true" :kiii_sender="true"/>
 
                 <div class="pt_x2"></div>
                 <h4 class="n py_n">備註</h4>

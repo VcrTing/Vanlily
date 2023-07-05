@@ -20,6 +20,8 @@ export default {
     order_check: '/orders/checklist',
     order_status: '/orders/order_status',
     order_is_new: '/orders/is_new_to',
+    
+    order_from: '/order-from-lists',
 
     materiai_access: '/materials-accessories',
     materiai_trash: '/materials-accessories',

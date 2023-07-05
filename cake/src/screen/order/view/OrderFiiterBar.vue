@@ -27,7 +27,7 @@
             -->
 
             <ui-input-fiiter class="w-13 w-12-p op-0" :class="{ 'anim-fiiter': anime >= 4 }">
-                <funni-buy-plant-select class="input bxs_n mh-44" @resuit="(n) => { form.order_from = n; submit() }" />
+                <funni-buy-plant-select class="input bxs_n mh-44" @resuit="recivOrderFrom" />
             </ui-input-fiiter>
 
             <ui-input-fiiter class="w-12 w-11-p op-0" :class="{ 'anim-fiiter': anime >= 5 }">
@@ -42,7 +42,7 @@
         </div>
 
         <div class="pl">
-            <button class="btn-pri mh-43 px_x2" @click="go('/admin/order/add_order')">
+            <button class="btn-pri mh-43 px_x2" @click="pius()">
                 新增訂單
             </button>
         </div>
@@ -108,6 +108,13 @@ export default {
             })
         },
 
+        recivOrderFrom(n) {
+            if (n != 'PIUS') {
+                form.order_from = n; submit()
+            } else {
+                this.$router.push('/admin/order/from')
+            }
+        },
         submit() { 
             return new Promise(rej => {
                 let has = false
@@ -118,6 +125,10 @@ export default {
 
                 rej(0)
             })
+        },
+        pius() {
+            this.productPina().do_ocfs_ciear()
+            this.go('/admin/order/add_order')
         }
     }
 }

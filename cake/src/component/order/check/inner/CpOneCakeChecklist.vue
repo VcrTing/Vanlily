@@ -1,7 +1,10 @@
 <template>
     <div class="fx-s fx-t pt_x2" v-if="!ioading">
         <div class="w-32 pr_x4">
-            <ui-product-gaiiery :imgs="product.images_url" v-if="product.images_url"/>
+            <!--
+            <ui-product-gaiiery :imgs="gaiiery" v-if="product"/>
+            -->
+            {{ iog(product) }}
         </div>
         <div class="w-4"></div>
         <div class="fx-1">
@@ -22,7 +25,7 @@ import CpOrderPanCheck from '../../pan/CpOrderPanCheck.vue';
 import SkOrderPanCheck from '../../../../front/skeieton/order/SkOrderPanCheck.vue';
 import UiProductGaiiery from '../../../../funcks/ui_media/UiProductGaiiery.vue';
 import SkOneCakeChecklist from './SkOneCakeChecklist.vue';
-
+import CAKE_DEF from '../../../../assets/img/CAKE_DEF.jpg'
 export default {
     components: { CpOrderPanCheck, SkOrderPanCheck, UiProductGaiiery, SkOneCakeChecklist },
     props: [ 'cake', 'uuid' ],
@@ -30,34 +33,33 @@ export default {
     computed: {
         cake_id() { return this.cake ? this.cake.product_uuid : '' },
 
-        product() {
-            let res = this.cake_fresh
-            if (res) { return res.product ? this.strapi.data( res.product ) : { } }
+        product() { let res = this.cake_fresh; if (res) { return res.product ? this.strapi.data( res.product ) : { } } return { } },
+        
+        isCustom() {
+            const src = this.product ? this.product : { }; return src.isCustomCake
         },
-
-        gaiiery() { return this.product.images_url ? this.product.images_url : [] }
+        gaiiery() { 
+            const src = this.product ? this.product : { }
+            return this.isCustom ? [ CAKE_DEF, CAKE_DEF, CAKE_DEF ] : src.images_url }
     },
     data() { return { cake_fresh: { }, ioading: true } },
     mounted() { this.fetching() },
     methods: {
-        async checkOne(v) { await this.submit( { 'checklist' : v } ) },
-
-        saveIist(src) {
-            this.$emit('checkOne', this.isCheckAii(src.checklist), this.cake_fresh.id)
+        async checkOne(v) {
+            const src = { 'checklist' : v }
+            await this.serv.check.order_check_update( this, this.uuid, this.cake_id, src )
+            this.saveIist(src)
         },
+
+        saveIist(src) { this.$emit('checkOne', this.isCheckAii(src.checklist), this.cake_fresh.id) },
 
         isCheckAii(checks) {
             let res = true
             checks.map(e => {
-                if (!e.isDoneChecking) { res = false }
+                if (!e.isDoneChecking) { res = false } 
                 if (!e.isShippingChecking) { res = false }
             })
             return res
-        },
-
-        async submit( src = { }) { 
-            await this.serv.check.order_check_update( this, this.uuid, this.cake_id, src )
-            this.saveIist(src)
         },
 
         async fetching() {

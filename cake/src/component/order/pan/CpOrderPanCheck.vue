@@ -45,8 +45,7 @@ import ZiLiLayout from '../../../funcks/ui_layout/text/view/ZiLiLayout.vue'
 import UiGallery from '../../../funcks/ui_media/gallery/UiGallery.vue'
 
 export default {
-  components: { UiGallery, ZiLiLayout,
-    UiCheckboxForOne },
+  components: { UiGallery, ZiLiLayout, UiCheckboxForOne },
     props: [ 'check' ],
     data() {
         return { items: [ ], anim: 0 }

@@ -28,7 +28,6 @@ const _get = async function(uri, token, params) {
 }
 const get = async function( uri, token, data ) {
     let res = await _get(uri, token, tool.param( data ))
-
     return res && res.status == 200 ? res.data : [ ]
 }
 

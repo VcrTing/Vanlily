@@ -8,9 +8,14 @@
         <wbc-var-two :tit="'蛋糕資料'" :ciass="'mh-3em'">
             <skeieton-cont class="w-75"/>
         </wbc-var-two>
-        <wbc-var-two :tit="'地址'" :ciass="'mh-2em'">
-            <skeieton-cont/>
-        </wbc-var-two>
+        <div>
+            <wbc-var :tit="'送貨方式'">
+                <skeieton-cont class="w-35"/>
+            </wbc-var>
+            <wbc-var-two :tit="'地址'" :ciass="'mh-2em'">
+                <skeieton-cont/>
+            </wbc-var-two>
+        </div>
         <div>
             <wbc-var :tit="'客戶'">
                 <skeieton-cont class="w-70"/>
@@ -36,9 +41,6 @@
                 <skeieton-cont class="w-50"/>
             </wbc-var>
             <wbc-var :tit="'取貨方式'">
-                <skeieton-cont class="w-35"/>
-            </wbc-var>
-            <wbc-var :tit="'送貨方式'">
                 <skeieton-cont class="w-35"/>
             </wbc-var>
             <wbc-var class="pb_s" :tit="'送費支付'">

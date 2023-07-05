@@ -6,8 +6,12 @@
     <button class="btn-succ righter">已更新</button>
 </p>
 <p>
-    蛋糕ID:&nbsp;&nbsp;
-    <span>{{ cake.product_uuid }}</span>
+    生日牌:&nbsp;&nbsp;
+    <span>{{ cake.sign }}</span>
+</p>
+<p>
+    字粒:&nbsp;&nbsp;
+    <span>{{ cake.letter }}</span>
 </p>
 <p>
     數量:&nbsp;&nbsp;

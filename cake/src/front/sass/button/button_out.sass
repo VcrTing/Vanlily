@@ -13,13 +13,18 @@
     &:hover
         color: #FFF
         background: $primary_Hover
+    @extend .fx-cck
     @extend .fx-pri-focus
 
 .item-pri_out
     color: $primary
     border-radius: $br_s
     border: 1px solid $primary
+    @extend .fx-cck
     @extend .fx-pri-focus
+    &:hover
+        transform: scale(1.03)
+        background: $primary_Thin
         
 .btn-pri_out_deep
     color: $primary_Deep

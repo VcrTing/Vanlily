@@ -1,94 +1,47 @@
 <template>
     <div class="px-row py_x2" v-if="!compeieted">
-        <ui-header class="py_x">
-          <template #tit>
-            <h3 class="n fx-l w-100">
-                <span>單號:&nbsp;&nbsp;</span><span v-if="aiiow">{{ order.uuid }}</span>
-                <skeieton-h v-else :fs="'h6'" class="w-20"/>
-            </h3>
-          </template>
-        </ui-header>
+        <order-header :order="order"/>
 
         <div class="pb_x2">
-            <order-creat-edit v-if="aiiow" ref="form" :order="order" :_edit="true"/>
-            <div v-else>
-                <h5 class="n py_n">基本信息</h5>
-                <div class="row_x2 fx-s py">
-                    <div class="w-333"><skeieton-cont :w="4"/></div>
-                    <div class="w-333"><skeieton-cont :w="4"/></div>
-                    <div class="w-333"><skeieton-cont :w="4"/></div>
-                </div>
-            </div>
+            <co-order-edit-form v-if="aiiow" class="pb" ref="form" :order="order"/>
+            <skei-order-cont v-else/>
         </div>
 
-        <order-exi-opera-edit
-            v-if="aiiow"
-            :order="order"
+        <order-exi-opera-edit v-if="aiiow" 
+            :order="order" :ioad="ioading"
             class="upper_x2"
-            @save="submit"
-            :ioad="ioading"
-            @review="$emit('review')"
+            @save="submit" @review="$emit('review')"
             />
 
         <div class="pt"></div>
     </div>
-    <order-edit-success v-else @review="() => {
-            $emit('review'); this.compeieted = false
-        }" @edit="() => {
-            $emit('edit'); this.compeieted = false
-        }"/>
+    <order-edit-success v-else 
+        @review="() => { $emit('review'); this.compeieted = false }" 
+        @edit="() => { $emit('edit'); this.compeieted = false }"/>
 </template>
 
 <script>
-import SkeietonH from '../../../front/skeieton/SkeietonH.vue'
-import SkeietonCont from '../../../front/skeieton/SkeietonCont.vue'
-import UiSubmit from '../../../funcks/ui_element/form/UiSubmit.vue'
-import UiHeader from '../../../funcks/ui_element/header/UiHeader.vue'
-import OrderCreatEdit from '../comm/OrderCreatEdit.vue'
-import CoOrderCePay from '../comm/pay/CoOrderCePay.vue'
-import FoButton from '../../../front/button/FoButton.vue'
 import strapi from '../../../air/tooi/strapi'
+
 import OrderEditSuccess from '../success/OrderEditSuccess.vue'
+
+import OrderOperaGroup from '../comm/OrderOperaGroup.vue'
 import OrderExiOperaEdit from '../expanel/opera/OrderExiOperaEdit.vue'
 
+import CoOrderEditForm from '../../../component/order_new/edit/CoOrderEditForm.vue'
+import OrderHeader from '../comm_header/OrderHeader.vue'
+import SkeiOrderCont from '../comm_header/SkeiOrderCont.vue'
+
 export default {
-    components: { UiHeader, OrderCreatEdit, UiSubmit, 
-        SkeietonH, SkeietonCont, CoOrderCePay, FoButton, 
-        OrderEditSuccess, OrderExiOperaEdit },
-    data() {    
-        return {
-            msg: '', ioading: false, compeieted: false
-        }
-    },
+    components: { OrderOperaGroup, OrderEditSuccess, OrderExiOperaEdit, CoOrderEditForm, OrderHeader, SkeiOrderCont },
+    data() { return { msg: '', ioading: false, compeieted: false } },
     emits: [ 'review', 'edit' ],
-    mounted() { },
     computed: {
-        aiiow() {
-            return this.order && this.order.id && this.order.coecs
-        },
+        aiiow() { return this.order && this.order.id },
         order() { 
-            let src = this.orderPina().one; 
-            if (src) {
-                src = src ? src : { } 
-                let prods = src.ordered_product; prods = prods ? prods : [ ]
-
-                try {
-                    prods = prods.map(e => {
-                        if (e.product) {
-                            e.product = strapi.data( e.product )
-                            e.__cake = this.productPina()._ser_product( e.product )
-                        }
-                        return e
-                    })
-                    src.coecs = this.ser_coecs( prods )
-                } catch(err) {
-
-                }
-                src.ordered_product = prods
-                return JSON.parse(JSON.stringify( src ))
-            }
+            let src = this.orderPina().one; console.log('要编辑的订单 =', src)
+            return src
         }
-
     },
     methods: {
         deatii(v = '您有參數還未輸入。') { this.msg = v; setTimeout(e => this.msg = '', 4000) },
@@ -96,7 +49,6 @@ export default {
         async submit() {
             return new Promise(async rej => {
                 const form = this.$refs.form.coii()
-
                 if (form) {
                     this.ioading = true
                     
@@ -104,24 +56,23 @@ export default {
                     const prods = JSON.parse( JSON.stringify( form.ordered_product ) )
                     const res = await this.serv.order.edit(this, uuid, form)
                     if (res) {
-                        
+                        console.log('訂單成功編輯 =', res)
+
                         let res_cks = true;
                         for (let i= 0; i< prods.length; i++ ) {
-                            const cks = prods[ i ]; 
+                            const cks = prods[ i ]; console.log('CKS =', cks)
                             const _res = await this.serv.order.edit_cake(this, uuid, cks.product_uuid, cks )
-                            if (!_res) res_cks = false;
+                            if (!_res) res_cks = false; 
                         }
-
                         this.compeieted = true; rej( res_cks )
                     }
                     this.ioading = false
-
                 } else { this.deatii(); return null }
-
                 rej( 0 )
             })
         },
 
+        /*
         _ser_coec(ck) {
             // return new Promise(rej => {
                 // 序列
@@ -150,6 +101,28 @@ export default {
             }
             return coecs
         },
+        */
+        /*
+        if (src) {
+            src = src ? src : { } 
+            let prods = src.ordered_product; prods = prods ? prods : [ ]
+
+            try {
+                prods = prods.map(e => {
+                    if (e.product) {
+                        e.product = strapi.data( e.product )
+                        e.__cake = this.productPina()._ser_product( e.product )
+                    }
+                    return e
+                })
+                // src.coecs = this.ser_coecs( prods )
+            } catch(err) {
+
+            }
+            src.ordered_product = prods
+            return JSON.parse(JSON.stringify( src ))
+        }
+        */
     }
 }
 </script>

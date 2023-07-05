@@ -31,6 +31,7 @@ import otherPina from './himmer/pina/other'
 import memberPina from './himmer/pina/member'
 import productPina from './himmer/pina/product'
 import accountPina from './himmer/pina/account'
+import orderAboutPina from './himmer/pina/order_about'
 
 app.config.globalProperties.pina = pina
 app.config.globalProperties.userPina = userPina
@@ -39,6 +40,7 @@ app.config.globalProperties.otherPina = otherPina
 app.config.globalProperties.memberPina = memberPina
 app.config.globalProperties.productPina = productPina
 app.config.globalProperties.accountPina = accountPina
+app.config.globalProperties.orderAboutPina = orderAboutPina
 
 app.config.globalProperties.go = function (ink) { this.$router.push(ink) }
 app.config.globalProperties.mod = function (n) { this.pina().modai( n ) }

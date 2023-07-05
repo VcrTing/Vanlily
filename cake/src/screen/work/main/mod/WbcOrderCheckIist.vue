@@ -1,24 +1,26 @@
 <template>
     <div>
         <h4 class="n">檢查清單</h4>
-        <div class="py">
+        <div class="py softer">
             單號:&nbsp;&nbsp;{{ uuid }}
         </div>
-        <div class="pb" v-for="(v, i) in prods" :key="i">
-            <!--
-            <div class="pb min">
-                <h4># {{ i + 1 }}</h4>
+
+        <div v-if="prods && prods.length > 0">
+            <div v-for="(v, i) in prods" :key="i" class="pb_x2 pt softer">
+                <co-one-check-iist v-if="v" :orderId="uuid" :cake="v"/>
             </div>
-            -->
-            <cp-one-cake-checklist :cake="v" :uuid="uuid"/>
         </div>
+        <sk-one-cake-checklist v-else/>
     </div>
 </template>
 
 <script>
-import CpOneCakeChecklist from '../../../../component/order/check/inner/CpOneCakeChecklist.vue'
+import SkOneCakeChecklist from '../../../../component/order/check/inner/SkOneCakeChecklist.vue'
+import CoOneCheckIist from '../../../../component/order_new/check/CoOneCheckIist.vue'
 export default {
-  components: { CpOneCakeChecklist },
+  components: {
+    CoOneCheckIist,
+    SkOneCakeChecklist },
     computed: {
         uuid() { return this.orderPina().uuid },
         prods() { return this.productPina().prods }

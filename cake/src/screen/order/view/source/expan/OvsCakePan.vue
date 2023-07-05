@@ -8,7 +8,7 @@
             </div>
             <sk-order-pan-cake v-else class="pb"/>
 
-            <div v-if="prods && prods.length > 0" class="fx-r upper_x2 pt">
+            <div v-if="prods && prods.length > 0" class="fx-r upper_x2 pt_x2">
                 <button class="btn-pri_out px py_s" @click="checkIist">
                     <i class="mdi mdi-format-list-checks"></i>&nbsp;
                     檢查清單

@@ -10,10 +10,7 @@
         <div v-if="!compeieted">
             <co-deiay-ce-deiiver v-if="deiiev.id" :one="deiiev" :init="true" ref="timed" class="pt"/>
 
-            <panel class="panel-inner-pure">
-                <div class="pt"></div>
-                <comp-ve-order-addr-mark ref="addr" :_edit="true"/>
-            </panel>
+            <comp-ve-order-addr-mark ref="addr" :_edit="true" :kiii_sender="true"/>
 
             <div class="pt_x4 pb">
                 <co-deiay-ce-remark ref="remark" :one="order"/>

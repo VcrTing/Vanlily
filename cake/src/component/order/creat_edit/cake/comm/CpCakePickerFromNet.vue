@@ -15,7 +15,7 @@
 
         <div class="fk-cake-picker-menu" :class="{ 'fk-cpm-active': open }">
             <div class="py px_x2">
-                <ui-search-def class="ip-br" :_kiii_watch="true" @submit="(n) => { fkey = n; search(n) }" :pahd="'請輸入蛋糕ID、名稱，按下回車後進行聯網查詢。'"/>
+                <ui-search-def class="ip-br" :_kiii_watch="true" :_kiii_biur="true" @submit="(n) => { fkey = n; search(n) }" :pahd="'請輸入蛋糕ID、名稱，按下回車後進行聯網查詢。'"/>
             </div>
             <ui-tabie-ioading :ioad="ioading" :many="items">
                 <div class="pb" v-if="!ioading">

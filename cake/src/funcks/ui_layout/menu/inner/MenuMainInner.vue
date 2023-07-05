@@ -67,7 +67,8 @@ export default {
         _route(path, _link, index) { 
             path = path + ''
             _link = _link + ''
-            if (_link == path || _link.indexOf(path) >= 0) { 
+            // console.log(_link, path, path.indexOf(_link))
+            if (_link == path || path.indexOf(_link) >= 0) { 
                 this.now = index 
                 this.now_inner = -1 } 
         },

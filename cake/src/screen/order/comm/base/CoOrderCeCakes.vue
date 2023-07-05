@@ -46,7 +46,6 @@ import UiImgGroup from '../../../../funcks/ui_element/img/UiImgGroup.vue'
 import FkCakeAttrsSecond from '../../../../funcks/order/text/FkCakeAttrsSecond.vue'
 import ViewMoney from '../../../../component/view/money/ViewMoney.vue'
 
-import strapi from '../../../../air/tooi/strapi'
 import CoCoecsAttr from '../comm/CoCoecsAttr.vue'
 import CoCoecsBasic from '../comm/CoCoecsBasic.vue'
 import CoCoecsPrice from '../comm/CoCoecsPrice.vue'
@@ -57,7 +56,10 @@ export default {
     data() { return { } },
     emits: [ 'trash' ],
     computed: {
-        coecs() { let src = this.productPina().coecs; return src ? src : [ ]; },
+        coecs() { let src = this.productPina().coecs; console.log('COECS =', src) ;return src ? src : [ ]; },
+    },
+    mounted( ) {
+        console.log('CAKES =', this.cakes)       
     },
     methods: {
         has( cake ) { let res = null
@@ -65,17 +67,7 @@ export default {
                 if (e.product_uuid == cake.uuid) { res = e }
             }); return res ? true : false
         },
-        /*
-        _attrs(v) { 
-            let res = { }
-            let src = v.attributes_relations
-            src ? src.map(e => {
-                    if (!res[ e.attribute_type_name ]) { res[ e.attribute_type_name ] = [ ] }
-                    res[ e.attribute_type_name ].push( e )
-                }) : undefined;
-            return res
-        },
-        */
+        
         _imgs(v) { return (v && v.images_url) ? v.images_url : [ ] },
         //  編輯 
         cakeEdit(cake) { this.productPina().do_cake_of_edit(cake); this.mod(26) },

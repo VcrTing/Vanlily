@@ -42,6 +42,7 @@ import TimeOne from '../../../../funcks/ui_element/timed/one/TimeOne.vue'
 import VfBuyPlantSelect from '../../../../component/view_form/order/VfBuyPlantSelect.vue'
 import UiInput from '../../../../funcks/ui_element/input/normal/UiInput.vue'
 import timed from '../../../../air/tooi/timed'
+import strapi from '../../../../air/tooi/strapi'
 export default {
     components: { UiIconInput, VfBuyPlantSelect, FkSearchOidOrder, UiInlineInputIcon, TimeOne, UiInlineInput, UiInput },
     props: { 
@@ -58,12 +59,19 @@ export default {
         }
     },
     mounted() { 
-        if (this._edit) { this.reset( this.one ) }
+        if (this._edit) { 
+            let src = this.one.order_from
+            if (src && src.data) {
+                src = strapi.data(src)
+                this.one.order_from = src.id
+            }
+            this.reset( this.one ) }
     },
     methods: {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
         reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } }
             this.$refs.piant.ioc( this.form.order_from )
+            console.log('order from =', this.form)
             this.time = timed.view( v.ordered_date )
         },
         coii() {

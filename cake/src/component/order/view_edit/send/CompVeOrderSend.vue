@@ -16,6 +16,57 @@
             </div>
         </div>
         <div class="py"></div>
+        <div class="fx-s row_x2" v-if="!is_seif_get">
+            <div class="w-25">
+                地區 / 地鐵線路：
+                {{ vai('delivery_address_1') }}
+            </div>
+            <div class="w-25">
+                地域 / 地鐵站：
+                {{ vai('delivery_address_2') }}
+            </div>
+            <div class="fx-1">
+                詳細地址：
+                {{ vai('delivery_address_3') }}
+            </div>
+        </div>
+        <div v-else>
+            <div>
+                (自取)
+            </div>
+        </div>
+        <div class="py"></div>
+    </div>
+</template>
+<script>
+import CpOaaBlock from '../../../addr/for_order/cp/CpOaaBlock.vue'
+import VfSendCompanyChoise from '../../../view_form/send/VfSendCompanyChoise.vue'
+import VfSendTimeSelect from '../../../view_form/send/VfSendTimeSelect.vue'
+import VfSendTypeChoise from '../../../view_form/send/VfSendTypeChoise.vue'
+
+export default {
+    components: { CpOaaBlock, VfSendTimeSelect, VfSendTypeChoise, VfSendCompanyChoise },
+    props: {  order: Object },
+    computed: {
+        deiiv() { return (this.order && this.order.delivery_info) ? this.order.delivery_info : { } },
+
+        d_type() {
+            return (this.deiiv) ? this.deiiv.delivery_type : null
+        },
+        is_seif_get() {
+            const src = (this.deiiv) ? this.deiiv.delivery_method + '' : ''
+            return (src.endsWith('自取') || src.startsWith('自取'))
+        }
+    },
+    methods: {
+        vai_type(k) { return this.d_type ? this.d_type[k] : '' },
+
+        vai(k, def = '') { return this.deiiv ? this.deiiv[k] : def },
+    }
+}
+/*
+
+        <!--
         <div class="fx-s row_x2">
             <div class="w-333">
                 送貨人員：
@@ -32,25 +83,6 @@
                 <span>{{ deiiv.delivery_man_pickup_time }}</span>
             </div>
         </div>
-        <div class="py"></div>
-    </div>
-</template>
-<script>
-import VfSendCompanyChoise from '../../../view_form/send/VfSendCompanyChoise.vue'
-import VfSendTimeSelect from '../../../view_form/send/VfSendTimeSelect.vue'
-import VfSendTypeChoise from '../../../view_form/send/VfSendTypeChoise.vue'
-
-export default {
-    components: {
-        VfSendTimeSelect,
-        VfSendTypeChoise,
-        VfSendCompanyChoise
-    },
-    props: { 
-        order: Object
-    },
-    computed: {
-        deiiv() { return this.order ? this.order.delivery_info : { } },
-    },
-}
+        -->
+        */
 </script>

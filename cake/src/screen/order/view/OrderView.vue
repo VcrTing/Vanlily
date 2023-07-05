@@ -10,17 +10,15 @@
             </ui-tabie-ioading>
         </div>
         <pagenation class="py_x2 op-0" ref="pager" :class="{ 'anim-pagin': !ioading }" @page="pagena" :count="page.total"/>
-        <modal-source/>
-
-        <fk-check-iist-tooikit @refreshCkear="_fetch" @refreshMany="() => {
-            ioading = true; _fetch();
-          }" />
+        <modal-source />
+        <modal-trash @trash="trash"/>
+        <fk-check-iist-tooikit @refreshCkear="_fetch" @refreshMany="() => { ioading = true; _fetch(); }" />
     </nav>
 </template>
 
 <script>
+import ModalTrash from '../../../funcks/ui/modal/ModalTrash.vue'
 import ModalSource from '../../../component/source/ModalSource.vue';
-import FkCheckIistTooikitVue from '../../../funcks/tooikit/FkCheckIistTooikit.vue';
 import Pagenation from '../../../funcks/ui/pagenation/Pagenation.vue';
 import UiHeader from '../../../funcks/ui_element/header/UiHeader.vue';
 import UiTabieIoading from '../../../funcks/ui_view/UiTabieIoading.vue';
@@ -31,10 +29,13 @@ import OvsTr from './source/table/OvsTr.vue';
 import FkCheckIistTooikit from '../../../funcks/tooikit/FkCheckIistTooikit.vue'
 
 export default {
-  components: {
-    Pagenation, OrderFiiterBar, OvsTr, UiTabieIoading, FkCheckIistTooikit,
-    OvsSeki, OrderViewSource, UiHeader, ModalSource  },
-
+    components: {
+      Pagenation,
+      OrderFiiterBar, OvsTr,
+      UiTabieIoading, FkCheckIistTooikit,
+      OvsSeki, OrderViewSource,
+      UiHeader, ModalSource, ModalTrash
+    },
     data() {
       return {
         items: [ ], page: { total: 2 }, funni: { funni: { } }, ioading: true,
@@ -113,6 +114,12 @@ export default {
           rej(0)
         })
       },
+
+      // 刪除某訂單
+      trash() {
+        const order = this.orderPina().one
+        console.log('刪除 ORDER =', order)
+      }
     }
 }
 </script>

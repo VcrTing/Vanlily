@@ -22,21 +22,15 @@ export default {
         imgs: Array
     },
     data() {
-        return {
-            now: 0, cover: ''
-        }
+        return { now: 0, cover: '' }
     },
-    mounted() {
-        this.cover = this.imgs[0]
-    },
+    mounted() { this.cover = this.imgs[0] },
+
     watch: {
-        imgs(n, o) {
-            this.cover = this.imgs[0]
-        },
+        imgs(n, o) { this.cover = this.imgs[0] },
+
         now(n, o) {
-            if (this.imgs) {
-                this.cover = this.imgs[n]
-            }
+            if (this.imgs) { this.cover = this.imgs[n] }
         },
     }
 }

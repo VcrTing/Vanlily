@@ -3,12 +3,15 @@ $succ_thin: #ebf6e3 // 6BE81F
 $succ_br: #bad5aa // 6BE81F
 
 
-$err: #F55C5C // #f45d5b // F55C5C
+$err: #F55C5C
+$err_hv: #f45454
 $err_thin: #fdf4f4 // #f45d5b // F55C5C
 $err_br: #ecbdbd // #f45d5b // F55C5C
 
 $err_shd: #fad1d1 // F55C5C
     
+.fx-err-hv:hover
+    background: $err_hv
 
 .fx-err-focus:focus,
 .fx-err-focus:active,
@@ -27,6 +30,7 @@ $err_shd: #fad1d1 // F55C5C
     transition: all .122s ease-in
 .btn-err
     background: $err
+    @extend .fx-err-hv
     @extend .fx-err-focus
 
 .err

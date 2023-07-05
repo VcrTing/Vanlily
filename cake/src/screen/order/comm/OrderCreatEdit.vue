@@ -7,7 +7,7 @@
       <div class="upper">
 
         <h5 class="n py">蛋糕信息&nbsp;&nbsp;
-          <ui-pius-tag v-if="_creat" @click="piusCake">添加訂製蛋糕</ui-pius-tag>
+          <ui-pius-tag v-if="_creat" @click="piusCake">添加 / 自訂蛋糕</ui-pius-tag>
         </h5>
         <panel-inner :header="'訂製蛋糕內容'">
           <template #cont>
@@ -68,17 +68,12 @@ export default {
   },
   watch: {
     cake_of_choise(n) { 
-      if (n && n.uuid) {
-        this.cakes.push( n );
-        this.productPina().do_cake_of_choise({ });
-      }
+      if (n && n.uuid) { this.cakes.push( n ); this.productPina().do_cake_of_choise({ }); }
     }
   },
   props: [ '_edit', 'order', '_creat' ],
 
-  data() {
-    return { cakes: [ ], }
-  },
+  data() { return { cakes: [ ], } },
   mounted() {
     if (this._edit && this.order.id) { setTimeout(e => this.for_edit(), 2) }
   },
@@ -93,7 +88,9 @@ export default {
 
         let prods = this.order.ordered_product
         this.cakes = prods ? prods.map(e => e.__cake) : [ ]
-        // console.log('ORDER =', this.order)
+
+        console.log('手動構建的 COECS =', this.order.coecs)
+
         this.order.coecs ? this.order.coecs.map(cs => this.productPina().do_coecs( cs )) : undefined;
         rej(0)
       })
@@ -108,8 +105,7 @@ export default {
 
       return (base && send && addr && remark && ordered_product) ? {
           ...base, ...remark, 
-          ordered_product,
-          delivery_info: { ...send, ...addr }
+          ordered_product, delivery_info: { ...send, ...addr }
         }: null
     },
 
@@ -130,5 +126,28 @@ export default {
     viewDeiay() { this.pina().mod(33) }
   }
 }
+
+/*
+order product
+{
+	attribute:
+		(4)['1007', '1031', '1087', '198']
+	attribute_of_edit: Proxy {
+		蛋糕公仔: '1007',
+		蛋糕款式: '1031',
+		蛋糕味道: '1087',
+		尺吋: '198'
+	}
+	cake_special_needs: "多一點點草莓"
+	discounted_price: ""
+	letter: 123
+	original_price: 880
+	product_uuid: "25854"
+	quantity: 1
+	sign: "1234"
+	unit_price: 880
+	uuid: "25854"
+}
+*/
 </script>
     

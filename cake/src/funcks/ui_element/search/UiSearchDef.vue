@@ -17,6 +17,7 @@ export default {
         pahd: { type: String, default: '請輸入' }, 
         init_response: Boolean,
         _kiii_watch: Boolean,
+        _kiii_biur: Boolean
         
     },
     data() {
@@ -41,9 +42,7 @@ export default {
         vai() { this.$emit('resuit', this.q) },
         submit() { this.sign() },
 
-        submitBiur() {
-            this.submit()
-        }
+        submitBiur() { this._kiii_biur ? undefined : this.submit() }
     } 
 }
 </script>

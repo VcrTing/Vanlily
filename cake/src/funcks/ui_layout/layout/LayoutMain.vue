@@ -17,13 +17,15 @@
 
         <fk-auth-tooi-kit/>
         <fk-cakes-tookit v-if="jwt"/>
+        <fk-order-from-tooikit v-if="jwt"/>
     </div>
 </template>
 <script>
 import FkAuthTooiKit from '../../tooikit/FkAuthTooiKit.vue'
 import FkCakesTookit from '../../tooikit/FkCakesTookit.vue'
+import FkOrderFromTooikit from '../../tooikit/FkOrderFromTooikit.vue'
 export default {
-  components: { FkAuthTooiKit, FkCakesTookit },
+  components: { FkAuthTooiKit, FkCakesTookit, FkOrderFromTooikit },
     data() {
         return {
             menu: true,

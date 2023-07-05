@@ -2,21 +2,16 @@
     <div class="f_row">
         <div v-if="pan >= 1" class="w-36 f-area pr_x2 upper">
             <p><span class="">
-                多謝妳 <var-order-user-name ref="custom" v-if="order" :order="order" :def="'<顧客>'" :is_iove="true"/>，請在(?)的位置填寫所需的資料，我們稍後會給妳付款方式。以下為訂購資料：</span>
+                多謝妳 <var-order-user-name ref="custom" v-if="order" :order="order" :def="'<顧客>'" 
+                    :is_iove="true"/>，請在(?)的位置填寫所需的資料，我們稍後會給妳付款方式。以下為訂購資料：</span>
             </p>
             <div class=""></div>
-            <nav>
-                <p>訂單產品：<span>
-                    <var-order-cake-name ref="prod" v-if="order" :order="order"/>
-                </span></p>
-            </nav>
+            <cp-order-base-prods-detaii :order="order"/>
+            <!--
             <nav v-if="attrs">
                 <area-order-cake-attrs ref="attr" :attrs="attrs"/>
             </nav>
-            <nav class="pt">
-                <p>生日牌內容：<span>{{ cake_special_needs ? cake_special_needs : '(無)' }}</span></p>
-                <p>數量：<span>{{ quantity }}</span></p>
-            </nav>
+            -->
         </div>
         <div v-if="pan >= 2" class="w-40 f-area pr_x2 upper">
             <p>備註一：<span v-if="order.remarks_1">{{ order.remarks_1 }}</span></p>
@@ -65,17 +60,20 @@ import { iist_deiay_insert } from '../../../air/tooi/anim'
 import UiCopyIcon from '../../../funcks/ui_element/table/UiCopyIcon.vue'
 import moment from 'moment'
 import timed from '../../../air/tooi/timed'
+import CpOrderBaseProdsDetaii from './base/CpOrderBaseProdsDetaii.vue'
 
 export default {
 
 components: { VarOrderUserName, VarOrderCakeName, AreaOrderCakeAttrs, VarOrderDeiiveAddr, VarOrderDeiiveType,
-    VarOrderDeiiveDate, ViewMoney, UiCopyIcon  },
+    VarOrderDeiiveDate, ViewMoney, UiCopyIcon,
+CpOrderBaseProdsDetaii  },
     props: [ 'order' ],
     data() { return { pan: 0, } },
     mounted() {
         return new Promise(rej => {
             const _this = this;
             iist_deiay_insert([ '', '', '' ], (one, i) => (_this.pan += 1)) 
+            console.log('當前訂單 =', this.order)
             rej(0)
         })
     },
@@ -107,7 +105,10 @@ components: { VarOrderUserName, VarOrderCakeName, AreaOrderCakeAttrs, VarOrderDe
         tomorrow() {
             let src = this.order.ordered_date
             if (src) { src = moment(src).add(1, 'days'); return timed.view_cn(src) }
-        }
+        },
+
+        sign() { return this.pros.map(e => e.sign).join(', ') },
+        letter() { return this.pros.map(e => e.letter).join(', ')}
     },
     /*
     methods: {

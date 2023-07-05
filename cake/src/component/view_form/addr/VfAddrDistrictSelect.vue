@@ -1,6 +1,6 @@
 <template>
     <select 
-        v-model="now"
+        v-model="form[pk]"
         >
         <option :value="v.txt" v-for="(v, i) in ops" :key="i">{{ v.txt }}</option>
     </select>
@@ -9,44 +9,30 @@
 <script>
 import vanlily_addr from '../../../air/vanlily_addr'
 export default {
-    props: [ 'def' ],
+    props: [ 'def', 'form', 'pk', 'pk_father' ],
     data() {
-        return {
-            now: '',
-            fater: 0
-        }
+        return { ops: [ ] }
     },
     computed: {
-        ops() {
-            let res = vanlily_addr.addr
-            res = res[ this.fater ].children
-            return res
-        },
+        v() { return this.form[this.pk] },
+        v_father() { return this.form[this.pk_father] }
     },
-    mounted() { 
-        
-        this.now = this.def ? this.def : this.ops[0].txt; 
-        // this.sign() 
+    mounted() { this.v_father ? this.ioc_father( this.v_father ) : undefined; setTimeout(() => this.ioc(), 200) },
+    watch: { 
+        v_father(n) { this.ioc_father(n); this.ioc() },
     },
-    watch: {
-        now(n, o) { this.sign() }
-    },
-    methods: {
-        sign() { this.$emit('resuit', this.now == '全部區域' ? '' : this.now) },
 
-        sets(ar) {
-            const src = vanlily_addr.addr
-            src.map((e, i) => {
-                if (e.txt == ar) {
-                    this.fater = i
-                    this.now = this.ops[ 0 ].txt
-                }
-            })
-        }
+    methods: {
+        ioc_father(n) {
+            let idx = 0
+            vanlily_addr.addr.map((e, i) => { if (e.txt == n) { idx = i } })
+            this.ops = vanlily_addr.addr[idx].children
+        },
+        ioc() {
+            let has = false
+            this.ops.map(e => { if (e.txt === this.v) { has = true } })
+            if (!has) { this.form[this.pk] = this.ops[0].txt }
+        },
     }
 }
 </script>
-
-<style>
-
-</style>

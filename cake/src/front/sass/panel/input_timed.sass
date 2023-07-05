@@ -1,0 +1,155 @@
+
+// 时间
+.input-timed
+    //    
+    .vuejs3-datepicker
+        position: relative
+        z-index: 200
+        width: 100%
+    .vuejs3-datepicker__value
+        @extend .input
+        border: none
+        overflow: hidden
+        min-width: calc( 3em + 0.5vw )
+    .vuejs3-datepicker__content
+        font-size: 1em
+        margin: 0px
+        padding-left: 0px
+        width: 100%
+    //   
+    .vuejs3-datepicker__icon,
+    .vuejs3-datepicker__calendar-topbar
+        display: none !important
+    .vuejs3-datepicker__calendar
+        border-color:  transparent
+        margin: $ds 0
+        z-index: 800
+        overflow: hidden
+        border-radius: 6px
+        padding-bottom: 2px
+        box-shadow: 0px 3px 8px -1px rgba(0, 0, 0, 0.34)
+        
+        span.day
+            border-radius: 100% !important
+        span.year,
+        span.month
+            border-radius: 4px !important
+        .selected 
+            color: #FFF
+            background: $primary_x2 !important 
+            &:hover
+                background: $primary_x2_Hover !important
+            &:focus, &:active, &:focus-visible
+                background: $primary_x2 !important 
+
+        .prev,
+        .next,
+        .day__month_btn,
+        .month__year_btn
+            padding: 8px 0px
+            text-align: center
+
+        .cell:not(.blank):not(.disabled).day, 
+        .cell:not(.blank):not(.disabled).month, 
+        .cell:not(.blank):not(.disabled).year
+            &:hover
+                border: 1px solid $primary_x2_Bd
+                background: none
+            &:focus, &:active, &:focus-visible
+                box-shadow: 0px 0px 0px 2px $primary_x2_Shd
+
+    .vdp-datepicker
+        input
+            @extend .input
+    #calendar-div
+        background: none !important
+            
+.input-time_one
+    user-select: none
+    
+.ip-time-def
+    input
+        padding-left: $ds_x3 !important
+.ip-timed-i,
+.ip-timed-l,
+.ip-calendar-left
+    .vuejs3-datepicker__calendar
+        left: 0%
+        transform: translateX(-50%) !important
+
+.timed-doub
+    input
+        padding-right: $ds !important
+        max-width: calc( 74px + 5vw )
+
+.time-doub-one
+    border-radius: $br
+    padding-right: $ds_x
+    border: 1px solid $ip-br
+    input
+        border: none !important
+    .vuejs3-datepicker
+        .vuejs3-datepicker__calendar
+            left: 50%
+            transform: translateX(-70%)
+
+// =========================
+
+.timed-doub
+    background: #FFF
+    padding-right: $ds
+
+    .vuejs3-datepicker
+        width: calc( 92px + 3.2vw ) !important
+    .vuejs3-datepicker__value
+        padding-top: $ds_s
+        padding-bottom: $ds_s
+    .vuejs3-datepicker__content
+        @extend .fx-l
+
+    .time_2
+        .vuejs3-datepicker__content
+            margin: 0px
+
+.time-doub-s
+    .input-timed-1
+        .vuejs3-datepicker__value
+            padding-left: $ds !important
+            padding-right: 0px !important
+    .input-timed-2
+        .vuejs3-datepicker__value
+            padding-left: $ds_s !important
+            padding-right: 2px !important
+
+@media screen and ( max-width: 1444px )
+    .time-doub-s-p
+        .input-timed-1
+            .vuejs3-datepicker__value
+                padding-left: $ds !important
+                padding-right: 0px !important
+        .input-timed-2
+            .vuejs3-datepicker__value
+                padding-left: $ds_s !important
+                padding-right: 2px !important
+
+
+//   
+.input-timed-pahd
+    .vuejs3-datepicker__content
+        color: $ip_pchd !important
+.input-phcd
+    color: $ip_pchd !important
+//    
+.input-timed-hide
+    position: absolute
+    padding: 0px !important
+    overflow: hidden
+    height: 0em !important
+
+//   
+.ip-time-top
+    //
+    .vuejs3-datepicker__calendar
+        bottom: -96px
+        left: 130%
+        box-shadow: 1px 2px 8px -1px rgba(0, 0, 0, 0.34)

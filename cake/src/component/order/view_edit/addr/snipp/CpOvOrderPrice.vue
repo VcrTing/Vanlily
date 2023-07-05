@@ -2,7 +2,7 @@
 
     <div class="fx-s fx-t cold row_x2">
         <div class="w-37">
-            <p class="">運費</p>
+            <p class="">運費信息</p>
             <p class="">&nbsp;</p>
         </div>
         <div class="w-28">

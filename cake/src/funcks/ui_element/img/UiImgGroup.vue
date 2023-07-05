@@ -1,8 +1,8 @@
 <template>
-    <div class="row fx-l">
+    <div class="row fx-l w-100">
         <nav 
             class="mb"
-            :class="{ 'w-25': (ien <= 8), 'w-20': (ien > 8 && ien < 15), 'w-12': (ien > 15) }" 
+            :class="{ 'w-25': (ien <= 8), 'w-20': (ien > 8 && ien < 15), 'w-12': (ien >= 15) }" 
             v-for="(v, i) in res" :key="i" 
             @click="$emit('change', i)"
         >
@@ -26,6 +26,7 @@ export default {
                     res.push(e)
                 }
             }) : undefined
+            // console.log('IMGS =', this.imgs)
             return res
         },
         ien() { return this.imgs ? this.res.length : 0 }

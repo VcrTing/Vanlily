@@ -1,7 +1,7 @@
 <template>
     <div class="">
         <ui-header class="py_x">
-            <template v-slot:tit>
+            <template #tit>
                 <h3 class="n">
                     <span v-if="!is_creat">單號：<span v-if="_one">{{ _one.uuid }}</span></span>
                     <span v-else>新增訂單</span>
@@ -18,7 +18,7 @@
             </nav>
 
             <panel-inner :header="'定製蛋糕內容'" v-if="order">
-                <template v-slot:cont>
+                <template #cont>
                     <order-exi-product :order="order" :_kiii_btn="kiii_btn"  :edit="!is_view"></order-exi-product>
                 </template>
             </panel-inner>

@@ -4,6 +4,10 @@
             <h3 class="n pb">選取蛋糕</h3>
             <div class="fx-r">
                 <div class="fs-s tabs tabs-pri">
+                    <button class="py_s" @click="pina().mod(28)" :class="{ 'tab-iive': tab == 2 }">
+                        <i class="mdi mdi-cookie-plus"></i>
+                        自訂蛋糕</button>
+                    <span class="px_n"></span>
                     <button class="py_s" @click="tab = 0" :class="{ 'tab-iive': tab == 0 }">常用選取</button>
                     <span class="px_s"></span>
                     <button class="py_s" @click="tab = 1" :class="{ 'tab-iive': tab == 1 }">聯網選取</button>
@@ -17,7 +21,7 @@
                     @open="(n) => _open = n"/>
                 <cp-cake-picker-from-net
                     @resuit="(n) => { cake = n; _open = false; }" 
-                    v-else/>
+                    v-else-if="tab == 1"/>
             </div>
 
             <div v-if="show" class="py row_x2 fx-s fx-t">
@@ -65,32 +69,43 @@ export default {
         CpCakePickerFromNet   
     },
     data() {
-        return {
-            cake: { }, _open: true, tab: 0
-        }
+        return { cake: { }, _open: true, tab: 0 }
     },
     computed: {
         show() { return !this._open && this.cake && this.cake.id },
         attrs() { return this.vai('attributes', [ ]) },
         price() { return this.vai('price') }
     },
-    watch: {
-        cake(n) { }
-    },
+    watch: { cake(n) { console.log('選取的蛋糕 =', n) } },
     emits: [ 'resuit' ],
     methods: {
-        _ser_cake(v) { return v },
 
         vai(k, def = { }) { return this.cake && this.cake[ k ] ? this.cake[ k ] : def },
         submit() { 
             return new Promise(rej => {
                 this.cancei() 
-                this.$emit('resuit', this._ser_cake( this.cake ));
-                this.productPina().do_cake_of_choise( this.cake );
+                this.$emit('resuit', this.cake);
+
+                this.productPina().do_ocfs( this.ser_ocf( this.cake ) )
+                // this.productPina().do_cake_of_choise( this.cake );
                 rej(0)
             })
         },
-        cancei() { this.pina().mod( 0 ) }
+        cancei() { this.pina().mod( 0 ) },
+
+        ser_ocf(ck) {
+            if (ck) {
+                const price = ck.price
+
+                ck.isCustomCake = false;
+                ck.quantity = 1
+                ck.unit_price = price.regular_price
+                ck.original_price = price.price
+
+                ck.__compieted = false
+            }
+            return ck
+        }
     }
 }
 </script>

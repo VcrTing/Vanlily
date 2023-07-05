@@ -1,7 +1,11 @@
 <template>
     <div class="fx-l">
         <div class="w-10">&nbsp;</div>
-        <div class="fx-1 scroii-wrapper" :class="{ 'scroiibar': !_kiii_scroiibar, 'scroiibarno': _kiii_scroiibar }" :id="'scroii_' + pk">
+        <div 
+            class="fx-1 scroii-wrapper" 
+            :class="{ 'scroiibar': !_kiii_scroiibar, 'scroiibarno': _kiii_scroiibar }" 
+            :id="'scroii_' + pk"
+            >
             <div class="fx-l fx-t">
                 <slot></slot>
             </div>

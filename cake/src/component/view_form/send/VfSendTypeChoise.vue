@@ -37,15 +37,11 @@ export default {
         }
     },
     mounted() {
-        this.def ? this.ioc( this.def ) : undefined;
-        this.sign()
+        this.def ? this.ioc( this.def ) : undefined; this.sign()
     },
-    watch: {
-        now(n, o) { this.sign() }
-    },
+    watch: { now(n, o) { this.sign() } },
     methods: {
         sign() { this.$emit('resuit', this.ways[ this.now ]) },
-
         code() { let res = this.ways[ this.now ]; return res ? res.code : 'addr' },
         ioc(vv) { this.ways.map( (e, i) => { if (e.v == vv) { this.now = i } }) }
     }

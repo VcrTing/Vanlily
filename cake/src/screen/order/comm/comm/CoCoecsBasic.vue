@@ -6,8 +6,12 @@
             <span v-else class="sus">(無需求)</span>
         </p>
         <p>
-            蛋糕 ID:&nbsp;&nbsp;
-            <span>{{ coec.product_uuid }}</span>
+            生日牌:&nbsp;&nbsp; 
+            <span>{{ coec.sign }}</span>
+        </p>
+        <p>
+            字粒:&nbsp;&nbsp; 
+            <span>{{ coec.letter }}</span>
         </p>
         <p>
             數量:&nbsp;&nbsp; 

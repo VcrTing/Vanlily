@@ -7,6 +7,7 @@ import check from './order/check'
 import action_board from './order/action_board'
 
 import cake from './prod/cake'
+import order_from from './order/order_from'
 import dashboard from './other/dashboard'
 
 import materiai from './account/materiai'
@@ -22,6 +23,8 @@ export default {
     cake,
     pay,
     order,
+    order_from,
+    
     check,
     action_board,
 

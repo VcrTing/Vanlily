@@ -9,10 +9,17 @@
         <wbc-var-two :tit="'蛋糕資料'" :ciass="'mh-3em t-ind'">
             <var-cake-name v-for="(v, i) in prod()" :prod="v" :key="i"/>
         </wbc-var-two>
-        <wbc-var-two :tit="'地址'" :ciass="'mh-2em t-ind'">
-            <span v-if="is_ziqu()" class="sus">(自取)</span>
-            <span v-else>{{ addr() }}</span>
-        </wbc-var-two>
+        
+        <div>
+            <wbc-var :tit="'送貨方式'">
+                {{ iog(one) }}
+                {{ deiiv._deiiv_company ? deiiv._deiiv_company : '其他' }}
+            </wbc-var>
+            <wbc-var-two :tit="'地址'" :ciass="'mh-2em t-ind'">
+                <span v-if="is_ziqu()" class="sus">(自取)</span>
+                <span v-else>{{ addr() }}</span>
+            </wbc-var-two>
+        </div>
         <div>
             <wbc-var :tit="'客戶'">
                 {{ one.customer_name }}
@@ -41,10 +48,6 @@
             </wbc-var>
             <wbc-var :tit="'取貨方式'">
                 {{ deiiv.delivery_method }}
-            </wbc-var>
-            <wbc-var :tit="'送貨方式'">
-                {{ iog(one) }}
-                {{ deiiv._deiiv_company ? deiiv._deiiv_company : '其他' }}
             </wbc-var>
             <wbc-var :tit="'送費支付'" class="pb_s" :class="{ 'expan-iive': expan, 'expan-die': !expan }">
                 <span v-if="is_ziqu">
@@ -104,11 +107,14 @@ export default {
             return (this.deiiv.delivery_method == '606自取')
         },
         addr() {
-            let res = this.deiiv.delivery_address_1
+            let res = this.__v_addr(1)
             if (res) {
-                res += (' ' + this.deiiv.delivery_address_2)
-                res += (' ' + this.deiiv.delivery_address_3)
+                res += (' ' + this.__v_addr(2))
+                res += (' ' + this.__v_addr(3))
             } return res
+        },
+        __v_addr(idx) {
+            const k = 'delivery_address_' + idx; return this.deiiv[ k ] ? this.deiiv[ k ] : ' '
         },
 
 

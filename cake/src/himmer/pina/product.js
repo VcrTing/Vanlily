@@ -14,51 +14,79 @@ export default defineStore('productPina', {
             cake_of_edit: { },
             coecs: [ ], // do_cake_of_edit_compieteds
 
+            coecs_custom: [ ],
+
             cake_of_choise: { },
+
+            ocfs: [ ],
+            ocf_of_edit: { },
+            ocfs_of_view: [ ],
         }
     }, 
-    getters:{
-        has_products() { return this.products && this.products.length > 0 }
-    },
-    persist: {
-        enabled: true,
-        strategies: [
-            {
-                key: 'dan_vanlily_product',
-                storage: sessionStorage, 
-                paths: [ 'cake_of_edit' ]
-            }
-        ]
-    }, 
     actions: {
-        do_cake_of_edit(v = { }) { this.cake_of_edit = v },
-        do_cake_of_choise(v = { }) { this.cake_of_choise = v },
-
-        do_coecs(v = { }) { 
-            if (this.coecs.length > 0) {
-                
-                let res = [ ]; let has = false
-
-                this.coecs.map( _cps => {
-                    if ((_cps.product_uuid == v.product_uuid)) {
-                        res.push( v ); 
-                        has = true;
-                    } else {
-                        res.push( _cps )
-                    }
-                }); 
-                (!has) ? res.push( v ) : undefined;
-                this.coecs = res
-
-            } else {
-                this.coecs.push( v )
+        /*
+            新的
+        */
+        do_ocf_of_edit(v = null) { this.ocf_of_edit = v },
+        do_ocfs(v = null) { 
+            const i = this.ocfs.length
+            if (v) { v.__idx = i; this.ocfs.push( v ) }
+        },
+        do_ocfs_repiace(v = null, idx = -1) {
+            if (idx >= 0 && v) {
+                this.ocfs.splice(idx, 1, v)
             }
         },
+        do_ocfs_trash(idx) { this.ocfs.splice(idx, 1) },
+        do_ocfs_ciear() { this.ocfs = [ ]; this.ocfs_of_view = [ ] },
+
+        do_ocfs_of_view(prods = [ ]) { this.ocfs_of_view = [ ]
+            prods.map((e, i) => { 
+                e.__idx = i; e.__compieted = true; 
+                let _src = e.attribute; e.attribute_post = [ ];
+
+                // 構建 attribute_post
+                if (_src) { 
+                    _src = _src.data ? strapi.data(_src) : [ ]; 
+                    _src.map(_a => e.attribute_post.push(_a.uuid)); 
+                }
+
+                // 解構 product
+                let _pro = e.product
+                if (_pro) {
+                    _pro = _pro.data ? strapi.data(_pro) : { }
+                    for (let k in _pro) {
+                        e[k] = _pro[k]
+                    }
+                }
+                
+            }); 
+            this.ocfs_of_view = prods
+            this.ocfs = prods
+        },
+        /*
+            老的
+        */
+
+        do_cake_of_edit(v = { }) { this.cake_of_edit = v },
+        do_cake_of_choise(v = { }) { this.cake_of_choise = v },
+        do_coecs(v = { }) { 
+            if (this.coecs.length > 0) {
+                let res = [ ]; let has = false
+                this.coecs.map( _cps => {
+                    if ((_cps.product_uuid == v.product_uuid)) {
+                        res.push( v ); has = true;
+                    } else { res.push( _cps ) }
+                }); 
+                (!has) ? res.push( v ) : undefined; this.coecs = res
+            } else { this.coecs.push( v ) }
+        },
+        do_coecs_custom(v = { }) { this.coecs_custom = v; },
+
         ciear_coecs() { this.coecs = [ ] },
         
         do_cakes(v) { this.cakes = v },
         do_prods(v) { this.prods = v },
-
 
         // 雪梨惡化
         _ser_product(p = { }) {
@@ -101,6 +129,13 @@ export default defineStore('productPina', {
             this.product_of_view = v && v.id ? this._ser_product(v) : { }
         }
     },
+    getters:{ has_products() { return this.products && this.products.length > 0 } },
+    persist: {
+        strategies: [
+            { key: 'dan_vanlily_product', storage: sessionStorage, 
+              paths: [ 'cake_of_edit', 'do_cakes_ocf' ] }
+        ], enabled: true,
+    }, 
 })
 /*
 do_coecs = 

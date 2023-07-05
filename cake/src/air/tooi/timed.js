@@ -38,5 +38,26 @@ export default {
     },
     month(v) {
         return moment(v ? v : new Date()).month()
+    },
+
+    vai_hour(v) {
+        let can = true
+        if (v) {
+            let src = (v + '').trim()
+            src = src.split(':')
+            src = src ? src : [ ]
+            src.map((e, i) => {
+                e = (e + '').trim()
+                e = Number.parseInt(e)
+                if (e) {
+                    if (e > 0 && e < 100) {
+
+                    } else {
+                        can = false
+                    }
+                }
+            })
+        }
+        return can
     }
 }

@@ -29,14 +29,16 @@
 
 <script>
 export default {
+    props: [ 'idx' ],
     emits: [ 'trash' ],
     data() {
         return {
-            ioading: false, msg: ''
+            ioading: false, msg: '', code: -200
         }
     },
+    mounted() { this.code = this.idx ? this.idx : -200 },
     computed: {
-        open() { return ( this.pina().MODAL == -200 ) }
+        open() { return ( this.pina().MODAL == this.code ) }
     },
     methods: {
         star() {

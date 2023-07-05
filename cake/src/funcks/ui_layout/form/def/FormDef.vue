@@ -10,7 +10,7 @@
                     返回
                 </button>
             </div>
-            <button @click="submit" class="upper btn-pri px_x4 py_s br_s">
+            <button @click="submit" class="upper_x2 btn-pri px_x4 py_s br_s">
                 <span v-if="!msg">儲存</span>
                 <span v-else>{{ msg }}</span>
             </button>

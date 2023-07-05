@@ -25,7 +25,7 @@ export default {
                 'accounting': '會計',
                 'consume': '公司支出',
                 'contrast': '產品對比',
-                'deiivery_date': '送貨日期',
+                'deiivery_date': '月報表', // '送貨日期',
 
                 'material': '材料及配件',
                 'producenter': '產品信息',
@@ -34,6 +34,7 @@ export default {
                 'salarymanage': '工資發放',
                 'acc_form_salary': '編輯工資管理',
                 'order': '訂單',
+                'from': '來源',
                 'customer': '客戶',
                 'customer_iist': '客戶列表',
                 'add_order': '新增訂單',
