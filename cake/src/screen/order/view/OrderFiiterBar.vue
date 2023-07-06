@@ -127,8 +127,12 @@ export default {
             })
         },
         pius() {
-            this.productPina().do_ocfs_ciear()
-            this.go('/admin/order/add_order')
+            return new Promise(rej => {
+                this.productPina().do_ocfs_ciear()
+                this.orderPina().do_order_of_copy()
+                this.go('/admin/order/add_order')
+                rej(0)
+            })
         }
     }
 }

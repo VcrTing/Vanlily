@@ -1,6 +1,9 @@
 <template>
-    <money v-if="deiiv.delivery_fee" :v="deiiv.delivery_fee"/>
-    <span v-else>無</span>
+    <div v-if="deiiv.delivery_fee">
+        {{ deiiv.delivery_fee }}
+    </div>
+
+    <span v-else></span>
 </template>
 
 <script>

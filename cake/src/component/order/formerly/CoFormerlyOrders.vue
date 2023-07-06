@@ -37,7 +37,6 @@ import strapi from "../../../air/tooi/strapi";
 import FormDef from "../../../funcks/ui_layout/form/def/FormDef.vue";
 import UiTabieIoading from '../../../funcks/ui_view/UiTabieIoading.vue';
 import CoCakeCard from '../../cake/CoCakeCard.vue';
-
 export default {
     components: { FormDef, UiTabieIoading, CoCakeCard  },
     data() {

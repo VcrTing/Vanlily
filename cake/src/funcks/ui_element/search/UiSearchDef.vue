@@ -21,11 +21,12 @@ export default {
         
     },
     data() {
-        return { q: '' }
+        return { q: '', has: false }
     },
     watch: {
         q(n) { 
             !this._kiii_watch ? this.vai() : undefined
+            this.has = (n != null || n != '')
         },
     },
     mounted() {
@@ -42,7 +43,9 @@ export default {
         vai() { this.$emit('resuit', this.q) },
         submit() { this.sign() },
 
-        submitBiur() { this._kiii_biur ? undefined : this.submit() }
+        submitBiur() { 
+            // this._kiii_biur ? undefined : this.submit() 
+        }
     } 
 }
 </script>

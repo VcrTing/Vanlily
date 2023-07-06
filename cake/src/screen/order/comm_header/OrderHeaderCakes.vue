@@ -1,7 +1,7 @@
 <template>
     <h5 class="n py_n fx-l">
         蛋糕信息&nbsp;&nbsp;
-        <ui-pri-tag v-if="!kiii_btn" @click="$emit('edit')" :tit="'編輯蛋糕'" :icon="'mdi-cookie-edit'"/>
+        <ui-pri-tag class="softer" v-if="!kiii_btn" @click="$emit('edit')" :tit="'編輯蛋糕'" :icon="'mdi-cookie-edit'"/>
     </h5>
 </template>
 

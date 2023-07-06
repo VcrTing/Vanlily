@@ -6,20 +6,27 @@
         <div class="w-9">
             {{ timed.view(one.ordered_date) }}
         </div>
-        <div class="w-11">
+        <div class="w-10">
             {{ one.customer_name }}
         </div>
 
         <div class="w-9 t-elip_x2 pr_s">
             {{ one.customer_phone_no_1 }}
         </div>
+
+
+        <div class="w-5">
+            <span v-if="one.payment_date">已付</span>
+            <span v-else class="">未付</span>
+        </div>
+
         <div class="w-16 pr t-elip_x3">
             <span class="pri_son hand" @click="view_cake()">
                 <var-order-cake-name :order="one"/>
             </span>
         </div>
 
-        <div class="w-15">
+        <div class="w-13">
             {{ deiivery_timed() }}
         </div>
         <div class="w-7">
@@ -29,10 +36,11 @@
             <view-order-send-type class="hand" @click="view_deiivery()" :_typed="deiiv.delivery_method"/>
         </div>
 
-        <div class="w-6">
+        <div class="w-5">
             <var-order-deiive-fee :deiiv="deiiv"/>
         </div>
-        <div class="w-15">
+        <div class="w-6">{{ one.total_price }}</div>
+        <div class="w-8">
             <var-order-pay-detaii :order="one"/>
         </div>
     </div>

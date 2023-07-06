@@ -79,7 +79,8 @@ export default {
             const addr = this.$refs.addr.coii()
             const remark = this.$refs.remark.coii()
             const ordered_product = this.$refs.cakes.coii()
-
+            console.log('儲存的蛋糕 =', ordered_product)
+            
             return (base && send && addr && remark && ordered_product) ? {
                 ...base, ...remark, 
                 ordered_product, delivery_info: { ...send, ...addr }

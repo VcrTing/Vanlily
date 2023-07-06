@@ -32,8 +32,7 @@ import CoOcfCakeCustom from '../cake_one/CoOcfCakeCustom.vue';
 import CoOcfCakeNormaii from '../cake_one/CoOcfCakeNormaii.vue';
 export default {
     components: { CoOcfCakeNormaii, CoOcfCakeCustom, ModalTrash },
-    emits: [ 'pius' ],
-    props: [ 'creat' ],
+    emits: [ 'pius' ], props: [ 'creat' ],
     data() { return { trashIdx: -1 } },
     computed: { ocfs() { const res = this.productPina().ocfs; return res; } },
     methods: {
@@ -42,10 +41,7 @@ export default {
             this.ocfs.map(e => { if (!e.__compieted) { can = false } })
             if (can) {
                 this.ocfs.map(e => {
-                    if (e.isCustomCake) {
-
-                    } else {
-
+                    if (!e.isCustomCake) {
                         const ap = e.attribute_post
                         if (ap) {
                             e.attribute = ap
@@ -60,7 +56,6 @@ export default {
         sureTrash(idx) { this.trashIdx = idx; this.pina().mod(-201) },
 
         trash() {
-            console.log('刪除')
             return new Promise(rej => {
                 this.productPina().do_ocfs_trash( this.trashIdx )
                 this.productPina().do_ocf_of_edit(); rej(0)

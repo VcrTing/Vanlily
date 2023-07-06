@@ -63,7 +63,6 @@ export default {
     },
     methods: {
         updCheck(one, name, v) { one[ name ] = v; this.$emit('update', this.checkIist) },
-
         ser(named) { return this.keywords[named] ? this.keywords[named] : named }
     }
 }

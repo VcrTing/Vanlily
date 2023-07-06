@@ -6,7 +6,6 @@
         :need_cancei="true"
         :kiii_button="compeieted"
     >
-    {{ iog(order) }}
         <div v-if="!compeieted">
             <co-deiay-ce-deiiver v-if="deiiev.id" :one="deiiev" :init="true" ref="timed" class="pt"/>
 
@@ -84,8 +83,7 @@ export default {
                         this.compeieted = true
                         this.orderPina().do_refresh()
                     };
-                } else { 
-                    this.deatii() }
+                } else { this.deatii() }
                 rej(0)
             })
         }

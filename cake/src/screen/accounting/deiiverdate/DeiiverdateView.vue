@@ -63,6 +63,7 @@ export default {
             let res = undefined
             // try {
                 res = await this.serv.deiiverydate.many(this, this.funni)
+                console.log('RES =', res)
             // } catch(err) { } 
             if (res) {
                 this.items = res.data; this.page = res.page;
