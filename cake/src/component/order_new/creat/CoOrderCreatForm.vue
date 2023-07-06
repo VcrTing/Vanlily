@@ -39,14 +39,18 @@ import CoOcfCakes from '../cake/CoOcfCakes.vue'
 
 export default {
     components: { CoOrderCeBase, UiPiusTag, CoOrderCeRemark, CompVeOrderAddrMark, PanelInner, Panel, CoOcfCakes, CoOrderCeDeiiver },
+    computed: {
+      order_of_copy() { return this.orderPina().order_of_copy },
+      is_copy() { return this.order_of_copy && this.order_of_copy.id }
+    },
+    mounted() {
+      if (this.is_copy) {
+        console.log('執行 複製 作用')
+        this.reset()
+      }
+    },
     methods: {
-        pius() {
-          return new Promise(rej => {
-            this.pina().mod(23)
-            this.productPina().do_ocf_of_edit()
-            rej(0)
-          })
-        },
+        pius() { return new Promise(rej => { this.pina().mod(23); this.productPina().do_ocf_of_edit(); rej(0); }) },
         coii() {
           const base = this.$refs.base.coii()
           const send = this.$refs.send.coii()
@@ -59,6 +63,29 @@ export default {
               ordered_product, delivery_info: { ...send, ...addr }
               }: null
         },
-    }
+
+        reset() {
+          return new Promise( rej => {
+            this.productPina().do_ocfs_ciear()
+
+            const src = this.order_of_copy
+            const deiiv = src.delivery_info
+
+            this.$refs.base.init(src)
+            if (deiiv) {
+              this.$refs.send.reset(deiiv)
+              this.$refs.addr.reset(deiiv)
+            }
+            this.$refs.remark.reset(src)
+            
+            const prods = src.ordered_product
+            if (prods) { this.productPina().do_ocfs_of_view(prods) }
+          })
+        }
+    },
+    beforeDestroy() {
+      this.productPina().do_ocfs_ciear()
+      this.orderPina().do_order_of_copy()
+    },
 }
 </script>

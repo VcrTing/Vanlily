@@ -112,11 +112,13 @@ export default {
             return res
         },
         reset(deiiv = null) {
-            if (this._edit && deiiv) {
+            // this._edit &&
+            if (deiiv) {
                 
                 // comp
                 const meth = deiiv.delivery_method
                 this.$refs.stc.ioc( meth )
+
                 const company = deiiv.delivery_company
                 this.$refs.scc.ioc(company)
 
@@ -126,9 +128,7 @@ export default {
                 this.form.delivery_address_1 = deiiv.delivery_address_1
                 this.form.delivery_address_3 = deiiv.delivery_address_3
 
-                setTimeout(e => { 
-                    this.$refs.oaf.reset() 
-                }, 200)
+                setTimeout(e => { this.$refs.oaf.reset() }, 200)
                 
                 // 送貨 人員
                 for (let k in this.form) { this.form[k] = deiiv[k] }

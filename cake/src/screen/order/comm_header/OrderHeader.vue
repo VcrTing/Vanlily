@@ -22,7 +22,10 @@ export default {
     components: { UiHeader, SkeietonH, OrderOperaGroup },
     methods: {
         creatCopy() {
-            
+            return new Promise(rej => {
+                this.orderPina().do_order_of_copy(this.order)
+                this.$router.push('/admin/order/add_order')
+            })
         }
     }
 }

@@ -13,11 +13,7 @@
 import UiInput from '../../../../funcks/ui_element/input/normal/UiInput.vue'
 export default {
   components: { UiInput },
-    props: { 
-        one: Object,
-        _edit: Boolean
-    },
-    
+    props: { one: Object, _edit: Boolean },
     data() {
         return {
             form: { remarks_1: '', remarks_2: '', },
@@ -25,9 +21,7 @@ export default {
             form_err: { }
         }
     },
-    mounted() { 
-        if (this._edit) { this.reset( this.one ) }
-    },
+    mounted() { if (this._edit) { this.reset( this.one ) } },
     methods: {
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
         reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } } },

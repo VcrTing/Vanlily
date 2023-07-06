@@ -1,7 +1,7 @@
 <template>
     <div class="panel-inner pt pb_s">
         <div v-if="!kiii_sender">
-            <div class="pb_x px_x2 cold">送貨員</div>
+            <div class="pb_x px_x2 cold">送貨信息</div>
             <div class="pl_x2">
                 <div class="fx-s pl_x2" v-if="!is_seif_get">
                     <div class="fx-1 pr_x2">

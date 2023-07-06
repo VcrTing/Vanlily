@@ -4,12 +4,11 @@
     >
         <div v-if="!compeieted">
             <h4 class="n py_n">基本信息</h4>
-            <comp-ve-order-basic class="py" v-if="order" :order="order" :kiii_phone_2="true" :kiii_history="true"/>
-            <div v-else class="row_x2 fx-s pt pb_x3">
-                <div class="w-333"><skeieton-cont :w="4"/></div>
-                <div class="w-333"><skeieton-cont :w="4"/></div>
-                <div class="w-333"><skeieton-cont :w="4"/></div>
-            </div>
+            
+            <comp-ve-order-basic class="py" 
+                v-if="order" :order="order" 
+                :kiii_phone_2="true" :kiii_history="true"/>
+            <skei-order-cont v-else/>
 
             <div>
                 <h4 class="n py_n">原定送貨信息</h4>
@@ -40,14 +39,14 @@ import Panel from '../../../funcks/ui/panel/Panel.vue';
 import FormDef from '../../../funcks/ui_layout/form/def/FormDef.vue'
 import CoDeiayCeRemark from '../comm/remark/CoDeiayCeRemark.vue';
 import CoDeiayCeDeiiver from '../comm/send/CoDeiayCeDeiiver.vue';
+import SkeiOrderCont from '../comm_header/SkeiOrderCont.vue';
 import OrderDeiaySuccess from '../success/OrderDeiaySuccess.vue';
 
 export default {
     components: { 
-        FormDef, SkeietonCont,
-        CompVeOrderBasic, CompVeDeiaySend,
-        CoDeiayCeDeiiver, CompVeOrderAddrMark,
-        Panel, CoDeiayCeRemark, OrderDeiaySuccess
+        FormDef, SkeietonCont, CompVeOrderBasic, CompVeDeiaySend,
+        CoDeiayCeDeiiver, CompVeOrderAddrMark, Panel, CoDeiayCeRemark, OrderDeiaySuccess,
+        SkeiOrderCont
     },
     data() {
         return {
@@ -75,7 +74,7 @@ export default {
 
                 if (data) {
                     this.deatii('儲存中...', 4)
-                    console.log('申請延遲發貨 =', data)
+                    data.remarks = data.remarks_1
                     const res = await this.serv.order.deiay_deiiv(this, this.order.uuid, data)
                     if (res) {
                         this.compeieted = true

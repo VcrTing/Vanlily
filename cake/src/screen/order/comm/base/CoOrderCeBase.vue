@@ -45,11 +45,7 @@ import timed from '../../../../air/tooi/timed'
 import strapi from '../../../../air/tooi/strapi'
 export default {
     components: { UiIconInput, VfBuyPlantSelect, FkSearchOidOrder, UiInlineInputIcon, TimeOne, UiInlineInput, UiInput },
-    props: { 
-        one: Object,
-        _edit: Boolean
-    },
-    
+    props: { one: Object, _edit: Boolean },
     data() {
         return {
             time: timed.now(),
@@ -58,18 +54,25 @@ export default {
             form_err: { customer_name: false, customer_phone_no_1: false }
         }
     },
-    mounted() { 
-        if (this._edit) { 
-            let src = this.one.order_from
-            if (src && src.data) {
-                src = strapi.data(src)
-                this.one.order_from = src.id
-            }
-            this.reset( this.one ) }
-    },
+    mounted() { if (this._edit) { this.init(this.one) } },
     methods: {
+        init(v) {
+            return new Promise(rej => {
+                this.__ser_from( v )
+                this.reset( v )
+                rej(0)
+            })
+        },
+        __ser_from(v) {
+            let src = v.order_from
+            src = src ? src : { }
+            src = src.data ? strapi.data(src) : src
+            v.order_from = src.id ? src.id : src
+        },
+
         ciear() { this.reset( JSON.parse(JSON.stringify( this.form_origin )) ) },
-        reset(v = { }) { if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } }
+        reset(v = { }) { 
+            if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } }
             this.$refs.piant.ioc( this.form.order_from )
             console.log('order from =', this.form)
             this.time = timed.view( v.ordered_date )

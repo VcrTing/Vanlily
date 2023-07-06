@@ -102,8 +102,11 @@ export default {
     mounted() { this.init() },
     
     methods: {
-        async init() {
-            await this.fetching()
+        init() {
+            return new Promise(async rej => {
+                await this.fetching()
+                rej(0)
+            })
         },
         chart() {
             this.$refs.order_chart.resetChart( this.one.orderPrice )
