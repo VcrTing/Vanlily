@@ -1,11 +1,11 @@
 <template>
     <nav class="fx-l fx-t fk-order-img-msg" :class="{ 'fx-t': imgs.length > 4 }">
-        <div class="w-38 pr_x2">
+        <div class="w-38 w-30-x pr_x2">
             <img class="img cake-cover" @click="pina().viewImg(cover)" :src="cover" v-if="cover">
             <skeieton-img v-else/>
         </div>
         <div class="w-4"></div>
-        <div class="w-57">
+        <div class="w-57 w-65-x">
             <p class="pb_x pt_s">相冊:&nbsp;</p>
             <ui-img-group :imgs="imgs" @change="(n) => now = n"/>
         </div>

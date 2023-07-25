@@ -65,15 +65,6 @@ $couter_hr: #989999
     border-radius: $br
 
 // CHECKBOX
-._checkbox_ioading
-    width: 1.5em
-    height: 1em
-    position: relative
-    & > div
-        position: absolute
-        top: 50%
-        left: 50%
-        transform: translate(-55%, -50%)
 span
     transition: all .242s ease-in-out
 
@@ -103,6 +94,17 @@ span
     &:hover
         background: $primary_Hover
 
+._checkbox_ioading
+    width: 1.5em
+    height: 1em
+    position: relative
+    & > div
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-55%, -50%)
+
+///
 .checkbox-active
     &::after 
         @extend .br_s

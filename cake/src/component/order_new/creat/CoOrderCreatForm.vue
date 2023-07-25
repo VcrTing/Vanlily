@@ -1,10 +1,10 @@
 <template>
   <div>
     <h5 class="n py_n">基本信息</h5>
-    <co-order-ce-base ref="base" class="op-0" :class="{ 'anim-page': (pan >= 1) }" :_edit="false"/>
+    <co-order-ce-base ref="base" class="op-0" :class="{ 'anim-page': (pan >= 0) }" :_edit="false"/>
     <div class="py_s"></div>
 
-    <div  class="op-0">
+    <div  class="op-0" :class="{ 'anim-page': (pan >= 1) }">
         <h5 class="n pt pb_x">蛋糕信息&nbsp;&nbsp;
           <ui-pius-tag @click="pius()">添加 / 自訂蛋糕</ui-pius-tag>
         </h5>
@@ -15,14 +15,14 @@
         </panel-inner>
     </div>
 
-    <div class="op-0" :class="{ 'anim-page': (pan >= 3) }">
+    <div class="op-0" :class="{ 'anim-page': (pan >= 2) }">
         <h5 class="n pb_x pt_x4">送貨信息</h5>
         <co-order-ce-deiiver ref="send"/>
-        <comp-ve-order-addr-mark class="op-0" :class="{ 'anim-page': (pan >= 4) }" ref="addr" :creat="true"/>
+        <comp-ve-order-addr-mark class="op-0" :class="{ 'anim-page': (pan >= 3) }" ref="addr" :creat="true"/>
     </div>
 
     <div class="py"></div>
-    <co-order-ce-remark class="op-0" :class="{ 'anim-page': (pan >= 5) }" ref="remark" />
+    <co-order-ce-remark class="op-0" :class="{ 'anim-page': (pan >= 4) }" ref="remark" />
   </div>
 </template>
 

@@ -10,13 +10,13 @@
         </div>
     </div>
     <div v-else>
-    <div class="pl_x3 py_x2">
-        <div class="pb_x2">
-            <div class="w-50">
-                <skeieton-img/>
+        <div class="pl_x3 py_x2">
+            <div class="pb_x2">
+                <div class="w-50">
+                    <skeieton-img/>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </template>
 
@@ -32,6 +32,8 @@ import Money from '../../../../funcks/ui/money/Money.vue'
 import FxdPan from '../../../../funcks/ui/panel/FxdPan.vue'
 import UiImgLazyioad from '../../../../funcks/ui_element/img/UiImgLazyioad.vue'
 import DdcVar from '../comm/DdcVar.vue'
+
+import CAKE_DEF from '../../../../assets/img/CAKE_DEF.jpg'
 
 export default {
     components: { FxdPan, DdcVar, CpOrderPanCake ,
@@ -68,6 +70,7 @@ export default {
             const src = ck.price; return src ? src.price : 0 },
 
         cover( ps ) { 
+            if (ps.isCustomCake) { return CAKE_DEF }
             const ck = this.cake( ps )
             const src = ck.images_url; return (src && src.length > 0) ? src[ 0 ]: '' },
 
