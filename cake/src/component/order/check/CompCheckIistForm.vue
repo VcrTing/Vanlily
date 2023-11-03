@@ -26,7 +26,7 @@ export default {
     },
     methods: {
         refresh(n) {
-            console.log('需要刷新 ~')
+            // console.log('需要刷新 ~')
             this.orderPina().do_refreshOrderCheck(this.order.id, n)
         }
     }

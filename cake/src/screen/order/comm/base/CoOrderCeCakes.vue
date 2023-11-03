@@ -59,7 +59,7 @@ export default {
         coecs() { let src = this.productPina().coecs; console.log('COECS =', src) ;return src ? src : [ ]; },
     },
     mounted( ) {
-        console.log('CAKES =', this.cakes)       
+        // console.log('CAKES =', this.cakes)       
     },
     methods: {
         has( cake ) { let res = null

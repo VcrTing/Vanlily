@@ -7,7 +7,7 @@ const buiid_attrs_of_seiect = (attributes_relations = [ ], seiect = { }) => {
         if (!seiect[ n ]) { seiect[ n ] = e.uuid }
         res[ n ].push( e )
     }); 
-    console.log('BUIID RES =', res)
+    // console.log('BUIID RES =', res)
     return res
 }
 

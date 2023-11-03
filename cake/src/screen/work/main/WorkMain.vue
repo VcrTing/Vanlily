@@ -177,7 +177,8 @@ export default {
 
                 // 序列化 company
                 many = many.map(e => {
-                    const deiiv = e.delivery_info ? e.delivery_info : { }
+                    const deiiv = e.delivery_info ? e.delivery_info : { };
+
                     if (this.ziqus.indexOf(deiiv.delivery_method) >= 0) {
                         deiiv[ '_deiiv_company' ] = deiiv.delivery_method
                     } else {
@@ -187,6 +188,7 @@ export default {
                     e.delivery_info = deiiv
                     return e
                 })
+                // console.log("MANY 之前 =", many)
                 let res = { }
                 // 序列化 出 map
                 many = many.map(e => { 
@@ -209,9 +211,11 @@ export default {
             let res = undefined
             try {
                 res = await this.serv.action_board.many(this, this.funni)
+                // console.log("搜索 工作 面板 =", res)
             } catch(err) { }
             if (res && res.data) {
                 this.items = await this.ser_items(res.data); this.page = res.page; // this.opened() 
+                // console.log("工作 items =", this.items)
             }
             setTimeout(e => { this.ioading = false }, 200);
         },

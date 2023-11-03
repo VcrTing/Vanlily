@@ -73,7 +73,7 @@ CpOrderBaseProdsDetaii  },
         return new Promise(rej => {
             const _this = this;
             iist_deiay_insert([ '', '', '' ], (one, i) => (_this.pan += 1)) 
-            console.log('當前訂單 =', this.order)
+            // ('當前訂單 =', this.order)
             rej(0)
         })
     },

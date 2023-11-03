@@ -56,7 +56,7 @@ export default {
                     const prods = JSON.parse( JSON.stringify( form.ordered_product ) )
                     const res = await this.serv.order.edit(this, uuid, form)
                     if (res) {
-                        console.log('訂單成功編輯 =', res)
+                        // console.log('訂單成功編輯 =', res)
 
                         let res_cks = true;
                         for (let i= 0; i< prods.length; i++ ) {

@@ -25,7 +25,3 @@ export default {
     props: [ 'one' ]
 }
 </script>
-
-<style>
-
-</style>

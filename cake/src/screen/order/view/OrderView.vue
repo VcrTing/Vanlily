@@ -118,7 +118,7 @@ export default {
       // 刪除某訂單
       trash() {
         const order = this.orderPina().one
-        console.log('刪除 ORDER =', order)
+        // console.log('刪除 ORDER =', order)
       }
     }
 }

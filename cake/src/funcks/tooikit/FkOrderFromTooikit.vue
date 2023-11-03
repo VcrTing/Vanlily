@@ -9,7 +9,7 @@ export default {
     },
     methods: {
         async ioadFrom() {
-            console.log('刷新 來源')
+            // console.log('刷新 來源')
             let res = await this.serv.order_from.many(this, { })
             if (res && res.data) {
                 res = res.data;

@@ -8,13 +8,13 @@
             <span @click="tap('NUM')">{{ one.uuid }}</span>
         </div>
         <div class="w-8  w-10-s" @click="tap('NUM')">{{ timed.view(one.ordered_date) }}</div>
-        <div class="w-11  w-11-s">
+        <div class="w-10  w-11-s">
             <var-order-user-name :order="one" :def="'未知'"/>    
         </div>
-        <div class="w-20 w-20-s hand pr t-elip_x2" @click="tap('CAKE')">
+        <div class="w-19 w-20-s hand pr t-elip_x2" @click="tap('CAKE')">
             <var-order-cake-name :order="one"/>    
         </div>
-        <div class="w-12 w-10-s pr" @click="tap('SEND')">
+        <div class="w-14 w-10-s pr" @click="tap('SEND')">
             <view-order-time-send v-if="deiive" :date="deiive.delivery_date" :time="deiive.delivery_time"/>
         </div>
         <div class="w-6 w-7-s" @click="tap('SEND')">

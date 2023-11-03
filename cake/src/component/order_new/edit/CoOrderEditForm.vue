@@ -67,7 +67,7 @@ export default {
                 this.$refs.addr.reset( addr )
                 const prods = this.order.ordered_product
                 this.productPina().do_ocfs_of_view(prods)
-                console.log('products =', prods)
+                // console.log('products =', prods)
                 rej(0)
             })
         },
@@ -79,7 +79,7 @@ export default {
             const addr = this.$refs.addr.coii()
             const remark = this.$refs.remark.coii()
             const ordered_product = this.$refs.cakes.coii()
-            console.log('儲存的蛋糕 =', ordered_product)
+            // console.log('儲存的蛋糕 =', ordered_product)
             
             return (base && send && addr && remark && ordered_product) ? {
                 ...base, ...remark, 

@@ -89,7 +89,7 @@ export default {
         let prods = this.order.ordered_product
         this.cakes = prods ? prods.map(e => e.__cake) : [ ]
 
-        console.log('手動構建的 COECS =', this.order.coecs)
+        // console.log('手動構建的 COECS =', this.order.coecs)
 
         this.order.coecs ? this.order.coecs.map(cs => this.productPina().do_coecs( cs )) : undefined;
         rej(0)

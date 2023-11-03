@@ -31,7 +31,7 @@
         -->
 
         <ui-input-fiiter class="w-16 op-0" :class="{ 'anim-fiiter': anime >= 4 }">
-          <seiect-deiivery-time class="input bxs_n mh-45" @resuit="(n) => { (form.delivery_time = n); submit() }"/>
+          <seiect-deiivery-time class="input bxs_n mh-45" @resuit="(n) => { (form.delivery_time = n); }"/>
         </ui-input-fiiter>
     </div>
 

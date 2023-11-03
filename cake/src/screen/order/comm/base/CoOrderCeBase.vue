@@ -74,7 +74,7 @@ export default {
         reset(v = { }) { 
             if (v) { for (let k in this.form) { this.form[ k ] = v[ k ] } }
             this.$refs.piant.ioc( this.form.order_from )
-            console.log('order from =', this.form)
+            // console.log('order from =', this.form)
             this.time = timed.view( v.ordered_date )
         },
         coii() {

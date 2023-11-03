@@ -18,5 +18,5 @@ export default {
 
     ENDPOINT,
 
-    VERSION: 'JUL 25'
+    VERSION: 'NOV 03'
 }

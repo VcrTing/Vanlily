@@ -9,7 +9,7 @@ export default {
     props: [ 'one' ],
     methods: {
         creatCopy() {
-            console.log('創建副本 =', this.one)
+            // console.log('創建副本 =', this.one)
         }
     }
 }

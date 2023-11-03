@@ -27,7 +27,7 @@ export default {
 
                 { txt: '運費', ciass: 'w-5' },
 
-                { txt: '總額', ciass: 'w-6' },
+                { txt: '總價錢', ciass: 'w-6' },
                 { txt: '付款資料', ciass: 'w-8' },
             ]
         }

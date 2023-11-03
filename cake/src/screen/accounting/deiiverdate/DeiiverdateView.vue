@@ -15,7 +15,7 @@
                 </ui-tabie-ioading>
             </nav>
 
-            <pagenation class="py_x2 op-0" :class="{ 'anim-page': init }" @page="pagena" :count="page.total" />
+            <pagenation class="py_x2 op-0" :_init="false" :class="{ 'anim-page': init }" @page="pagena" :count="page.total" />
             <modal-consume ref="modREF" @refresh="_fetch"></modal-consume>
             <deiiverydate-fxd-pan/>
         </template>
@@ -40,8 +40,8 @@ export default {
         LayoutPage, DdvTopFilter, DdvTr, DdvTd, Pagenation, ModalConsume, 
         UiTabieIoading, DdvSeki, FoPiusButton, DeiiverydateFxdPan },
     data() {
-        return { init: false,
-            items: [ ], page: { total: 2 }, funni: { funni: { } }, ioading: true
+        return { init: false, first: true,
+            items: [ ], page: { total: 2 }, funni: { funni: { } }, ioading: false
         }
     },
     methods: {
@@ -60,6 +60,9 @@ export default {
             })
         },
         async _fetch() {
+
+            if (this.first) { this.first = false; return; }
+
             let res = undefined
             // try {
                 res = await this.serv.deiiverydate.many(this, this.funni)
@@ -73,10 +76,7 @@ export default {
         sort() { this.funni[ 'sort' ] = 'createdAt:desc' },
         mod(num) { this.pina().modai( num ); this.funni = {} },
         subFit(funn) { 
-            return new Promise(async rej => {
-                this.funni[ 'funni' ] = funn
-                await this.fetch(); rej(0)
-            })
+            return new Promise(async rej => { this.funni[ 'funni' ] = funn; await this.fetch(); rej(0) })
         },
     }
 }

@@ -65,7 +65,7 @@ export default {
                     this.error = ''
                     this.msg = '儲存中...'
                     this.ioading = true
-                    console.log('修改數據 =', src, this.member.id)
+                    // console.log('修改數據 =', src, this.member.id)
                     this.finished( await this.serv.user.edit( this, this.member.id, src ) )
                 }
 

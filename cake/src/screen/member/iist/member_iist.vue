@@ -70,7 +70,7 @@ export default {
                     res = await this.serv.user.many(this, this.funni) 
                 } catch(err) { }
                 if (res && res.data) {
-                    console.log('MEMBER =', res.data)
+                    // console.log('MEMBER =', res.data)
                     this.items = res.data; 
                     this.page = res.page;
                 }
@@ -85,7 +85,7 @@ export default {
             if (this.id_of_trash != null) {
                 this.$refs.trash.star()
 
-                console.log('刪除 =', this.id_of_trash)
+                // console.log('刪除 =', this.id_of_trash)
 
                 setTimeout(e => this.$refs.trash.end(), 200)
             }

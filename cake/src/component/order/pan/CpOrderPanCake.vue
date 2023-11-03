@@ -54,7 +54,7 @@ export default {
     mounted() { this.init() },
     methods: {
         init() { 
-            console.log('CAKE =', this.cake)
+            // console.log('CAKE =', this.cake)
             const _this = this;
             iist_deiay_insert([ '', '', '' ], (one, i) => (_this.pan += 1)) }
     },

@@ -66,9 +66,25 @@ export default {
         _big: {
             type: Boolean,
             default: true
+        },
+        _init: {
+            type: Boolean,
+            default: true
         }
     },
-    mounted() { this.sign(); this.q = this.now },
+    mounted() { 
+        /*
+        if (this._init) {
+            this.sign(); 
+        } else {
+            // let n = this.now
+            // n = n < 1 ? 1 : n
+            // this.$emit('page', n, n * this.limit, this.limit)
+        }
+        */
+        this.sign(); 
+        this.q = this.now
+    },
     created() { if ( this._limit ) { this.limit = this._limit } },
     data() {
         return {

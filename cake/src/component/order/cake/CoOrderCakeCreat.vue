@@ -109,7 +109,7 @@ export default {
                     res['product_uuid'] = this.cake.uuid
 
                     this._proP.do_coecs( res ); 
-                    console.log('儲存蛋糕資料 =', res)
+                    // console.log('儲存蛋糕資料 =', res)
                     setTimeout(e => this.msg = '', 2000)
                 } 
                 else { this.msg = '輸入不完整。' }
@@ -121,7 +121,7 @@ export default {
         init() {
             return new Promise(rej => {
                 if (this.coec) {
-                    console.log("COEC 的樣子 =", this.coec)
+                    // console.log("COEC 的樣子 =", this.coec)
                     
                     this.reset( this.coec )
                     this.reset_attr( this.coec.attribute_of_edit )
